@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<document>
+
+  <properties>
+    <title>Changes</title>
+  </properties>
+
+  <body>
+
+    <release version='0.1.0-SNAPSHOT' date='???'>
+      <action dev='sascha' type='add'>
+        Base implementation.
+      </action>
+    </release>
+
+    <!-- 'relase' element attributes: (Documentatiion under Apache 2.0 license)
+           version:  Name of the version for which to describe the changes.
+                     For each change, add a nested 'action' element as described
+                     below.
+                   required: yes
+           date:     Date at which the version was released. You can use a free
+                     form comment such as 'in CVS' for unreleased versions.
+                   required: yes
+
+         'action' element attributes:
+           dev:      Name of developer who committed the change. This must be
+                     the name of the developer as described in the developers
+                     section of the POM (project.xml file).
+                   required: yes
+           type:     Type of change. There are four valid values:
+                     add, fix, remove, update
+                   required: yes
+           issue:    Id of the issue related to this change. This is the id in
+                     your bug tracking system. The Changes plugin will
+                     generate a URL out of this id. The URL is constructed by
+                     using the 'maven.changes.issue.template' property.
+                     See the page for more details.
+                   required: no
+           due-to:   Name of the person to be credited for this change. To be
+                     used when a patch is submitted by a non-committer.
+                   required: no
+           due-to-email: Email of the person to be credited for this change.
+                   required: no
+    -->
+  </body>
+</document>

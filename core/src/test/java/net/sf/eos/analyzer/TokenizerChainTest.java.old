@@ -1,0 +1,94 @@
+/* Copyright (c) 2008 Sascha Kohlmann
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package de.speexx.eos.analyzer;
+
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
+import java.text.CharacterIterator;
+import java.text.StringCharacterIterator;
+
+public class TokenizerChainTest {
+
+    @Test
+    public void simpleFilter() throws Exception {
+        final Tokenizer deeper = new WhitespaceTokenizer("ab cd");
+        final Tokenizer higher = new CharTokenizer();
+
+        final Tokenizer filter = new TokenizerChain(deeper, higher);
+        assertEquals("a", filter.next().getTokenText());
+        assertEquals("b", filter.next().getTokenText());
+        assertEquals("c", filter.next().getTokenText());
+        assertEquals("d", filter.next().getTokenText());
+        assertNull(filter.next());
+    }
+
+    @Test
+    public void simpleFilterChain() throws Exception {
+        final Tokenizer sentence = new SentenceTokenizer("The quick brow fox!");
+        final Tokenizer whitespace = new WhitespaceTokenizer();
+        final Tokenizer lower = new LowerCaseTokenizer();
+        final Tokenizer filter = new TokenizerChain(sentence, whitespace, lower);
+
+        assertEquals("the", filter.next().getTokenText());
+    }
+
+    @Test
+    public void simpleResetFilter() throws Exception {
+        final Tokenizer deeper = new WhitespaceTokenizer("ab cd");
+        final Tokenizer higher = new CharTokenizer();
+
+        final Tokenizer filter = new TokenizerChain(deeper, higher);
+        assertEquals("a", filter.next().getTokenText());
+        assertEquals("b", filter.next().getTokenText());
+        filter.reset("12 34");
+        assertEquals("1", filter.next().getTokenText());
+        assertEquals("2", filter.next().getTokenText());
+        assertEquals("3", filter.next().getTokenText());
+        assertEquals("4", filter.next().getTokenText());
+        assertNull(filter.next());
+    }
+
+    private final static class CharTokenizer implements Tokenizer {
+
+        private final StringCharacterIterator itr;
+
+        public CharTokenizer() {
+            this.itr = new StringCharacterIterator("");
+        }
+
+        public CharTokenizer(final CharSequence text) {
+            this.itr = new StringCharacterIterator(text.toString());
+        }
+
+        public Token next() throws TokenizerException {
+            assert this.itr != null;
+            final char c = this.itr.current();
+            this.itr.next();
+            if (c == CharacterIterator.DONE) {
+                return null;
+            }
+            final String s = "" + c;
+            return new AbstractToken(s) {};
+        }
+
+        public void reset(CharSequence input) throws TokenizerException {
+            assert this.itr != null;
+            this.itr.setText(input.toString());
+        }
+    }
+}

@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<trie>
+  <entry><key>first word</key><value>urn:id:1</value></entry> 
+  <entry><key>second word</key><value>urn:id:2</value></entry>
+</trie>
