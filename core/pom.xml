@@ -243,4 +243,23 @@
       </plugin>
     </plugins>
   </reporting>
+
+  <repositories>
+    <repository>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+        <checksumPolicy>warn</checksumPolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+        <checksumPolicy>warn</checksumPolicy>
+      </snapshots>
+      <id>eostoolkitRepository</id>
+      <name>eos-toolkit Repository</name>
+      <url>http://eos-toolkit.sourceforge.net/repo/</url>
+      <layout>default</layout>
+    </repository>
+  </repositories>
 </project>
