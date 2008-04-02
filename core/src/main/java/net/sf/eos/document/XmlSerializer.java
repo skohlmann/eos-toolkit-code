@@ -15,6 +15,8 @@
  */
 package net.sf.eos.document;
 
+import net.sf.eos.io.NewlineReplaceWriter;
+
 import org.apache.commons.lang.StringEscapeUtils;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;

@@ -12,7 +12,7 @@
  *
  * You should have received a copy of the GNU Affero General Public License
  */
-package net.sf.eos.document;
+package net.sf.eos.io;
 
 import java.io.FilterWriter;
 import java.io.IOException;
