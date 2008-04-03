@@ -26,8 +26,8 @@ import org.apache.hadoop.io.WritableComparable;
  * Simple implementation with a factory.
  * @author Sascha Kohlmann
  */
-public abstract class AbstractKeyGenerator<T extends WritableComparable>
-        extends Configured implements KeyGenerator<T> {
+public abstract class AbstractKeyGenerator<K extends WritableComparable>
+        extends Configured implements KeyGenerator<K> {
 
     @SuppressWarnings("nls")
     public final static String ABSTRACT_KEY_GENERATOR_IMPL_CONFIG_NAME =
