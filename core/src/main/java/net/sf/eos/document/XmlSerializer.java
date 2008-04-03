@@ -40,7 +40,7 @@ import javax.xml.parsers.SAXParserFactory;
 
 /**
  * Serializer and deserializer for an {@link EosDocument}. See
- * {@link XmlSerializer.Xml} for element names. The order of the elements in
+ * {@link XmlSerializer.ElementName} for element names. The order of the elements in
  * the root container are not defined. Also the order in the meta container
  * is not defined. If the root container contains more than one <em>title</em>
  * or <em>text</em> element, the lastes elements may win. If the meta container
@@ -57,7 +57,7 @@ public class XmlSerializer extends Serializer {
      *  &#949;&#183;&#959;&#183;s&#183;&#183;&#183; document.
      * @author Sascha Kohlmann
      */
-    public enum Xml {
+    public enum ElementName {
         /** Root element of an &#949;&#183;&#959;&#183;s&#183;&#183;&#183;
          * document. */
         d,
@@ -91,22 +91,23 @@ public class XmlSerializer extends Serializer {
             LOG.fine("start serialize EosDocument");
         }
         final NewlineReplaceWriter writer = new NewlineReplaceWriter(out);
-        writer.write(XML_OPEN + Xml.d.name() + XML_CLOSE);
+        writer.write(XML_OPEN + ElementName.d.name() + XML_CLOSE);
         final  Map<String, List<String>> meta = doc.getMeta();
         if (meta != null && meta.size() != 0) {
             for (final Entry<String, List<String>> entry : meta.entrySet()) {
-                writer.write(XML_OPEN + Xml.m.name() + XML_CLOSE);
+                writer.write(XML_OPEN + ElementName.m.name() + XML_CLOSE);
 
-                writer.write(XML_OPEN + Xml.k.name() + XML_CLOSE);
+                writer.write(XML_OPEN + ElementName.k.name() + XML_CLOSE);
                 writer.write(StringEscapeUtils.escapeXml(entry.getKey()));
-                writer.write(XML_CLOSE_TAG + Xml.k.name() + XML_CLOSE);
+                writer.write(XML_CLOSE_TAG + ElementName.k.name() + XML_CLOSE);
 
                 for (final String value : entry.getValue()) {
-                    writer.write(XML_OPEN + Xml.v.name() + XML_CLOSE);
+                    writer.write(XML_OPEN + ElementName.v.name() + XML_CLOSE);
                     writer.write(StringEscapeUtils.escapeXml(value));
-                    writer.write(XML_CLOSE_TAG + Xml.v.name() + XML_CLOSE);
+                    writer.write(XML_CLOSE_TAG + ElementName.v.name() 
+                                 + XML_CLOSE);
                 }
-                writer.write(XML_CLOSE_TAG + Xml.m.name() + XML_CLOSE);
+                writer.write(XML_CLOSE_TAG + ElementName.m.name() + XML_CLOSE);
             }
         }
 
@@ -114,21 +115,21 @@ public class XmlSerializer extends Serializer {
         if (title != null) {
             final String asString = title.toString();
             final String escaped = StringEscapeUtils.escapeXml(asString);
-            writer.write(XML_OPEN + Xml.ti.name() + XML_CLOSE);
+            writer.write(XML_OPEN + ElementName.ti.name() + XML_CLOSE);
             writer.write(escaped);
-            writer.write(XML_CLOSE_TAG + Xml.ti.name() + XML_CLOSE);
+            writer.write(XML_CLOSE_TAG + ElementName.ti.name() + XML_CLOSE);
         }
 
         final CharSequence text = doc.getText();
         if (text != null) {
             final String asString = text.toString();
             final String escaped = StringEscapeUtils.escapeXml(asString);
-            writer.write(XML_OPEN + Xml.te.name() + XML_CLOSE);
+            writer.write(XML_OPEN + ElementName.te.name() + XML_CLOSE);
             writer.write(escaped);
-            writer.write(XML_CLOSE_TAG + Xml.te.name() + XML_CLOSE);
+            writer.write(XML_CLOSE_TAG + ElementName.te.name() + XML_CLOSE);
         }
 
-        writer.write(XML_CLOSE_TAG + Xml.d.name() + XML_CLOSE);
+        writer.write(XML_CLOSE_TAG + ElementName.d.name() + XML_CLOSE);
         if (LOG.isLoggable(Level.FINE)) {
             LOG.fine("end serialize EosDocument");
         }
@@ -211,18 +212,18 @@ public class XmlSerializer extends Serializer {
                                  final String localName,
                                  final String qName,
                                  final Attributes attributes) {
-            if (Xml.te.name().equals(qName)) {
+            if (ElementName.te.name().equals(qName)) {
                 this.sb = new StringBuilder();
-            } else if (Xml.ti.name().equals(qName)) {
+            } else if (ElementName.ti.name().equals(qName)) {
                 this.sb = new StringBuilder();
-            } else if (Xml.m.name().equals(qName)) {
+            } else if (ElementName.m.name().equals(qName)) {
                 this.inMeta = true;
                 this.key = null;
                 this.value = new ArrayList<String>();
-            } else if (Xml.k.name().equals(qName)) {
+            } else if (ElementName.k.name().equals(qName)) {
                 this.inKey = true;
                 this.sb = new StringBuilder();
-            } else if (Xml.v.name().equals(qName)) {
+            } else if (ElementName.v.name().equals(qName)) {
                 this.inValue = true;
                 this.sb = new StringBuilder();
             }
@@ -237,7 +238,7 @@ public class XmlSerializer extends Serializer {
                                final String localName,
                                final String qName) {
 
-            if (Xml.te.name().equals(qName)) {
+            if (ElementName.te.name().equals(qName)) {
                 final String text = this.sb.toString();
                 this.doc.setText(text);
 
@@ -248,7 +249,7 @@ public class XmlSerializer extends Serializer {
                     LOG.finer(lbuf.toString());
                 }
 
-            } else if (Xml.ti.name().equals(qName)) {
+            } else if (ElementName.ti.name().equals(qName)) {
                 final String title = sb.toString();
                 this.doc.setTitle(title);
 
@@ -259,7 +260,7 @@ public class XmlSerializer extends Serializer {
                     LOG.finer(lbuf.toString());
                 }
 
-            } else if (Xml.m.name().equals(qName)) {
+            } else if (ElementName.m.name().equals(qName)) {
                 assert this.inMeta == true;
                 final Map<String, List<String>> meta = this.doc.getMeta();
                 assert this.key != null;
@@ -278,10 +279,10 @@ public class XmlSerializer extends Serializer {
                 }
 
                 this.inMeta = false;
-            } else if (Xml.k.name().equals(qName)) {
+            } else if (ElementName.k.name().equals(qName)) {
                 assert this.inKey == true;
                 this.key = this.sb.toString();
-            } else if (Xml.v.name().equals(qName)) {
+            } else if (ElementName.v.name().equals(qName)) {
                 assert this.inValue == true;
                 assert this.value != null;
                 final String v = this.sb.toString();
