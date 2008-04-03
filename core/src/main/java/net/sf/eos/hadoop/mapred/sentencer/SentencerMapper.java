@@ -24,8 +24,11 @@ import net.sf.eos.analyzer.TokenizerBuilder;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.HadoopConfigurationAdapter;
 import net.sf.eos.document.EosDocument;
+import net.sf.eos.hadoop.mapred.AbstractKeyGenerator;
+import static net.sf.eos.hadoop.mapred.AbstractKeyGenerator.ABSTRACT_KEY_GENERATOR_IMPL_CONFIG_NAME;
 import net.sf.eos.hadoop.mapred.EosDocumentSupportMapReduceBase;
 import net.sf.eos.hadoop.mapred.Index;
+import net.sf.eos.hadoop.mapred.KeyGenerator;
 import net.sf.eos.sentence.Sentencer;
 
 import org.apache.hadoop.io.LongWritable;
@@ -86,17 +89,22 @@ public class SentencerMapper extends EosDocumentSupportMapReduceBase
                                               tokenizer,
                                               textBuilder);
 
+            final KeyGenerator<Text> generator = newGenerator();
             for (final Entry<String, EosDocument> entry : docs.entrySet()) {
-                // TODO: Support for different key. At this time alle different
-                //       Sentences were remove. Later the construction of the
-                //       key will use different meta values
-                //       (see mapred.entity.DictionaryBasedEntityRecognizerReducer)
                 final String key = entry.getKey();
-                final Text keyAsText = new Text(key);
                 final EosDocument toWrite = entry.getValue();
-                final Text docAsText = eosDocumentToText(toWrite);
-                outputCollector.collect(keyAsText, docAsText);
-                reporter.incrCounter(Index.MAP, 1);
+                final Map<Text, EosDocument> toStore =
+                    generator.createKeysForDocument(toWrite);
+
+                for (final Entry<Text, EosDocument> e : toStore.entrySet()) {
+                    final Text textKey = e.getKey();
+                    final String asString = textKey.toString();
+                    final String addKey = key + "+" + asString;
+                    final Text keyAsText = new Text(addKey);
+                    final Text docAsText = eosDocumentToText(toWrite);
+                    outputCollector.collect(keyAsText, docAsText);
+                    reporter.incrCounter(Index.MAP, 1);
+                }
             }
 
         } catch (final EosException e) {
@@ -106,6 +114,21 @@ public class SentencerMapper extends EosDocumentSupportMapReduceBase
             reporter.incrCounter(Index.IO_EXCEPTION, 1);
             throw new IOException(e.getMessage());
         }
+    }
+
+    protected KeyGenerator<Text> newGenerator() throws EosException {
+        final Configuration lconf = new Configuration(); 
+        HadoopConfigurationAdapter.addHadoopConfigToEosConfig(this.conf, lconf);
+        
+        final String implName =
+            lconf.get(ABSTRACT_KEY_GENERATOR_IMPL_CONFIG_NAME);
+        if (implName == null || implName.length() == 0) {
+            lconf.set(ABSTRACT_KEY_GENERATOR_IMPL_CONFIG_NAME,
+                    TextMetaKeyGenerator.class.getName());
+        }
+        final KeyGenerator<Text> newInstance = 
+            (KeyGenerator<Text>) AbstractKeyGenerator.newInstance(lconf);
+        return newInstance;
     }
 
     @Override
