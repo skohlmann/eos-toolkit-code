@@ -36,9 +36,32 @@ public class HadoopConfigurationAdapter extends Configuration {
         }
     }
 
+    /**
+     * Adds the data of the Hadoop configuration to the &#949;&#959;s 
+     * configuration.
+     * @param from the Hadoop configuration
+     * @param to the &#949;&#959;s configuration
+     */
     public static void addHadoopConfigToEosConfig(
             final org.apache.hadoop.conf.Configuration from,
             final Configuration to) {
+
+        for (final Entry<String, String> entry : from) {
+            final String key = entry.getKey();
+            final String value = entry.getValue();
+            to.set(key, value);
+        }
+    }
+
+    /**
+     * Adds the data of the &#949;&#959;s configuration to the Hadoop 
+     * configuration.
+     * @param to the Hadoop configuration
+     * @param from the &#949;&#959;s configuration
+     */
+    public static void addEosConfigToHadoopConfig(
+            final Configuration from,
+            final org.apache.hadoop.conf.Configuration to) {
 
         for (final Entry<String, String> entry : from) {
             final String key = entry.getKey();

@@ -15,6 +15,10 @@
  */
 package net.sf.eos;
 
+/**
+ * Base exception of eos.
+ * @author Sascha Kohlmann
+ */
 public class EosException extends Exception {
 
     private static final long serialVersionUID = -6375053702157616197L;

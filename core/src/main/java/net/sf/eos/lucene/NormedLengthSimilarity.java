@@ -21,7 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Normalize the lengh for the goven field to 1.0.
+ * Normalize the lengh for als fields to 1.0.
  * @author Sascha Kohlmann
  */
 public class NormedLengthSimilarity extends DefaultSimilarity {

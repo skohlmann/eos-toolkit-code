@@ -198,7 +198,7 @@ public class SimpleDictionaryBasedEntityRecognizerMapperTest {
 
         DistributedCache.addCacheFile(new Path(LOCAL_PATH, TRIEX_DAT).toUri(),
                                       conf);
-        conf.set(DistributedCacheStrategy.STRATEGY_CONFIG_NAME,
+        conf.set(DistributedCacheStrategy.STRATEGY_IMPL_CONFIG_NAME,
                  TestDistributedCacheStrategy.class.getName());
 
         final ExtDictionaryBasedEntityRecognizerMapper mapper =

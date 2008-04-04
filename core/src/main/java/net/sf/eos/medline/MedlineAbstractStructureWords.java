@@ -17,7 +17,7 @@ package net.sf.eos.medline;
 
 /**
  * The word list defines terms which structure a medline abstract in something
- * like <em>BACKGROUND:<em>, <em>PURPOSE:</em> or evan a <em>CONCLUSION:</em>.
+ * like <em>BACKGROUND:</em>, <em>PURPOSE:</em> or evan a <em>CONCLUSION:</em>.
  * The words in the list are uppercase, like there appearance in medline
  * abstract texts.
  * @author Sascha Kohlmann

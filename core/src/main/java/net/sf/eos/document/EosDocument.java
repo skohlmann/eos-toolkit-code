@@ -15,7 +15,6 @@
  */
 package net.sf.eos.document;
 
-import net.sf.eos.analyzer.TextBuilder;
 import net.sf.eos.util.EqualsAndHashUtil;
 
 import java.io.IOException;

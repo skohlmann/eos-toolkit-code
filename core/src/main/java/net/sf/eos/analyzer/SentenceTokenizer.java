@@ -15,13 +15,12 @@
  */
 package net.sf.eos.analyzer;
 
-import net.sf.eos.config.Configured;
-
 import java.text.BreakIterator;
 import java.util.Locale;
 
 /**
  * Tokenized a text into sentences.
+ * <p>Based on {@link BreakIterator#getLineInstance(Locale)}.</p>
  * @author Sascha Kohlmann
  */
 public class SentenceTokenizer /*extends Configured*/

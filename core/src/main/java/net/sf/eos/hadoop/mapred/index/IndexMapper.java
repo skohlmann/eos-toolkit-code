@@ -33,7 +33,6 @@ public class IndexMapper<K extends WritableComparable>
 
     private JobConf conf;
 
-    /** {@inheritDocs} */
     public void map(final K key,
                     final Text value,
                     final OutputCollector<K, Text> output,

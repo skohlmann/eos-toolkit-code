@@ -79,7 +79,7 @@ import java.util.SortedMap;
     System.out.println(trie.select("Lo"));
     System.out.println(trie.select("Lime"));
 
-    System.out.println(trie.getPrefixedBy("La").toString());            
+    System.out.println(trie.getPrefixedBy("La").toString());
     
     Output:
         Lovely

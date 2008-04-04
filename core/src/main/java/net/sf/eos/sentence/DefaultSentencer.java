@@ -32,18 +32,25 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Simple default implementation.
+ * @author Sascha Kohlmann
+ */
 public class DefaultSentencer extends Sentencer {
 
     /** For logging. */
     private static final Logger LOG = 
         Logger.getLogger(DefaultSentencer.class.getName());
 
+    /** Creates a new instance. */
     public DefaultSentencer() {
         super();
     }
 
+    @SuppressWarnings("nls")
     @Override
     public Map<String, EosDocument> 
             toSentenceDocuments(final EosDocument doc,
@@ -52,22 +59,16 @@ public class DefaultSentencer extends Sentencer {
                                 final TextBuilder builder)
             throws EosException {
 
+        if (LOG.isLoggable(Level.FINER)) {
+            LOG.fine("SentenceTokenizer instance: " + sentencer.getClass());
+            LOG.fine("ResettableTokenizer instance: " + tokenizer.getClass());
+            LOG.fine("TextBuilder instance: " + builder.getClass());
+        }
         final Map<String, EosDocument> retval =
             new HashMap<String, EosDocument>();
         final MessageDigest md = createDigester();
 
         final Map<String, List<String>> meta = doc.getMeta();
-
-//        final List<String> years = meta.get(EosDocument.YEAR_META_KEY);
-//        if (years == null || years.size() == 0) {
-//            LOG.warning("document contains no year: " + doc);
-//            return retval;
-//        }
-//        final String year = years.get(0);
-//        if (year == null || year.length() == 0) {
-//            LOG.warning("document year is null or has length zero: " + doc);
-//            return retval;
-//        }
 
         final CharSequence newTitle = extractTitle(doc, tokenizer, builder);
         final List<CharSequence> sentences =

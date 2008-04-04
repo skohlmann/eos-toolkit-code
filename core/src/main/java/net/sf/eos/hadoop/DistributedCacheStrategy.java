@@ -30,7 +30,7 @@ public interface DistributedCacheStrategy {
 
     /** The key for the name of the strategy implementing class. */
     @SuppressWarnings("nls")
-    String STRATEGY_CONFIG_NAME =
+    String STRATEGY_IMPL_CONFIG_NAME =
         "net.sf.eos.hadoop.DistributedCacheStrategy.impl";
 
     /**

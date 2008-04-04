@@ -31,6 +31,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * A simple matcher for named entities. The implementation sluices
+ * {@link Token Tokens} of a defined maximum length throught the recognizer.
+ * If a token combination matches a key in the
+ * {@link AbstractDictionaryBasedEntityRecognizer#getEntityMap() entity map},
+ * a new <code>Token</code> of type {@link EntityRecognizer#ENTITY_TYPE} 
+ * is created and return by {@link #next()}.
  * @author Sascha Kohlmann
  */
 public class SimpleLongestMatchDictionaryBasedEntityRecognizer
@@ -46,12 +52,18 @@ public class SimpleLongestMatchDictionaryBasedEntityRecognizer
     private Queue<Token> retvalBuffer = new LinkedList<Token>();
     private FixedSizeQueue<Token> longestMatchQueue = null;
 
+    /**
+     * Creates a new instance.
+     * @param source the source tokenizer
+     */
     public SimpleLongestMatchDictionaryBasedEntityRecognizer(
                 @SuppressWarnings("hiding") final Tokenizer source) {
         super(source);
     }
 
     /**
+     * Returned <code>Token</code> may be of type
+     * {@link EntityRecognizer#ENTITY_TYPE} or any different type.
      * @throws IllegalStateException if {@link #getEntityMap()} returns
      *                               <code>null</code>
      * @see net.sf.eos.analyzer.Tokenizer#next()

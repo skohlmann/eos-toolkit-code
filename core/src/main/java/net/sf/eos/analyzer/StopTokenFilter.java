@@ -18,10 +18,19 @@ package net.sf.eos.analyzer;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Filter for stop words out of the {@linkplain Token token} stream.
+ * @author Sascha Kohlmann
+ */
 public class StopTokenFilter extends TokenFilter {
 
     private final Set<CharSequence> stopWords = new HashSet<CharSequence>();
 
+    /**
+     * Creates a new instance.
+     * @param source the source filter.
+     * @param stopWords a collection of stop words
+     */
     public StopTokenFilter(final Tokenizer source,
                 @SuppressWarnings("hiding") final Set<CharSequence> stopWords) {
         super(source);

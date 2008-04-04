@@ -18,16 +18,28 @@ package net.sf.eos.analyzer;
 
 import net.sf.eos.EosException;
 import net.sf.eos.config.Configuration;
+import net.sf.eos.config.Configured;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
- * Implementation creats new text sequences.
+ * Implementation creates new text sequences from {@link Token}- or
+ * {@link CharSequence}-lists. Use {@link #newInstance(Configuration)} to
+ * create a new instance.
  * @author Sascha Kohlmann
  */
-public abstract class TextBuilder {
+public abstract class TextBuilder extends Configured {
 
+    /** For logging. */
+    private static final Logger LOG = 
+        Logger.getLogger(TextBuilder.class.getName());
+
+    /** The configuration key name for the classname of the builder.
+     * @see #newInstance(Configuration) */
+    @SuppressWarnings("nls")
     public final static String TEXT_BUILDER_IMPL_CONFIG_NAME =
         "net.sf.eos.analyzer.TextBuilder.impl";
 
@@ -35,6 +47,7 @@ public abstract class TextBuilder {
      * Simple implementation concats all texts from the tokens delimited
      * by space (ASCII <tt>0x20</tt>).
      */
+    @SuppressWarnings("nls")
     public static final TextBuilder SPACE_BUILDER = new TextBuilder() {
         @SuppressWarnings("nls")
         public final static String SPACE = " ";
@@ -63,11 +76,18 @@ public abstract class TextBuilder {
         }
     };
 
-    public final static TextBuilder newInstance() throws EosException {
-        final Configuration config = new Configuration();
-        return newInstance(config);
-    }
-
+    /**
+     * Creates a new instance of a of the builder. If the
+     * <code>Configuration</code> contains a key
+     * {@link #TEXT_BUILDER_IMPL_CONFIG_NAME} a new instance of the
+     * classname of the value will instantiate. The
+     * {@link #SPACE_BUILDER} will instantiate if there is no
+     * value setted.
+     * @param config the configuration
+     * @return a new instance
+     * @throws EosException if it is not possible to instantiate an instance
+     */
+    @SuppressWarnings("nls")
     public final static TextBuilder newInstance(final Configuration config)
             throws EosException {
 
@@ -90,6 +110,11 @@ public abstract class TextBuilder {
             try {
 
                 final TextBuilder textBuilder = clazz.newInstance();
+                textBuilder.configure(config);
+                if (LOG.isLoggable(Level.CONFIG)) {
+                    LOG.config("TextBuilder instance: "
+                               + textBuilder.getClass().getName());
+                }
                 return textBuilder;
 
             } catch (final InstantiationException e) {

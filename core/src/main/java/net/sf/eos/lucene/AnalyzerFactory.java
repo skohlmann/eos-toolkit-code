@@ -25,8 +25,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Implementations must have a default constructor and must implement
- * {@link #newAnalyzer()}.
+ * To support different strategies of Lucene analyzers this
+ * factory decoupled the creation of the analyzer from hard coded classnames.
+ * Set the classname of a factory different from
+ * <i>{@linkplain WhitespaceAnalyzerFactory default}</i> implementation.
+ * {@link #ANALYZER_FACTORY_IMPL_CONFIG_NAME} contains the name of the
+ * configuration key.
+ *
+ * <p>Implementations must have a default constructor and must implement
+ * {@link #newAnalyzer()}.</p>
  * @author Sascha Kohlmann
  */
 public abstract class AnalyzerFactory {
@@ -35,10 +42,23 @@ public abstract class AnalyzerFactory {
     private static final Logger LOG = 
         Logger.getLogger(AnalyzerFactory.class.getName());
 
+    /** The configuration key name for the classname of the factory.
+     * @see #newInstance(Configuration) */
     @SuppressWarnings("nls")
     public final static String ANALYZER_FACTORY_IMPL_CONFIG_NAME = 
         "net.sf.eos.lucene.AnalyzerFactory.impl";
 
+    /**
+     * Creates a new instance of a of the factory. If the
+     * <code>Configuration</code> contains a key
+     * {@link #ANALYZER_FACTORY_IMPL_CONFIG_NAME} a new instance of the
+     * classname in the value will instantiate. The 
+     * {@link WhitespaceAnalyzerFactory} will instantiate if there is no
+     * value setted.
+     * @param config the configuration
+     * @return a new instance
+     * @throws EosException if it is not possible to instantiate an instance
+     */
     public final static AnalyzerFactory newInstance(final Configuration config)
             throws EosException {
 

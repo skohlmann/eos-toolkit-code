@@ -15,20 +15,18 @@
  */
 package net.sf.eos.hadoop.mapred.sentencer;
 
+import net.sf.eos.hadoop.mapred.AbstractEosDriver;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapred.JobClient;
 import org.apache.hadoop.mapred.JobConf;
-import org.apache.hadoop.mapred.RunningJob;
 import org.apache.hadoop.util.ToolRunner;
-
-import net.sf.eos.hadoop.mapred.AbstractEosDriver;
 
 /**
  * 
  * @author Sascha Kohlmann
- * @see SentenceMapper
- * @see SentenceReducer
+ * @see SentencerMapper
+ * @see SentencerReducer
  */
 public class SentenceMapReduceDriver extends AbstractEosDriver {
 
@@ -56,7 +54,7 @@ public class SentenceMapReduceDriver extends AbstractEosDriver {
         conf.setMapOutputValueClass(Text.class);
 
         conf.setMapperClass(SentencerMapper.class);
-        conf.setReducerClass(SentenceReducer.class);
+        conf.setReducerClass(SentencerReducer.class);
 
         return doJob(conf);
     }

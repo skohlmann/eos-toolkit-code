@@ -18,8 +18,6 @@ package net.sf.eos.hadoop.mapred.sentencer;
 
 import net.sf.eos.analyzer.TokenizerBuilder;
 import net.sf.eos.hadoop.mapred.Index;
-import net.sf.eos.hadoop.mapred.sentencer.SentenceReducer;
-import net.sf.eos.hadoop.mapred.sentencer.SentencerMapper;
 
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
@@ -86,7 +84,7 @@ public class CombiningSentencerReducerTest extends HadoopTestCase {
    public void testSimpleJob() throws Exception {
        final JobConf jobConf = createJobConf();
        jobConf.setMapperClass(SentencerMapper.class);
-       jobConf.setReducerClass(SentenceReducer.class);
+       jobConf.setReducerClass(SentencerReducer.class);
        jobConf.setJobName("eos Sentencer Combining Test");
 
        jobConf.addInputPath(new Path(LOCAL_PATH, INPUT_EOSDOCS));

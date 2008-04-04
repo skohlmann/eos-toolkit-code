@@ -17,9 +17,19 @@ package net.sf.eos.entity;
 
 import net.sf.eos.analyzer.Tokenizer;
 
+/**
+ * The strategy for entity recognation is not defined. Implementation only
+ * must set the defined {@link #ENTITY_TYPE} value in the recognized
+ * {@link net.sf.eos.analyzer.Token}.
+ * @author Sascha Kohlmann
+ */
 public interface EntityRecognizer extends Tokenizer {
 
-    /** The default type of a token. 
-     * @see net.sf.eos.analyzer.Token */
+    /**
+     * The {@link net.sf.eos.analyzer.Token#getType() type} of a recognized
+     * token.
+     * @see net.sf.eos.analyzer.Token
+     */
+    @SuppressWarnings("nls")
     public final static String ENTITY_TYPE = "entity";
 }

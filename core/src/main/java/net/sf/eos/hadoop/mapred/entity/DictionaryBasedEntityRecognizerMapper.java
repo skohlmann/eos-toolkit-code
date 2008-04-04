@@ -108,7 +108,7 @@ public class DictionaryBasedEntityRecognizerMapper
 
     /**
      * Configures the trie. After finishing the method {@link #getTrie()}.
-     * Uses the value of {@link DistributedCacheStrategy#STRATEGY_CONFIG_NAME}
+     * Uses the value of {@link DistributedCacheStrategy#STRATEGY_IMPL_CONFIG_NAME}
      * if setted to get the distributed cache strategy.
      * never returns <code>null</code>.
      */
@@ -118,7 +118,7 @@ public class DictionaryBasedEntityRecognizerMapper
                 assert this.conf != null;
 
                 final String strageyClassName =
-                    this.conf.get(DistributedCacheStrategy.STRATEGY_CONFIG_NAME);
+                    this.conf.get(DistributedCacheStrategy.STRATEGY_IMPL_CONFIG_NAME);
                 if (strageyClassName != null) {
                     try {
                         this.strategy = (DistributedCacheStrategy) 

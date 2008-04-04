@@ -25,8 +25,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Implementations must have a default constructor and must implement
- * {@link #newSimilarity()}.
+ * To support different strategies of Similarity in a Lucene index this
+ * factory decoupled the creation of the Similarity from hard coded classnames.
+ * Set the classname of a factory different from
+ * <i>{@linkplain NormedLengthSimilarityFactory default}</i> implementation.
+ * {@link #SIMILARITY_FACTORY_IMPL_CONFIG_NAME} contains the name of the
+ * configuration key.
+ *
+ * <p>Implementations must have a default constructor and must implement
+ * {@link #newSimilarity()}.</p>
  * @author Sascha Kohlmann
  */
 public abstract class SimilarityFactory {
@@ -35,10 +42,23 @@ public abstract class SimilarityFactory {
     private static final Logger LOG = 
         Logger.getLogger(SimilarityFactory.class.getName());
 
+    /** The configuration key name for the classname of the factory.
+     * @see #newInstance(Configuration) */
     @SuppressWarnings("nls")
     public final static String SIMILARITY_FACTORY_IMPL_CONFIG_NAME = 
         "net.sf.eos.lucene.SimilarityFactory.impl";
 
+    /**
+     * Creates a new instance of a of the factory. If the
+     * <code>Configuration</code> contains a key
+     * {@link #SIMILARITY_FACTORY_IMPL_CONFIG_NAME} a new instance of the
+     * classname in the value will instantiate. The 
+     * {@link NormedLengthSimilarityFactory} will instantiate if there is no
+     * value setted.
+     * @param config the configuration
+     * @return a new instance
+     * @throws EosException if it is not possible to instantiate an instance
+     */
     public final static SimilarityFactory 
             newInstance(final Configuration config) throws EosException {
 

@@ -107,7 +107,7 @@ public class DictionaryBasedEntityRecognizerMapReduceTest
         // For Tests
         DistributedCache.addCacheFile(new Path(LOCAL_PATH, TRIEX_DAT).toUri(),
                                       jobConf);
-        jobConf.set(DistributedCacheStrategy.STRATEGY_CONFIG_NAME,
+        jobConf.set(DistributedCacheStrategy.STRATEGY_IMPL_CONFIG_NAME,
                     TestDistributedCacheStrategy.class.getName());
 
         final RunningJob job = JobClient.runJob(jobConf);

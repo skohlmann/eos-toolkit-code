@@ -20,7 +20,6 @@ import net.sf.eos.config.Configuration;
 import net.sf.eos.config.HadoopConfigurationAdapter;
 import net.sf.eos.document.EosDocument;
 import net.sf.eos.document.Serializer;
-import net.sf.eos.hadoop.mapred.sentencer.SentenceReducer;
 
 import org.apache.commons.io.input.CharSequenceReader;
 import org.apache.hadoop.io.Text;
@@ -42,7 +41,7 @@ public abstract class EosDocumentSupportMapReduceBase extends MapReduceBase {
 
     /** For logging. */
     private static final Logger LOG = 
-        Logger.getLogger(SentenceReducer.class.getName());
+        Logger.getLogger(EosDocumentSupportMapReduceBase.class.getName());
 
     private JobConf conf;
 

@@ -25,10 +25,8 @@ import java.io.IOException;
 import java.io.Reader;
 
 /**
- * Tokenized a sequence of chars at whitespaces.
- * <p>Avoid using a <code>ResettableTokenFilter</code> if the tokenizer is part
- * of a chain that is not  empty e.g. {@link #next()} returns
- * <code>null</code>.</p>
+ * Tokenized a sequence of chars at whitespaces. Wrapper around Lucenes
+ * <code>WhitespaceTokenizer</code>.
  * @author Sascha Kohlmann
  */
 public final class WhitespaceTokenizer extends TokenFilter
@@ -39,6 +37,10 @@ public final class WhitespaceTokenizer extends TokenFilter
     private LuceneTokenizerWrapper tokenizer;
     private org.apache.lucene.analysis.WhitespaceTokenizer wrapped;
 
+    /**
+     * Creates a new instance.
+     * @param source a source filter
+     */
     public WhitespaceTokenizer(final Tokenizer source) {
         super(source);
         final Reader reader = new CharSequenceReader("");
@@ -47,13 +49,16 @@ public final class WhitespaceTokenizer extends TokenFilter
         this.tokenizer = new LuceneTokenizerWrapper(this.wrapped);
     }
 
+    /**
+     * Creates a new instance.
+     */
     public WhitespaceTokenizer() {
         this("");
     }
 
     /**
-     * Creates a new instance.
-     * @param text the sequence to tokenize.
+     * Creates a new instance for a char sequence.
+     * @param text the sequence to tokenize
      */
     public WhitespaceTokenizer(final CharSequence text) {
         super(NULL);

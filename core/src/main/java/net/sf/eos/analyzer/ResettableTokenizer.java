@@ -23,7 +23,7 @@ package net.sf.eos.analyzer;
 public interface ResettableTokenizer extends Tokenizer {
 
 
-    /** Inits the tokenizer woth new input data.
+    /** Inits the tokenizer woith new input data.
      * @param input represents new input data for the tokenizer.
      */
     void reset(final CharSequence input) throws TokenizerException;

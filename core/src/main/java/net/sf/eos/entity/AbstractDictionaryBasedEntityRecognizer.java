@@ -19,7 +19,6 @@ import net.sf.eos.EosException;
 import net.sf.eos.analyzer.TextBuilder;
 import net.sf.eos.analyzer.TokenFilter;
 import net.sf.eos.analyzer.Tokenizer;
-import net.sf.eos.analyzer.TokenizerBuilder;
 import net.sf.eos.analyzer.TokenizerException;
 import net.sf.eos.config.Configurable;
 import net.sf.eos.config.Configuration;
@@ -28,6 +27,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * An implementation of a <code>EntityRecognizer</code> identifies entities
@@ -43,6 +44,13 @@ public abstract class AbstractDictionaryBasedEntityRecognizer
                     Configurable,
                     DictionaryBasedEntityRecognizer {
 
+    /** For logging. */
+    private static final Logger LOG = 
+        Logger.getLogger(AbstractDictionaryBasedEntityRecognizer.class.getName());
+
+    /** The configuration key name for the classname of the factory.
+     * @see #newInstance(Tokenizer, Configuration)
+     * @see #newInstance(Tokenizer) */
     @SuppressWarnings("nls")
     public final static String
         ABSTRACT_DICTIONARY_BASED_ENTITY_RECOGNIZER_IMPL_CONFIG_NAME =
@@ -121,12 +129,31 @@ public abstract class AbstractDictionaryBasedEntityRecognizer
         return this.config;
     }
 
+    /**
+     * Creates a new instance of a of the recognizer. Instantiate the 
+     * {@link SimpleLongestMatchDictionaryBasedEntityRecognizer}.
+     * @param source a source tokenizer
+     * @return a new instance
+     * @throws EosException if it is not possible to instantiate an instance
+     */
     public final static DictionaryBasedEntityRecognizer 
             newInstance(final Tokenizer source) throws EosException {
         final Configuration config = new Configuration();
         return newInstance(source, config);
     }
 
+    /**
+     * Creates a new instance of a of the recognizer. If the
+     * <code>Configuration</code> contains a key
+     * {@link #ABSTRACT_DICTIONARY_BASED_ENTITY_RECOGNIZER_IMPL_CONFIG_NAME}
+     * a new instance of the classname in the value will instantiate. The 
+     * {@link SimpleLongestMatchDictionaryBasedEntityRecognizer} will
+     * instantiate if there is no value setted.
+     * @param source a source tokenizer
+     * @param config the configuration
+     * @return a new instance
+     * @throws EosException if it is not possible to instantiate an instance
+     */
     public final static DictionaryBasedEntityRecognizer 
             newInstance(final Tokenizer source, final Configuration config)
                 throws EosException {
@@ -154,6 +181,10 @@ public abstract class AbstractDictionaryBasedEntityRecognizer
                 final AbstractDictionaryBasedEntityRecognizer recognizer
                      = constructor.newInstance(source);
                 recognizer.configure(config);
+                if (LOG.isLoggable(Level.CONFIG)) {
+                    LOG.config("AbstractDictionaryBasedEntityRecognizer instance: "
+                               + recognizer.getClass().getName());
+                }
                 return recognizer;
 
             } catch (final InstantiationException e) {

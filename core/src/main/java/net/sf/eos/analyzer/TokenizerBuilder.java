@@ -16,21 +16,40 @@
 package net.sf.eos.analyzer;
 
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.Configured;
 import net.sf.eos.medline.MedlineTokenizerBuilder;
 
+/**
+ * Support class for {@link ResettableTokenizer}.
+ * @author Sascha Kohlmann
+ * @see ResettableTokenFilter
+ */
 public abstract class TokenizerBuilder extends Configured {
 
+    /** For logging. */
+    private static final Logger LOG = 
+        Logger.getLogger(TokenizerBuilder.class.getName());
+
+    /** The configuration key name for the classname of the builder.
+     * @see #newInstance(Configuration) */
+    @SuppressWarnings("nls")
     public final static String BUILDER_IMPL_CONFIG_NAME =
         "net.sf.eos.analyzer.TokenizerBuilder.impl";
 
-    public final static TokenizerBuilder newInstance() throws TokenizerException
-    {
-        final Configuration config = new Configuration();
-        return newInstance(config);
-    }
-
+    /**
+     * Creates a new instance. The
+     * <code>Configuration</code> must contain a key
+     * {@link #BUILDER_IMPL_CONFIG_NAME} of a builder implementation. There 
+     * is no default implementation.
+     * @param config the configuration
+     * @return a new instance
+     * @throws TokenizerException if it is not possible to instantiate an instance
+     */
+    @SuppressWarnings("nls")
     public final static TokenizerBuilder newInstance(final Configuration config)
             throws TokenizerException {
 
@@ -51,6 +70,10 @@ public abstract class TokenizerBuilder extends Configured {
 
                 final TokenizerBuilder builder = clazz.newInstance();
                 builder.configure(config);
+                if (LOG.isLoggable(Level.CONFIG)) {
+                    LOG.config("TokenizerBuilder instance: "
+                               + builder.getClass().getName());
+                }
                 return builder;
 
             } catch (final InstantiationException e) {
@@ -63,6 +86,11 @@ public abstract class TokenizerBuilder extends Configured {
         }
     }
 
+    /**
+     * Creates a new instance.
+     * @return a new instance
+     * @throws TokenizerException if an error occurs
+     */
     public abstract ResettableTokenizer newResettableTokenizer()
         throws TokenizerException;
 }

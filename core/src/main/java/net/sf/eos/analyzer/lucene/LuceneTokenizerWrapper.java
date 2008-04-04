@@ -23,17 +23,30 @@ import net.sf.eos.analyzer.TokenizerException;
 
 import java.io.IOException;
 
-
-public final class LuceneTokenizerWrapper extends TokenFilter
-                                          /*implements ResettableTokenizer*/ {
+/**
+ * Wrapps the functionality of the &#949;&#959;s {@link Tokenizer} for the
+ * reuse of Lucene tokenizer.
+ * @author Sascha Kohlmann
+ */
+public final class LuceneTokenizerWrapper extends TokenFilter {
 
     private final org.apache.lucene.analysis.Tokenizer delagate;
     private org.apache.lucene.analysis.Token luceneToken;
 
+    /** Creates a new wrapper.
+     * @param tokenizer a Lucene tokenizer to reuse in the &#949;&#959;s
+     *                  environment
+     */
     public LuceneTokenizerWrapper(final org.apache.lucene.analysis.Tokenizer tokenizer) {
         this(new NullTokenizer(), tokenizer);
     }
 
+    /**
+     * Creates a new wrapper.
+     * @param source a &#949;&#959;s tokenizer
+     * @param tokenizer a Lucene tokenizer to reuse in the &#949;&#959;s
+     *                  environment
+     */
     public LuceneTokenizerWrapper(
             final Tokenizer source,
             final org.apache.lucene.analysis.Tokenizer tokenizer) {
@@ -41,6 +54,9 @@ public final class LuceneTokenizerWrapper extends TokenFilter
         this.delagate = tokenizer;
     }
 
+    /*
+     * @see net.sf.eos.analyzer.TokenFilter#next()
+     */
     @Override
     public Token next() throws TokenizerException {
         if (this.luceneToken == null) {

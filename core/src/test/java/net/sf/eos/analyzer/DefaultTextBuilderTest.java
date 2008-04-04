@@ -27,7 +27,7 @@ public class DefaultTextBuilderTest {
 
     @Test
     public void simpleFactoryCreation() throws Exception {
-        final TextBuilder builder = TextBuilder.newInstance();
+        final TextBuilder builder = TextBuilder.newInstance(new Configuration());
         assertTrue(builder.getClass().isInstance(TextBuilder.SPACE_BUILDER));
     }
 

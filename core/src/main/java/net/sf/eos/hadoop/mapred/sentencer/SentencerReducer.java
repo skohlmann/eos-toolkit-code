@@ -39,12 +39,12 @@ import java.util.Set;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
 
-public class SentenceReducer extends EosDocumentSupportMapReduceBase
-                             implements Reducer<Text, Text, Text, Text> {
+public class SentencerReducer extends EosDocumentSupportMapReduceBase
+                              implements Reducer<Text, Text, Text, Text> {
 
     /** For logging. */
     private static final Logger LOG = 
-        Logger.getLogger(SentenceReducer.class.getName());
+        Logger.getLogger(SentencerReducer.class.getName());
 
     private JobConf conf;
 

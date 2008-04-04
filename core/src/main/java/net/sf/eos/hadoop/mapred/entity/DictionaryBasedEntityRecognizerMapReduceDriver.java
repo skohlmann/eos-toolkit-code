@@ -98,8 +98,8 @@ public class DictionaryBasedEntityRecognizerMapReduceDriver
         LOG.info("Trie path: " + triePath);
         DistributedCache.addCacheFile(new Path(triePath).toUri(), conf);
 
-        if (conf.get(DistributedCacheStrategy.STRATEGY_CONFIG_NAME) == null) {
-            conf.set(DistributedCacheStrategy.STRATEGY_CONFIG_NAME,
+        if (conf.get(DistributedCacheStrategy.STRATEGY_IMPL_CONFIG_NAME) == null) {
+            conf.set(DistributedCacheStrategy.STRATEGY_IMPL_CONFIG_NAME,
                     FullyDistributedCacheStrategy.class.getName());
             LOG.config("No CacheStrategy given. Use '"
                        + FullyDistributedCacheStrategy.class.getName()

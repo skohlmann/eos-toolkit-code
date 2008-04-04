@@ -16,7 +16,7 @@
 package net.sf.eos.config;
 
 /**
- * Class which are configurable must implements this interface.
+ * Class which are configurable must implement this interface.
  * @author Sascha Kohlmann
  */
 public interface Configurable {
