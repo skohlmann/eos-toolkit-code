@@ -21,6 +21,7 @@ import net.sf.eos.config.HadoopConfigurationAdapter;
 import net.sf.eos.document.EosDocument;
 import net.sf.eos.hadoop.mapred.EosDocumentSupportMapReduceBase;
 import net.sf.eos.hadoop.mapred.Index;
+import net.sf.eos.lucene.LuceneDocumentCreator;
 
 import org.apache.hadoop.io.ObjectWritable;
 import org.apache.hadoop.io.Text;

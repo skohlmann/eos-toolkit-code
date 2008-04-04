@@ -39,6 +39,8 @@ import java.util.logging.Logger;
  * The driver supports the base arguments. To run the driver set the path
  * to the {@linkplain #TRIE_LONG_CMD_ARG trie}.
  * @author Sascha Kohlmann
+ * @see DictionaryBasedEntityRecognizerReducer
+ * @see DictionaryBasedEntityRecognizerMapper
  */
 public class DictionaryBasedEntityRecognizerMapReduceDriver
         extends AbstractEosDriver {

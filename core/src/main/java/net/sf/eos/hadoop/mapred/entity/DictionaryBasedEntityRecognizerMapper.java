@@ -15,19 +15,13 @@
  */
 package net.sf.eos.hadoop.mapred.entity;
 
-import static net.sf.eos.entity.DictionaryBasedEntityRecognizer.ENTITY_ID_KEY;
-import static net.sf.eos.entity.EntityRecognizer.ENTITY_TYPE;
 import net.sf.eos.EosException;
 import net.sf.eos.analyzer.ResettableTokenizer;
-import net.sf.eos.analyzer.TextBuilder;
-import net.sf.eos.analyzer.Token;
 import net.sf.eos.analyzer.TokenizerBuilder;
 import net.sf.eos.analyzer.TokenizerException;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.HadoopConfigurationAdapter;
 import net.sf.eos.document.EosDocument;
-import net.sf.eos.entity.AbstractDictionaryBasedEntityRecognizer;
-import net.sf.eos.entity.DictionaryBasedEntityRecognizer;
 import net.sf.eos.hadoop.DistributedCacheStrategy;
 import net.sf.eos.hadoop.FullyDistributedCacheStrategy;
 import net.sf.eos.hadoop.mapred.EosDocumentSupportMapReduceBase;
@@ -49,9 +43,6 @@ import org.apache.hadoop.mapred.Reporter;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
@@ -88,17 +79,6 @@ public class DictionaryBasedEntityRecognizerMapper
             final Trie<CharSequence, Set<CharSequence>> lTrie = getTrie();
             generator.setTrie(lTrie);
 
-//            final Map<String, EosDocument> idMap =
-//                toEntityIdMap(doc);
-//
-//            for (final Entry<String, EosDocument> entry : idMap.entrySet()) {
-//                final String key = entry.getKey();
-//                final EosDocument newdoc = entry.getValue();
-//                final Text newTextDoc = this.eosDocumentToText(newdoc);
-//                final Text keyText = new Text(key);
-//                outputCollector.collect(keyText, newTextDoc);
-//                reporter.incrCounter(Index.MAP, 1);
-//            }
             final Map<Text, EosDocument> idMap =
                 generator.createKeysForDocument(doc); 
 

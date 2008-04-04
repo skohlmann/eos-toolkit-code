@@ -13,22 +13,21 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.sf.eos.hadoop.mapred.index;
+package net.sf.eos.lucene;
 
-import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.WhitespaceAnalyzer;
+import org.apache.lucene.search.Similarity;
 
 /**
- * Supprt for Lucene {@link org.apache.lucene.analysis.WhitespaceAnalyzer}.
+ * Supprt for {@link NormedLengthSimilarity}.
  * @author Sascha Kohlmann
  */
-public class WhitespaceAnalyzerFactory extends AnalyzerFactory {
+public class NormedLengthSimilarityFactory extends SimilarityFactory {
 
     /**
-     * @return a Lucene {@link org.apache.lucene.analysis.WhitespaceAnalyzer}
+     * @return a {@link NormedLengthSimilarity} instance.
      */
     @Override
-    public Analyzer newAnalyzer() {
-        return new WhitespaceAnalyzer();
+    public Similarity newSimilarity() {
+        return new NormedLengthSimilarity();
     }
 }

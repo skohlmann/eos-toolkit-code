@@ -13,31 +13,34 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.sf.eos.hadoop.mapred.index;
-
-import org.apache.lucene.document.Document;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
+package net.sf.eos.lucene;
 
 import net.sf.eos.EosException;
 import net.sf.eos.analyzer.TokenizerException;
 import net.sf.eos.config.Configuration;
-import net.sf.eos.config.Configured;
-import net.sf.eos.document.EosDocument;
 
-public abstract class LuceneDocumentCreator extends Configured {
+import org.apache.lucene.analysis.Analyzer;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ * Implementations must have a default constructor and must implement
+ * {@link #newAnalyzer()}.
+ * @author Sascha Kohlmann
+ */
+public abstract class AnalyzerFactory {
 
     /** For logging. */
     private static final Logger LOG = 
-        Logger.getLogger(LuceneDocumentCreator.class.getName());
+        Logger.getLogger(AnalyzerFactory.class.getName());
 
     @SuppressWarnings("nls")
-    public final static String DOCUMENT_CREATOR_IMPL_CONFIG_NAME = 
-        "net.sf.eos.hadoop.mapred.index.LuceneDocumentCreator.impl";
+    public final static String ANALYZER_FACTORY_IMPL_CONFIG_NAME = 
+        "net.sf.eos.lucene.AnalyzerFactory.impl";
 
-    public final static LuceneDocumentCreator
-            newInstance(final Configuration config) throws EosException {
+    public final static AnalyzerFactory newInstance(final Configuration config)
+            throws EosException {
 
         final Thread t = Thread.currentThread();
         ClassLoader classLoader = t.getContextClassLoader();
@@ -45,21 +48,22 @@ public abstract class LuceneDocumentCreator extends Configured {
             classLoader = AnalyzerFactory.class.getClassLoader();
         }
 
-        final String clazzName = config.get(DOCUMENT_CREATOR_IMPL_CONFIG_NAME,
-                DefaultLuceneDocumentCreator.class.getName());
+        final String clazzName =
+            config.get(ANALYZER_FACTORY_IMPL_CONFIG_NAME,
+                       WhitespaceAnalyzerFactory.class.getName());
 
         try {
-            final Class<? extends LuceneDocumentCreator> clazz =
-                (Class<? extends LuceneDocumentCreator>) Class
+            final Class<? extends AnalyzerFactory> clazz =
+                (Class<? extends AnalyzerFactory>) Class
                     .forName(clazzName, true, classLoader);
             try {
 
-                final LuceneDocumentCreator creator = clazz.newInstance();
+                final AnalyzerFactory factory = clazz.newInstance();
                 if (LOG.isLoggable(Level.CONFIG)) {
-                    LOG.config("LuceneDocumentCreator instance: "
-                            + creator.getClass().getName());
+                    LOG.config("AnalyzerFactory instance: "
+                               + factory.getClass().getName());
                 }
-                return creator;
+                return factory;
 
             } catch (final InstantiationException e) {
                 throw new TokenizerException(e);
@@ -72,12 +76,8 @@ public abstract class LuceneDocumentCreator extends Configured {
     }
 
     /**
-     * Creates a Lucene <code>Document</code> for a given
-     * <code>EosDocument</code>.
-     * @param doc the document to transform
-     * @return a Lucene <code>Document</code> for indexing
-     * @throws EosDocument if transoformation fails
+     * Returns a new <code>Analyzer</code> instance.
+     * @return a new <code>Analyzer</code> instance
      */
-    public abstract Document createLuceneForEosDocument(final EosDocument doc)
-        throws EosException;
+    public abstract Analyzer newAnalyzer();
 }

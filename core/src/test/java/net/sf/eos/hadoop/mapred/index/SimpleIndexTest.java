@@ -18,6 +18,8 @@ package net.sf.eos.hadoop.mapred.index;
 import net.sf.eos.analyzer.TokenizerBuilder;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.HadoopConfigurationAdapter;
+import net.sf.eos.lucene.AnalyzerFactory;
+import net.sf.eos.lucene.DefaultLuceneDocumentCreator;
 
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;

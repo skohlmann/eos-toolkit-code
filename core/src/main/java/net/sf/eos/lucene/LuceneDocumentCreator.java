@@ -13,58 +13,53 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.sf.eos.hadoop.mapred.index;
+package net.sf.eos.lucene;
 
-import net.sf.eos.EosException;
-import net.sf.eos.analyzer.TokenizerException;
-import net.sf.eos.config.Configuration;
-
-import org.apache.lucene.search.Similarity;
+import org.apache.lucene.document.Document;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * Implementations must have a default constructor and must implement
- * {@link #newSimilarity()}.
- * @author Sascha Kohlmann
- */
-public abstract class SimilarityFactory {
+import net.sf.eos.EosException;
+import net.sf.eos.analyzer.TokenizerException;
+import net.sf.eos.config.Configuration;
+import net.sf.eos.config.Configured;
+import net.sf.eos.document.EosDocument;
+
+public abstract class LuceneDocumentCreator extends Configured {
 
     /** For logging. */
     private static final Logger LOG = 
-        Logger.getLogger(SimilarityFactory.class.getName());
+        Logger.getLogger(LuceneDocumentCreator.class.getName());
 
     @SuppressWarnings("nls")
-    public final static String SIMILARITY_FACTORY_IMPL_CONFIG_NAME = 
-        "net.sf.eos.hadoop.mapred.index.SimilarityFactory.impl";
+    public final static String DOCUMENT_CREATOR_IMPL_CONFIG_NAME = 
+        "net.sf.eos.lucene.LuceneDocumentCreator.impl";
 
-    public final static SimilarityFactory 
+    public final static LuceneDocumentCreator
             newInstance(final Configuration config) throws EosException {
 
         final Thread t = Thread.currentThread();
         ClassLoader classLoader = t.getContextClassLoader();
         if (classLoader == null) {
-            classLoader = SimilarityFactory.class.getClassLoader();
+            classLoader = AnalyzerFactory.class.getClassLoader();
         }
 
-        final String clazzName =
-            config.get(SIMILARITY_FACTORY_IMPL_CONFIG_NAME,
-                       NormedLengthSimilarityFactory.class.getName());
+        final String clazzName = config.get(DOCUMENT_CREATOR_IMPL_CONFIG_NAME,
+                DefaultLuceneDocumentCreator.class.getName());
 
         try {
-            final Class<? extends SimilarityFactory> clazz =
-                (Class<? extends SimilarityFactory>) Class
+            final Class<? extends LuceneDocumentCreator> clazz =
+                (Class<? extends LuceneDocumentCreator>) Class
                     .forName(clazzName, true, classLoader);
             try {
 
-                final SimilarityFactory factory =
-                    (SimilarityFactory) clazz.newInstance();
+                final LuceneDocumentCreator creator = clazz.newInstance();
                 if (LOG.isLoggable(Level.CONFIG)) {
-                    LOG.config("SimilarityFactory instance: "
-                               + factory.getClass().getName());
+                    LOG.config("LuceneDocumentCreator instance: "
+                            + creator.getClass().getName());
                 }
-                return factory;
+                return creator;
 
             } catch (final InstantiationException e) {
                 throw new TokenizerException(e);
@@ -77,8 +72,12 @@ public abstract class SimilarityFactory {
     }
 
     /**
-     * Returns a new <code>Similarity</code> instance.
-     * @return a new <code>Similarity</code> instance
+     * Creates a Lucene <code>Document</code> for a given
+     * <code>EosDocument</code>.
+     * @param doc the document to transform
+     * @return a Lucene <code>Document</code> for indexing
+     * @throws EosDocument if transoformation fails
      */
-    public abstract Similarity newSimilarity();
+    public abstract Document createLuceneForEosDocument(final EosDocument doc)
+        throws EosException;
 }

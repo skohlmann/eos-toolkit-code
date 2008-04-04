@@ -24,6 +24,12 @@ import org.apache.hadoop.util.ToolRunner;
 
 import net.sf.eos.hadoop.mapred.AbstractEosDriver;
 
+/**
+ * 
+ * @author Sascha Kohlmann
+ * @see SentenceMapper
+ * @see SentenceReducer
+ */
 public class SentenceMapReduceDriver extends AbstractEosDriver {
 
     /**

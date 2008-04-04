@@ -23,6 +23,12 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.JobConf;
 import org.apache.hadoop.util.ToolRunner;
 
+/**
+ * 
+ * @author Sascha Kohlmann
+ * @see IndexMapper
+ * @see IndexReducer
+ */
 public class IndexMapReduceDriver extends AbstractEosDriver {
 
     /**

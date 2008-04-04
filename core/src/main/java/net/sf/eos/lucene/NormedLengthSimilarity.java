@@ -13,7 +13,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.sf.eos.hadoop.mapred.index;
+package net.sf.eos.lucene;
 
 import org.apache.lucene.search.DefaultSimilarity;
 
