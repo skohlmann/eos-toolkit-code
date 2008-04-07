@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- 
+  Copyright (c) 2008 Sascha Kohlmann
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+
+  You should have received a copy of the GNU Affero General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>net.sf.eos-toolkit</groupId>
+  <artifactId>net.sf.eos-toolkit.skin</artifactId>
+  <packaging>jar</packaging>
+  <version>0.1.0-SNAPSHOT</version>
+  <name>net.sf.eos-toolkit.skin</name>
+  <url>http://eos-toolkit.sourceforge.net/</url>
+  <description>eos-toolkit Site Skin</description>
+
+  <scm>
+    <connection>scm:svn:https://eos-toolkit.svn.sourceforge.net/svnroot/eos-toolkit/trunk/skin/</connection>
+    <developerConnection>scm:svn:https://eos-toolkit.svn.sourceforge.net/svnroot/eos-toolkit/trunk/skin/</developerConnection>
+    <tag>HEAD</tag>
+    <url>https://eos-toolkit.svn.sourceforge.net/svnroot/eos-toolkit/trunk/skin/</url>
+  </scm>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>2.0-beta-6</version>
+          <configuration>
+            <!--templateFile>src/site/my-site.vm</templateFile-->
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+</project>
