@@ -18,14 +18,15 @@
 <project name='eos-toolkit core - project site'>
 
   <bannerLeft>
-    <name>eos-toolkit core</name>
-    <href>http://eos-toolkit.sourceforge.net/</href>
+    <name>${project.name}</name>
+    <src>http://www.speexx.de/blog/images/eos/eos-logo4.png</src>
+    <href>http://eos-toolkit.sourceforge.net/core/</href>
   </bannerLeft>
 
   <skin>
-    <groupId>org.apache.maven.skins</groupId>
-    <artifactId>maven-stylus-skin</artifactId>
-    <version>1.0</version>
+    <artifactId>net.sf.eos-toolkit.skin</artifactId>
+    <groupId>net.sf.eos-toolkit</groupId>
+    <version>0.1.0-SNAPSHOT</version>
   </skin>
 
   <publishDate position='bottom' format='yyyy-MM-dd HH:mm'/>
@@ -41,7 +42,7 @@
     </breadcrumbs>
 
     <menu name='Overview'>
-      <item name='Base' href='index.html'/>
+      <item name='Introduction' href='index.html'/>
     </menu>
     <menu ref='reports'/>
   </body>
