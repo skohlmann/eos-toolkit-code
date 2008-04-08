@@ -1,0 +1,74 @@
+ -----
+ u03b5os-toolkit core - Introduction
+ -----
+ Sascha Kohlmann
+ -----
+
+Introduction
+
+  eos-toolkit core ist the base implementation of \u03b5os.
+\u03b5os stands for entity oriented search. {{{http://en.wikipedia.org/wiki/Eos}Eos}}
+is also the name of the Greek mythology goddess of Aurora (Greek: \u0397\u03ce\u03c2).
+
+  \u03b5os major task is to identify
+{{{http://en.wikipedia.org/wiki/Concordance_(publishing)}concordance}} (index)
+lists of related named entities from a text corpus. To support this task \u03b5os
+should offer a bunch of tools and concepts to use the whole chain to create
+different application based on it. Its also a target to offer an
+out-of-the-box implementation for {{{common-usecase.html}a common use-case}}.
+
+  Possible applications of the entity oriented search in unstructured text 
+  with or without metadata are:
+
+  [Enrich news search] Based on the concordance in timeline oriented search
+    \u03b5os should offer <near by> named entities. E.g. in April 2008 searching
+    for "Hillary Clinton" may offer you the concordance of the named entities
+    "Barack Obama" and "John McCain".
+    
+  [Explore timeline based named entity occurrence] This may be a use-case for
+    researcher in the biomedical domain. Explore the named entity of
+    "Dopamine" in a timeline based context to "Parkinson's disease". What is an
+    upcoming named entity in your research domain?
+    
+  [Improve lexicon viewing] Offer the user of an encyclopedia entries which are
+    in context of the observed entry.    
+
+  []
+
+Based on
+
+  \u03b5os based on two major open source projects:
+  
+  [Lucene] {{{http://lucene.apache.org/}Lucene}} is the backbone of the retrieval
+side. \u03b5os heavily based on the <{{{http://en.wikipedia.org/wiki/TFIDF}tf-idf}}>
+and the fulltext retrieval functions of Lucene.
+
+  [Hadoop] {{{http://hadoop.apache.org/}Hadoop}} is the backbone of the analyzing
+side of \u03b5os. Cause it takes long time to create a Lucene index for the
+retrieval side of \u03b5os. Hadoop is a strong opportunity to create such an index
+in an acceptable time for the online search business.
+
+  []
+  
+Next Tasks
+
+  [[1]] Create use-case web-service for Wikipedia based entity oriented search.
+  
+  [[2]] Add contribution code to transform Wikipedia into <<<EosDocuemts>>>
+        inside of an Hadoop cluster.
+        
+  [[3]] Improve documentation.
+  
+  [[4]] Setup development environment to better user support (e.g. Mailing list,
+        Wiki, Issue Tracker)
+
+  []
+
+Reference
+
+  \u03b5os is inspired by a paper of
+{{{http://www.google.de/search?hl=de&q=%22Steven+Skiena%22+%22Mikhail+Bautin%22+%22Entity+Oriented+Search%22&btnG=Google-Suche&meta=}Mikhail\ Bautin and Steven\ Skiena about Entity Oriented Search}}.
+\u03b5os and the \u03b5os-toolkit architecture based on a proof-of-concept
+implementation by Sascha Kohlmann. Experience in building \u03b5os with Hadoop
+and Lucene are written in the {{{http://www.speexx.de/blog/tags/eos}blog of Sascha}}
+(German).

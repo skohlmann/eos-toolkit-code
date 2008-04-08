@@ -243,6 +243,13 @@
           <language>Java</language>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <configuration>
+          <outputEncoding>UTF-8</outputEncoding>
+        </configuration>
+      </plugin>
     </plugins>
   </reporting>
 
