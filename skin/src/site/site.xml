@@ -18,12 +18,10 @@
 <project>
   <bannerLeft>
     <name>${project.name}</name>
-    <src>http://www.speexx.de/blog/images/eos/eos-logo.png</src>
+    <src>http://www.speexx.de/blog/images/eos/eos-logo8.png</src>
     <href>http://eos-toolkit.sourceforge.net/</href>
   </bannerLeft>
-  <!--bannerRight>
-    <src>http://maven.apache.org/images/maven-logo-2.gif</src>
-  </bannerRight-->
+
   <skin>
     <artifactId>net.sf.eos-toolkit.skin</artifactId>
     <groupId>net.sf.eos-toolkit</groupId>
