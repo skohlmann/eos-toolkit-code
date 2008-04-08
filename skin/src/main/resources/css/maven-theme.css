@@ -92,9 +92,9 @@ p {
   color: #000;
 }
 
-#breadcrumbs {
+#breadcrumbs { 
   height: 13px;
-  background-image: url(../images/breadcrumbs.jpg);
+  background-image: url(../images/breadcrumbs.png);
   padding: 5px 10px 14px 20px;
 }
 
