@@ -15,7 +15,7 @@
   You should have received a copy of the GNU Affero General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<project name='&#949;&#959;s-toolkit core - project site'>
+<project name='&#949;&#959;s-toolkit core - Project Site'>
 
   <bannerLeft>
     <name>${project.name}</name>
@@ -48,6 +48,7 @@
     <menu name='Overview'>
       <item name='Introduction' href='index.html'/>
       <item name='Common use-case' href='common-usecase.html'/>
+      <item name='FAQ' href='faq.html'/>
     </menu>
     <menu ref='reports'/>
   </body>

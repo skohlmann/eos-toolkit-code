@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  Copyright (c) 2008 Sascha Kohlmann
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+
+  You should have received a copy of the GNU Affero General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<faqs title="Frequently Asked Questions" toplink="false">
+
+  <part id="license">
+    <title>License</title>
+
+    <faq id="why-agpl">
+      <question>
+        eos commons under the AGPL but I use a more business like license?
+      </question>
+      <answer>
+        <p>eos is free software that means: it is open-source and free.
+          Licenses like <a href='http://www.apache.org/licenses/LICENSE-2.0.txt'>Apache 2.0</a>
+          are not free for software, also free for business. But thats not a
+          problem. Think about Linux. It comes under the
+          <a href='http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt'>GNU General Public License</a>
+          and its a billion dollar market. So think about your business.</p>
+      </answer>
+    </faq>
+    <faq id="why-agpl">
+      <question>
+        Really no other license available?
+      </question>
+      <answer>
+        <p>Nope, not at this time.</p>
+      </answer>
+    </faq>
+  </part>
+</faqs>

@@ -187,6 +187,11 @@
     </plugins>
   </build>
 
+  <issueManagement>
+    <system>Sourceforge</system>
+    <url>https://sourceforge.net/tracker/?group_id=222423</url>
+  </issueManagement>
+
   <scm>
     <connection>scm:svn:https://eos-toolkit.svn.sourceforge.net/svnroot/eos-toolkit/trunk/core/</connection>
     <developerConnection>scm:svn:https://eos-toolkit.svn.sourceforge.net/svnroot/eos-toolkit/trunk/core/</developerConnection>
