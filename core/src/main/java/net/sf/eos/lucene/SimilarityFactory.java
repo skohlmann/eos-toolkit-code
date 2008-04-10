@@ -87,12 +87,12 @@ public abstract class SimilarityFactory {
                 return factory;
 
             } catch (final InstantiationException e) {
-                throw new TokenizerException(e);
+                throw new EosException(e);
             } catch (final IllegalAccessException e) {
-                throw new TokenizerException(e);
+                throw new EosException(e);
             }
         } catch (final ClassNotFoundException e) {
-            throw new TokenizerException(e);
+            throw new EosException(e);
         }
     }
 
