@@ -255,7 +255,7 @@
           <outputEncoding>UTF-8</outputEncoding>
         </configuration>
       </plugin>
-    </plugins>
+     </plugins>
   </reporting>
 
   <repositories>

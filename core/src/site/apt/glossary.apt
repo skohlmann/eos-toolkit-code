@@ -1,0 +1,54 @@
+~~ Copyright (c) 2008 Sascha Kohlmann
+~~
+~~ This program is free software: you can redistribute it and/or modify
+~~ it under the terms of the GNU Affero General Public License as published by
+~~ the Free Software Foundation, either version 3 of the License, or
+~~ (at your option) any later version.
+~~
+~~ This program is distributed in the hope that it will be useful,
+~~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+~~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+~~ GNU Affero General Public License for more details.
+~~
+~~ You should have received a copy of the GNU Affero General Public License
+~~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+ -----
+ Glossary
+ -----
+ Sascha Kohlmann
+ -----
+
+Glossary
+
+  [Concept] A concept is an abstract idea or a mental symbol, typically associated
+    with a corresponding representation in a language or symbology. It is
+    composed of a <preferred\ name> and <synonymous\ terms>. There may
+    be different terms for differend languages.
+    
+  [Longest match] Means that the longest phrase is the winner in entity
+     recognizing. For example: you have two named entities
+     
+     [[a]] <name>
+     
+     [[b]] <first name>
+     
+     []
+     
+  In the sentence "<Please write your first name>" the matched named entity is
+  <first name>.
+  
+  [Named entity] In \u03b5os terminology a named\ entity is a <concept> 
+    composed of a <preferred\ name> and <synonymous\ terms>. There may
+    be different terms for differend languages.
+  
+  [Phrase] A phrase is a sequence of terms.
+  
+  [Preferred name] The main used name of a concept.
+
+  [Synonymous term] Is a different word with identical or at least similar meanings
+    to a <preferred term>.
+
+  [Term] A there is a sequence of characters.
+
+

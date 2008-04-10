@@ -13,4 +13,57 @@
 ~~ You should have received a copy of the GNU Affero General Public License
 ~~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-TODO
+ -----
+ Common use-case
+ -----
+ Sascha Kohlmann
+ -----
+ Date
+
+*------------------*
+| Work in progress
+*------------------*
+
+Common use-case
+
+* Creation
+
+  The common use-case bases on a {{{http://en.wikipedia.org/wiki/Co-occurrence}co-occurrence}}
+anylze of {{{glossary.html}named entities}} on sentence level.
+
+** First step
+
+  In a frist step all documents of a corpus will decompose into sentences.
+\u03b5os generates a message digest over each <lower\ cased> decomposed sentence.
+The message digest acts and additional metadata information acts as key in
+a dictonary. Additional metadata may be the year of document writing. The value
+of the dictionary is the sentence and the metadata of the original document.
+If a key is twice in the dictionary \u03b5os combines the metadata of the values.
+
+  <<Result:>> double sentences are removed.
+
+** Second step
+
+  The second step is the co-occurrence analyzing. Named entities will recognize
+in the sentences and replaced. In the common use-case \u03b5os identifies named
+entities thru a {{{glossary.html}simple longest}} match look up. \u03b5os
+replace the named entity in the sentence thru a concept identifier (ID).
+For each replaced named entity \u03b5os puts the ID as a key in a map. The value
+is the sentence with the replaced ID. For each equal key \u03b5os concatenates
+all sentences of the ID and the metadata of the sentence and removes the key ID
+from the sentence. All other IDs are still in the sentence.
+
+  <<Result:>> A new document for each reconized ID.
+  
+** Third step
+
+  The third and last step creates a Lucene based fulltext index over all
+concatenates sentences.
+
+  <<Result:>> A Lucene fulltext index.
+
+* Lock up
+
+  TODO
+
+
