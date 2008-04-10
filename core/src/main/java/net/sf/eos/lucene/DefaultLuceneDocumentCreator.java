@@ -18,6 +18,7 @@ package net.sf.eos.lucene;
 import static org.apache.lucene.document.Field.Index.TOKENIZED;
 import static org.apache.lucene.document.Field.Index.UN_TOKENIZED;
 import static org.apache.lucene.document.Field.Store.YES;
+import static org.apache.lucene.document.Field.Store.NO;
 import net.sf.eos.EosException;
 import net.sf.eos.document.EosDocument;
 
@@ -71,7 +72,7 @@ public class DefaultLuceneDocumentCreator extends LuceneDocumentCreator {
         final String text = doc.getText().toString();
         final Field content = new Field(FieldName.CONTENT.name(),
                                         text,
-                                        YES,
+                                        NO,
                                         TOKENIZED);
         lDoc.add(content);
 
