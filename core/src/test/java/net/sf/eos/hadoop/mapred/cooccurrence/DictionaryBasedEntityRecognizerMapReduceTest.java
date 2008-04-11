@@ -13,7 +13,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.sf.eos.hadoop.mapred.entity;
+package net.sf.eos.hadoop.mapred.cooccurrence;
 
 import net.sf.eos.analyzer.TokenizerBuilder;
 import net.sf.eos.document.Serializer;
@@ -23,6 +23,8 @@ import net.sf.eos.entity.SimpleLongestMatchDictionaryBasedEntityRecognizer;
 import net.sf.eos.hadoop.DistributedCacheStrategy;
 import net.sf.eos.hadoop.TestDistributedCacheStrategy;
 import net.sf.eos.hadoop.mapred.Index;
+import net.sf.eos.hadoop.mapred.cooccurrence.DictionaryBasedEntityRecognizerMapper;
+import net.sf.eos.hadoop.mapred.cooccurrence.DictionaryBasedEntityRecognizerReducer;
 import net.sf.eos.medline.MedlineTokenizerBuilder;
 import net.sf.eos.trie.AbstractTrieLoader;
 import net.sf.eos.trie.XmlTrieLoader;

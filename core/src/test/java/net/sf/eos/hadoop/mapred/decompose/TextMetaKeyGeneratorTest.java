@@ -13,7 +13,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.sf.eos.hadoop.mapred.sentencer;
+package net.sf.eos.hadoop.mapred.decompose;
 
 import org.apache.hadoop.io.Text;
 import org.junit.Before;
@@ -29,6 +29,7 @@ import net.sf.eos.config.Configuration;
 import net.sf.eos.document.EosDocument;
 import net.sf.eos.hadoop.mapred.AbstractKeyGenerator;
 import net.sf.eos.hadoop.mapred.KeyGenerator;
+import net.sf.eos.hadoop.mapred.decompose.TextMetaKeyGenerator;
 
 public class TextMetaKeyGeneratorTest {
 

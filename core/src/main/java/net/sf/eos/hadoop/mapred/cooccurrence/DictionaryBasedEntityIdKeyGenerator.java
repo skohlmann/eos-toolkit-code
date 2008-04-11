@@ -13,7 +13,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.sf.eos.hadoop.mapred.entity;
+package net.sf.eos.hadoop.mapred.cooccurrence;
 
 import static net.sf.eos.entity.DictionaryBasedEntityRecognizer.ENTITY_ID_KEY;
 import static net.sf.eos.entity.EntityRecognizer.ENTITY_TYPE;

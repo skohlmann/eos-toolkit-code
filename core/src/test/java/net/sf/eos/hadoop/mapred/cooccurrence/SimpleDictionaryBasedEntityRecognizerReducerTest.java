@@ -13,11 +13,12 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.sf.eos.hadoop.mapred.entity;
+package net.sf.eos.hadoop.mapred.cooccurrence;
 
 
 import net.sf.eos.analyzer.TextBuilder;
 import net.sf.eos.document.EosDocument;
+import net.sf.eos.hadoop.mapred.cooccurrence.DictionaryBasedEntityRecognizerReducer;
 
 import org.apache.hadoop.mapred.JobConf;
 import static org.junit.Assert.assertEquals;
