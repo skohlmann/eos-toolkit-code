@@ -15,6 +15,8 @@
  */
 package net.sf.eos.hadoop;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.filecache.DistributedCache;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
@@ -24,7 +26,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * Supports the cache in a test environment.
@@ -33,8 +34,8 @@ import java.util.logging.Logger;
 public class TestDistributedCacheStrategy implements DistributedCacheStrategy {
 
     /** The logging of this class. */
-    private static final Logger LOG =
-        Logger.getLogger(TestDistributedCacheStrategy.class.getName());
+    private static final Log LOG =
+        LogFactory.getLog(TestDistributedCacheStrategy.class.getName());
 
     /*
      * @see net.sf.eos.hadoop.DistributedCacheStrategy#distributedCachePathes(org.apache.hadoop.mapred.JobConf)

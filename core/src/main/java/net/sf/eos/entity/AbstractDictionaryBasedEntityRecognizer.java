@@ -15,6 +15,9 @@
  */
 package net.sf.eos.entity;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import net.sf.eos.EosException;
 import net.sf.eos.analyzer.TextBuilder;
 import net.sf.eos.analyzer.TokenFilter;
@@ -27,8 +30,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * An implementation of a <code>EntityRecognizer</code> identifies entities
@@ -45,8 +46,8 @@ public abstract class AbstractDictionaryBasedEntityRecognizer
                     DictionaryBasedEntityRecognizer {
 
     /** For logging. */
-    private static final Logger LOG = 
-        Logger.getLogger(AbstractDictionaryBasedEntityRecognizer.class.getName());
+    private static final Log LOG =
+        LogFactory.getLog(AbstractDictionaryBasedEntityRecognizer.class.getName());
 
     /** The configuration key name for the classname of the factory.
      * @see #newInstance(Tokenizer, Configuration)
@@ -181,9 +182,9 @@ public abstract class AbstractDictionaryBasedEntityRecognizer
                 final AbstractDictionaryBasedEntityRecognizer recognizer
                      = constructor.newInstance(source);
                 recognizer.configure(config);
-                if (LOG.isLoggable(Level.CONFIG)) {
-                    LOG.config("AbstractDictionaryBasedEntityRecognizer instance: "
-                               + recognizer.getClass().getName());
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("AbstractDictionaryBasedEntityRecognizer instance: "
+                              + recognizer.getClass().getName());
                 }
                 return recognizer;
 

@@ -21,6 +21,8 @@ import net.sf.eos.document.EosDocument;
 import net.sf.eos.hadoop.mapred.EosDocumentSupportMapReduceBase;
 import net.sf.eos.hadoop.mapred.Index;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.JobConf;
 import org.apache.hadoop.mapred.OutputCollector;
@@ -37,14 +39,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
-import java.util.logging.Logger;
 
 public class SentencerReducer extends EosDocumentSupportMapReduceBase
                               implements Reducer<Text, Text, Text, Text> {
 
     /** For logging. */
-    private static final Logger LOG = 
-        Logger.getLogger(SentencerReducer.class.getName());
+    private static final Log LOG =
+        LogFactory.getLog(SentencerReducer.class.getName());
 
     private JobConf conf;
 

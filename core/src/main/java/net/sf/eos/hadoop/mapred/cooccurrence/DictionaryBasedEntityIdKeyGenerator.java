@@ -31,6 +31,8 @@ import net.sf.eos.entity.DictionaryBasedEntityRecognizer;
 import net.sf.eos.hadoop.mapred.KeyGenerator;
 import net.sf.eos.trie.Trie;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.io.Text;
 
 import java.util.ArrayList;
@@ -39,14 +41,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
-import java.util.logging.Logger;
+
 
 public class DictionaryBasedEntityIdKeyGenerator extends Configured
         implements KeyGenerator<Text> {
 
     /** For logging. */
-    private static final Logger LOG =
-        Logger.getLogger(DictionaryBasedEntityIdKeyGenerator.class.getName());
+    private static final Log LOG =
+        LogFactory.getLog(DictionaryBasedEntityIdKeyGenerator.class.getName());
 
     private Trie<CharSequence, Set<CharSequence>> trie;
 
@@ -154,7 +156,7 @@ public class DictionaryBasedEntityIdKeyGenerator extends Configured
     protected DictionaryBasedEntityRecognizer
             getDictionaryBasedEntityRecognizerForText(final CharSequence text) {
         try {
-            LOG.fine("Initialize DictionaryBasedEntityRecognizer");
+            LOG.debug("Initialize DictionaryBasedEntityRecognizer");
 
             final Configuration lconf = getConfiguration();
             final ResettableTokenizer tokenizer = getTokenizer();

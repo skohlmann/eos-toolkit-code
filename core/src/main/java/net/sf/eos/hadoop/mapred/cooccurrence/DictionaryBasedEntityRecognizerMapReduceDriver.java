@@ -25,6 +25,8 @@ import org.apache.commons.cli.GnuParser;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.Parser;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.filecache.DistributedCache;
 import org.apache.hadoop.fs.Path;
@@ -33,7 +35,6 @@ import org.apache.hadoop.mapred.JobConf;
 import org.apache.hadoop.util.GenericOptionsParser;
 import org.apache.hadoop.util.ToolRunner;
 
-import java.util.logging.Logger;
 
 /**
  * The driver supports the base arguments. To run the driver set the path
@@ -60,8 +61,8 @@ public class DictionaryBasedEntityRecognizerMapReduceDriver
     public static final String TRIE_LONG_CMD_ARG = "trie";
 
     /** For logging. */
-    private static final Logger LOG = 
-        Logger.getLogger(DictionaryBasedEntityRecognizerMapReduceDriver.class.getName());
+    private static final Log LOG =
+        LogFactory.getLog(DictionaryBasedEntityRecognizerMapReduceDriver.class.getName());
 
     /**
      * The parameter "<tt>-t</tt>" or "<tt>--trie</tt>" must be set use the
@@ -92,7 +93,7 @@ public class DictionaryBasedEntityRecognizerMapReduceDriver
 
         final String triePath = cmdLine.getOptionValue(TRIE_LONG_CMD_ARG);
         if (triePath == null || triePath.length() == 0) {
-            LOG.severe("No Trie data path given - exiting");
+            LOG.fatal("No Trie data path given - exiting");
             return 1;
         }
         LOG.info("Trie path: " + triePath);
@@ -101,9 +102,9 @@ public class DictionaryBasedEntityRecognizerMapReduceDriver
         if (conf.get(DistributedCacheStrategy.STRATEGY_IMPL_CONFIG_NAME) == null) {
             conf.set(DistributedCacheStrategy.STRATEGY_IMPL_CONFIG_NAME,
                     FullyDistributedCacheStrategy.class.getName());
-            LOG.config("No CacheStrategy given. Use '"
-                       + FullyDistributedCacheStrategy.class.getName()
-                       + "'");
+            LOG.debug("No CacheStrategy given. Use '"
+                      + FullyDistributedCacheStrategy.class.getName()
+                      + "'");
         }
 
         conf.setJobName("\u03b5\u00b7\u03bf\u00b7s\u00b7\u00b7\u00b7 Entity");

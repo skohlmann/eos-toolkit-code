@@ -31,6 +31,8 @@ import net.sf.eos.hadoop.mapred.Index;
 import net.sf.eos.hadoop.mapred.KeyGenerator;
 import net.sf.eos.sentence.Sentencer;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.JobConf;
@@ -41,15 +43,13 @@ import org.apache.hadoop.mapred.Reporter;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class SentencerMapper extends EosDocumentSupportMapReduceBase
         implements Mapper<LongWritable, Text, Text, Text> {
 
     /** For logging. */
-    private static final Logger LOG = 
-        Logger.getLogger(SentencerMapper.class.getName());
+    private static final Log LOG =
+        LogFactory.getLog(SentencerMapper.class.getName());
 
     private JobConf conf;
 
@@ -64,18 +64,18 @@ public class SentencerMapper extends EosDocumentSupportMapReduceBase
             final EosDocument doc = textToEosDocument(eosDoc);
             final TokenizerBuilder tokenBuilder =
                 TokenizerBuilder.newInstance(config);
-            if (LOG.isLoggable(Level.FINE)) {
-                LOG.fine("TokenizerBuilder instanceof "
-                         + tokenBuilder.getClass());
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("TokenizerBuilder instanceof "
+                          + tokenBuilder.getClass());
             }
             final TextBuilder textBuilder =
                 TextBuilder.newInstance(config);
-            if (LOG.isLoggable(Level.FINE)) {
-                LOG.fine("TextBuilder instanceof " + textBuilder.getClass());
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("TextBuilder instanceof " + textBuilder.getClass());
             }
             final Sentencer sentencer = Sentencer.newInstance(config);
-            if (LOG.isLoggable(Level.FINE)) {
-                LOG.fine("Sentencer instanceof " + sentencer.getClass());
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Sentencer instanceof " + sentencer.getClass());
             }
 
             final ResettableTokenizer tokenizer =

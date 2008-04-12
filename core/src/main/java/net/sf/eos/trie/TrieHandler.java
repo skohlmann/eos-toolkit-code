@@ -1,17 +1,16 @@
 package net.sf.eos.trie;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class TrieHandler extends DefaultHandler implements TrieSource {
 
-    static final Level LEVEL = Level.INFO;
-    static final Logger LOG = Logger.getLogger(TrieHandler.class.getName());
+    static final Log LOG = LogFactory.getLog(TrieHandler.class.getName());
 
     private enum Xml {trie, entry, key, value}
 

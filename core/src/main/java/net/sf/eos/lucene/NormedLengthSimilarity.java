@@ -15,10 +15,9 @@
  */
 package net.sf.eos.lucene;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.search.DefaultSimilarity;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Normalize the lengh for als fields to 1.0.
@@ -27,68 +26,67 @@ import java.util.logging.Logger;
 public class NormedLengthSimilarity extends DefaultSimilarity {
 
     /** For logging. */
-    private static final Logger LOG =
-            Logger.getLogger(NormedLengthSimilarity.class.getName());
-    private static final Level LEVEL = Level.FINER;
+    private static final Log LOG =
+        LogFactory.getLog(NormedLengthSimilarity.class.getName());
 
     @Override
     public float lengthNorm(final String fieldName, final int numTerms) {
         if (! "TODO".equals(fieldName)) {
             final float retval = super.lengthNorm(fieldName, numTerms);
-            if (LOG.isLoggable(LEVEL)) {
-                LOG.log(LEVEL, "fieldname: "+ fieldName
-                               + " - numTerms: "+ numTerms + " - retval: "
-                               + retval);
+            if (LOG.isTraceEnabled()) {
+                LOG.trace("fieldname: "+ fieldName
+                          + " - numTerms: "+ numTerms + " - retval: "
+                          + retval);
             }
             return retval;
         }
-        if (LOG.isLoggable(LEVEL)) {
-            LOG.log(LEVEL, "fieldname: "+ fieldName
-                           + " - numTerms: "+ numTerms + " - retval: 1.0");
+        if (LOG.isTraceEnabled()) {
+            LOG.trace("fieldname: "+ fieldName
+                      + " - numTerms: "+ numTerms + " - retval: 1.0");
         }
         return 1.0f;
     }
     @Override
     public float queryNorm(final float sumOfSquaredWeights) {
         final float retval = super.queryNorm(sumOfSquaredWeights);
-        if (LOG.isLoggable(LEVEL)) {
-            LOG.log(LEVEL, "sumOfSquaredWeights: "
-                           + sumOfSquaredWeights + " - retval: " + retval);
+        if (LOG.isTraceEnabled()) {
+            LOG.trace("sumOfSquaredWeights: "
+                      + sumOfSquaredWeights + " - retval: " + retval);
         }
         return retval;
     }
     @Override
     public float tf(final float freq) {
         final float retval =  super.tf(freq);
-        if (LOG.isLoggable(LEVEL)) {
-            LOG.log(LEVEL, "freq: "+ freq + " - retval: " + retval);
+        if (LOG.isTraceEnabled()) {
+            LOG.trace("freq: "+ freq + " - retval: " + retval);
         }
         return retval;
     }
     @Override
     public float sloppyFreq(final int distance) {
         final float retval = super.sloppyFreq(distance);
-        if (LOG.isLoggable(LEVEL)) {
-            LOG.log(LEVEL, "distance: "+ distance + " - retval: " + retval);
+        if (LOG.isTraceEnabled()) {
+            LOG.trace("distance: "+ distance + " - retval: " + retval);
         }
         return retval;
     }
     @Override
     public float idf(final int docFreq, final int numDocs) {
         final float retval = super.idf(docFreq, numDocs);
-        if (LOG.isLoggable(LEVEL)) {
-            LOG.log(LEVEL, "docFreq: "+ docFreq
-                           + " - docFreq: " + docFreq + " - retval: " + retval);
+        if (LOG.isTraceEnabled()) {
+            LOG.trace("docFreq: "+ docFreq
+                    + " - docFreq: " + docFreq + " - retval: " + retval);
         }
         return retval;
     }
     @Override
     public float coord(final int overlap, final int maxOverlap) {
         final float retval = super.idf(overlap, maxOverlap);
-        if (LOG.isLoggable(LEVEL)) {
-            LOG.log(LEVEL, "overlap: "+ overlap
-                           + " - maxOverlap: " + maxOverlap + " - retval: "
-                           + retval);
+        if (LOG.isTraceEnabled()) {
+            LOG.trace("overlap: "+ overlap
+                      + " - maxOverlap: " + maxOverlap + " - retval: "
+                      + retval);
         }
        return retval;
     }

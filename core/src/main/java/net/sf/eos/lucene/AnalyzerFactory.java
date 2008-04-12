@@ -16,13 +16,12 @@
 package net.sf.eos.lucene;
 
 import net.sf.eos.EosException;
-import net.sf.eos.analyzer.TokenizerException;
 import net.sf.eos.config.Configuration;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.analysis.Analyzer;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * To support different strategies of Lucene analyzers this
@@ -39,8 +38,8 @@ import java.util.logging.Logger;
 public abstract class AnalyzerFactory {
 
     /** For logging. */
-    private static final Logger LOG = 
-        Logger.getLogger(AnalyzerFactory.class.getName());
+    private static final Log LOG =
+        LogFactory.getLog(AnalyzerFactory.class.getName());
 
     /** The configuration key name for the classname of the factory.
      * @see #newInstance(Configuration) */
@@ -79,9 +78,9 @@ public abstract class AnalyzerFactory {
             try {
 
                 final AnalyzerFactory factory = clazz.newInstance();
-                if (LOG.isLoggable(Level.CONFIG)) {
-                    LOG.config("AnalyzerFactory instance: "
-                               + factory.getClass().getName());
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("AnalyzerFactory instance: "
+                              + factory.getClass().getName());
                 }
                 return factory;
 

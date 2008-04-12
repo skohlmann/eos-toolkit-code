@@ -22,10 +22,12 @@ import net.sf.eos.analyzer.TokenizerException;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.Configured;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
-import java.util.logging.Logger;
 
 /**
  * Implementations must serialize and deserialize an {@link EosDocument}.
@@ -37,8 +39,8 @@ import java.util.logging.Logger;
 public abstract class Serializer extends Configured {
 
     /** For logging. */
-    private static final Logger LOG = 
-        Logger.getLogger(Serializer.class.getName());
+    private static final Log LOG =
+        LogFactory.getLog(Serializer.class.getName());
 
     public final static String SERIALIZER_IMPL_CONFIG_NAME =
         "net.sf.eos.document.Serializer.impl";

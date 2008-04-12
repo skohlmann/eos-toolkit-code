@@ -23,6 +23,8 @@ import net.sf.eos.config.HadoopConfigurationAdapter;
 import net.sf.eos.lucene.AnalyzerFactory;
 import net.sf.eos.lucene.SimilarityFactory;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.ObjectWritable;
@@ -39,8 +41,6 @@ import org.apache.lucene.search.Similarity;
 
 import java.io.IOException;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Support to write a Lucene index in a Hadoop Filesystem.
@@ -76,8 +76,8 @@ public class LuceneOutputFormat<K extends WritableComparable,
     public static final String DONE_NAME = "index.done";
 
     /** For logging. */
-    private static final Logger LOG = 
-        Logger.getLogger(LuceneOutputFormat.class.getName());
+    private static final Log LOG =
+        LogFactory.getLog(LuceneOutputFormat.class.getName());
 
     /**
      * To configure see <code><em>XXX</em>_CONFIG_NAME</code> keys. Uses
@@ -96,7 +96,7 @@ public class LuceneOutputFormat<K extends WritableComparable,
         final Path temp = job.getLocalPath(
                 "index/_"+Integer.toString(new Random().nextInt()));
 
-        if (LOG.isLoggable(Level.INFO)) {
+        if (LOG.isInfoEnabled()) {
             LOG.info("path (perm): " + perm.getName());
             LOG.info("path (temp): " + temp.getName());
         }
@@ -138,16 +138,16 @@ public class LuceneOutputFormat<K extends WritableComparable,
 
             writer.setSimilarity(similarity);
 
-            if (LOG.isLoggable(Level.CONFIG)) {
-                LOG.config("mergeFactor: " + mergeFactor);
-                LOG.config("maxBufferedDocs: " + maxBufferedDocs);
-                LOG.config("maxMergeDocs: " + maxMergeDocs);
-                LOG.config("RAMBufferSizeDB: " + ramBufferSize);
-                LOG.config("maxFieldLength: " + maxFieldLength);
-                LOG.config("Lucene Analyzer instance: "
-                           + analyzer.getClass().getName());
-                LOG.config("Lucene Similarity instance: "
-                           + similarity.getClass().getName());
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("mergeFactor: " + mergeFactor);
+                LOG.debug("maxBufferedDocs: " + maxBufferedDocs);
+                LOG.debug("maxMergeDocs: " + maxMergeDocs);
+                LOG.debug("RAMBufferSizeDB: " + ramBufferSize);
+                LOG.debug("maxFieldLength: " + maxFieldLength);
+                LOG.debug("Lucene Analyzer instance: "
+                          + analyzer.getClass().getName());
+                LOG.debug("Lucene Similarity instance: "
+                          + similarity.getClass().getName());
             }
 
             final RecordWriterImpl<K, V> recordWriter
@@ -171,8 +171,8 @@ public class LuceneOutputFormat<K extends WritableComparable,
         private boolean closed;
 
         /** The logging of this class. */
-        private static final Logger LOG = Logger
-                .getLogger(RecordWriterImpl.class.getName());
+        private static final Log LOG =
+            LogFactory.getLog(RecordWriterImpl.class.getName());
 
         private IndexWriter writer;
         private Analyzer luceneAnalyzer;
@@ -201,7 +201,7 @@ public class LuceneOutputFormat<K extends WritableComparable,
                 throws IOException {
 
             final Document doc = (Document) value.get();
-            LOG.finer(" Indexing document ....");
+            LOG.trace("Indexing document ....");
             this.writer.addDocument(doc, this.luceneAnalyzer);
         }
 

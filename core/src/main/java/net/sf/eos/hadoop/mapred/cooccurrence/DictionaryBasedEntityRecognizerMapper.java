@@ -33,6 +33,8 @@ import net.sf.eos.trie.Trie;
 import net.sf.eos.trie.TrieLoader;
 import net.sf.eos.trie.PatriciaTrie.KeyAnalyzer;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
@@ -46,15 +48,15 @@ import java.io.InputStream;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
-import java.util.logging.Logger;
+
 
 public class DictionaryBasedEntityRecognizerMapper
         extends EosDocumentSupportMapReduceBase
         implements Mapper<LongWritable, Text, Text, Text> {
 
     /** For logging. */
-    private static final Logger LOG =
-        Logger.getLogger(DictionaryBasedEntityRecognizerMapper.class.getName());
+    private static final Log LOG =
+        LogFactory.getLog(DictionaryBasedEntityRecognizerMapper.class.getName());
 
     private JobConf conf;
 

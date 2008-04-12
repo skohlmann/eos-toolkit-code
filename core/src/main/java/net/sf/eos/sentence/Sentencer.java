@@ -15,6 +15,9 @@
  */
 package net.sf.eos.sentence;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import net.sf.eos.EosException;
 import net.sf.eos.analyzer.ResettableTokenizer;
 import net.sf.eos.analyzer.SentenceTokenizer;
@@ -40,8 +43,8 @@ import java.util.logging.Logger;
 public abstract class Sentencer extends Configured {
 
     /** For logging. */
-    private static final Logger LOG = 
-        Logger.getLogger(Sentencer.class.getName());
+    private static final Log LOG =
+        LogFactory.getLog(Sentencer.class.getName());
 
     /** The name of the algorithm of the message digest. */
     @SuppressWarnings("nls")
@@ -90,9 +93,9 @@ public abstract class Sentencer extends Configured {
 
                 final Sentencer sentencer = clazz.newInstance();
                 sentencer.configure(config);
-                if (LOG.isLoggable(Level.CONFIG)) {
-                    LOG.config("Sentencer instance: "
-                               + sentencer.getClass().getName());
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Sentencer instance: "
+                              + sentencer.getClass().getName());
                 }
                 return sentencer;
 

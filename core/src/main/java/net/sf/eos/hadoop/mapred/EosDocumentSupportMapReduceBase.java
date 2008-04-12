@@ -22,6 +22,8 @@ import net.sf.eos.document.EosDocument;
 import net.sf.eos.document.Serializer;
 
 import org.apache.commons.io.input.CharSequenceReader;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.JobConf;
 import org.apache.hadoop.mapred.MapReduceBase;
@@ -30,8 +32,6 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Support for handling Map/Reduce jobs with {@link EosDocument}.
@@ -40,8 +40,8 @@ import java.util.logging.Logger;
 public abstract class EosDocumentSupportMapReduceBase extends MapReduceBase {
 
     /** For logging. */
-    private static final Logger LOG = 
-        Logger.getLogger(EosDocumentSupportMapReduceBase.class.getName());
+    private static final Log LOG =
+        LogFactory.getLog(EosDocumentSupportMapReduceBase.class.getName());
 
     private JobConf conf;
 
@@ -57,7 +57,7 @@ public abstract class EosDocumentSupportMapReduceBase extends MapReduceBase {
         assert this.conf != null;
         final Configuration config = new HadoopConfigurationAdapter(this.conf);
         final Serializer serializer = Serializer.newInstance(config);
-        LOG.fine("Serializer instanceof " + serializer.getClass());
+        LOG.debug("Serializer instanceof " + serializer.getClass());
 
         return serializer;
     }
@@ -77,8 +77,8 @@ public abstract class EosDocumentSupportMapReduceBase extends MapReduceBase {
         serializer.serialize(doc, writer);
         final String docAsString = writer.toString();
         final Text docAsText = new Text(docAsString);
-        if (LOG.isLoggable(Level.FINE)) {
-            LOG.fine("seralized EosDocument: " + docAsText);
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("seralized EosDocument: " + docAsText);
         }
 
         return docAsText;
@@ -98,8 +98,8 @@ public abstract class EosDocumentSupportMapReduceBase extends MapReduceBase {
         final CharSequence text = eosDoc.toString();
         final Reader reader = new CharSequenceReader(text);
         final EosDocument doc = serializer.deserialize(reader);
-        if (LOG.isLoggable(Level.FINE)) {
-            LOG.fine("doc: " + doc);
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("doc: " + doc);
         }
 
         return doc;

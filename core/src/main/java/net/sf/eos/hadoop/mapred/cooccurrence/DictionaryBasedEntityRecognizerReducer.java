@@ -23,6 +23,8 @@ import net.sf.eos.document.EosDocument;
 import net.sf.eos.hadoop.mapred.EosDocumentSupportMapReduceBase;
 import net.sf.eos.hadoop.mapred.Index;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.JobConf;
 import org.apache.hadoop.mapred.OutputCollector;
@@ -39,16 +41,14 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.Map.Entry;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class DictionaryBasedEntityRecognizerReducer
         extends EosDocumentSupportMapReduceBase
         implements Reducer<Text, Text, Text, Text> {
 
     /** For logging. */
-    private static final Logger LOG = 
-        Logger.getLogger(DictionaryBasedEntityRecognizerReducer.class.getName());
+    private static final Log LOG =
+        LogFactory.getLog(DictionaryBasedEntityRecognizerReducer.class.getName());
 
     private final static String NULL = "<null>";
     private final static String UNDERLINE = "_";
@@ -99,8 +99,8 @@ public class DictionaryBasedEntityRecognizerReducer
 
         while (valuesIterator.hasNext()) {
             final Text eosDoc = valuesIterator.next();
-            if (LOG.isLoggable(Level.FINER)) {
-                LOG.finer("EosDocument to handle: " + eosDoc.toString());
+            if (LOG.isTraceEnabled()) {
+                LOG.trace("EosDocument to handle: " + eosDoc.toString());
             }
             final EosDocument doc = textToEosDocument(eosDoc);
             assert doc != null;

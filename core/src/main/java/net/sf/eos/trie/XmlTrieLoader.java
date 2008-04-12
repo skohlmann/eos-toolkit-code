@@ -16,6 +16,9 @@
 package net.sf.eos.trie;
 
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import net.sf.eos.analyzer.ResettableTokenizer;
 import net.sf.eos.analyzer.TextBuilder;
 import net.sf.eos.analyzer.Token;
@@ -34,8 +37,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -58,8 +59,7 @@ import javax.xml.parsers.SAXParserFactory;
 public class XmlTrieLoader 
         extends AbstractTrieLoader<CharSequence, Set<CharSequence>> {
 
-    static final Level LEVEL = Level.INFO;
-    static final Logger LOG = Logger.getLogger(XmlTrieLoader.class.getName());
+    static final Log LOG = LogFactory.getLog(XmlTrieLoader.class.getName());
 
     /** A Tokenizer to tokenize the value of the trie before storing. */
     private ResettableTokenizer tokenizer;
@@ -85,7 +85,7 @@ public class XmlTrieLoader
         });
 
         final long start = System.currentTimeMillis();
-        LOG.log(LEVEL, "start time since epoche: " + start + "ms");
+        LOG.trace("start time since epoche: " + start + "ms");
         final MemoryMXBean memBean = ManagementFactory.getMemoryMXBean();
         final StringBuilder lsb =
             new StringBuilder("Heap Memory statistics:\n");
@@ -95,15 +95,15 @@ public class XmlTrieLoader
         lsb.append("\n  nonheap: ");
         final MemoryUsage nonheap = memBean.getNonHeapMemoryUsage();
         lsb.append(nonheap);
-        LOG.log(LEVEL, lsb.toString());
+        LOG.debug(lsb.toString());
         logStatistic();
 
         parser.parse(trieData, source);
 
         logStatistic();
-        LOG.log(LEVEL, "Build time: " 
-                       + (System.currentTimeMillis() - start) + "ms"
-                       + " for " + trie.size() + " entries");
+        LOG.debug("Build time: " 
+                  + (System.currentTimeMillis() - start) + "ms"
+                  + " for " + trie.size() + " entries");
     }
 
     final void handleNewTrieEntryForCharSequenceTrie(
@@ -146,7 +146,7 @@ public class XmlTrieLoader
             lsb.append("\n");
         }
 
-        LOG.log(LEVEL, lsb.toString());
+        LOG.debug(lsb.toString());
     }
 
     /**

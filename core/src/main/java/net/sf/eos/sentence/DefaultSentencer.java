@@ -25,6 +25,8 @@ import net.sf.eos.analyzer.TokenizerException;
 import net.sf.eos.document.EosDocument;
 
 import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -32,8 +34,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Simple default implementation.
@@ -42,8 +42,8 @@ import java.util.logging.Logger;
 public class DefaultSentencer extends Sentencer {
 
     /** For logging. */
-    private static final Logger LOG = 
-        Logger.getLogger(DefaultSentencer.class.getName());
+    private static final Log LOG =
+        LogFactory.getLog(DefaultSentencer.class.getName());
 
     /** Creates a new instance. */
     public DefaultSentencer() {
@@ -59,10 +59,10 @@ public class DefaultSentencer extends Sentencer {
                                 final TextBuilder builder)
             throws EosException {
 
-        if (LOG.isLoggable(Level.FINER)) {
-            LOG.fine("SentenceTokenizer instance: " + sentencer.getClass());
-            LOG.fine("ResettableTokenizer instance: " + tokenizer.getClass());
-            LOG.fine("TextBuilder instance: " + builder.getClass());
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("SentenceTokenizer instance: " + sentencer.getClass());
+            LOG.debug("ResettableTokenizer instance: " + tokenizer.getClass());
+            LOG.debug("TextBuilder instance: " + builder.getClass());
         }
         final Map<String, EosDocument> retval =
             new HashMap<String, EosDocument>();

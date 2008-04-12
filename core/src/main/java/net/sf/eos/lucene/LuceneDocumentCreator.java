@@ -15,13 +15,11 @@
  */
 package net.sf.eos.lucene;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.document.Document;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import net.sf.eos.EosException;
-import net.sf.eos.analyzer.TokenizerException;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.Configured;
 import net.sf.eos.document.EosDocument;
@@ -41,8 +39,8 @@ import net.sf.eos.document.EosDocument;
 public abstract class LuceneDocumentCreator extends Configured {
 
     /** For logging. */
-    private static final Logger LOG = 
-        Logger.getLogger(LuceneDocumentCreator.class.getName());
+    private static final Log LOG = 
+        LogFactory.getLog(LuceneDocumentCreator.class.getName());
 
     /** The configuration key name for the classname of the creator.
      * @see #newInstance(Configuration) */
@@ -80,9 +78,9 @@ public abstract class LuceneDocumentCreator extends Configured {
             try {
 
                 final LuceneDocumentCreator creator = clazz.newInstance();
-                if (LOG.isLoggable(Level.CONFIG)) {
-                    LOG.config("LuceneDocumentCreator instance: "
-                            + creator.getClass().getName());
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("LuceneDocumentCreator instance: "
+                              + creator.getClass().getName());
                 }
                 return creator;
 

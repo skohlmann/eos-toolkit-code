@@ -15,6 +15,8 @@
  */
 package net.sf.eos.hadoop;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.filecache.DistributedCache;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.mapred.JobConf;
@@ -22,7 +24,6 @@ import org.apache.hadoop.mapred.JobConf;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * Supports the cache in a fully distributed environment.
@@ -31,8 +32,8 @@ import java.util.logging.Logger;
 public class FullyDistributedCacheStrategy implements DistributedCacheStrategy {
 
     /** The logging of this class. */
-    private static final Logger LOG =
-        Logger.getLogger(FullyDistributedCacheStrategy.class.getName());
+    private static final Log LOG =
+        LogFactory.getLog(FullyDistributedCacheStrategy.class.getName());
 
     /*
      * @see net.sf.eos.hadoop.DistributedCacheStrategy#distributedCachePathes(org.apache.hadoop.mapred.JobConf)

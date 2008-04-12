@@ -18,6 +18,8 @@ package net.sf.eos.document;
 import net.sf.eos.io.NewlineReplaceWriter;
 
 import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -31,8 +33,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -49,8 +49,7 @@ import javax.xml.parsers.SAXParserFactory;
  */
 public class XmlSerializer extends Serializer {
 
-    static final Level LEVEL = Level.INFO;
-    static final Logger LOG = Logger.getLogger(XmlSerializer.class.getName());
+    static final Log LOG = LogFactory.getLog(XmlSerializer.class.getName());
 
     /**
      * Represents the XML emlement names of a serialized
@@ -87,8 +86,8 @@ public class XmlSerializer extends Serializer {
     @SuppressWarnings("nls")
     public void serialize(final EosDocument doc, final Writer out)
             throws IOException {
-        if (LOG.isLoggable(Level.FINE)) {
-            LOG.fine("start serialize EosDocument");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("start serialize EosDocument");
         }
         final NewlineReplaceWriter writer = new NewlineReplaceWriter(out);
         writer.write(XML_OPEN + ElementName.d.name() + XML_CLOSE);
@@ -130,8 +129,8 @@ public class XmlSerializer extends Serializer {
         }
 
         writer.write(XML_CLOSE_TAG + ElementName.d.name() + XML_CLOSE);
-        if (LOG.isLoggable(Level.FINE)) {
-            LOG.fine("end serialize EosDocument");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("end serialize EosDocument");
         }
     }
 
@@ -144,8 +143,8 @@ public class XmlSerializer extends Serializer {
             throws IOException, ParserConfigurationException, SAXException {
 
         final XmlEosDocumentHandler handler = new XmlEosDocumentHandler();
-        if (LOG.isLoggable(Level.FINE)) {
-            LOG.fine(handler.id + " start loading EosDocument");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug(handler.id + " start loading EosDocument");
         }
 
         final SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -155,8 +154,8 @@ public class XmlSerializer extends Serializer {
         parser.parse(source, handler);
 
         final EosDocument doc = handler.getDocument();
-        if (LOG.isLoggable(Level.FINE)) {
-            LOG.fine(handler.id + " start loading EosDocument - " + doc);
+        if (LOG.isDebugEnabled()) {
+            LOG.debug(handler.id + " start loading EosDocument - " + doc);
         }
 
         return doc;
@@ -188,8 +187,8 @@ public class XmlSerializer extends Serializer {
         @Override
         @SuppressWarnings("nls")
         public void startDocument() {
-            if (LOG.isLoggable(Level.FINE)) {
-                LOG.fine(this.id + " start parsing EosDocument");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug(this.id + " start parsing EosDocument");
             }
         }
 
@@ -199,8 +198,8 @@ public class XmlSerializer extends Serializer {
         @Override
         @SuppressWarnings("nls")
         public void endDocument() {
-            if (LOG.isLoggable(Level.FINE)) {
-                LOG.fine(this.id + " end parsing EosDocument");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug(this.id + " end parsing EosDocument");
             }
         }
 
@@ -242,22 +241,22 @@ public class XmlSerializer extends Serializer {
                 final String text = this.sb.toString();
                 this.doc.setText(text);
 
-                if (LOG.isLoggable(Level.FINER)) {
+                if (LOG.isTraceEnabled()) {
                     final StringBuilder lbuf =
                         new StringBuilder(this.id + " text: ");
                     lbuf.append(text);
-                    LOG.finer(lbuf.toString());
+                    LOG.trace(lbuf.toString());
                 }
 
             } else if (ElementName.ti.name().equals(qName)) {
                 final String title = sb.toString();
                 this.doc.setTitle(title);
 
-                if (LOG.isLoggable(Level.FINER)) {
+                if (LOG.isTraceEnabled()) {
                     final StringBuilder lbuf =
                         new StringBuilder(this.id + " title: ");
                     lbuf.append(title);
-                    LOG.finer(lbuf.toString());
+                    LOG.trace(lbuf.toString());
                 }
 
             } else if (ElementName.m.name().equals(qName)) {
@@ -266,7 +265,7 @@ public class XmlSerializer extends Serializer {
                 assert this.key != null;
                 meta.put(this.key, this.value);
 
-                if (LOG.isLoggable(Level.FINER)) {
+                if (LOG.isTraceEnabled()) {
                     final StringBuilder lbuf =
                         new StringBuilder(this.id + " key: ");
                     lbuf.append(this.key);
@@ -275,7 +274,7 @@ public class XmlSerializer extends Serializer {
                         lbuf.append("value=");
                         lbuf.append(v);
                     }
-                    LOG.finer(lbuf.toString());
+                    LOG.trace(lbuf.toString());
                 }
 
                 this.inMeta = false;

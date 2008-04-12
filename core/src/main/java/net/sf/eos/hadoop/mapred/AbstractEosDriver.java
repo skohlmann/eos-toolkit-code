@@ -19,6 +19,8 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.GnuParser;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.Parser;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
@@ -26,8 +28,6 @@ import org.apache.hadoop.mapred.JobClient;
 import org.apache.hadoop.mapred.JobConf;
 import org.apache.hadoop.mapred.RunningJob;
 import org.apache.hadoop.util.Tool;
-
-import java.util.logging.Logger;
 
 /**
  * Support for some generic configuration data. The {@link #run(String[])}
@@ -39,8 +39,8 @@ import java.util.logging.Logger;
 public abstract class AbstractEosDriver extends Configured implements Tool {
 
     /** For logging. */
-    private static final Logger LOG = 
-        Logger.getLogger(AbstractEosDriver.class.getName());
+    private static final Log LOG =
+        LogFactory.getLog(AbstractEosDriver.class.getName());
 
     /** Short commandline parameter name for the <em>source</em> or
      * <em>input</em> path. */ 
@@ -86,13 +86,13 @@ public abstract class AbstractEosDriver extends Configured implements Tool {
         final String dest = cmdLine.getOptionValue(DESTINATION_SHORT_CMD_ARG);
 
         if (source == null || source.length() == 0) {
-            LOG.warning("Arguments contains no source path.");
+            LOG.warn("Arguments contains no source path.");
         } else {
             final Path in = new Path(source);
             this.jobConf.setInputPath(in);
         }
         if (dest == null || dest.length() == 0) {
-            LOG.warning("Arguments contains no destination path.");
+            LOG.warn("Arguments contains no destination path.");
         } else {
             final Path out = new Path(dest);
             this.jobConf.setOutputPath(out);

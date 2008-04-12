@@ -15,6 +15,9 @@
  */
 package net.sf.eos.entity;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import net.sf.eos.analyzer.AbstractToken;
 import net.sf.eos.analyzer.TextBuilder;
 import net.sf.eos.analyzer.Token;
@@ -27,8 +30,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * A simple matcher for named entities. The implementation sluices
@@ -42,11 +43,8 @@ import java.util.logging.Logger;
 public class SimpleLongestMatchDictionaryBasedEntityRecognizer
         extends AbstractDictionaryBasedEntityRecognizer {
 
-    static final Level LEVEL1 = Level.FINE;
-    static final Level LEVEL2 = Level.FINER;
-    static final Logger LOG = 
-        Logger.getLogger(SimpleLongestMatchDictionaryBasedEntityRecognizer
-                .class.getName());
+    static final Log LOG =
+        LogFactory.getLog(SimpleLongestMatchDictionaryBasedEntityRecognizer.class.getName());
 
     private Map<CharSequence, Set<CharSequence>> entities;
     private Queue<Token> retvalBuffer = new LinkedList<Token>();
@@ -97,9 +95,9 @@ public class SimpleLongestMatchDictionaryBasedEntityRecognizer
             }
         }
         if (this.longestMatchQueue.size() != 0) {
-            if (LOG.isLoggable(LEVEL1)) {
-                LOG.log(LEVEL1, "END REACHED: "
-                        + this.longestMatchQueue.toString());
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("END REACHED: "
+                          + this.longestMatchQueue.toString());
             }
             final Match match =
                 checkForLongestMatchInTrie(this.longestMatchQueue, entityMap);
@@ -137,20 +135,20 @@ public class SimpleLongestMatchDictionaryBasedEntityRecognizer
                 t = ts;
             }
             final CharSequence seq = toCharSequence(t);
-            if (LOG.isLoggable(LEVEL1)) {
-                LOG.log(LEVEL1, "seq: '" + seq + "'");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("seq: '" + seq + "'");
             }
             final Set<CharSequence> value = trie.get(seq);
-            if (LOG.isLoggable(LEVEL1)) {
-                LOG.log(LEVEL1, "from trie: " + value);
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("from trie: " + value);
             }
             if (value != null) {
                 for (int j = 0; j < i; j++) {
                     tokens.poll();
                 }
                 final Match match = new Match(seq, value);
-                if (LOG.isLoggable(LEVEL1)) {
-                    LOG.log(LEVEL1, "match: " + match);
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("match: " + match);
                 }
                 return match;
             }
@@ -160,8 +158,8 @@ public class SimpleLongestMatchDictionaryBasedEntityRecognizer
 
     final CharSequence toCharSequence(final Token[] tokens) {
         for (int i = 0; i < tokens.length; i++) {
-            if (LOG.isLoggable(LEVEL2)) {
-                LOG.log(LEVEL2, "token: " + tokens[i]);
+            if (LOG.isTraceEnabled()) {
+                LOG.trace("token: " + tokens[i]);
             }
         }
         final TextBuilder builder = getTextBuilder();

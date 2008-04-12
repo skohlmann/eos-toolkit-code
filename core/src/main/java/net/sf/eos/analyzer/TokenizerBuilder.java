@@ -16,8 +16,8 @@
 package net.sf.eos.analyzer;
 
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.Configured;
@@ -31,8 +31,8 @@ import net.sf.eos.medline.MedlineTokenizerBuilder;
 public abstract class TokenizerBuilder extends Configured {
 
     /** For logging. */
-    private static final Logger LOG = 
-        Logger.getLogger(TokenizerBuilder.class.getName());
+    private static final Log LOG =
+        LogFactory.getLog(TokenizerBuilder.class.getName());
 
     /** The configuration key name for the classname of the builder.
      * @see #newInstance(Configuration) */
@@ -70,8 +70,8 @@ public abstract class TokenizerBuilder extends Configured {
 
                 final TokenizerBuilder builder = clazz.newInstance();
                 builder.configure(config);
-                if (LOG.isLoggable(Level.CONFIG)) {
-                    LOG.config("TokenizerBuilder instance: "
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("TokenizerBuilder instance: "
                                + builder.getClass().getName());
                 }
                 return builder;

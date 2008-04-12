@@ -16,14 +16,15 @@
 package net.sf.eos.analyzer;
 
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import net.sf.eos.EosException;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.Configured;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Implementation creates new text sequences from {@link Token}- or
@@ -34,8 +35,7 @@ import java.util.logging.Logger;
 public abstract class TextBuilder extends Configured {
 
     /** For logging. */
-    private static final Logger LOG = 
-        Logger.getLogger(TextBuilder.class.getName());
+    private static final Log LOG = LogFactory.getLog(TextBuilder.class);
 
     /** The configuration key name for the classname of the builder.
      * @see #newInstance(Configuration) */
@@ -111,8 +111,8 @@ public abstract class TextBuilder extends Configured {
 
                 final TextBuilder textBuilder = clazz.newInstance();
                 textBuilder.configure(config);
-                if (LOG.isLoggable(Level.CONFIG)) {
-                    LOG.config("TextBuilder instance: "
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("TextBuilder instance: "
                                + textBuilder.getClass().getName());
                 }
                 return textBuilder;
