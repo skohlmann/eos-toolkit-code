@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>net.sf.eos-toolkit</groupId>
+    <artifactId>net.sf.eos-toolkit</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+  </parent>
+
+  <!--groupId>net.sf.eos-toolkit</groupId-->
+  <artifactId>net.sf.eos-toolkit.contrib.converter</artifactId>
+  <packaging>jar</packaging>
+  <name>net.sf.eos-toolkit.contrib.converter</name>
+  <url>http://eos-toolkit.sourceforge.net/</url>
+
+  <licenses>
+    <license>
+      <name>GNU Affero General Public License Version 3</name> 
+      <url>http://www.gnu.org/licenses/agpl-3.0.txt</url> 
+      <distribution>repo</distribution> 
+      <comments>
+        The main license of the project - cause open source software is not
+        free software.
+      </comments>
+    </license>
+  </licenses>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.hadoop</groupId>
+      <artifactId>hadoop-streaming</artifactId>
+      <version>0.16.1</version>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.eos-toolkit</groupId>
+      <artifactId>net.sf.eos-toolkit.core</artifactId>
+      <version>${project.parent.version}</version>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <descriptors>
+            <descriptor>src/main/assembly/uberjar-executable.xml</descriptor>
+          </descriptors>
+          <archive>
+            <manifest>
+              <!-- mainClass>net.sf...</mainClass-->
+              <addDefaultImplementationEntries/>
+              <addDefaultSpecificationEntries/>
+            </manifest>
+            <index>true</index>
+            <compress>false</compress>
+          </archive>
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-assembly</id> <!-- this is used for inheritance merges -->
+            <phase>package</phase> <!-- append to the packaging phase. -->
+            <goals>
+              <goal>attached</goal> <!-- goals == mojos -->
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <scm>
+    <connection>scm:svn:https://eos-toolkit.svn.sourceforge.net/svnroot/eos-toolkit/trunk/contrib/converter/</connection>
+    <developerConnection>scm:svn:https://eos-toolkit.svn.sourceforge.net/svnroot/eos-toolkit/trunk/contrib/converter/</developerConnection>
+    <tag>HEAD</tag>
+    <url>https://eos-toolkit.svn.sourceforge.net/svnroot/eos-toolkit/trunk/contrib/converter/</url>
+  </scm>
+  
+</project>

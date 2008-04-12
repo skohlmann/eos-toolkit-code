@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- 
+  Copyright (c) 2008 Sascha Kohlmann
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+
+  You should have received a copy of the GNU Affero General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<project name='&#949;&#959;s-toolkit core - Project Site'>
+
+  <bannerLeft>
+    <name>${project.name}</name>
+    <src>http://www.speexx.de/blog/images/eos/eos-logo8.png</src>
+    <href>http://eos-toolkit.sourceforge.net/</href>
+  </bannerLeft>
+
+  <skin>
+    <artifactId>net.sf.eos-toolkit.skin</artifactId>
+    <groupId>net.sf.eos-toolkit</groupId>
+    <version>${eos-toolkit.skin.version}</version>
+  </skin>
+
+  <publishDate position='bottom' format='yyyy-MM-dd HH:mm'/>
+
+  <poweredBy>
+    <logo name='Sourceforge'
+          href='http://sourceforge.net/projects/eos-toolkit/'
+          img='http://sflogo.sourceforge.net/sflogo.php?group_id=175292&amp;type=1'/>
+    <logo name='Built by Maven 2'
+          href='http://maven.apache.org' />
+  </poweredBy>
+
+  <body>
+    <breadcrumbs>
+      <item name='&#949;&#959;s-tooklkit' href='http://eos-toolkit.sourceforge.net/'/>
+      <item name='${project.name}' href='index.html'/>
+    </breadcrumbs>
+
+    <menu name='Overview'>
+      <item name='Introduction' href='index.html'/>
+      <item name='Usage' href='usage.html'/>
+    </menu>
+    <menu ref='reports'/>
+  </body>
+</project>
