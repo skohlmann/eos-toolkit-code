@@ -41,7 +41,6 @@
 
   <body>
     <breadcrumbs>
-      <item name='&#949;&#959;s-tooklkit' href='http://eos-toolkit.sourceforge.net/'/>
       <item name='${project.name}' href='index.html'/>
     </breadcrumbs>
 
