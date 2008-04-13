@@ -41,11 +41,12 @@
 
   <body>
     <breadcrumbs>
-      <item name='${project.name}' href='index.html'/>
+      <item name='&#949;&#959;s-tooklkit' href='../../index.html'/>
+      <item name='${project.name}' href='./index.html'/>
     </breadcrumbs>
 
     <menu name='Overview'>
-      <item name='Introduction' href='index.html'/>
+      <item name='Introduction' href='./index.html'/>
       <item name='Usage' href='usage.html'/>
     </menu>
     <menu ref='reports'/>
