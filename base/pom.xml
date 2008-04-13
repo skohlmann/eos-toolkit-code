@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>net.sf.eos-toolkit</groupId>
-  <artifactId>net.sf.eos-toolkit</artifactId>
+  <artifactId>net.sf.eos-toolkit.base</artifactId>
   <packaging>pom</packaging>
   <version>0.1.0-SNAPSHOT</version>
   <name>net.sf.eos-toolkit</name>
