@@ -42,6 +42,23 @@ If a key is twice in the dictionary \u03b5os combines the metadata of the values
 
   <<Result:>> double sentences are removed.
 
+*** Example usage
+
++-----+
+hadoop jar net.sf.eos-toolkit.core-<VERSION>-uberjar-executable.jar net.sf.eos.hadoop.mapred.decompose.SentenceMapReduceDriver \  
+       -D net.sf.eos.hadoop.mapred.AbstractKeyGenerator.impl=net.sf.eos.hadoop.mapred.decompose.TextMetaKeyGenerator \
+       -D net.sf.eos.hadoop.mapred.sentencer.TextMetadataKeyGenerator.metaKey=EosDocument/date \
+       --source <SOURCE FOLDER> \
+       --dest <DESTINATION FOLDER>
++-----+
+
+  [VERSION] The version of the \u03b5os-toolkit core implementation.
+    
+  [SOURCE FOLDER] The source folder containing EosDocuments to decompose into
+    sentences.
+
+  [DESTINATION FOLDER] The destination folder to store the decomposed EosDocuments.
+
 ** Second step
 
   The second step is the co-occurrence analyzing. Named entities will recognize

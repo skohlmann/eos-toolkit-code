@@ -15,6 +15,8 @@
  */
 package net.sf.eos.hadoop.mapred;
 
+import net.sf.eos.hadoop.mapred.cooccurrence.DictionaryBasedEntityRecognizerMapReduceDriver;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.GnuParser;
 import org.apache.commons.cli.Options;
@@ -118,7 +120,7 @@ public abstract class AbstractEosDriver extends Configured implements Tool {
         return this.jobConf;
     }
 
-    final Options createOptions() {
+    protected Options createOptions() {
         return new Options()
             .addOption(SOURCE_SHORT_CMD_ARG,
                        SOURCE_LONG_CMD_ARG,
@@ -128,7 +130,6 @@ public abstract class AbstractEosDriver extends Configured implements Tool {
                        DESTINATION_LONG_CMD_ARG,
                        true,
                        "Path to the destination folder of the output data");
-
     }
 
     /**

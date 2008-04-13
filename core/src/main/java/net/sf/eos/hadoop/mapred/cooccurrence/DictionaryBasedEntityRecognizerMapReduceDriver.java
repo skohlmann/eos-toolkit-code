@@ -120,7 +120,9 @@ public class DictionaryBasedEntityRecognizerMapReduceDriver
         return doJob(conf);
     }
 
-    final Options createOptions() {
+    @Override
+    protected Options createOptions() {
+        final Options options = super.createOptions();
         final Option option =
             new Option(TRIE_SHORT_CMD_ARG,
                        TRIE_LONG_CMD_ARG,
@@ -128,6 +130,6 @@ public class DictionaryBasedEntityRecognizerMapReduceDriver
                        "Path to trie data");
         option.setRequired(true);
 
-        return new Options().addOption(option);
+        return options.addOption(option);
     }
 }
