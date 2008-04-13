@@ -32,7 +32,7 @@ public abstract class Configured implements Configurable {
      * Creates a copy of the given <code>Configuration</code>.
      * @param config the <code>Configuration</code> to copy.
      */
-    public final void configure(
+    public void configure(
             @SuppressWarnings("hiding") final Configuration config) {
         this.config = new Configuration(config);
     }

@@ -85,4 +85,19 @@ public class Configuration implements Iterable<Entry<String, String>>  {
         assert this.config != null;
         return this.config.entrySet().iterator();
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Configuration[\n");
+        for (final Entry<String, String> entry : this) {
+            sb.append("        ");
+            sb.append(entry.getKey());
+            sb.append("  =  ");
+            sb.append(entry.getValue());
+            sb.append("\n");
+        }
+        sb.append("]");
+
+        return sb.toString();
+    }
 }

@@ -20,6 +20,8 @@ import net.sf.eos.config.Configuration;
 import net.sf.eos.document.EosDocument;
 import net.sf.eos.hadoop.mapred.AbstractKeyGenerator;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.io.Text;
 
 import java.util.HashMap;
@@ -27,6 +29,10 @@ import java.util.List;
 import java.util.Map;
 
 public class TextMetaKeyGenerator extends AbstractKeyGenerator<Text> {
+
+    /** For logging. */
+    private static final Log LOG =
+        LogFactory.getLog(TextMetaKeyGenerator.class.getName());
 
     /** The meta field for separation.
      * <p>Default value is {@link EosDocument#YEAR_META_KEY}.</p> */
@@ -43,6 +49,7 @@ public class TextMetaKeyGenerator extends AbstractKeyGenerator<Text> {
         final Map<Text, EosDocument> retval =
             new HashMap<Text, EosDocument>();
         final String metaKey = conf.get(META_FIELD_FOR_KEY_CONFIG_NAME);
+        LOG.info("metaKey: " + metaKey);
 
         if (metaKey == null || metaKey.length() == 0) {
             final Text t = new Text("");
@@ -57,5 +64,16 @@ public class TextMetaKeyGenerator extends AbstractKeyGenerator<Text> {
         }
 
         return retval;
+    }
+
+    /**
+     * Returns the configuration.
+     * @return the configuration holder or <code>null</code>
+     */
+    @Override
+    public void configure(
+            @SuppressWarnings("hiding") final Configuration config) {
+        LOG.info(config);
+        super.configure(config);
     }
 }

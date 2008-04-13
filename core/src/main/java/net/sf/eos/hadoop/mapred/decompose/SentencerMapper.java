@@ -111,8 +111,11 @@ public class SentencerMapper extends EosDocumentSupportMapReduceBase
             reporter.incrCounter(Index.EOS_EXCEPTION, 1);
             throw new IOException(e.getMessage());
         } catch (final Exception e) {
+            if (e instanceof RuntimeException) {
+                throw (RuntimeException) e;
+            }
             reporter.incrCounter(Index.IO_EXCEPTION, 1);
-            throw new IOException(e.getMessage());
+            throw new IOException("" + e.getClass() + " - " + e.getMessage());
         }
     }
 
@@ -126,8 +129,10 @@ public class SentencerMapper extends EosDocumentSupportMapReduceBase
             lconf.set(ABSTRACT_KEY_GENERATOR_IMPL_CONFIG_NAME,
                     TextMetaKeyGenerator.class.getName());
         }
-        final KeyGenerator<Text> newInstance = 
+        final KeyGenerator<Text> newInstance =
             (KeyGenerator<Text>) AbstractKeyGenerator.newInstance(lconf);
+
+        LOG.info("KeyGenerator<Text> instance is " + newInstance.getClass());
         return newInstance;
     }
 

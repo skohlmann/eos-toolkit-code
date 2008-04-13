@@ -47,6 +47,8 @@ public class SentencerReducer extends EosDocumentSupportMapReduceBase
     private static final Log LOG =
         LogFactory.getLog(SentencerReducer.class.getName());
 
+    private static final Text EMPTY = new Text();
+
     private JobConf conf;
 
     /*
@@ -63,7 +65,7 @@ public class SentencerReducer extends EosDocumentSupportMapReduceBase
                 createEosDocumentFromIterator(valuesIterator);
             final Text docAsText = eosDocumentToText(doc);
 
-            outputCollector.collect(key, docAsText);
+            outputCollector.collect(EMPTY, docAsText);
             reporter.incrCounter(Index.REDUCE, 1);
 
         } catch (final EosException e) {

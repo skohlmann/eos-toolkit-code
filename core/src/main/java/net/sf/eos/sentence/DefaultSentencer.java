@@ -104,20 +104,22 @@ public class DefaultSentencer extends Sentencer {
         final List<CharSequence> sentences = new ArrayList<CharSequence>();
 
         final CharSequence text = doc.getText();
-        sentencer.reset(text);
-        Token sentence = null;
-        while ((sentence = sentencer.next()) != null) {
-            final CharSequence seq = sentence.getTokenText();
-            tokenizer.reset(seq);
-            final List<Token> textTokens = new ArrayList<Token>();
-            Token textToken = null;
+        if (text != null) {
+            sentencer.reset(text);
+            Token sentence = null;
+            while ((sentence = sentencer.next()) != null) {
+                final CharSequence seq = sentence.getTokenText();
+                tokenizer.reset(seq);
+                final List<Token> textTokens = new ArrayList<Token>();
+                Token textToken = null;
 
-            while ((textToken = tokenizer.next()) != null) {
-                textTokens.add(textToken);
+                while ((textToken = tokenizer.next()) != null) {
+                    textTokens.add(textToken);
+                }
+
+                final CharSequence newText = builder.buildText(textTokens);
+                sentences.add(newText);
             }
-
-            final CharSequence newText = builder.buildText(textTokens);
-            sentences.add(newText);
         }
 
         return sentences;
