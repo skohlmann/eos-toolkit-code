@@ -45,8 +45,9 @@ If a key is twice in the dictionary \u03b5os combines the metadata of the values
 *** Example usage
 
 +-----+
-hadoop jar net.sf.eos-toolkit.core-<VERSION>-uberjar-executable.jar net.sf.eos.hadoop.mapred.decompose.SentenceMapReduceDriver \  
-       -D net.sf.eos.hadoop.mapred.AbstractKeyGenerator.impl=net.sf.eos.hadoop.mapred.decompose.TextMetaKeyGenerator \
+hadoop jar net.sf.eos-toolkit.core-<VERSION>-uberjar-executable.jar \
+           net.sf.eos.hadoop.mapred.decompose.SentenceMapReduceDriver \  
+       -D net.sf.eos.hadoop.mapred.AbstractKeyGenerator.impl=net.sf.eos.hadoop.mapred.decompose.TextMetaKeyGenerator \  
        -D net.sf.eos.hadoop.mapred.sentencer.TextMetadataKeyGenerator.metaKey=EosDocument/date \
        --source <SOURCE FOLDER> \
        --dest <DESTINATION FOLDER>
@@ -71,7 +72,29 @@ all sentences of the ID and the metadata of the sentence and removes the key ID
 from the sentence. All other IDs are still in the sentence.
 
   <<Result:>> A new document for each reconized ID.
-  
+
+*** Example usage
+
++-----+
+hadoop jar net.sf.eos-toolkit.core-<VERSION>-uberjar-executable.jar \
+           net.sf.eos.hadoop.mapred.cooccurrence.DictionaryBasedEntityRecognizerMapReduceDriver \
+       --trie <PATH TO TRIE> \
+       --source <SOURCE FOLDER> \
+       --dest <DESTINATION FOLDER>
++-----+
+
+  [VERSION] The version of the \u03b5os-toolkit core implementation.
+    
+  [SOURCE FOLDER] The source folder containing EosDocuments to recognize named
+     entities.
+
+  [DESTINATION FOLDER] The destination folder to store the EosDocuments with
+    recognized named entities.
+
+  [PATH TO TRIE] Contains the path to the trie data for dictionary based named
+    entity recognition.
+
+
 ** Third step
 
   The third and last step creates a Lucene based fulltext index over all

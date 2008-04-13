@@ -50,6 +50,8 @@ public class DictionaryBasedEntityRecognizerReducer
     private static final Log LOG =
         LogFactory.getLog(DictionaryBasedEntityRecognizerReducer.class.getName());
 
+    private static final Text EMPTY = new Text();
+
     private final static String NULL = "<null>";
     private final static String UNDERLINE = "_";
 
@@ -71,10 +73,9 @@ public class DictionaryBasedEntityRecognizerReducer
             for (final Entry<String, EosDocument> entry : docs.entrySet()) {
 
                 final String newKey = entry.getKey();
-                final Text textKey = new Text(newKey);
                 final EosDocument doc = entry.getValue();
                 final Text textValue = this.eosDocumentToText(doc);
-                outputCollector.collect(textKey, textValue);
+                outputCollector.collect(EMPTY, textValue);
 
                 reporter.incrCounter(Index.REDUCE, 1);
             }
