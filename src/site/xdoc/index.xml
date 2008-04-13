@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- 
+  Copyright (c) 2008 Sascha Kohlmann
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+
+  You should have received a copy of the GNU Affero General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<document>
+
+  <properties>
+       <title>Introduction</title>
+  </properties>
+
+  <body>
+    <section name='Introduction'>
+        <p>&#949;&#959;s stands for entity oriented search.
+          <a href='http://en.wikipedia.org/wiki/Eos'>Eos</a> is also the name of the
+          Greek mythology goddess of Aurora (Greek: &#x397;&#x3ce;&#x3c2;).
+        </p>
+        <ul>
+          <li>See <a href='./core/index.html'>&#949;&#959;s-toolkit core</a> for main
+            implementation.</li>
+          <li>See <a href='./contrib/converter/index.html'>&#949;&#959;s-toolkit converter</a>
+            for simple Medline2EosDocument support.</li>
+        </ul>
+    </section>
+  </body>
+</document>
