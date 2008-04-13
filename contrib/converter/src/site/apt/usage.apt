@@ -36,7 +36,7 @@ hadoop jar net.sf.eos-toolkit.contrib.converter-<VERSION>-uberjar-executable.jar
        -inputreader "org.apache.hadoop.streaming.StreamXmlRecordReader,maxrec=1000000,begin=<MedlineCitation,end=</MedlineCitation>" \
        -mapper net.sf.eos.contrib.converter.medline.MedlineMapper \
        -reducer net.sf.eos.contrib.converter.medline.MedlineReducer \
-       -input <SOURCE FOLDER> 
+       -input <SOURCE FOLDER> \
        -output <DESTINATION FOLDER>
 +-----+
 
