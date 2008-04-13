@@ -49,7 +49,10 @@ public class TextMetaKeyGenerator extends AbstractKeyGenerator<Text> {
         final Map<Text, EosDocument> retval =
             new HashMap<Text, EosDocument>();
         final String metaKey = conf.get(META_FIELD_FOR_KEY_CONFIG_NAME);
-        LOG.info("metaKey: " + metaKey);
+
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("metaKey: " + metaKey);
+        }
 
         if (metaKey == null || metaKey.length() == 0) {
             final Text t = new Text("");

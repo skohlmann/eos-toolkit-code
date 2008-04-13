@@ -132,7 +132,10 @@ public class SentencerMapper extends EosDocumentSupportMapReduceBase
         final KeyGenerator<Text> newInstance =
             (KeyGenerator<Text>) AbstractKeyGenerator.newInstance(lconf);
 
-        LOG.info("KeyGenerator<Text> instance is " + newInstance.getClass());
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("KeyGenerator<Text> instance is "
+                      + newInstance.getClass());
+        }
         return newInstance;
     }
 
