@@ -18,7 +18,10 @@ package net.sf.eos.contrib.converter.medline;
 import net.sf.eos.document.EosDocument;
 import net.sf.eos.util.EqualsAndHashUtil;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.xml.sax.Attributes;
+import org.xml.sax.SAXParseException;
 import org.xml.sax.ext.DefaultHandler2;
 
 import java.util.ArrayList;
@@ -31,18 +34,31 @@ import java.util.logging.Logger;
 
 public class MedlineHandler extends DefaultHandler2 {
 
+    @SuppressWarnings("nls")
     public static final String TAG_MEDLINE_CITATION = "MedlineCitation";
+    @SuppressWarnings("nls")
     public static final String TAG_PMID = "PMID";
+    @SuppressWarnings("nls")
     public static final String TAG_DATE_CREATED = "DateCreated";
+    @SuppressWarnings("nls")
     public static final String TAG_PUB_DATE = "PubDate";
+    @SuppressWarnings("nls")
     public static final String TAG_YEAR = "Year";
+    @SuppressWarnings("nls")
     public static final String TAG_ABSTRACT = "Abstract";
+    @SuppressWarnings("nls")
     public static final String TAG_ABSTRACT_TEXT = "AbstractText";
+    @SuppressWarnings("nls")
     public static final String TAG_ARTICLE_TITLE = "ArticleTitle";
+    @SuppressWarnings("nls")
     public static final String TAG_AUTHOR_LIST = "AuthorList";
+    @SuppressWarnings("nls")
     public static final String TAG_AUTHOR = "Author";
+    @SuppressWarnings("nls")
     public static final String TAG_ARTICLE = "Article";
+    @SuppressWarnings("nls")
     public static final String TAG_LAST_NAME = "LastName";
+    @SuppressWarnings("nls")
     public static final String TAG_MEDLINE_DATE = "MedlineDate";
 
     private static final String[] PATH_PMID =
@@ -63,8 +79,8 @@ public class MedlineHandler extends DefaultHandler2 {
                       TAG_AUTHOR,
                       TAG_LAST_NAME};
 
-    static final Level LEVEL = Level.INFO;
-    static final Logger LOG = Logger.getLogger(MedlineHandler.class.getName());
+    /** For logging. */
+    private static final Log LOG = LogFactory.getLog(MedlineHandler.class);
 
     private EosDocument doc = null;
     private Stack<String> tags = new Stack<String>();
@@ -87,8 +103,8 @@ public class MedlineHandler extends DefaultHandler2 {
     @SuppressWarnings("nls")
     public void endDocument() {
         assert this.doc != null;
-        if (LOG.isLoggable(Level.FINE)) {
-            LOG.fine("DOC: " + this.doc);
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("DOC: " + this.doc);
         }
     }
 
@@ -127,18 +143,23 @@ public class MedlineHandler extends DefaultHandler2 {
         if (EqualsAndHashUtil.equals(path, PATH_PMID)) {
             final String id = this.sb.toString();
             addMetaToEosDocument(EosDocument.ID_META_KEY, id);
+            this.sb = null;
         } else if (EqualsAndHashUtil.equals(path, PATH_CREATION_DATE_YEAR)) {
             final String year = this.sb.toString();
             addMetaToEosDocument(EosDocument.YEAR_META_KEY, year);
+            this.sb = null;
         } else if (EqualsAndHashUtil.equals(path, PATH_ARTICLE_TITLE)) {
             final String title = this.sb.toString();
             this.doc.setTitle(title);
+            this.sb = null;
         } else if (EqualsAndHashUtil.equals(path, PATH_ABSTRACT_TEXT)) {
             final String text = this.sb.toString();
             this.doc.setText(text);
+            this.sb = null;
         } else if (EqualsAndHashUtil.equals(path, PATH_AUTHOR_LAST_NAME)) {
             final String name = this.sb.toString();
             addMetaToEosDocument(EosDocument.CREATOR_META_KEY, name);
+            this.sb = null;
         }
         this.tags.pop();
     }
@@ -157,6 +178,45 @@ public class MedlineHandler extends DefaultHandler2 {
 
     public EosDocument getEosDocument() {
         return this.doc;
+    }
+
+    /*
+     * @see org.xml.sax.helpers.DefaultHandler#error(org.xml.sax.SAXParseException)
+     */
+    @SuppressWarnings("nls")
+    @Override
+    public void error(final SAXParseException e) {
+        LOG.error("Message: " + e.getMessage());
+        LOG.error("ColumnNumber: " + e.getColumnNumber());
+        LOG.error("LineNumber: " + e.getLineNumber());
+        LOG.error("PublicId: " + e.getPublicId());
+        LOG.error("SystemId: " + e.getSystemId());
+    }
+
+    /*
+     * @see org.xml.sax.helpers.DefaultHandler#fatalError(org.xml.sax.SAXParseException)
+     */
+    @SuppressWarnings("nls")
+    @Override
+    public void fatalError(final SAXParseException e) {
+        LOG.fatal("Message: " + e.getMessage());
+        LOG.fatal("ColumnNumber: " + e.getColumnNumber());
+        LOG.fatal("LineNumber: " + e.getLineNumber());
+        LOG.fatal("PublicId: " + e.getPublicId());
+        LOG.fatal("SystemId: " + e.getSystemId());
+    }
+
+    /*
+     * @see org.xml.sax.helpers.DefaultHandler#warning(org.xml.sax.SAXParseException)
+     */
+    @SuppressWarnings("nls")
+    @Override
+    public void warning(final SAXParseException e) {
+        LOG.warn("Message: " + e.getMessage());
+        LOG.warn("ColumnNumber: " + e.getColumnNumber());
+        LOG.warn("LineNumber: " + e.getLineNumber());
+        LOG.warn("PublicId: " + e.getPublicId());
+        LOG.warn("SystemId: " + e.getSystemId());
     }
 
     final void addMetaToEosDocument(final String metaKey,

@@ -17,10 +17,33 @@
  Usage
  -----
  Sascha Kohlmann
+ <skohlmann[at]sourceforge.net>
+ -----
+ Date
  -----
 
 Usage
 
+  Describes the usage to call the project converter.
+
 * Medline
 
-  TODO
+  To convert {{{http://www.nlm.nih.gov/databases/dtd/}Medline Citation Set}}
+documents into EosDocuments, execute:
+  
++-----+
+hadoop jar net.sf.eos-toolkit.contrib.converter-<VERSION>-uberjar-executable.jar \
+       -inputreader "org.apache.hadoop.streaming.StreamXmlRecordReader,maxrec=1000000,begin=<MedlineCitation,end=</MedlineCitation>" \
+       -mapper net.sf.eos.contrib.converter.medline.MedlineMapper \
+       -reducer net.sf.eos.contrib.converter.medline.MedlineReducer \
+       -input <SOURCE FOLDER> 
+       -output <DESTINATION FOLDER>
++-----+
+
+  [VERSION] The version of the converter implementation.
+    
+  [SOURCE FOLDER] The source folder containing the Medline Citation Set
+    documents.
+
+  [DESTINATION FOLDER] The destination folder to store the converted EosDocuments
+    in.

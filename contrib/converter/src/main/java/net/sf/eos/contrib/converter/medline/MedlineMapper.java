@@ -19,6 +19,8 @@ import net.sf.eos.contrib.converter.Conversion;
 import net.sf.eos.document.EosDocument;
 import net.sf.eos.hadoop.mapred.EosDocumentSupportMapReduceBase;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.JobConf;
@@ -32,95 +34,119 @@ import org.xml.sax.SAXNotSupportedException;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 public class MedlineMapper extends EosDocumentSupportMapReduceBase
-                           implements Mapper<Text, Text, LongWritable, Text> {
+                           implements Mapper<Text, Text, Text, Text> {
 
     /** For logging. */
-    private static final Logger LOG = 
-        Logger.getLogger(MedlineMapper.class.getName());
+    private static final Log LOG = LogFactory.getLog(MedlineMapper.class);
+
+    private static final String START_IGNORE = "<MedlineCitationSet>";
+    private static final String END_IGNORE = "</MedlineCitationSet>";
+    
+    private static final Pattern START_IGNORE_PATTERN =
+        Pattern.compile(Pattern.quote(START_IGNORE));
+    private static final Pattern END_IGNORE_PATTERN =
+        Pattern.compile(Pattern.quote(END_IGNORE));
 
     private JobConf conf;
 
-    public void map(Text positionInFile,
-                    Text medlineCitationDoc,
-                    final OutputCollector<LongWritable, Text> outputCollector,
+    public void map(final Text positionInFile,
+                    final Text medlineCitationDoc,
+                    final OutputCollector<Text, Text> outputCollector,
                     final Reporter reporter) throws IOException {
 
         final SAXParserFactory factory = SAXParserFactory.newInstance();
         configureSaxFactory(factory);
         try {
             final SAXParser parser = factory.newSAXParser();
-            final String medlineCitationAsString =
-                medlineCitationDoc.toString();
+            final String medlineCitationAsString = textToString(positionInFile);
 
-            StringReader reader = new StringReader(medlineCitationAsString);
+            LOG.info("MedlineCitation: \"" + medlineCitationAsString + "\"");
+            final StringReader reader = new StringReader(medlineCitationAsString);
             final InputSource source = new InputSource(reader);
             final MedlineHandler handler = new MedlineHandler();
 
             parser.parse(source, handler);
 
-            // for GC
-            reader = null;
-            final EosDocument doc = handler.getEosDocument();
-            final Text out = eosDocumentToText(doc);
-            final Random rand = new Random();
-            final long keyValue = rand.nextLong();
-            final LongWritable key = new LongWritable(keyValue);
-            outputCollector.collect(key, out);
+            final EosDocument eosDoc = handler.getEosDocument();
+            final Text eosOut = eosDocumentToText(eosDoc);
+            LOG.info("EosDocument: " + eosOut.toString());
+            final String id = getIdFromEosDocument(eosDoc);
+            final Text outKey = new Text(id);
+            outputCollector.collect(outKey, eosOut);
             reporter.incrCounter(Conversion.CONVERTED, 1);
 
         } catch (final ParserConfigurationException e) {
-            LOG.log(Level.SEVERE, e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
             reporter.incrCounter(Conversion.FAILED, 1);
+            throw new IOException(e.getMessage() + " - " + e.getClass());
         } catch (final SAXException e) {
-            LOG.log(Level.SEVERE, e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
             reporter.incrCounter(Conversion.FAILED, 1);
-        } catch (final Exception e) {
-            LOG.log(Level.SEVERE, e.getMessage(), e);
-            reporter.incrCounter(Conversion.FAILED, 1);
+            throw new IOException(e.getMessage() + " - " + e.getClass());
+         } catch (final Exception e) {
+             LOG.error(e.getMessage(), e);
+             reporter.incrCounter(Conversion.FAILED, 1);
+             throw new IOException(e.getMessage() + " - " + e.getClass());
         }
     }
 
+    String textToString(final Text text) {
+        String medlineCitationAsString = text.toString();
+        medlineCitationAsString = medlineCitationAsString.replace(START_IGNORE, "");
+        medlineCitationAsString = medlineCitationAsString.replace(END_IGNORE, "");
+        return medlineCitationAsString;
+    }
+
+    final String getIdFromEosDocument(final EosDocument doc) {
+        assert doc != null;
+        final Map<String, List<String>> meta = doc.getMeta();
+        final List<String> values = meta.get(EosDocument.ID_META_KEY);
+        final String id = values.get(0);
+        return id;
+    }
+
     private void configureSaxFactory(final SAXParserFactory factory) {
-        try {
             factory.setValidating(false);
-            factory.setFeature("http://xml.org/sax/features/validation", false);
-        } catch (final SAXNotRecognizedException e) {
-            LOG.log(Level.CONFIG, e.getMessage(), e);
-        } catch (final SAXNotSupportedException e) {
-            LOG.log(Level.CONFIG, e.getMessage(), e);
-        } catch (final ParserConfigurationException e) {
-            LOG.log(Level.CONFIG, e.getMessage(), e);
-        }
+            setSaxParserFeature(
+                    factory,
+                    "http://xml.org/sax/features/validation",
+                    false
+            );
+            setSaxParserFeature(
+                    factory,
+                    "http://apache.org/xml/features/nonvalidating/load-dtd-grammar",
+                    false
+            );
+            setSaxParserFeature(
+                    factory,
+                    "http://apache.org/xml/features/nonvalidating/load-external-dtd",
+                    false
+            );
+    }
 
+    final void setSaxParserFeature(final SAXParserFactory factory,
+                                   final String name,
+                                   final boolean value) {
         try {
-        factory.setFeature("http://apache.org/xml/features/nonvalidating/load-dtd-grammar",
-                false);
+            factory.setFeature(name, value);
         } catch (final SAXNotRecognizedException e) {
-            LOG.log(Level.CONFIG, e.getMessage(), e);
+            LOG.info(e.getMessage(), e);
         } catch (final SAXNotSupportedException e) {
-            LOG.log(Level.CONFIG, e.getMessage(), e);
+            LOG.info(e.getMessage(), e);
         } catch (final ParserConfigurationException e) {
-            LOG.log(Level.CONFIG, e.getMessage(), e);
-        }
-
-        try {
-            factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd",
-                               false);
-        } catch (final SAXNotRecognizedException e) {
-            LOG.log(Level.CONFIG, e.getMessage(), e);
-        } catch (final SAXNotSupportedException e) {
-            LOG.log(Level.CONFIG, e.getMessage(), e);
-        } catch (final ParserConfigurationException e) {
-            LOG.log(Level.CONFIG, e.getMessage(), e);
+            LOG.info(e.getMessage(), e);
         }
     }
 
