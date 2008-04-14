@@ -23,13 +23,15 @@
 
     <faq id="why-agpl">
       <question>
-        eos commons under the AGPL but I use a more business like license?
+        The &#949;&#959;s-toolkit commons under the AGPL but I use a more
+        business like license?
       </question>
       <answer>
-        <p>eos is free software that means: it is open-source and free.
-          Licenses like <a href='http://www.apache.org/licenses/LICENSE-2.0.txt'>Apache 2.0</a>
-          are not free for software, also free for business. But thats not a
-          problem. Think about Linux. It comes under the
+        <p>The &#949;&#959;s-toolkit is <a href='http://www.gnu.org/philosophy/free-sw.html'>free software</a>.
+          Concrete: it is open-source and free. Software comming with licenses like 
+          <a href='http://www.apache.org/licenses/LICENSE-2.0.txt'>Apache 2.0</a>
+          are not free software. Such software is free for business.</p>
+          <p>But the not a problem. Think about Linux. It comes under the
           <a href='http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt'>GNU General Public License</a>
           and its a billion dollar market. So think about your business.</p>
       </answer>
