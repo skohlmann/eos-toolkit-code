@@ -30,10 +30,11 @@ Usage
 
   To convert {{{http://www.nlm.nih.gov/databases/dtd/}Medline Citation Set}}
 documents into EosDocuments, execute:
-  
+
+
 +-----+
 hadoop jar net.sf.eos-toolkit.contrib.converter-<VERSION>-uberjar-executable.jar \
-       -inputreader "org.apache.hadoop.streaming.StreamXmlRecordReader,maxrec=1000000,begin=<MedlineCitation,end=</MedlineCitation>" \
+       -inputreader "org.apache.hadoop.streaming.StreamXmlRecordReader,maxrec=1000000,begin=<MedlineCitation ,end=</MedlineCitation>" \
        -mapper net.sf.eos.contrib.converter.medline.MedlineMapper \
        -reducer net.sf.eos.contrib.converter.medline.MedlineReducer \
        -input <SOURCE FOLDER> \
@@ -47,3 +48,17 @@ hadoop jar net.sf.eos-toolkit.contrib.converter-<VERSION>-uberjar-executable.jar
 
   [DESTINATION FOLDER] The destination folder to store the converted EosDocuments
     in.
+
+  []
+
+** <<Note:>>
+
+  The <MedlineCitation DTD> requires at minimum one attribute in the
+<<<\<MedlineCitation\>>>> element. This is the main solution to differ the
+starting character sequence of the element from the parent element
+<<<\<MedlineCitationSet\>>>>. Remember the XML specification: the delimiting
+character between the tag name and the first attribut is a sequence of whitespace
+characters (<S ::= (#x20 | #x9 | #xD | #xA>). The implementation assumes from
+the practice, that the first whitespace character has the value <<<#x20>>>. If
+this assumption creates problems later, another solution may be bypass the
+problem.

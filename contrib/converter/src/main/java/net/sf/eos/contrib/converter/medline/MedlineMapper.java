@@ -51,14 +51,6 @@ public class MedlineMapper extends EosDocumentSupportMapReduceBase
     /** For logging. */
     private static final Log LOG = LogFactory.getLog(MedlineMapper.class);
 
-    private static final String START_IGNORE = "<MedlineCitationSet>";
-    private static final String END_IGNORE = "</MedlineCitationSet>";
-    
-    private static final Pattern START_IGNORE_PATTERN =
-        Pattern.compile(Pattern.quote(START_IGNORE));
-    private static final Pattern END_IGNORE_PATTERN =
-        Pattern.compile(Pattern.quote(END_IGNORE));
-
     private JobConf conf;
 
     public void map(final Text positionInFile,
@@ -104,8 +96,6 @@ public class MedlineMapper extends EosDocumentSupportMapReduceBase
 
     String textToString(final Text text) {
         String medlineCitationAsString = text.toString();
-        medlineCitationAsString = medlineCitationAsString.replace(START_IGNORE, "");
-        medlineCitationAsString = medlineCitationAsString.replace(END_IGNORE, "");
         return medlineCitationAsString;
     }
 
