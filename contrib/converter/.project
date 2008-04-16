@@ -1,7 +1,9 @@
 <projectDescription>
   <name>net.sf.eos-toolkit.contrib.converter</name>
   <comment/>
-  <projects/>
+  <projects>
+    <project>net.sf.eos-toolkit.core</project>
+  </projects>
   <buildSpec>
     <buildCommand>
       <name>org.eclipse.jdt.core.javabuilder</name>
