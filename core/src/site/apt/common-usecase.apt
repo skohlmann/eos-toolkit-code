@@ -78,7 +78,7 @@ from the sentence. All other IDs are still in the sentence.
 +-----+
 hadoop jar net.sf.eos-toolkit.core-<VERSION>-uberjar-executable.jar \
            net.sf.eos.hadoop.mapred.cooccurrence.DictionaryBasedEntityRecognizerMapReduceDriver \
-       -Dnet.sf.eos.hadoop.mapred.entity.DictionaryBasedEntityRecognizerReducer.metaKeys=EosDocument/creator
+       -Dnet.sf.eos.hadoop.mapred.entity.DictionaryBasedEntityRecognizerReducer.metaKeys=EosDocument/creator \ 
        --trie <PATH TO TRIE> \
        --source <SOURCE FOLDER> \
        --dest <DESTINATION FOLDER>
