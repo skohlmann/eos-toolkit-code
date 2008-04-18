@@ -60,6 +60,9 @@ hadoop jar net.sf.eos-toolkit.core-<VERSION>-uberjar-executable.jar \
 
   [DESTINATION FOLDER] The destination folder to store the decomposed EosDocuments.
 
+  []
+
+
 ** Second step
 
   The second step is the co-occurrence analyzing. Named entities will recognize
@@ -95,6 +98,7 @@ hadoop jar net.sf.eos-toolkit.core-<VERSION>-uberjar-executable.jar \
   [PATH TO TRIE] Contains the path to the trie data for dictionary based named
     entity recognition.
 
+  []
 
 ** Third step
 
@@ -119,8 +123,29 @@ hadoop jar net.sf.eos-toolkit.core-<VERSION>-uberjar-executable.jar \
 
   [DESTINATION FOLDER] The destination folder to store the decomposed EosDocuments.
 
+  []
+
+  After indexing optimize the index by calling
+
++-----+
+hadoop jar net.sf.eos-toolkit.core-<VERSION>-uberjar-executable.jar \
+           net.sf.eos.hadoop.mapred.index.IndexMerger \ 
+       -workingdir <WORKING FOLDER> \
+       <DESTINATION FOLDER> \
+       <SOURCE FOLDER>
++-----+
+
+  [VERSION] The version of the \u03b5os-toolkit core implementation.
+  
+  [WORKING FOLDER] <Optional> local working folder.
+
+  [SOURCE FOLDER] The source folder containing the Lucene index to optimize.
+    Value of the the last preceding command.
+
+  [DESTINATION FOLDER] The destination folder to store the optimized Lucene index
+    in the Hadoop filesystem.
+
 * Lock up
 
   TODO
-
 

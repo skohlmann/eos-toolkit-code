@@ -30,6 +30,7 @@ import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.util.StringUtils;
 import org.apache.hadoop.util.Tool;
+import org.apache.hadoop.util.ToolRunner;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.store.Directory;
 
@@ -41,7 +42,8 @@ import org.apache.lucene.store.Directory;
  * @author Mike Cafarella
  */
 public class IndexMerger extends Configured implements Tool {
-  public static final Log LOG = LogFactory.getLog(IndexMerger.class);
+
+    public static final Log LOG = LogFactory.getLog(IndexMerger.class);
 
   public static final String DONE_NAME = "merge.done";
 
@@ -101,8 +103,8 @@ public class IndexMerger extends Configured implements Tool {
 
     // Put target back //
     LOG.info("completeLocalOutput: from '" + tmpLocalOutput.toString() + "' to '" + outputIndex.toString() + "'");
-//    fs.completeLocalOutput(outputIndex, tmpLocalOutput);
-//    FileSystem.getLocal(getConf()).delete(localWorkingDir);
+    fs.completeLocalOutput(outputIndex, tmpLocalOutput);
+    FileSystem.getLocal(getConf()).delete(localWorkingDir);
     if (LOG.isInfoEnabled()) {  
         LOG.info("done merging");
     }
@@ -149,4 +151,15 @@ public class IndexMerger extends Configured implements Tool {
       return -1;
     }
   }
+  
+  /**
+   * @param args
+   */
+  public static void main(final String[] args) throws Exception {
+      final int res = ToolRunner.run(new Configuration(),
+                                     new IndexMerger(),
+                                     args);
+      System.exit(res);
+  }
+
 }
