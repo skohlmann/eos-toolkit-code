@@ -72,7 +72,6 @@ public class DictionaryBasedEntityRecognizerReducer
 
             for (final Entry<String, EosDocument> entry : docs.entrySet()) {
 
-                final String newKey = entry.getKey();
                 final EosDocument doc = entry.getValue();
                 final Text textValue = this.eosDocumentToText(doc);
                 outputCollector.collect(EMPTY, textValue);

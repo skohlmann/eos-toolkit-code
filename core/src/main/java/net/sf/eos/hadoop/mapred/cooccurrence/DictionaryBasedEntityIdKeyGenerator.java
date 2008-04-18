@@ -94,6 +94,7 @@ public class DictionaryBasedEntityIdKeyGenerator extends Configured
 
                 final List<CharSequence> l = new ArrayList<CharSequence>();
                 final List<Token> value = entry.getValue();
+
                 for (final Token token : value) {
                     final String type = token.getType();
                     if (ENTITY_TYPE.equals(type)) {
@@ -128,7 +129,7 @@ public class DictionaryBasedEntityIdKeyGenerator extends Configured
                 newDoc.setText(newText);
                 final CharSequence title = doc.getTitle();
                 newDoc.setTitle(title);
-                
+
                 final Map<String, List<String>> oldMeta = doc.getMeta();
                 final Map<String, List<String>> newMap =
                     new HashMap<String, List<String>>(oldMeta);

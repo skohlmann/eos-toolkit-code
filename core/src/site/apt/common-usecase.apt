@@ -78,6 +78,7 @@ from the sentence. All other IDs are still in the sentence.
 +-----+
 hadoop jar net.sf.eos-toolkit.core-<VERSION>-uberjar-executable.jar \
            net.sf.eos.hadoop.mapred.cooccurrence.DictionaryBasedEntityRecognizerMapReduceDriver \
+       -Dnet.sf.eos.hadoop.mapred.entity.DictionaryBasedEntityRecognizerReducer.metaKeys=EosDocument/creator
        --trie <PATH TO TRIE> \
        --source <SOURCE FOLDER> \
        --dest <DESTINATION FOLDER>
@@ -101,6 +102,22 @@ hadoop jar net.sf.eos-toolkit.core-<VERSION>-uberjar-executable.jar \
 concatenates sentences.
 
   <<Result:>> A Lucene fulltext index.
+
+*** Example usage
+
++-----+
+hadoop jar net.sf.eos-toolkit.core-<VERSION>-uberjar-executable.jar \
+           net.sf.eos.hadoop.mapred.index.IndexMapReduceDriver \  
+       --source <SOURCE FOLDER> \
+       --dest <DESTINATION FOLDER>
++-----+
+
+  [VERSION] The version of the \u03b5os-toolkit core implementation.
+    
+  [SOURCE FOLDER] The source folder containing EosDocuments to decompose into
+    sentences.
+
+  [DESTINATION FOLDER] The destination folder to store the decomposed EosDocuments.
 
 * Lock up
 
