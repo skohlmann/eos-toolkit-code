@@ -14,7 +14,7 @@
   <artifactId>net.sf.eos-toolkit.contrib.converter</artifactId>
   <packaging>jar</packaging>
   <name>net.sf.eos-toolkit.contrib.converter</name>
-  <url>http://eos-toolkit.sourceforge.net/</url>
+  <url>http://eos-toolkit.sourceforge.net/contrib/converter/</url>
 
   <licenses>
     <license>

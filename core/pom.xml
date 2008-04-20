@@ -14,6 +14,7 @@
   <artifactId>net.sf.eos-toolkit.core</artifactId>
   <packaging>jar</packaging>
   <name>net.sf.eos-toolkit.core</name>
+  <url>http://eos-toolkit.sourceforge.net/core/</url>
 
   <licenses>
     <license>
