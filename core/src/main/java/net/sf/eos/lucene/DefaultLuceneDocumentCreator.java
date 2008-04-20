@@ -41,27 +41,8 @@ import java.util.Map.Entry;
  *
  * @author Sascha Kohlmann
  */
-public class DefaultLuceneDocumentCreator extends LuceneDocumentCreator {
-
-    /** The field names. */
-    public enum FieldName {
-        /** The name of the content field. Represents the value of
-         * {@link EosDocument#getText() EosDocument.getText()}.
-         * @see DefaultLuceneDocumentCreator */
-        CONTENT,
-        /** The name of the {@link EosDocument#CREATOR_META_KEY creator} meta
-         * values.
-         * @see DefaultLuceneDocumentCreator */
-        CREATOR,
-        /** The name of the {@link EosDocument#ID_META_KEY ID} meta
-         * values.
-         * @see DefaultLuceneDocumentCreator */
-        ID,
-        /** The name of the {@link EosDocument#YEAR_META_KEY creator} meta
-         * values.
-         * @see DefaultLuceneDocumentCreator */
-        YEAR,
-    }
+public class DefaultLuceneDocumentCreator extends LuceneDocumentCreator
+        implements CommonDocument {
 
     /** Creates a new document. */
     @Override

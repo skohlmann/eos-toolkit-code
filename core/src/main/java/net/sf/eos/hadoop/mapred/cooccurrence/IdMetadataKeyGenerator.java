@@ -28,9 +28,8 @@ import java.util.StringTokenizer;
 
 import net.sf.eos.EosException;
 import net.sf.eos.config.Configuration;
-import net.sf.eos.config.Configured;
 import net.sf.eos.document.EosDocument;
-import net.sf.eos.hadoop.mapred.KeyGenerator;
+import net.sf.eos.hadoop.mapred.AbstractKeyGenerator;
 
 /**
  * Creates a new map based on the document metadata value of
@@ -38,8 +37,7 @@ import net.sf.eos.hadoop.mapred.KeyGenerator;
  * Will sort optional metadata values.
  * @author Sascha Kohlmann
  */
-public class IdMetadataKeyGenerator extends Configured
-        implements KeyGenerator<Text> {
+public class IdMetadataKeyGenerator extends AbstractKeyGenerator<Text> {
 
     /** For logging. */
     private static final Log LOG =

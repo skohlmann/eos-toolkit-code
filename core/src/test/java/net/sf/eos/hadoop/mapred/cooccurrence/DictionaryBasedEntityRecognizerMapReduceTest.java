@@ -116,7 +116,7 @@ public class DictionaryBasedEntityRecognizerMapReduceTest
         job.waitForCompletion();
 
         final Counters counters = job.getCounters();
-        assertEquals(2, counters.getCounter(Index.REDUCE));
+        assertEquals(4, counters.getCounter(Index.REDUCE));
         assertEquals(7, counters.getCounter(Index.MAP));
     }
 
