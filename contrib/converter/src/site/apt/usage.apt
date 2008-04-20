@@ -58,7 +58,7 @@ hadoop jar net.sf.eos-toolkit.contrib.converter-<VERSION>-uberjar-executable.jar
 starting character sequence of the element from the parent element
 <<<\<MedlineCitationSet\>>>>. Remember the XML specification: the delimiting
 character between the tag name and the first attribut is a sequence of whitespace
-characters (<S ::= (#x20 | #x9 | #xD | #xA>). The implementation assumes from
-the practice, that the first whitespace character has the value <<<#x20>>>. If
-this assumption creates problems later, another solution may be bypass the
+characters (<S ::= (#x20 | #x9 | #xD | #xA>). The implementation assumes from 
+practice, that the first whitespace character has the value of <<<#x20>>>. If
+this assumption creates problems in the future, another solution may be bypass the
 problem.
