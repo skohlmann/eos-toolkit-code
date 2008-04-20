@@ -28,6 +28,7 @@ import net.sf.eos.config.Configured;
 import net.sf.eos.document.EosDocument;
 import net.sf.eos.entity.AbstractDictionaryBasedEntityRecognizer;
 import net.sf.eos.entity.DictionaryBasedEntityRecognizer;
+import net.sf.eos.hadoop.mapred.AbstractKeyGenerator;
 import net.sf.eos.hadoop.mapred.KeyGenerator;
 import net.sf.eos.trie.Trie;
 
@@ -44,7 +45,7 @@ import java.util.Map.Entry;
 
 
 public class DictionaryBasedEntityIdKeyGenerator extends Configured
-        implements KeyGenerator<Text> {
+/*        implements KeyGenerator<Text> */ {
 
     /** For logging. */
     private static final Log LOG =
@@ -59,16 +60,14 @@ public class DictionaryBasedEntityIdKeyGenerator extends Configured
         final DictionaryBasedEntityRecognizer dber =
             getDictionaryBasedEntityRecognizerForText(text);
 
-        final List<Token> tokens = new ArrayList<Token>();
-        Token t = null;
-        while ((t = dber.next()) != null) {
-            tokens.add(t);
-        }
+        List<Token> tokens = tokens = identifiyToken(dber);
 
         final Map<String, List<Token>> mapToTokenList =
             new HashMap<String, List<Token>>();
 
+        // Map for entity ID to all tokens with addition meta information.
         for (final Token token : tokens) {
+            assert token != null;
             final String type = token.getType();
             if (ENTITY_TYPE.equals(type)) {
                 final Map<String, List<String>> meta = token.getMeta();
@@ -84,11 +83,23 @@ public class DictionaryBasedEntityIdKeyGenerator extends Configured
         final Map<Text, EosDocument> mapToDocument =
             new HashMap<Text, EosDocument>();
 
+        final Configuration lconf = getConfiguration();
+        if (lconf.get(AbstractKeyGenerator.ABSTRACT_KEY_GENERATOR_IMPL_CONFIG_NAME)
+                == null) {
+            lconf.set(AbstractKeyGenerator.ABSTRACT_KEY_GENERATOR_IMPL_CONFIG_NAME,
+                      IdMetadataKeyGenerator.class.getName());
+        }
+
+        final KeyGenerator<Text> generator =
+            (KeyGenerator<Text>) AbstractKeyGenerator.newInstance(lconf);
+
+        // Create new document for each entity ID. Remove enity ID from
+        // document and replace charater sequence of the entity common- or
+        // other name by the entity ID.
         for (final Entry<String, List<Token>> entry : mapToTokenList.entrySet())
         {
             final String key = entry.getKey();
             if (! mapToDocument.containsKey(key)) {
-                final Configuration lconf = getConfiguration();
                 final TextBuilder builder =
                     TextBuilder.newInstance(lconf);
 
@@ -97,9 +108,12 @@ public class DictionaryBasedEntityIdKeyGenerator extends Configured
 
                 for (final Token token : value) {
                     final String type = token.getType();
+
                     if (ENTITY_TYPE.equals(type)) {
+
                         final Map<String, List<String>> meta = token.getMeta();
                         final List<String> ids = meta.get(ENTITY_ID_KEY);
+
                         final List<CharSequence> idList =
                             new ArrayList<CharSequence>();
                         for (final String id :ids) {
@@ -137,12 +151,32 @@ public class DictionaryBasedEntityIdKeyGenerator extends Configured
                 newIdList.add(key);
                 newMap.put(EosDocument.ID_META_KEY, newIdList);
                 newDoc.setMeta(newMap);
-                final Text keyAsText = new Text(key);
-                mapToDocument.put(keyAsText, newDoc);
+
+                final Map<Text, EosDocument> toStore =
+                    generator.createKeysForDocument(newDoc);
+                for (final Entry<Text, EosDocument> toStoreEntry
+                        : toStore.entrySet()) {
+                    final Text keyAsText = toStoreEntry.getKey();
+                    final EosDocument toStoreDoc = toStoreEntry.getValue();
+                    mapToDocument.put(keyAsText, toStoreDoc);
+                }
             }
         }
 
         return mapToDocument;
+    }
+
+    final List<Token> identifiyToken(final DictionaryBasedEntityRecognizer dber)
+            throws TokenizerException {
+
+        final List<Token> tokens = new ArrayList<Token>();
+
+        Token t = null;
+        while ((t = dber.next()) != null) {
+            tokens.add(t);
+        }
+
+        return tokens;
     }
 
     /**

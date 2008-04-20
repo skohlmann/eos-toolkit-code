@@ -58,7 +58,7 @@ public class DictionaryBasedEntityRecognizerReducer
     /** The meta field for separation.
      * Default value is {@link EosDocument#ID_META_KEY}. */
     public static final String META_FIELD_FOR_SEPARATION_CONFIG_NAME =
-        "net.sf.eos.hadoop.mapred.entity.DictionaryBasedEntityRecognizerReducer.metaKeys";
+        "net.sf.eos.hadoop.mapred.cooccurrence.DictionaryBasedEntityRecognizerReducer.metaKeys";
 
     private JobConf conf;
 
