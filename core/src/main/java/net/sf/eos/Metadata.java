@@ -13,31 +13,21 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.sf.eos.analyzer;
+package net.sf.eos;
 
-import net.sf.eos.Metadata;
+import java.util.List;
+import java.util.Map;
 
 /**
- * A Token represents a part of a tokenized text.
- * @see Tokenizer
+ * Contains metadata about a concept.
  * @author Sascha Kohlmann
  */
-@SuppressWarnings("nls")
-public interface Token extends Metadata {
-
-    /** The default type of a token. */
-    public final static String DEFAULT_TYPE = "word";
+public interface Metadata {
 
     /**
-     * Returns the text of a token. The text may be a single word or a sequence
-     * of words, e.g. a sentence.
-     * @return the charater sequence of the token
+     * Returns simple metadata. The content of the metadata depends on the
+     * implementation.
+     * @return implementation dependend metadata. Maybe <code>null</code>.
      */
-    CharSequence getTokenText();
-
-    /**
-     * Returns the type of the token.
-     * @return the type of a token.
-     */
-    String getType();
+    Map<String, List<String>> getMeta();
 }

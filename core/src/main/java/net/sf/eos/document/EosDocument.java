@@ -15,6 +15,7 @@
  */
 package net.sf.eos.document;
 
+import net.sf.eos.Metadata;
 import net.sf.eos.util.EqualsAndHashUtil;
 
 import java.io.IOException;
@@ -29,7 +30,7 @@ import java.util.Map;
  * or carriage return (ASCII 0x0d) characters.
  * @author Sascha Kohlmann
  */
-public final class EosDocument {
+public final class EosDocument implements Metadata {
 
     /** A metadata key for the year in a metadata. */
     @SuppressWarnings("nls")

@@ -15,12 +15,28 @@
  */
 package net.sf.eos.lucene;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import net.sf.eos.EosException;
+
 import java.util.List;
 
-public class DefaultLuceneEosLookup extends LuceneEosLookup implements CommonDocument {
+public class DefaultLuceneEosLookup extends LuceneEosLookup
+        implements CommonDocument {
+
+    /** For logging. */
+    private static final Log LOG =
+        LogFactory.getLog(DefaultLuceneEosLookup.class.getName());
 
     @Override
-    public List<LookupEntry> lookup(final EosQuery query) {
+    public List<LookupEntry> lookup(final EosQuery query) throws EosException {
+        if (! (query instanceof DefaultEosQuery)) {
+            LOG.warn("query instance not of type "
+                     + DefaultEosQuery.class.getName() + ": "
+                     + query.getClass().getName()
+                     + " - will try it anyway.");
+        }
         return null;
     }
 

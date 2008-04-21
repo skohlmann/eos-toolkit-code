@@ -15,6 +15,8 @@
  */
 package net.sf.eos.lucene;
 
+import net.sf.eos.Metadata;
+
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +24,7 @@ import java.util.Map;
  * Bean holder for lookup data.
  * @author Sascha Kohlmann
  */
-public class LookupEntry {
+public class LookupEntry implements Metadata {
 
     private String id;
     private String commonName;
@@ -86,14 +88,5 @@ public class LookupEntry {
     public void setRelevance(@SuppressWarnings("hiding")
             final float relevance) {
         this.relevance = relevance;
-    }
-
-    /**
-     * Sets the metadata of the entry.
-     * @param meta the metadata of the entry
-     */
-    public void setMeta(@SuppressWarnings("hiding")
-            final Map<String, List<String>> meta) {
-        this.meta = meta;
     }
 }

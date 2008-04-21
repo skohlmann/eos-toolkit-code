@@ -45,7 +45,7 @@ public class DefaultEosQueryTest {
     }
 
     @Test
-    public void simpleAndContent() throws EosException {
+    public void andContent() throws EosException {
         final DefaultEosQuery q = new DefaultEosQuery();
         q.and("test");
         q.and("boxi");
@@ -54,7 +54,7 @@ public class DefaultEosQueryTest {
     }
 
     @Test
-    public void simpleAndNotContent() throws EosException {
+    public void andNotContent() throws EosException {
         final DefaultEosQuery q = new DefaultEosQuery();
         q.and("test");
         q.andNot("boxi");
@@ -63,7 +63,7 @@ public class DefaultEosQueryTest {
     }
 
     @Test
-    public void simpleOrContent() throws EosException {
+    public void orContent() throws EosException {
         final DefaultEosQuery q = new DefaultEosQuery();
         q.and("test");
         q.or("boxi");
@@ -80,7 +80,7 @@ public class DefaultEosQueryTest {
     }
 
     @Test
-    public void simpleAndMeta() throws EosException {
+    public void mndMeta() throws EosException {
         final DefaultEosQuery q = new DefaultEosQuery();
         q.andMeta("FIELD", "test");
         q.andMeta("YEAR", "2006");
@@ -89,7 +89,7 @@ public class DefaultEosQueryTest {
     }
 
     @Test
-    public void simpleOrMeta() throws EosException {
+    public void orMeta() throws EosException {
         final DefaultEosQuery q = new DefaultEosQuery();
         q.andMeta("FIELD", "test");
         q.orMeta("YEAR", "2006");
@@ -98,11 +98,29 @@ public class DefaultEosQueryTest {
     }
 
     @Test
-    public void simpleAndNotMeta() throws EosException {
+    public void andNotMeta() throws EosException {
         final DefaultEosQuery q = new DefaultEosQuery();
         q.andMeta("FIELD", "test");
         q.andNotMeta("YEAR", "2006");
         final String qs = q.executableQuery();
         assertEquals("FIELD:\"test\" AND -YEAR:\"2006\" ", qs);
+    }
+
+    @Test
+    public void andMetaRange() throws EosException {
+        final DefaultEosQuery q = new DefaultEosQuery();
+        q.andMeta("FIELD", "test");
+        q.andMetaRange("YEAR", "2006", "2007");
+        final String qs = q.executableQuery();
+        assertEquals("FIELD:\"test\" AND YEAR:[\"2006\" TO \"2007\"] ", qs);
+    }
+
+    @Test
+    public void orMetaRange() throws EosException {
+        final DefaultEosQuery q = new DefaultEosQuery();
+        q.andMeta("FIELD", "test");
+        q.orMetaRange("YEAR", "2006", "2007");
+        final String qs = q.executableQuery();
+        assertEquals("FIELD:\"test\" OR YEAR:[\"2006\" TO \"2007\"] ", qs);
     }
 }

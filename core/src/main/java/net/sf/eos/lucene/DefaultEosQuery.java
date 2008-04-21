@@ -178,6 +178,6 @@ class DefaultEosQuery implements CommonDocument, EosQuery {
             LOG.debug("QUERY: " + q);
         }
 
-        return sb.toString();
+        return q;
     }
 }

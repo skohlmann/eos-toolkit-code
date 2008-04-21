@@ -29,7 +29,10 @@ public abstract class Configured implements Configurable {
     }
 
     /**
-     * Creates a copy of the given <code>Configuration</code>.
+     * Creates a copy of the given <code>Configuration</code> and stores it in
+     * a manner that {@link #getConfiguration()} can reach it.
+     * <p>If override the method first call <code>super</code> in the
+     * overriding method.</p>
      * @param config the <code>Configuration</code> to copy.
      */
     public void configure(
