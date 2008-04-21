@@ -153,6 +153,13 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
+        <configuration>
+          <links>
+            <link>http://java.sun.com/javase/6/docs/api/</link>
+            <link>http://hudson.zones.apache.org/hudson/job/Hadoop-trunk/javadoc/</link>
+          </links>
+          <charset>UTF-8</charset>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
