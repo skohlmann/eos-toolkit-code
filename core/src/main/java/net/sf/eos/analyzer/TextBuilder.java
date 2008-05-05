@@ -22,6 +22,8 @@ import org.apache.commons.logging.LogFactory;
 import net.sf.eos.EosException;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.Configured;
+import net.sf.eos.config.FactoryMethod;
+import net.sf.eos.medline.MedlineTokenizerBuilder;
 
 import java.util.Arrays;
 import java.util.List;
@@ -48,7 +50,13 @@ public abstract class TextBuilder extends Configured {
      * by space (ASCII <tt>0x20</tt>).
      */
     @SuppressWarnings("nls")
-    public static final TextBuilder SPACE_BUILDER = new TextBuilder() {
+    public static final TextBuilder SPACE_BUILDER = new SpaceBuilder();
+
+    /**
+     * Simple implementation concats all texts from the tokens delimited
+     * by space (ASCII <tt>0x20</tt>).
+     */
+    public static final class SpaceBuilder extends TextBuilder {
         @SuppressWarnings("nls")
         public final static String SPACE = " ";
         @Override
@@ -88,6 +96,8 @@ public abstract class TextBuilder extends Configured {
      * @throws EosException if it is not possible to instantiate an instance
      */
     @SuppressWarnings("nls")
+    @FactoryMethod(key=TEXT_BUILDER_IMPL_CONFIG_NAME,
+                   implementation=SpaceBuilder.class)
     public final static TextBuilder newInstance(final Configuration config)
             throws EosException {
 
