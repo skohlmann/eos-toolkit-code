@@ -25,13 +25,12 @@ import net.sf.eos.analyzer.TextBuilder;
 import net.sf.eos.analyzer.TokenizerException;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.Configured;
+import net.sf.eos.config.FactoryMethod;
 import net.sf.eos.document.EosDocument;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * The implementation fragmented {@link EosDocument} with more then one sentence
@@ -73,6 +72,8 @@ public abstract class Sentencer extends Configured {
      * @throws EosException if it is not possible to instantiate an instance
      */
     @SuppressWarnings("nls")
+    @FactoryMethod(key=SENTENCER_IMPL_CONFIG_NAME,
+                   implementation=DefaultSentencer.class)
     public final static Sentencer newInstance(final Configuration config)
             throws EosException {
 

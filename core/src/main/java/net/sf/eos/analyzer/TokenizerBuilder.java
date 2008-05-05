@@ -21,6 +21,7 @@ import org.apache.commons.logging.LogFactory;
 
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.Configured;
+import net.sf.eos.config.FactoryMethod;
 import net.sf.eos.medline.MedlineTokenizerBuilder;
 
 /**
@@ -50,6 +51,8 @@ public abstract class TokenizerBuilder extends Configured {
      * @throws TokenizerException if it is not possible to instantiate an instance
      */
     @SuppressWarnings("nls")
+    @FactoryMethod(key=BUILDER_IMPL_CONFIG_NAME,
+                   implementation=MedlineTokenizerBuilder.class)
     public final static TokenizerBuilder newInstance(final Configuration config)
             throws TokenizerException {
 

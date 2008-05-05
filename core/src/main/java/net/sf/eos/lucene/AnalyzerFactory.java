@@ -17,6 +17,7 @@ package net.sf.eos.lucene;
 
 import net.sf.eos.EosException;
 import net.sf.eos.config.Configuration;
+import net.sf.eos.config.FactoryMethod;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -58,6 +59,7 @@ public abstract class AnalyzerFactory {
      * @return a new instance
      * @throws EosException if it is not possible to instantiate an instance
      */
+    @FactoryMethod(key=ANALYZER_FACTORY_IMPL_CONFIG_NAME)
     public final static AnalyzerFactory newInstance(final Configuration config)
             throws EosException {
 

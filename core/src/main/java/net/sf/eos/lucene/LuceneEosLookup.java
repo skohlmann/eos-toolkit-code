@@ -23,6 +23,7 @@ import java.util.List;
 import net.sf.eos.EosException;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.Configured;
+import net.sf.eos.config.FactoryMethod;
 
 /**
  * A simple entity oriented search lookup implementation.
@@ -51,6 +52,8 @@ public abstract class LuceneEosLookup extends Configured {
      * @return a new instance
      * @throws EosException if it is not possible to instantiate an instance
      */
+    @FactoryMethod(key=LUCENE_EOS_LOOKUP_IMPL_CONFIG_NAME,
+                   implementation=DefaultLuceneEosLookup.class)
     public final static LuceneEosLookup
             newInstance(final Configuration config) throws EosException {
 

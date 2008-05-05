@@ -22,6 +22,7 @@ import org.apache.lucene.document.Document;
 import net.sf.eos.EosException;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.Configured;
+import net.sf.eos.config.FactoryMethod;
 import net.sf.eos.document.EosDocument;
 
 /**
@@ -59,6 +60,8 @@ public abstract class LuceneDocumentCreator extends Configured {
      * @return a new instance
      * @throws EosException if it is not possible to instantiate an instance
      */
+    @FactoryMethod(key=DOCUMENT_CREATOR_IMPL_CONFIG_NAME,
+                       implementation=DefaultLuceneDocumentCreator.class)
     public final static LuceneDocumentCreator
             newInstance(final Configuration config) throws EosException {
 

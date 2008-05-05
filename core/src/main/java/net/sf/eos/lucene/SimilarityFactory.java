@@ -17,6 +17,7 @@ package net.sf.eos.lucene;
 
 import net.sf.eos.EosException;
 import net.sf.eos.config.Configuration;
+import net.sf.eos.config.FactoryMethod;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -57,6 +58,8 @@ public abstract class SimilarityFactory {
      * @return a new instance
      * @throws EosException if it is not possible to instantiate an instance
      */
+    @FactoryMethod(key=SIMILARITY_FACTORY_IMPL_CONFIG_NAME,
+                   implementation=NormedLengthSimilarityFactory.class)
     public final static SimilarityFactory 
             newInstance(final Configuration config) throws EosException {
 
