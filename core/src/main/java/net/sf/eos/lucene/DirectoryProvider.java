@@ -17,45 +17,41 @@ package net.sf.eos.lucene;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.lucene.store.Directory;
 
 import net.sf.eos.EosException;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.Configured;
 import net.sf.eos.config.FactoryMethod;
-import net.sf.eos.search.EosLookup;
 
-/**
- * A simple <a href='http://lucene.apache.org/' title='Homepage'>Lucene</a>
- * entity oriented search lookup implementation.
- * @author Sascha Kohlmann
- */
-public abstract class LuceneEosLookup extends Configured implements EosLookup {
+public abstract class DirectoryProvider extends Configured {
 
     /** For logging. */
     private static final Log LOG =
-        LogFactory.getLog(LuceneEosLookup.class.getName());
+        LogFactory.getLog(DirectoryProvider.class.getName());
 
-    /** The configuration key name for the classname of the creator.
+    /** The configuration key name for the classname of the factory.
      * @see #newInstance(Configuration) */
     @SuppressWarnings("nls")
-    public final static String LUCENE_EOS_LOOKUP_IMPL_CONFIG_NAME = 
-        "net.sf.eos.lucene.LuceneEosLookup.impl";
+    public final static String DIRECTORY_PROVIDER_IMPL_CONFIG_NAME = 
+        "net.sf.eos.lucene.DirectoryProvider.impl";
 
     /**
-     * Creates a new instance of a of the lookup. If the
+     * Creates a new instance of a of the factory. If the
      * <code>Configuration</code> contains a key
-     * {@link #LUCENE_EOS_LOOKUP_IMPL_CONFIG_NAME} a new instance of the
+     * {@link #DIRECTORY_PROVIDER_IMPL_CONFIG_NAME} a new instance of the
      * classname in the value will instantiate. The 
-     * {@link DefaultLuceneEosLookup} will instantiate if there is no
+     * {@link LocalFsDirectoryProvider} will instantiate if there is no
      * value setted.
      * @param config the configuration
      * @return a new instance
      * @throws EosException if it is not possible to instantiate an instance
+     * @see LocalFsDirectoryProvider
      */
-    @FactoryMethod(key=LUCENE_EOS_LOOKUP_IMPL_CONFIG_NAME,
-                   implementation=DefaultLuceneEosLookup.class)
-    public final static LuceneEosLookup
-            newInstance(final Configuration config) throws EosException {
+    @FactoryMethod(key=DIRECTORY_PROVIDER_IMPL_CONFIG_NAME,
+                   implementation=LocalFsDirectoryProvider.class)
+    public final static DirectoryProvider newInstance(final Configuration config)
+            throws EosException {
 
         final Thread t = Thread.currentThread();
         ClassLoader classLoader = t.getContextClassLoader();
@@ -64,22 +60,21 @@ public abstract class LuceneEosLookup extends Configured implements EosLookup {
         }
 
         final String clazzName =
-            config.get(LUCENE_EOS_LOOKUP_IMPL_CONFIG_NAME,
-                       DefaultLuceneEosLookup.class.getName());
+            config.get(DIRECTORY_PROVIDER_IMPL_CONFIG_NAME,
+                    LocalFsDirectoryProvider.class.getName());
 
         try {
-            final Class<? extends LuceneEosLookup> clazz =
-                (Class<? extends LuceneEosLookup>) Class
+            final Class<? extends DirectoryProvider> clazz =
+                (Class<? extends DirectoryProvider>) Class
                     .forName(clazzName, true, classLoader);
             try {
 
-                final LuceneEosLookup lookup = clazz.newInstance();
-                lookup.configure(config);
+                final DirectoryProvider factory = clazz.newInstance();
                 if (LOG.isDebugEnabled()) {
-                    LOG.debug("LuceneEosLookup instance: "
-                              + lookup.getClass().getName());
+                    LOG.debug("DirectoryProvider instance: "
+                              + factory.getClass().getName());
                 }
-                return lookup;
+                return factory;
 
             } catch (final InstantiationException e) {
                 throw new EosException(e);
@@ -90,4 +85,23 @@ public abstract class LuceneEosLookup extends Configured implements EosLookup {
             throw new EosException(e);
         }
     }
+
+    /**
+     * Creates a new directory for the configuration at creation time.
+     * @return a new Lucene {@code Directory} instance.
+     * @throws EosException if an error occurs.
+     */
+    public Directory newDirectory() throws EosException {
+        final Configuration conf = this.getConfiguration();
+        return newDirectory(conf);
+    }
+
+    /**
+     * Use the given configuration to create a new {@code Directory} instance.
+     * @param conf the configuration to use for {@code Directory} creating
+     * @return a new Lucence {@code Directory}
+     * @throws EosException if an error occurs.
+     */
+    public abstract Directory newDirectory(final Configuration conf)
+            throws EosException;
 }

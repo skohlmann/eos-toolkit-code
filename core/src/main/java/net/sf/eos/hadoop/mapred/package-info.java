@@ -16,14 +16,13 @@
 
 
 /**
- * <p>Support for named entity recognizer.</p>
- * <p>At this time &#949;&#959;s supports only dictionary based named entity
- *  recognition. To create an instance use the factory method in
- *  {@link net.sf.eos.entity.AbstractDictionaryBasedEntityRecognizer}. The default
- *  implementation is
- *  {@link net.sf.eos.entity.SimpleLongestMatchDictionaryBasedEntityRecognizer}
- *  which supports a longest match named entity recognition.</p>
+ * <p>Contains the base infrastructure for mapreduce handling.</p>
+ * <p>{@link net.sf.eos.hadoop.mapred.AbstractEosDriver} supports the development
+ * of mapreduce-Drivers. The {@link net.sf.eos.hadoop.mapred.KeyGenerator}
+ * and its abstract factory implementation
+ * {@link net.sf.eos.hadoop.mapred.AbstractKeyGenerator} supports key generation
+ * in the map-task of a mapreduce job.</p>
  *
  * @since 0.1.0
  */
-package net.sf.eos.entity;
+package net.sf.eos.hadoop.mapred;

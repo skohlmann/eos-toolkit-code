@@ -25,9 +25,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Represents a simple &#949;&#183;&#959;&#183;s&#183;&#183;&#183; document.
- * An instance of this document may never contains any linefeed (ASCII 0xa) 
- * or carriage return (ASCII 0x0d) characters.
+ * Represents a simple &#949;&#959;s document. An instance of this document
+ * never contains any linefeed (ASCII 0xa) or carriage return (ASCII 0x0d)
+ * characters.
  * @author Sascha Kohlmann
  */
 public final class EosDocument implements Metadata {

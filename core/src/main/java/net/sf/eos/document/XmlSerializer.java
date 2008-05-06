@@ -52,13 +52,11 @@ public class XmlSerializer extends Serializer {
     static final Log LOG = LogFactory.getLog(XmlSerializer.class.getName());
 
     /**
-     * Represents the XML emlement names of a serialized
-     *  &#949;&#183;&#959;&#183;s&#183;&#183;&#183; document.
+     * Represents the XML emlement names of a serialized &#949;&#959;s document.
      * @author Sascha Kohlmann
      */
     public enum ElementName {
-        /** Root element of an &#949;&#183;&#959;&#183;s&#183;&#183;&#183;
-         * document. */
+        /** Root element of an &#949;&#959;s document. */
         d,
         /** Container for a meta data entry. */
         m,

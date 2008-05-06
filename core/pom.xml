@@ -95,6 +95,7 @@
             <link>http://hudson.zones.apache.org/hudson/job/Hadoop-trunk/javadoc/</link>
           </links>
           <charset>UTF-8</charset>
+          <overview>${basedir}/src/main/javadoc/overview.html</overview>
         </configuration>
       </plugin>
     </plugins>

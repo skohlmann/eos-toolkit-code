@@ -1,4 +1,4 @@
-/**
+/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -87,12 +87,8 @@ public class IndexMerger extends Configured implements Tool {
       dirs[i] = new FsDirectory(fs, indexes[i], false, getConf());
     }
 
-    // Patch SK - in urspruenglicher Applikation nicht enthalten
-//    final FsDirectory outDir = new FsDirectory(fs, localOutput, true, getConf());
-
     // Merge indices //
     IndexWriter writer = new IndexWriter(localOutput.toString(), null, true);
-//    IndexWriter writer = new IndexWriter(outDir, null, true); // Patch SK damit n HDFS System geschrieben wird
     writer.setMergeFactor(getConf().getInt("indexer.mergeFactor", IndexWriter.DEFAULT_MERGE_FACTOR));
     writer.setMaxBufferedDocs(getConf().getInt("indexer.minMergeDocs", IndexWriter.DEFAULT_MAX_BUFFERED_DOCS));
     writer.setMaxMergeDocs(getConf().getInt("indexer.maxMergeDocs", IndexWriter.DEFAULT_MAX_MERGE_DOCS));

@@ -16,14 +16,15 @@
 
 
 /**
- * <p>Support for named entity recognizer.</p>
- * <p>At this time &#949;&#959;s supports only dictionary based named entity
- *  recognition. To create an instance use the factory method in
- *  {@link net.sf.eos.entity.AbstractDictionaryBasedEntityRecognizer}. The default
- *  implementation is
- *  {@link net.sf.eos.entity.SimpleLongestMatchDictionaryBasedEntityRecognizer}
- *  which supports a longest match named entity recognition.</p>
+ * Retrieval independend definitions of data and processes in a entity oriented
+ * search lookup.
+ * @see net.sf.eos.search.EosLookup for the base interface of the lookup.
+ * @see net.sf.eos.search.EosQuery for a simple query for a lookup. The query definition is
+ *               independent from the underlying retrieval system..
+ * @see net.sf.eos.search.LookupEntry contains the data if a lookup entry.
+ * @see net.sf.eos.search.UserQueryParser for a processor to parse simple user defined
+ *                            queries.
  *
  * @since 0.1.0
  */
-package net.sf.eos.entity;
+package net.sf.eos.search;

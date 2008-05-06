@@ -15,7 +15,6 @@
  */
 package net.sf.eos.analyzer;
 
-import net.sf.eos.config.Configuration;
 import net.sf.eos.config.Configured;
 
 /**

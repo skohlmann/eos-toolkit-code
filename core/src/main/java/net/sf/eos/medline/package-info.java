@@ -16,14 +16,13 @@
 
 
 /**
- * <p>Support for named entity recognizer.</p>
- * <p>At this time &#949;&#959;s supports only dictionary based named entity
- *  recognition. To create an instance use the factory method in
- *  {@link net.sf.eos.entity.AbstractDictionaryBasedEntityRecognizer}. The default
- *  implementation is
- *  {@link net.sf.eos.entity.SimpleLongestMatchDictionaryBasedEntityRecognizer}
- *  which supports a longest match named entity recognition.</p>
+ * Support to work with data from the
+ * <acronym title='National Library of Medicine'>NLM</acronym> Medline database.
+ *
+ * <p><strong>Note:</strong> Maybe removed in the later developing stage into
+ * a seperat contribution project with repackaging.</p>
  *
  * @since 0.1.0
+ * @see net.sf.eos.analyzer
  */
-package net.sf.eos.entity;
+package net.sf.eos.medline;

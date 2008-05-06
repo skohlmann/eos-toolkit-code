@@ -13,21 +13,23 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.sf.eos.lucene;
+package net.sf.eos.search;
+
+import java.util.List;
 
 import net.sf.eos.EosException;
+import net.sf.eos.config.Configurable;
 
 /**
- * A query is always constructed by the {@link LuceneEosLookup} instance and supports
+ * A query is always constructed by the {@link EosLookup} instance and supports
  * simple lookups in an entity oriented search index.
  * 
  * <p>The query is very simple. At this time an entity oriented search system
  * doesn't need sophisticated queries.
  *
  * @author Sascha Kohlmann
- * @see LuceneEosLookup
  */
-public interface EosQuery {
+public interface EosQuery extends Configurable {
 
     /**
      * Adds a phrase to lookup with the boolean <tt>and</tt> operation.
@@ -116,5 +118,5 @@ public interface EosQuery {
      * @return the executable query
      * @throws EosException if an error occurs
      */
-    String executableQuery() throws EosException;
+    List<LookupEntry> execute() throws EosException;
 }

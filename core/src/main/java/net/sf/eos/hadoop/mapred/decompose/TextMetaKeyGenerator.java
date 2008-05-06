@@ -69,10 +69,6 @@ public class TextMetaKeyGenerator extends AbstractKeyGenerator<Text> {
         return retval;
     }
 
-    /**
-     * Returns the configuration.
-     * @return the configuration holder or <code>null</code>
-     */
     @Override
     public void configure(
             @SuppressWarnings("hiding") final Configuration config) {

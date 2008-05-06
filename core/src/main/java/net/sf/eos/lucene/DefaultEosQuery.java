@@ -17,21 +17,37 @@ package net.sf.eos.lucene;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.queryParser.QueryParser;
+import org.apache.lucene.search.Hits;
+import org.apache.lucene.search.Query;
+import org.apache.lucene.search.Searcher;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.eos.EosException;
+import net.sf.eos.config.Configuration;
+import net.sf.eos.config.Configured;
+import net.sf.eos.entity.CommonNameResolver;
 import net.sf.eos.lucene.DefaultEosQuery.Entry.Bool;
+import net.sf.eos.search.EosQuery;
+import net.sf.eos.search.LookupEntry;
 
-class DefaultEosQuery implements CommonDocument, EosQuery {
+/**
+ * Use internally {@link AnalyzerFactory}, {@link SearcherProvider} and
+ * {@link CommonNameResolver} if configured.
+ * @author Sascha Kohlmann
+ */
+public class DefaultEosQuery extends Configured implements CommonDocument, EosQuery {
 
     /** For logging. */
     private static final Log LOG =
         LogFactory.getLog(DefaultEosQuery.class.getName());
 
-    public static class Entry {
+    final static class Entry {
 
         public static enum Bool {AND, OR, AND_NOT}
 
@@ -97,7 +113,6 @@ class DefaultEosQuery implements CommonDocument, EosQuery {
         return this;
     }
 
-
     public DefaultEosQuery andMetaRange(final String fieldName,
                                         final String lowerBound,
                                         final String upperBound) {
@@ -126,7 +141,46 @@ class DefaultEosQuery implements CommonDocument, EosQuery {
     }
 
     @SuppressWarnings("nls")
-    public String executableQuery() throws EosException {
+    public List<LookupEntry> execute() throws EosException {
+
+        final Configuration conf = getConfiguration();
+
+        final AnalyzerFactory analyzerFactory =
+            AnalyzerFactory.newInstance(conf);
+        final Analyzer analyzer = analyzerFactory.newAnalyzer();
+        final String queryString = createLuceneQuery();
+        final QueryParser parser =
+            new QueryParser(CommonDocument.FieldName.CONTENT.name(), analyzer);
+
+        final SearcherProvider provider = SearcherProvider.newInstance(conf);
+        final Searcher searcher = provider.newSearcher(conf);
+
+        try {
+            final Query query = parser.parse(queryString);
+            final Hits hits = searcher.search(query);
+
+        } catch (final ParseException e) {
+            final String message = e.getMessage();
+            throw new EosException(message, e);
+        } catch (final IOException e) {
+            final String message = e.getMessage();
+            throw new EosException(message, e);
+        } finally {
+            try {
+                searcher.close();
+            } catch (final IOException e) {
+                throw new EosException("Unable to close Searcher", e);
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Creates a textual Lucene query representation.
+     * @return a textual Lucene query representation
+     */
+    final String createLuceneQuery() {
         final StringBuilder sb = new StringBuilder();
         final int size = this.query.size();
         Entry[] entries = this.query.toArray(new Entry[size]);
@@ -172,7 +226,6 @@ class DefaultEosQuery implements CommonDocument, EosQuery {
             }
             sb.append(" ");
         }
-
         final String q = sb.toString();
         if (LOG.isDebugEnabled()) {
             LOG.debug("QUERY: " + q);

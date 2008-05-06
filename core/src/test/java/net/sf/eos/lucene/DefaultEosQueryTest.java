@@ -32,7 +32,7 @@ public class DefaultEosQueryTest {
     public void simpleContent() throws EosException {
         final DefaultEosQuery q = new DefaultEosQuery();
         q.and("test");
-        final String qs = q.executableQuery();
+        final String qs = q.createLuceneQuery();
         assertEquals("CONTENT:\"test\" ", qs);
     }
 
@@ -40,7 +40,7 @@ public class DefaultEosQueryTest {
     public void simpleNotContent() throws EosException {
         final DefaultEosQuery q = new DefaultEosQuery();
         q.andNot("te\"st");
-        final String qs = q.executableQuery();
+        final String qs = q.createLuceneQuery();
         assertEquals("-CONTENT:\"te\\\"st\" ", qs);
     }
 
@@ -49,7 +49,7 @@ public class DefaultEosQueryTest {
         final DefaultEosQuery q = new DefaultEosQuery();
         q.and("test");
         q.and("boxi");
-        final String qs = q.executableQuery();
+        final String qs = q.createLuceneQuery();
         assertEquals("CONTENT:\"test\" AND CONTENT:\"boxi\" ", qs);
     }
 
@@ -58,7 +58,7 @@ public class DefaultEosQueryTest {
         final DefaultEosQuery q = new DefaultEosQuery();
         q.and("test");
         q.andNot("boxi");
-        final String qs = q.executableQuery();
+        final String qs = q.createLuceneQuery();
         assertEquals("CONTENT:\"test\" AND -CONTENT:\"boxi\" ", qs);
     }
 
@@ -67,7 +67,7 @@ public class DefaultEosQueryTest {
         final DefaultEosQuery q = new DefaultEosQuery();
         q.and("test");
         q.or("boxi");
-        final String qs = q.executableQuery();
+        final String qs = q.createLuceneQuery();
         assertEquals("CONTENT:\"test\" OR CONTENT:\"boxi\" ", qs);
     }
 
@@ -75,7 +75,7 @@ public class DefaultEosQueryTest {
     public void simpleMeta() throws EosException {
         final DefaultEosQuery q = new DefaultEosQuery();
         q.andMeta("FIELD", "test");
-        final String qs = q.executableQuery();
+        final String qs = q.createLuceneQuery();
         assertEquals("FIELD:\"test\" ", qs);
     }
 
@@ -84,7 +84,7 @@ public class DefaultEosQueryTest {
         final DefaultEosQuery q = new DefaultEosQuery();
         q.andMeta("FIELD", "test");
         q.andMeta("YEAR", "2006");
-        final String qs = q.executableQuery();
+        final String qs = q.createLuceneQuery();
         assertEquals("FIELD:\"test\" AND YEAR:\"2006\" ", qs);
     }
 
@@ -93,7 +93,7 @@ public class DefaultEosQueryTest {
         final DefaultEosQuery q = new DefaultEosQuery();
         q.andMeta("FIELD", "test");
         q.orMeta("YEAR", "2006");
-        final String qs = q.executableQuery();
+        final String qs = q.createLuceneQuery();
         assertEquals("FIELD:\"test\" OR YEAR:\"2006\" ", qs);
     }
 
@@ -102,7 +102,7 @@ public class DefaultEosQueryTest {
         final DefaultEosQuery q = new DefaultEosQuery();
         q.andMeta("FIELD", "test");
         q.andNotMeta("YEAR", "2006");
-        final String qs = q.executableQuery();
+        final String qs = q.createLuceneQuery();
         assertEquals("FIELD:\"test\" AND -YEAR:\"2006\" ", qs);
     }
 
@@ -111,7 +111,7 @@ public class DefaultEosQueryTest {
         final DefaultEosQuery q = new DefaultEosQuery();
         q.andMeta("FIELD", "test");
         q.andMetaRange("YEAR", "2006", "2007");
-        final String qs = q.executableQuery();
+        final String qs = q.createLuceneQuery();
         assertEquals("FIELD:\"test\" AND YEAR:[\"2006\" TO \"2007\"] ", qs);
     }
 
@@ -120,7 +120,7 @@ public class DefaultEosQueryTest {
         final DefaultEosQuery q = new DefaultEosQuery();
         q.andMeta("FIELD", "test");
         q.orMetaRange("YEAR", "2006", "2007");
-        final String qs = q.executableQuery();
+        final String qs = q.createLuceneQuery();
         assertEquals("FIELD:\"test\" OR YEAR:[\"2006\" TO \"2007\"] ", qs);
     }
 }

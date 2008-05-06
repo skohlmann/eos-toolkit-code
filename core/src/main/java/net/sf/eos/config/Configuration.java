@@ -24,7 +24,7 @@ import java.util.Map.Entry;
  * A simple name value configuration handler.
  * @author Sascha Kohlmann
  */
-public class Configuration implements Iterable<Entry<String, String>>  {
+public class Configuration implements Iterable<Entry<String, String>> {
 
     private final Map<String, String> config = new HashMap<String, String>();
 
@@ -81,7 +81,7 @@ public class Configuration implements Iterable<Entry<String, String>>  {
      * Returns an iterator for the configuration entries.
      * @return an iterator for the configuration entries
      */
-    public Iterator<Entry<String, String>>  iterator() {
+    public Iterator<Entry<String, String>> iterator() {
         assert this.config != null;
         return this.config.entrySet().iterator();
     }

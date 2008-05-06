@@ -15,23 +15,26 @@
  */
 package net.sf.eos.lucene;
 
+import net.sf.eos.EosException;
 import net.sf.eos.config.Configuration;
-import net.sf.eos.search.EosQuery;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.lucene.store.Directory;
+import org.apache.lucene.store.FSDirectory;
 
-public class DefaultLuceneEosLookup extends LuceneEosLookup
-        implements CommonDocument {
+import java.io.IOException;
 
-    /** For logging. */
-    private static final Log LOG =
-        LogFactory.getLog(DefaultLuceneEosLookup.class.getName());
+public class LocalFsDirectoryProvider extends DirectoryProvider {
 
-    public EosQuery newQuery() {
-        final DefaultEosQuery query = new DefaultEosQuery();
-        final Configuration conf = getConfiguration();
-        query.configure(conf);
-        return query;
+    public static final String LOCAL_PATH_CONFIG_NAME =
+        "net.sf.eos.lucene.LocalFsDirectoryProvider.path";
+
+    @Override
+    public Directory newDirectory(final Configuration conf) throws EosException {
+        final String path = conf.get(LOCAL_PATH_CONFIG_NAME);
+        try {
+            return FSDirectory.getDirectory(path);
+        } catch (final IOException e) {
+            throw new EosException(e);
+        }
     }
 }

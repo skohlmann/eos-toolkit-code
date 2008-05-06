@@ -13,17 +13,16 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package net.sf.eos.search;
 
+import net.sf.eos.EosException;
 
-/**
- * <p>Support for named entity recognizer.</p>
- * <p>At this time &#949;&#959;s supports only dictionary based named entity
- *  recognition. To create an instance use the factory method in
- *  {@link net.sf.eos.entity.AbstractDictionaryBasedEntityRecognizer}. The default
- *  implementation is
- *  {@link net.sf.eos.entity.SimpleLongestMatchDictionaryBasedEntityRecognizer}
- *  which supports a longest match named entity recognition.</p>
- *
- * @since 0.1.0
- */
-package net.sf.eos.entity;
+public interface EosLookup {
+
+    /**
+     * Creates a new query instance to configure and than execute.
+     * @return a new query instance
+     * @throws EosException if an error occurs
+     */
+    EosQuery newQuery() throws EosException;
+}
