@@ -15,39 +15,37 @@
  */
 package net.sf.eos.config;
 
-import java.lang.annotation.Documented;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-
-
 /**
- * Identifies a method in a class as a factory method. A factory method has
- * always a {@linkplain Configuration configuration key} in which the name
- * of the implementing class is stored.
+ * Indicates the internal use of a service in an instance. Use {@link Services}
+ * if the implementation supports more than one {@code Service}.
+ * Internal services may create thru a method, annotated with
+ * {@link FactoryMethod}.
+ * <p>{@code Service} annotations should be volatile between releases.</p>
  * @author Sascha Kohlmann
+ * @see Services
  */
-@Documented
 @Retention(value=RUNTIME)
-@Target(value=METHOD)
-public @interface FactoryMethod {
-
-    /** Default none implementation. */
-    static class None {
-        private None() {
-            ;
-        }
-    }
-
-    /** Contains the name of the configuration key.
-     * @return the configuration key. */
-    String key();
+@Target(value=TYPE)
+public @interface Service {
 
     /**
-     * The class of the default implementation if available.
-     * @return the name of the default implementation.
+     * {@link java.lang.Class} instance of the an internally used service.
+     * @return instance of the an internally used service
+      */
+    Class<?> factory();
+
+    /** The used implementation. */
+    Class<?> implementation() default FactoryMethod.None.class;
+
+    /**
+     * An optional description.
+     * @return a description
      */
-    Class<?> implementation() default None.class;
+    String description() default "";
 }

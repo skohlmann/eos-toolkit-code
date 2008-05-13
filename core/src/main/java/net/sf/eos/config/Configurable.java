@@ -15,6 +15,8 @@
  */
 package net.sf.eos.config;
 
+import net.sf.eos.EosException;
+
 /**
  * Class which are configurable must implement this interface.
  * @author Sascha Kohlmann
@@ -24,5 +26,5 @@ public interface Configurable {
     /** Set the configuration to be used by this object. Implementation may
      * create a copy of the parameter.
      * @param config the configuration.*/
-    void configure(final Configuration config);
+    void configure(final Configuration config) throws EosException;
 }

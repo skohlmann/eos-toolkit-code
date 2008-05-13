@@ -15,16 +15,25 @@
  */
 package net.sf.eos.config;
 
+
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * A simple name value configuration handler.
  * @author Sascha Kohlmann
  */
 public class Configuration implements Iterable<Entry<String, String>> {
+
+    static final Log LOG = LogFactory.getLog(Configuration.class.getName());
 
     private final Map<String, String> config = new HashMap<String, String>();
 
@@ -35,7 +44,7 @@ public class Configuration implements Iterable<Entry<String, String>> {
 
     /** 
      * Copy constructor.
-     * @param toCopy the <code>Configuration</code> to copy.
+     * @param toCopy the {@code Configuration} to copy.
      */
     public Configuration(final Configuration toCopy) {
         for (final Entry<String, String> entry : toCopy.config.entrySet()) {
@@ -58,7 +67,7 @@ public class Configuration implements Iterable<Entry<String, String>> {
     /**
      * Returns a value for the given name.
      * @param name the name to look up for a value
-     * @return a value or <code>null</code>
+     * @return a value or {@code null}
      */
     public String get(final String name) {
         assert this.config != null;
@@ -69,7 +78,7 @@ public class Configuration implements Iterable<Entry<String, String>> {
      * Returns a value for the given name.
      * @param name the name to look up for a value
      * @param defaultValue a default value
-     * @return a value or <code>null</code>
+     * @return a value or {@code null}
      */
     public String get(final String name, final String defaultValue) {
         assert this.config != null;
@@ -99,5 +108,88 @@ public class Configuration implements Iterable<Entry<String, String>> {
         sb.append("]");
 
         return sb.toString();
+    }
+
+    /**
+     * Returns a value for the given name as {@code boolean}
+     * @param name the name to look up for a value
+     * @param defaultValue a default value
+     * @return the value
+     * @see ConfigurationKey.Type#BOOLEAN
+     */
+    public boolean getBoolean(final String name, final boolean defaultValue) {
+        assert this.config != null;
+        final String retval = get(name);
+
+        if (TRUE.toString().equalsIgnoreCase(retval)) {
+            return true;
+        } else if (FALSE.toString().equalsIgnoreCase(retval)) {
+            return false;
+        }
+
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Use default value " + defaultValue + " for key " + name);
+        }
+        return defaultValue;
+    }
+
+    /**
+     * Returns a value for the given name as {@code int}
+     * @param name the name to look up for a value
+     * @param defaultValue a default value
+     * @return the value
+     * @see ConfigurationKey.Type#INTEGER
+     */
+    public int getInt(final String name, final int defaultValue) {
+        assert this.config != null;
+        final String retval = get(name);
+
+        if (retval == null) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Null value for key " + name + " - use default "
+                          + defaultValue);
+            }
+            return defaultValue;
+        }
+
+        try {
+            return Integer.parseInt(retval);
+        } catch (final NumberFormatException e) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Unable to parse value '" + retval + "' of key " + name 
+                          + " - use default " + defaultValue);
+            }
+            return defaultValue;
+        }
+    }
+
+    /**
+     * Returns a value for the given name as {@code float}
+     * @param name the name to look up for a value
+     * @param defaultValue a default value
+     * @return the value
+     * @see ConfigurationKey.Type#FLOAT
+     */
+    public float getFloat(final String name, final float defaultValue) {
+        assert this.config != null;
+        final String retval = get(name);
+
+        if (retval == null) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Null value for key " + name + " - use default "
+                          + defaultValue);
+             }
+            return defaultValue;
+        }
+
+        try {
+            return Float.parseFloat(retval);
+        } catch (final NumberFormatException e) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Unable to parse value '" + retval + "' of key " + name
+                          + " - use default " + defaultValue);
+            }
+            return defaultValue;
+        }
     }
 }
