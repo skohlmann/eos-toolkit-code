@@ -15,6 +15,9 @@
  */
 package net.sf.eos.hadoop;
 
+import static net.sf.eos.config.ConfigurationKey.Type.CLASSNAME;
+import net.sf.eos.config.ConfigurationKey;
+
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.mapred.JobConf;
 
@@ -30,6 +33,9 @@ public interface DistributedCacheStrategy {
 
     /** The key for the name of the strategy implementing class. */
     @SuppressWarnings("nls")
+    @ConfigurationKey(type=CLASSNAME,
+                            description="Supports different strategies to fetch"
+                                        + " the cache path.")
     String STRATEGY_IMPL_CONFIG_NAME =
         "net.sf.eos.hadoop.DistributedCacheStrategy.impl";
 

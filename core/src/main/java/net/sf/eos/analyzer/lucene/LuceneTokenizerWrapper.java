@@ -24,7 +24,7 @@ import net.sf.eos.analyzer.TokenizerException;
 import java.io.IOException;
 
 /**
- * Wrapps the functionality of the &#949;&#959;s {@link Tokenizer} for the
+ * Wraps the functionality of the &#949;&#959;s {@link Tokenizer} for the
  * reuse of Lucene tokenizer.
  * @author Sascha Kohlmann
  */

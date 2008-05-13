@@ -16,7 +16,7 @@
 package net.sf.eos;
 
 /**
- * Base exception of eos.
+ * Base exception of &#949;&#959;s-toolkit.
  * @author Sascha Kohlmann
  */
 public class EosException extends Exception {

@@ -15,9 +15,11 @@
  */
 package net.sf.eos.hadoop.mapred.cooccurrence;
 
+import static net.sf.eos.config.ConfigurationKey.Type.CLASSNAME;
 import net.sf.eos.EosException;
 import net.sf.eos.analyzer.TextBuilder;
 import net.sf.eos.config.Configuration;
+import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.HadoopConfigurationAdapter;
 import net.sf.eos.document.EosDocument;
 import net.sf.eos.hadoop.mapred.EosDocumentSupportMapReduceBase;
@@ -57,6 +59,8 @@ public class DictionaryBasedEntityRecognizerReducer
 
     /** The meta field for separation.
      * Default value is {@link EosDocument#ID_META_KEY}. */
+    @SuppressWarnings("nls")
+    @ConfigurationKey(description="Metakeys, comma delimited, for separation.")
     public static final String META_FIELD_FOR_SEPARATION_CONFIG_NAME =
         "net.sf.eos.hadoop.mapred.cooccurrence.DictionaryBasedEntityRecognizerReducer.metaKeys";
 

@@ -18,13 +18,13 @@ package net.sf.eos.trie;
 import java.io.InputStream;
 
 /**
- * Implementations creats new tries.
+ * Implementations creates new tries.
  * @author Sascha Kohlmann
  */
 public interface TrieLoader<K, V> {
 
     /**
-     * Creates a <code>Trie</code> from the <code>InputStream</code>.
+     * Creates a <{@code Trie} from the <code>InputStream</code>.
      * @param trieData stream pointing to the trie structure data.
      * @param trie the trie to fill with the <em>trieData</em>
      * @throws Exception if the builder is unable to create the trie.

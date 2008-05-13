@@ -15,12 +15,15 @@
  */
 package net.sf.eos.lucene;
 
+import static net.sf.eos.config.ConfigurationKey.Type.CLASSNAME;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.document.Document;
 
 import net.sf.eos.EosException;
 import net.sf.eos.config.Configuration;
+import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.Configured;
 import net.sf.eos.config.FactoryMethod;
 import net.sf.eos.document.EosDocument;
@@ -46,12 +49,15 @@ public abstract class LuceneDocumentCreator extends Configured {
     /** The configuration key name for the classname of the creator.
      * @see #newInstance(Configuration) */
     @SuppressWarnings("nls")
+    @ConfigurationKey(type=CLASSNAME,
+                      description="Configuration key of the Lucene document "
+                                  + " creator.")
     public final static String DOCUMENT_CREATOR_IMPL_CONFIG_NAME = 
         "net.sf.eos.lucene.LuceneDocumentCreator.impl";
 
     /**
      * Creates a new instance of a of the creator. If the
-     * <code>Configuration</code> contains a key
+     * {@code Configuration} contains a key
      * {@link #DOCUMENT_CREATOR_IMPL_CONFIG_NAME} a new instance of the
      * classname in the value will instantiate. The 
      * {@link DefaultLuceneDocumentCreator} will instantiate if there is no
@@ -98,10 +104,10 @@ public abstract class LuceneDocumentCreator extends Configured {
     }
 
     /**
-     * Creates a Lucene <code>Document</code> for a given
-     * <code>EosDocument</code>.
+     * Creates a Lucene {@code Document} for a given
+     * {@code EosDocument}.
      * @param doc the document to transform
-     * @return a Lucene <code>Document</code> for indexing
+     * @return a Lucene {@code Document} for indexing
      * @throws EosException if transformation fails
      */
     public abstract Document createLuceneForEosDocument(final EosDocument doc)

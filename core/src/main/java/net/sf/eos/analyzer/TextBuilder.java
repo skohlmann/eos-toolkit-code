@@ -21,9 +21,10 @@ import org.apache.commons.logging.LogFactory;
 
 import net.sf.eos.EosException;
 import net.sf.eos.config.Configuration;
+import net.sf.eos.config.ConfigurationKey;
+import static net.sf.eos.config.ConfigurationKey.Type.CLASSNAME;
 import net.sf.eos.config.Configured;
 import net.sf.eos.config.FactoryMethod;
-import net.sf.eos.medline.MedlineTokenizerBuilder;
 
 import java.util.Arrays;
 import java.util.List;
@@ -42,6 +43,9 @@ public abstract class TextBuilder extends Configured {
     /** The configuration key name for the classname of the builder.
      * @see #newInstance(Configuration) */
     @SuppressWarnings("nls")
+    @ConfigurationKey(type=CLASSNAME,
+                            description="Instances are used to create a new text "
+                                        + "thru Token concationation.")
     public final static String TEXT_BUILDER_IMPL_CONFIG_NAME =
         "net.sf.eos.analyzer.TextBuilder.impl";
 
@@ -86,7 +90,7 @@ public abstract class TextBuilder extends Configured {
 
     /**
      * Creates a new instance of a of the builder. If the
-     * <code>Configuration</code> contains a key
+     * {@code Configuration} contains a key
      * {@link #TEXT_BUILDER_IMPL_CONFIG_NAME} a new instance of the
      * classname of the value will instantiate. The
      * {@link #SPACE_BUILDER} will instantiate if there is no
@@ -139,25 +143,25 @@ public abstract class TextBuilder extends Configured {
 
     /**
      * Creates a new text from the given token.
-     * @param tokens a list of token. If <em>tokens</em> is <code>null</code>
+     * @param tokens a list of token. If <em>tokens</em> is {@code null}
      *               an exception will raise.
-     * @return a new text, never <code>null</code>
+     * @return a new text, never {@code null}
      */
     public abstract CharSequence buildText(final List<Token> tokens);
 
     /**
      * Creates a new text from the given token.
-     * @param tokens a list of token If <em>tokens</em> is <code>null</code>
+     * @param tokens a list of token If <em>tokens</em> is {@code null}
      *               an exception will raise.
-     * @return a new text, never <code>null</code>
+     * @return a new text, never {@code null}
      */
     public abstract CharSequence buildText(final Token... tokens);
 
     /**
-     * Creates a new text from the given <code><CharSequence/code>.
-     * @param seq a list of <code><CharSequence/code> If <em>tokens</em> is
-     *            <code>null</code> an exception will raise.
-     * @return a new text, never <code>null</code>
+     * Creates a new text from the given {@code CharSequence}.
+     * @param seq a list of {@code CharSequence} If <em>tokens</em> is
+     *            {@code null} an exception will raise.
+     * @return a new text, never {@code null}
      */
     public abstract CharSequence buildText(final CharSequence... seq);
 }

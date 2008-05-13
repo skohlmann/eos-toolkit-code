@@ -16,20 +16,26 @@
 package net.sf.eos.trie;
 
 
+import static net.sf.eos.config.ConfigurationKey.Type.CLASSNAME;
 import net.sf.eos.analyzer.TokenizerException;
 import net.sf.eos.config.Configuration;
+import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.FactoryMethod;
 
 import java.io.InputStream;
 
 public abstract class AbstractTrieLoader<K, V> implements TrieLoader<K, V> {
 
+    @SuppressWarnings("nls")
+    @ConfigurationKey(type=CLASSNAME,
+            description="Configuration key of the trie loader"
+                        + " factory.")
     public final static String TRIE_LOADER_IMPL_CONFIG_NAME =
         "net.sf.eos.trie.AbstractTrieLoader.impl";
 
     /**
-     * Default <code>Trie<Loader</code> is {@link XmlTrieLoader}.
-     * @return a
+     * Default {@code TrieLoader} is {@link XmlTrieLoader}.
+     * @return a loader
      * @throws TokenizerException
      */
     @FactoryMethod(key=TRIE_LOADER_IMPL_CONFIG_NAME,

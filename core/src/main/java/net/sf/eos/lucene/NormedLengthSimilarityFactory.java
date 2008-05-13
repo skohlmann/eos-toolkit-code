@@ -18,7 +18,7 @@ package net.sf.eos.lucene;
 import org.apache.lucene.search.Similarity;
 
 /**
- * Supprt for {@link NormedLengthSimilarity}.
+ * Support for {@link NormedLengthSimilarity}.
  * @author Sascha Kohlmann
  */
 public class NormedLengthSimilarityFactory extends SimilarityFactory {

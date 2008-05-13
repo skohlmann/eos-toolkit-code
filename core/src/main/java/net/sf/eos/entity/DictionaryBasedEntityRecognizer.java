@@ -21,28 +21,25 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * The <code>DictionaryBasedEntityRecognizer</code> uses a {@link Map} to
- * recognize entites in a text. An entity is identified thru the 
+ * The {@code DictionaryBasedEntityRecognizer} uses a {@link Map} to
+ * recognize entities in a text. An entity is identified thru the 
  * {@link net.sf.eos.analyzer.Token#getType()} {@link #ENTITY_TYPE}. The ID
- * comming in the map ist stored in the meta data with the key
+ * coming in the map is stored in the meta data with the key
  * {@link #ENTITY_ID_KEY}.
  * @author Sascha Kohlmann
  */
 public interface DictionaryBasedEntityRecognizer extends EntityRecognizer {
 
-    /** The default length of token to check against the entries in the map. */
-    public final static int DEFAULT_MAX_TOKEN = 5;
-
     /** ID meta key. */
     @SuppressWarnings("nls")
-    public final static String ENTITY_ID_KEY = 
+    static String ENTITY_ID_KEY = 
         DictionaryBasedEntityRecognizer.class.getName() + "." + ENTITY_TYPE;
 
-    /** Configuration key for the maximum token. The value of the key must
-     * follow the rules of an Java integer. */
-    @SuppressWarnings("nls")
-    public final static String MAX_TOKEN_CONFIG_NAME = 
-        "net.sf.eos.entity.DictionaryBasedEntityRecognizer.maxToken";
+//    /** Configuration key for the maximum token. The value of the key must
+//     * follow the rules of an Java integer. */
+//    @SuppressWarnings("nls")
+//    static String MAX_TOKEN_CONFIG_NAME = 
+//        "net.sf.eos.entity.DictionaryBasedEntityRecognizer.maxToken";
 
     /**
      * Set the entity map.
@@ -53,20 +50,20 @@ public interface DictionaryBasedEntityRecognizer extends EntityRecognizer {
 
     /**
      * Return the entity map.
-     * @return the entity map. May be <code>null</code>
+     * @return the entity map. May be {@code null}
      */
     Map<CharSequence, Set<CharSequence>> getEntityMap();
 
     /**
      * Sets a builder. The implementation has default builder of instance
      * {@link TextBuilder#SPACE_BUILDER} setted at construction time.
-     * @param builder a builder to set or <code>null</code>
+     * @param builder a builder to set or {@code null}
      */
     void setTextBuilder(final TextBuilder builder);
 
     /**
      * Returns a setted builder.
-     * @return a setted builder or <code>null</code>.
+     * @return a setted builder or {@code null}.
      */
     TextBuilder getTextBuilder();
 
@@ -78,7 +75,7 @@ public interface DictionaryBasedEntityRecognizer extends EntityRecognizer {
     /**
      * @param maxToken the maxToken to set
      * @throws IllegalArgumentException if and only if 
-     *                                  <code><em>token</em> &gt; 1</code>
+     *                                  <em>{@literal token > 1}</em>
      */
     void setMaxToken(final int maxToken);
 }

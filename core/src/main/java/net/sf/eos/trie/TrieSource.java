@@ -82,6 +82,7 @@ public interface TrieSource {
             return old;
         }
     }
+
     public void addTrieEntryListener(final TrieEntryListener listener);
 
     public void removeTrieEntryListener(final TrieEntryListener listener);

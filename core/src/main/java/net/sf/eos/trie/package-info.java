@@ -26,21 +26,21 @@
  * <p>The main benefit for a memory based implementation for entity
  * recognition ist the cluster structure of the
  * <a href='http://hadoop.apache.org/' title='Homepage'>Hadoop</a> system.
- * In such a system it is contraproductive to have a central instance for
- * entity recognition. Such a central system is always the bootleneck if it is
+ * In such a system it is contra productive to have a central instance for
+ * entity recognition. Such a central system is always the bottleneck if it is
  * under fire of a few hundrets of cluster node, each with X running instances.
  * A PATRICIA trie structure consumes not as much main memory as other
  * implementations.</p>
  *
  * <p>To work with the trie in a cluster environment, use the service offered by
  * {@link net.sf.eos.trie.AbstractTrieLoader}. The default serialization format
- * is definied in {@link net.sf.eos.trie.XmlTrieLoader}. At this time the tries
+ * is defined in {@link net.sf.eos.trie.XmlTrieLoader}. At this time the tries
  * key structure is based on {@link net.sf.eos.trie.CharSequenceKeyAnalyzer CharSequences}.
  * This implementation is not as memory optimized as the
  * {@linkplain net.sf.eos.trie.ByteArrayKeyAnalyzer byte array}
  * implementation. The byte array oriented key analyzer may use
  * {@link java.lang.CharSequence CharSequences} transformed in UTF-8 bytes.
- * This safes memory for latin based langugaes.</p>
+ * This safes memory for latin based languages.</p>
  *
  * <p>For Hadoop use the distributed cache mechanism of Hadoop. See
  * {@link net.sf.eos.hadoop} for further information.</p>

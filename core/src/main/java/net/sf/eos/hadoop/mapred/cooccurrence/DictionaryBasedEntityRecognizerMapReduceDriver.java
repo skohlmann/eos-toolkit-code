@@ -102,9 +102,11 @@ public class DictionaryBasedEntityRecognizerMapReduceDriver
         if (conf.get(DistributedCacheStrategy.STRATEGY_IMPL_CONFIG_NAME) == null) {
             conf.set(DistributedCacheStrategy.STRATEGY_IMPL_CONFIG_NAME,
                     FullyDistributedCacheStrategy.class.getName());
-            LOG.debug("No CacheStrategy given. Use '"
-                      + FullyDistributedCacheStrategy.class.getName()
-                      + "'");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("No CacheStrategy given. Use '"
+                          + FullyDistributedCacheStrategy.class.getName()
+                          + "'");
+            }
         }
 
         conf.setJobName("\u03b5\u00b7\u03bf\u00b7s\u00b7\u00b7\u00b7 Entity");

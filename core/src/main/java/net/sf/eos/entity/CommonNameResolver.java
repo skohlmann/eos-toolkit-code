@@ -15,6 +15,8 @@
  */
 package net.sf.eos.entity;
 
+import static net.sf.eos.config.ConfigurationKey.Type.CLASSNAME;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -22,6 +24,7 @@ import java.util.Locale;
 
 import net.sf.eos.EosException;
 import net.sf.eos.config.Configuration;
+import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.Configured;
 import net.sf.eos.config.FactoryMethod;
 
@@ -39,12 +42,15 @@ public abstract class CommonNameResolver extends Configured {
     /** The configuration key name for the classname of the factory.
      * @see #newInstance(Configuration) */
     @SuppressWarnings("nls")
+    @ConfigurationKey(type=CLASSNAME,
+                            description="Resolver remaps an entity ID to a "
+                                        + "common name (human readable).")
     public final static String COMMON_NAME_RESOLVER_IMPL_CONFIG_NAME =
             "net.sf.eos.entity.CommonNameResolver.impl";
 
     /**
      * Creates a new instance of a of the recognizer. If the
-     * <code>Configuration</code> contains a key
+     * {@code Configuration} contains a key
      * {@link #COMMON_NAME_RESOLVER_IMPL_CONFIG_NAME}
      * a new instance of the classname in the value will instantiate.
      * @param config the configuration
@@ -71,6 +77,10 @@ public abstract class CommonNameResolver extends Configured {
             try {
 
                 final CommonNameResolver instance = clazz.newInstance();
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("CommonNameResolver instance: "
+                              + instance.getClass().getName());
+                }
                 instance.configure(config);
                 return instance;
 
@@ -85,10 +95,10 @@ public abstract class CommonNameResolver extends Configured {
     }
 
     /**
-     * Resolves the common enitity name for the default locale of the platform.
+     * Resolves the common entity name for the default locale of the platform.
      * @param id the ID of the entity
-     * @return a commond name or <code>null</code> if the implementation is
-     *         unable to resolve a commmon name.
+     * @return a common name or {@code null} if the implementation is
+     *         unable to resolve a common name.
      * @throws EosException if an error occurs
      */
     public String resolveCommonName(final String id) throws EosException {
@@ -97,11 +107,11 @@ public abstract class CommonNameResolver extends Configured {
     }
 
     /**
-     * Resolves the common enitity name for the given locale if available.
+     * Resolves the common entity name for the given locale if available.
      * @param id the ID of the entity
      * @param locale to get the right language of the common name.
-     * @return a commond name or <code>null</code> if the implementation is
-     *         unable to resolve a commmon name.
+     * @return a common name or {@code null} if the implementation is
+     *         unable to resolve a common name.
      * @throws EosException if an error occurs
      */
     public abstract String resolveCommonName(final String id,

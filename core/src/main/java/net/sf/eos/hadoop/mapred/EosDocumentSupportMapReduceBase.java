@@ -18,8 +18,10 @@ package net.sf.eos.hadoop.mapred;
 import net.sf.eos.EosException;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.HadoopConfigurationAdapter;
+import net.sf.eos.config.Service;
 import net.sf.eos.document.EosDocument;
 import net.sf.eos.document.Serializer;
+import net.sf.eos.document.XmlSerializer;
 
 import org.apache.commons.io.input.CharSequenceReader;
 import org.apache.commons.logging.Log;
@@ -37,6 +39,12 @@ import java.io.Writer;
  * Support for handling Map/Reduce jobs with {@link EosDocument}.
  * @author Sascha Kohlmann
  */
+@Service(
+    factory=Serializer.class,
+    implementation=XmlSerializer.class,
+    description="Implementations support the serialization and deserialization "
+                + "of EosDocuments."
+)
 public abstract class EosDocumentSupportMapReduceBase extends MapReduceBase {
 
     /** For logging. */
@@ -46,25 +54,29 @@ public abstract class EosDocumentSupportMapReduceBase extends MapReduceBase {
     private JobConf conf;
 
     /**
-     * Returns a <code>Serializer</code> instance. Uses the instance defined in
+     * Returns a {@code Serializer} instance. Uses the instance defined in
      * {@link Serializer#SERIALIZER_IMPL_CONFIG_NAME}. If no configuration
      * is defined, the default implementation is used.
-     * @return a <code>Serializer</code> instance
+     * @return a {@code Serializer} instance
      * @throws EosException if an error occurs
      */
     @SuppressWarnings("nls")
     protected Serializer getSerializer() throws EosException {
         assert this.conf != null;
+
         final Configuration config = new HadoopConfigurationAdapter(this.conf);
         final Serializer serializer = Serializer.newInstance(config);
-        LOG.debug("Serializer instanceof " + serializer.getClass());
+
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Serializer instanceof " + serializer.getClass());
+        }
 
         return serializer;
     }
 
     /**
-     * Transforms a <code>EosDocument</code> to an Hadoop <code>Text</code>.
-     * @param doc the <code>EosDocument</code> to transform
+     * Transforms a {@code EosDocument} to an Hadoop {@code Text}.
+     * @param doc the {@code EosDocument} to transform
      * @return a serialized document
      * @throws Exception if an error occurs
      * @throws IOException if an I/O error occurs
@@ -85,8 +97,8 @@ public abstract class EosDocumentSupportMapReduceBase extends MapReduceBase {
     }
 
     /**
-     * Transforms a Hadoop <code>Text</code> to an <code>EosDocument</code>.
-     * @param eosDoc the document as Hadoop <code>Text</code>.
+     * Transforms a Hadoop {@code Text} to an {@code EosDocument}.
+     * @param eosDoc the document as Hadoop {@code Text}.
      * @return a deserialized document
      * @throws Exception if an error occurs
      * @throws IOException if an I/O error occurs

@@ -15,6 +15,8 @@
  */
 package net.sf.eos.lucene;
 
+import static net.sf.eos.config.ConfigurationKey.Type.CLASSNAME;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.search.Searchable;
@@ -23,6 +25,7 @@ import org.apache.lucene.store.Directory;
 
 import net.sf.eos.EosException;
 import net.sf.eos.config.Configuration;
+import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.Configured;
 import net.sf.eos.config.FactoryMethod;
 
@@ -35,12 +38,14 @@ public abstract class SearcherProvider extends Configured {
     /** The configuration key name for the classname of the factory.
      * @see #newInstance(Configuration) */
     @SuppressWarnings("nls")
+    @ConfigurationKey(type=CLASSNAME,
+                            description="Configuration key of the search provider.")
     public final static String SEARCHER_PROVIDER_IMPL_CONFIG_NAME = 
         "net.sf.eos.lucene.SearcherProvider.impl";
 
     /**
      * Creates a new instance of a of the factory. If the
-     * <code>Configuration</code> contains a key
+     * {@code Configuration} contains a key
      * {@link #SEARCHER_PROVIDER_IMPL_CONFIG_NAME} a new instance of the
      * classname in the value will instantiate. The 
      * {@link IndexSearcherProvider} will instantiate if there is no

@@ -43,7 +43,7 @@ import javax.xml.parsers.SAXParserFactory;
  * {@link XmlSerializer.ElementName} for element names. The order of the elements in
  * the root container are not defined. Also the order in the meta container
  * is not defined. If the root container contains more than one <em>title</em>
- * or <em>text</em> element, the lastes elements may win. If the meta container
+ * or <em>text</em> element, the latest elements may win. If the meta container
  * contains more than one <em>key</em>, the latest may win.
  * @author Sascha Kohlmann
  */
@@ -52,7 +52,7 @@ public class XmlSerializer extends Serializer {
     static final Log LOG = LogFactory.getLog(XmlSerializer.class.getName());
 
     /**
-     * Represents the XML emlement names of a serialized &#949;&#959;s document.
+     * Represents the XML element names of a serialized &#949;&#959;s document.
      * @author Sascha Kohlmann
      */
     public enum ElementName {
@@ -160,7 +160,7 @@ public class XmlSerializer extends Serializer {
     }
 
     /**
-     * Deserilalizes a {@link EosDocument} which is serilized by
+     * Deserializes a {@link EosDocument} which is serialized by
      * {@link XmlSerializer#serialize(EosDocument, Writer)}.
      * @author Sascha Kohlmann
      */
@@ -301,7 +301,7 @@ public class XmlSerializer extends Serializer {
 
         /**
          * Returns a document, constructed from the value of the parser.
-         * @return a document if created. may be <code>null</code> or an empty
+         * @return a document if created. may be {@code null} or an empty
          *         document.
          */
         

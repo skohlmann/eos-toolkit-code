@@ -32,7 +32,7 @@ import net.sf.eos.config.Configurable;
 public interface EosQuery extends Configurable {
 
     /**
-     * Adds a phrase to lookup with the boolean <tt>and</tt> operation.
+     * Adds a phrase to lookup with the boolean {@literal and} operation.
      * @param phrase the phrase to lookup
      * @return this instance
      * @throws EosException if an error occurs
@@ -40,7 +40,7 @@ public interface EosQuery extends Configurable {
     EosQuery and(final String phrase) throws EosException;
 
     /**
-     * Adds a phrase to lookup with the boolean <tt>or</tt> operation.
+     * Adds a phrase to lookup with the boolean {@literal or} operation.
      * @param phrase the phrase to lookup
      * @return this instance
      * @throws EosException if an error occurs
@@ -48,7 +48,7 @@ public interface EosQuery extends Configurable {
     EosQuery or(final String phrase) throws EosException;
 
     /**
-     * Adds a phrase not to lookup with the boolean <tt>and</tt> operation.
+     * Adds a phrase not to lookup with the boolean {@literal and} operation.
      * @param phrase the phrase to lookup
      * @return this instance
      * @throws EosException if an error occurs
@@ -57,7 +57,7 @@ public interface EosQuery extends Configurable {
 
     /**
      * Adds a meta entry for a special field to lookup with the boolean
-     * <tt>and</tt> operation.
+     * {@literal and} operation.
      * @param fieldName the meta field name to lookup
      * @param value the meta value to lookup
      * @return this instance
@@ -67,7 +67,7 @@ public interface EosQuery extends Configurable {
 
     /**
      * Adds a meta entry for a special field to not lookup with the boolean
-     * <tt>and</tt> operation.
+     * {@literal and} operation.
      * @param fieldName the meta field name to lookup
      * @param value the meta value to lookup
      * @return this instance
@@ -77,7 +77,7 @@ public interface EosQuery extends Configurable {
 
     /**
      * Adds a meta entry for a special field to lookup with the boolean
-     * <tt>or</tt> operation.
+     * {@literal or} operation.
      * @param fieldName the meta field name to lookup
      * @param value the meta value to lookup
      * @return this instance
@@ -87,7 +87,7 @@ public interface EosQuery extends Configurable {
 
     /**
      * Adds a meta entry for a special field to lookup with the boolean
-     * <tt>and</tt> operation. The two value parameters spans a range between
+     * {@literal and} operation. The two value parameters spans a range between
      * the lower bound value and the upper bound value.
      * @param fieldName the meta field name to lookup
      * @param lowerBoundValue the meta lower bound value to lookup
@@ -101,7 +101,7 @@ public interface EosQuery extends Configurable {
 
     /**
      * Adds a meta entry for a special field to lookup with the boolean
-     * <tt>or</tt> operation. The two value parameters spans a range between
+     * {@literal or} operation. The two value parameters spans a range between
      * the lower bound value and the upper bound value.
      * @param fieldName the meta field name to lookup
      * @param lowerBoundValue the meta lower bound value to lookup

@@ -21,37 +21,36 @@ import java.util.Locale;
  * Transforms the input token to a upper or lower cased format for a given
  * {@link Locale}. The default is to change in lower case format. If the
  * user doesn't set a locale, the implementation uses the
- * {@link Locale#getDefault() default} <code>Locale</code>.
+ * {@link Locale#getDefault() default} {@code Locale}.
  * @author Sascha Kohlmann
  */
 public class CaseTokenFilter extends TokenFilter {
 
     /** The locale for lowercase transformation. */
     private Locale locale;
-    /** Indicates if to lower- or to upper-case.« */
+    /** Indicates if to lower- or to upper-case. */
     private boolean upper;
 
-    /** Creates a new instance for lowercase with the default
-     * <code>Locale</code>.
+    /** Creates a new instance for lowercase with the default {@code Locale}.
      * @param source the source tokenizer.
      */
     public CaseTokenFilter(final Tokenizer source) {
         this(source, null);
     }
 
-    /** Creates a new instance with the default <code>Locale</code>.
+    /** Creates a new instance with the default {@code Locale}.
      * @param source the source tokenizer
-     * @param upper <code>true</code> to uppercase the token. For lowercase
-     *              <code>false</code>.
+     * @param upper {@code true} to uppercase the token. For lowercase
+     *              {@code false}.
      */
     public CaseTokenFilter(final Tokenizer source,
                            @SuppressWarnings("hiding") final boolean upper) {
         this(source, null, upper);
     }
 
-    /** Creates a new instance for lowercase with the given <code>Locale</code>.
+    /** Creates a new instance for lowercase with the given {@code Locale}.
      * @param source the source tokenizer
-     * @param locale the <code>Locale</code> to use for lowercase handling.
+     * @param locale the {@code Locale} to use for lowercase handling.
      */
     public CaseTokenFilter(final Tokenizer source, final Locale locale) {
         this(source, locale, false);
@@ -59,9 +58,9 @@ public class CaseTokenFilter extends TokenFilter {
 
     /** Creates a new instance.
      * @param source the source tokenizer
-     * @param locale the <code>Locale</code> to use for case handling.
-     * @param upper <code>true</code> to uppercase the token. For lowercase
-     *              <code>false</code>.
+     * @param locale the {@code Locale} to use for case handling.
+     * @param upper {@code true} to uppercase the token. For lowercase
+     *              {@code false}.
      */
     public CaseTokenFilter(final Tokenizer source,
                            final Locale locale,

@@ -17,8 +17,6 @@ package net.sf.eos.trie;
 
 import net.sf.eos.trie.PatriciaTrie.KeyAnalyzer;
 
-import java.io.UnsupportedEncodingException;
-
 public class ByteArrayKeyAnalyzer implements KeyAnalyzer<byte[]> {
     
     private static final int LENGTH = 8;

@@ -113,8 +113,8 @@ public class SentencerReducer extends EosDocumentSupportMapReduceBase
     }
 
     /**
-     * Transforms a <code>Map</code> of metadata <code>Set</code>s into a
-     * <code>Map</code> of metadata <code>List</code>s.
+     * Transforms a {@code Map} of metadata {@code Set}s into a
+     * {@code Map} of metadata {@code List}s.
      * @param metaData the metadata to transform
      * @return the transformed map of lists.
      */

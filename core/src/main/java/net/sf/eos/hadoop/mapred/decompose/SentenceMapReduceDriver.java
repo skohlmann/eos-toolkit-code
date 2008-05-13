@@ -23,7 +23,6 @@ import org.apache.hadoop.mapred.JobConf;
 import org.apache.hadoop.util.ToolRunner;
 
 /**
- * 
  * @author Sascha Kohlmann
  * @see SentencerMapper
  * @see SentencerReducer

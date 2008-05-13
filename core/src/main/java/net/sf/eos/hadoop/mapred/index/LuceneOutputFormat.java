@@ -17,9 +17,12 @@
 package net.sf.eos.hadoop.mapred.index;
 
 
+import static net.sf.eos.config.ConfigurationKey.Type.INTEGER;
 import net.sf.eos.EosException;
 import net.sf.eos.config.Configuration;
+import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.HadoopConfigurationAdapter;
+import net.sf.eos.config.Service;
 import net.sf.eos.lucene.AnalyzerFactory;
 import net.sf.eos.lucene.SimilarityFactory;
 
@@ -43,33 +46,51 @@ import java.io.IOException;
 import java.util.Random;
 
 /**
- * Support to write a Lucene index in a Hadoop Filesystem.
+ * Support to write a Lucene index in a Hadoop filesystem.
  * <p>Parts are copied from Nutch source code.</p>
  * @author Nutch Team
  * @author Sascha Kohlmann
  */
+@Service(
+    factory=AnalyzerFactory.class
+)
 public class LuceneOutputFormat<K extends WritableComparable,
                                 V extends ObjectWritable>
         extends OutputFormatBase<K, V> {
 
     /** The name of the merge factory value. Default value is 10. */
+    @ConfigurationKey(type=INTEGER,
+                            defaultValue="10",
+                            description="The merge factory value.")
     public static final String MERGE_FACTOR_CONFIG_NAME =
         "net.sf.eos.hadoop.lucene.LuceneOutputFormat.writer.mergeFactor";
 
     /** The name of the max buffered docs value. Default value is 10. */
+    @ConfigurationKey(type=INTEGER,
+                            defaultValue="10",
+                            description="The max buffered docs value.")
     public static final String MAX_BUFFERED_DOCS_CONFIG_NAME =
         "net.sf.eos.hadoop.lucene.LuceneOutputFormat.writer.maxBufferedDocs";
 
     /** The name of the max merge docs value. Default value is
      * {@link Integer#MAX_VALUE}. */
+    @ConfigurationKey(type=INTEGER,
+                            defaultValue="" + Integer.MAX_VALUE,
+                            description="The max merge docs value.")
     public static final String MAX_MERGE_DOCS_CONFIG_NAME =
         "net.sf.eos.hadoop.lucene.LuceneOutputFormat.writer.maxMergeDocs";
 
     /** The RAM buffer size in MB. Default value is 200. */
+    @ConfigurationKey(type=INTEGER,
+                            defaultValue="200",
+                            description="The RAM buffer size in MB.")
     public static final String RAM_BUFFER_SIZE_MB_CONFIG_NAME =
         "net.sf.eos.hadoop.lucene.LuceneOutputFormat.writer.RAMBufferSizeMB";
 
     /** The maximum field length. Default value is 100000. */
+    @ConfigurationKey(type=INTEGER,
+                            defaultValue="100000",
+                            description="The maximum field length.")
     public static final String MAX_FIELD_LENGTH_CONFIG_NAME =
         "net.sf.eos.hadoop.lucene.LuceneOutputFormat.writer.maxFieldLength";
 
@@ -81,7 +102,7 @@ public class LuceneOutputFormat<K extends WritableComparable,
 
     /**
      * To configure see <code><em>XXX</em>_CONFIG_NAME</code> keys. Uses
-     * internaly the instances of {@link AnalyzerFactory} and
+     * internally the instances of {@link AnalyzerFactory} and
      * {@link SimilarityFactory}.
      */
     @SuppressWarnings("cast")

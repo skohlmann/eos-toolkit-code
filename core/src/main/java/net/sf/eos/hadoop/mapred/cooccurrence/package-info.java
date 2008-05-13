@@ -16,7 +16,7 @@
 
 
 /**
- * <p>Main task of the &#949;&#959;s-tookit mapreduce system to support
+ * <p>Main task of the &#949;&#959;s-toolkit mapreduce system to support
  * cooccurrence based entity oriented search.</p>
  *
  * @since 0.1.0

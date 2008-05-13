@@ -15,6 +15,8 @@
  */
 package net.sf.eos.sentence;
 
+import static net.sf.eos.config.ConfigurationKey.Type.CLASSNAME;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -24,6 +26,7 @@ import net.sf.eos.analyzer.SentenceTokenizer;
 import net.sf.eos.analyzer.TextBuilder;
 import net.sf.eos.analyzer.TokenizerException;
 import net.sf.eos.config.Configuration;
+import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.Configured;
 import net.sf.eos.config.FactoryMethod;
 import net.sf.eos.document.EosDocument;
@@ -45,24 +48,29 @@ public abstract class Sentencer extends Configured {
     private static final Log LOG =
         LogFactory.getLog(Sentencer.class.getName());
 
-    /** The name of the algorithm of the message digest. */
-    @SuppressWarnings("nls")
-    public static final String MESSAGE_DIGEST_CONFIG_NAME =
-        "net.sf.eos.sentence.Sentencer.messageDigest";
-
-    /** The defult message digest algorithm. */
+    /** The default message digest algorithm. */
     @SuppressWarnings("nls")
     public static final String DEFAULT_MESSAGE_DIGEST = "md5";
+
+    /** The name of the algorithm of the message digest. */
+    @SuppressWarnings("nls")
+    @ConfigurationKey(type=CLASSNAME,
+                            defaultValue=DEFAULT_MESSAGE_DIGEST,
+                            description="The message digest.")
+    public static final String MESSAGE_DIGEST_CONFIG_NAME =
+        "net.sf.eos.sentence.Sentencer.messageDigest";
 
     /** The configuration key name for the classname of the implementation.
      * @see #newInstance(Configuration) */
     @SuppressWarnings("nls")
+    @ConfigurationKey(type=CLASSNAME,
+                            description="Configuration key of the sentencer.")
     public final static String SENTENCER_IMPL_CONFIG_NAME =
         "net.sf.eos.sentence.Sentencer.impl";
 
     /**
      * Creates a new instance of a of the implementation. If the
-     * <code>Configuration</code> contains a key
+     * {@code Configuration} contains a key
      * {@link #SENTENCER_IMPL_CONFIG_NAME} a new instance of the
      * classname in the value will instantiate. The 
      * {@link DefaultSentencer} will instantiate if there is no
@@ -118,7 +126,7 @@ public abstract class Sentencer extends Configured {
     }
 
     /**
-     * Returns the message digest implemantation. If the
+     * Returns the message digest implementation. If the
      * {@link #configure(Configuration) configuration} contains no value
      * for the key {@link #MESSAGE_DIGEST_CONFIG_NAME} the
      * <em>{@linkplain #DEFAULT_MESSAGE_DIGEST default}</em> digest will be

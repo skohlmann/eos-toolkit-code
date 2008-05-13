@@ -15,12 +15,16 @@
  */
 package net.sf.eos.hadoop.mapred;
 
+import static net.sf.eos.config.ConfigurationKey.Type.CLASSNAME;
 import net.sf.eos.EosException;
 import net.sf.eos.config.Configuration;
+import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.Configured;
 import net.sf.eos.config.FactoryMethod;
 import net.sf.eos.sentence.Sentencer;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.io.WritableComparable;
 
 /**
@@ -30,10 +34,18 @@ import org.apache.hadoop.io.WritableComparable;
 public abstract class AbstractKeyGenerator<K extends WritableComparable>
         extends Configured implements KeyGenerator<K> {
 
+    /** For logging. */
+    private static final Log LOG =
+        LogFactory.getLog(AbstractKeyGenerator.class.getName());
+
     @SuppressWarnings("nls")
+    @ConfigurationKey(type=CLASSNAME,
+                            description="Key generator instances support the "
+                                        + "generation of keys in the map-reduce"
+                                        + " map task.")
     public final static String ABSTRACT_KEY_GENERATOR_IMPL_CONFIG_NAME =
         "net.sf.eos.hadoop.mapred.AbstractKeyGenerator.impl";
-
+ 
     /**
      * Creates a new instance.
      * @param conf the configuration with the configuration data for the
@@ -61,6 +73,10 @@ public abstract class AbstractKeyGenerator<K extends WritableComparable>
             try {
 
                 final AbstractKeyGenerator instance = clazz.newInstance();
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("AbstractKeyGenerator instance: "
+                              + instance.getClass().getName());
+                }
                 instance.configure(conf);
                 return instance;
 

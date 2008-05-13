@@ -16,10 +16,12 @@
 package net.sf.eos.document;
 
 
+import static net.sf.eos.config.ConfigurationKey.Type.CLASSNAME;
 import net.sf.eos.EosException;
 import net.sf.eos.analyzer.TokenizerBuilder;
 import net.sf.eos.analyzer.TokenizerException;
 import net.sf.eos.config.Configuration;
+import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.Configured;
 import net.sf.eos.config.FactoryMethod;
 
@@ -43,6 +45,12 @@ public abstract class Serializer extends Configured {
     private static final Log LOG =
         LogFactory.getLog(Serializer.class.getName());
 
+    /** The configuration key name for the classname of the serializer.
+     * @see #newInstance(Configuration) */
+    @SuppressWarnings("nls")
+    @ConfigurationKey(type=CLASSNAME,
+                            description="Implementation supports serialization "
+                                        + "and deserialization of EosDocuments.")
     public final static String SERIALIZER_IMPL_CONFIG_NAME =
         "net.sf.eos.document.Serializer.impl";
 
@@ -68,6 +76,10 @@ public abstract class Serializer extends Configured {
 
                 final Serializer serializer = clazz.newInstance();
                 serializer.configure(config);
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Serializer instance: "
+                              + serializer.getClass().getName());
+                }
                 return serializer;
 
             } catch (final InstantiationException e) {
@@ -85,7 +97,7 @@ public abstract class Serializer extends Configured {
     }
 
     /**
-     * Implementations serializes the content of an <code>EosDocument</code>
+     * Implementations serializes the content of an {@code EosDocument}
      * thru the given <em>writer</em>
      * @param doc the document to serialize
      * @param out the sink to write the content thru
@@ -95,10 +107,10 @@ public abstract class Serializer extends Configured {
                                    final Writer out) throws IOException;
 
     /**
-     * Implementations must deserialize a <code>EosDocument</code> which are
+     * Implementations must deserialize a {@code EosDocument} which are
      * serialized by {@link #serialize(EosDocument,Writer)}.
-     * @param in the stream to read the <code>EosDocument</code> content from
-     * @return a <code>EosDocument</code> constructed form the content
+     * @param in the stream to read the {@code EosDocument} content from
+     * @return a {@code EosDocument} constructed form the content
      * @throws Exception if an error occurs during deserilization
      * @throws IOException if <em>in</em> occurs an error
      */

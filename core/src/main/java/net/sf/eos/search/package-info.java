@@ -16,7 +16,7 @@
 
 
 /**
- * Retrieval independend definitions of data and processes in a entity oriented
+ * Retrieval independent definitions of data and processes in a entity oriented
  * search lookup.
  * @see net.sf.eos.search.EosLookup for the base interface of the lookup.
  * @see net.sf.eos.search.EosQuery for a simple query for a lookup. The query definition is

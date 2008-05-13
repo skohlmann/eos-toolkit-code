@@ -26,7 +26,7 @@ import java.io.Reader;
 
 /**
  * Tokenized a sequence of chars at whitespaces. Wrapper around Lucenes
- * <code>WhitespaceTokenizer</code>.
+ * {@code WhitespaceTokenizer}.
  * @author Sascha Kohlmann
  */
 public final class WhitespaceTokenizer extends TokenFilter
@@ -49,9 +49,7 @@ public final class WhitespaceTokenizer extends TokenFilter
         this.tokenizer = new LuceneTokenizerWrapper(this.wrapped);
     }
 
-    /**
-     * Creates a new instance.
-     */
+    /** * Creates a new instance. */
     public WhitespaceTokenizer() {
         this("");
     }
@@ -114,8 +112,8 @@ public final class WhitespaceTokenizer extends TokenFilter
     }
 
     /**
-     * Return value may be <code>null</code>.
-     * @return may be <code>null</code>
+     * Return value may be {@code null}.
+     * @return may be {@code null}
      */
     @Override
     protected Tokenizer getSource() {

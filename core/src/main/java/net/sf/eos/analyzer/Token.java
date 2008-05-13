@@ -31,7 +31,7 @@ public interface Token extends Metadata {
     /**
      * Returns the text of a token. The text may be a single word or a sequence
      * of words, e.g. a sentence.
-     * @return the charater sequence of the token
+     * @return the character sequence of the token
      */
     CharSequence getTokenText();
 

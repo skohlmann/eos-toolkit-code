@@ -15,8 +15,10 @@
  */
 package net.sf.eos.lucene;
 
+import static net.sf.eos.config.ConfigurationKey.Type.CLASSNAME;
 import net.sf.eos.EosException;
 import net.sf.eos.config.Configuration;
+import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.FactoryMethod;
 
 import org.apache.commons.logging.Log;
@@ -44,12 +46,15 @@ public abstract class SimilarityFactory {
     /** The configuration key name for the classname of the factory.
      * @see #newInstance(Configuration) */
     @SuppressWarnings("nls")
+    @ConfigurationKey(type=CLASSNAME,
+                            description="Configuration key of the Lucene similarity "
+                                        + " factory.")
     public final static String SIMILARITY_FACTORY_IMPL_CONFIG_NAME = 
         "net.sf.eos.lucene.SimilarityFactory.impl";
 
     /**
      * Creates a new instance of a of the factory. If the
-     * <code>Configuration</code> contains a key
+     * {@code Configuration} contains a key
      * {@link #SIMILARITY_FACTORY_IMPL_CONFIG_NAME} a new instance of the
      * classname in the value will instantiate. The 
      * {@link NormedLengthSimilarityFactory} will instantiate if there is no
@@ -98,8 +103,8 @@ public abstract class SimilarityFactory {
     }
 
     /**
-     * Returns a new <code>Similarity</code> instance.
-     * @return a new <code>Similarity</code> instance
+     * Returns a new {@code Similarity} instance.
+     * @return a new {@code Similarity} instance
      */
     public abstract Similarity newSimilarity();
 }

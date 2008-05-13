@@ -138,10 +138,10 @@ public class XmlTrieLoader
             lsb.append("  name: ");
             lsb.append(bean.getName());
             final MemoryUsage peakUsage = bean.getPeakUsage();
-            lsb.append(" |Êpeak: ");
+            lsb.append(" | peak: ");
             lsb.append(peakUsage);
             final MemoryUsage usage = bean.getUsage();
-            lsb.append(" |Êusage: ");
+            lsb.append(" | usage: ");
             lsb.append(usage);
             lsb.append("\n");
         }
@@ -167,7 +167,7 @@ public class XmlTrieLoader
     /**
      * Sets a builder. The implementation has default builder of instance
      * {@link TextBuilder#SPACE_BUILDER} setted at construction time.
-     * @param builder a builder to set or <code>null</code>
+     * @param builder a builder to set or {@code null}.
      */
     public void setTextBuilder(final TextBuilder builder) {
         this.textBuilder = builder;
@@ -175,8 +175,8 @@ public class XmlTrieLoader
 
     /**
      * Returns a setted builder.
-     * @return a setted builder or <code>null</code>.
-     */
+     * @return a setted builder or {@code null}.
+     */ 
     public TextBuilder getTextBuilder() {
         return this.textBuilder;
     }

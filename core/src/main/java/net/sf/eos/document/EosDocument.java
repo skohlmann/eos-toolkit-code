@@ -26,8 +26,8 @@ import java.util.Map;
 
 /**
  * Represents a simple &#949;&#959;s document. An instance of this document
- * never contains any linefeed (ASCII 0xa) or carriage return (ASCII 0x0d)
- * characters.
+ * never contains any linefeed (ASCII <tt>0xa</tt>) or carriage return
+ * (ASCII <tt>0xd</tt>) characters.
  * @author Sascha Kohlmann
  */
 public final class EosDocument implements Metadata {
@@ -82,9 +82,9 @@ public final class EosDocument implements Metadata {
     }
 
     /**
-     * The value of the returnd string may change in future implementations.
+     * The value of the return string may change in future implementations.
      * Don't use for information extraction.
-     * @return a <code>String</code> representation of the document
+     * @return a {@code String} representation of the document
      * @see Serializer for serialization
      */
     @Override
@@ -125,7 +125,7 @@ public final class EosDocument implements Metadata {
 
     /**
      * Implemented for {@linkplain Object#hashCode() hash contract}. Don't use
-     * a <code>EosDocument</code> instance in a hash oriented dictionary.
+     * a {@code EosDocument} instance in a hash oriented dictionary.
      */
     @Override
     public int hashCode() {

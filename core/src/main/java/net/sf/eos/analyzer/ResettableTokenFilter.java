@@ -19,11 +19,11 @@ package net.sf.eos.analyzer;
  * <p>A token filter that supports handling with resettable tokenizer. Use case
  * is a tokenizer chain where the last tokenizer in the chain is a resettable
  * tokenizer. The implementation fetch the next token from the <em>source</em>
- * token filter and resets the <code>CharSequence</code> to the 
+ * token filter and resets the {@code CharSequence} to the 
  * <em>resettable</em> tokenizer as bypass. With this construct it's possible
  * to reuse a complete tokenizer chain.</p>
- * <p>Avoid using a <code>ResettableTokenFilter</code> if the tokenizer chain
- * isn't empty e.g. {@link #next()} returns <code>null</code>.</p>
+ * <p>Avoid using a {@code ResettableTokenFilter} if the tokenizer chain
+ * isn't empty e.g. {@link #next()} returns {@code null}.</p>
  * @author Sascha Kohlmann
  */
 public final class ResettableTokenFilter extends TokenFilter

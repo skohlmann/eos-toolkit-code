@@ -32,11 +32,11 @@ import java.util.Queue;
 import java.util.Set;
 
 /**
- * A simple matcher for named entities. The implementation sluices
- * {@link Token Tokens} of a defined maximum length throught the recognizer.
+ * A simple matcher for named entities. The implementation slices
+ * {@link Token Tokens} of a defined maximum length thru the recognizer.
  * If a token combination matches a key in the
  * {@link AbstractDictionaryBasedEntityRecognizer#getEntityMap() entity map},
- * a new <code>Token</code> of type {@link EntityRecognizer#ENTITY_TYPE} 
+ * a new {@code Token} of type {@link EntityRecognizer#ENTITY_TYPE} 
  * is created and return by {@link #next()}.
  * @author Sascha Kohlmann
  */

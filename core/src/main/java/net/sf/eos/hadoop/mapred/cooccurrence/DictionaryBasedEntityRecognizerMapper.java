@@ -21,6 +21,8 @@ import net.sf.eos.analyzer.TokenizerBuilder;
 import net.sf.eos.analyzer.TokenizerException;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.HadoopConfigurationAdapter;
+import net.sf.eos.config.Service;
+import net.sf.eos.config.Services;
 import net.sf.eos.document.EosDocument;
 import net.sf.eos.hadoop.DistributedCacheStrategy;
 import net.sf.eos.hadoop.FullyDistributedCacheStrategy;
@@ -49,7 +51,18 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
-
+@Services(
+    services={
+        @Service(
+            factory=TokenizerBuilder.class,
+            description="Tokenizer for coocurence analyzing."
+        ),
+        @Service(
+            factory=AbstractTrieLoader.class,
+            description="Trie contains the look up data for cooccurance analyzis."
+        )
+    }
+)
 public class DictionaryBasedEntityRecognizerMapper
         extends EosDocumentSupportMapReduceBase
         implements Mapper<LongWritable, Text, Text, Text> {
@@ -112,7 +125,6 @@ public class DictionaryBasedEntityRecognizerMapper
      * Configures the trie. After finishing the method {@link #getTrie()}.
      * Uses the value of {@link DistributedCacheStrategy#STRATEGY_IMPL_CONFIG_NAME}
      * if setted to get the distributed cache strategy.
-     * never returns <code>null</code>.
      */
     protected void configureTrie() {
         synchronized(DictionaryBasedEntityRecognizerMapper.class) {
@@ -161,7 +173,7 @@ public class DictionaryBasedEntityRecognizerMapper
     }
 
     /**
-     * Returns a <code>Tokenizer</code> as <em>source</em> for the
+     * Returns a {@code Tokenizer} as <em>source</em> for the
      * recognizer.
      * @return the <em>source</em> for the recognizer
      * @throws TokenizerException if an error occurs
@@ -180,9 +192,9 @@ public class DictionaryBasedEntityRecognizerMapper
     }
 
     /**
-     * Returns a <code>Trie</code> instance. See contract in
+     * Returns a {@code Trie} instance. See contract in
      * {@link #configureTrie()}
-     * @return a <code>Trie</code> instance
+     * @return a {@code Trie} instance
      */
     protected Trie<CharSequence, Set<CharSequence>> getTrie() {
         assert this.entities != null;

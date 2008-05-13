@@ -39,7 +39,7 @@ public final class EqualsAndHashUtil {
      * <code>boolean</code> equality check.
      * @param own the first <code>boolean</code>
      * @param other the second <code>boolean</code>
-     * @return <code>true</code> if the <code>boolean</code>s are equal,
+     * @return {@code true} if the <code>boolean</code>s are equal,
      *         <code>false</code> otherwise
      */
     public static boolean equals(final boolean own, final boolean other) {
@@ -50,7 +50,7 @@ public final class EqualsAndHashUtil {
      * <code>char</code> equality check.
      * @param own the first <code>char</code>
      * @param other the second <code>char</code>
-     * @return <code>true</code> if the <code>char</code>s are equal,
+     * @return {@code true} if the <code>char</code>s are equal,
      *         <code>false</code> otherwise
      */
     public static boolean equals(final char own, final char other) {
@@ -61,7 +61,7 @@ public final class EqualsAndHashUtil {
      * <code>byte</code> equality check.
      * @param own the first <code>byte</code>
      * @param other the second <code>byte</code>
-     * @return <code>true</code> if the <code>byte</code>s are equal,
+     * @return {@code true} if the <code>byte</code>s are equal,
      *         <code>false</code> otherwise
      */
     public static boolean equals(final byte own, final byte other) {
@@ -72,7 +72,7 @@ public final class EqualsAndHashUtil {
      * <code>short</code> equality check.
      * @param own the first <code>short</code>
      * @param other the second <code>short</code>
-     * @return <code>true</code> if the <code>short</code>s are equal,
+     * @return {@code true} if the <code>short</code>s are equal,
      *         <code>false</code> otherwise
      */
     public static boolean equals(final short own, final short other) {
@@ -83,7 +83,7 @@ public final class EqualsAndHashUtil {
      * <code>int</code> equality check.
      * @param own the first <code>int</code>
      * @param other the second <code>int</code>
-     * @return <code>true</code> if the <code>int</code>s are equal,
+     * @return {@code true} if the <code>int</code>s are equal,
      *         <code>false</code> otherwise
      */
     public static boolean equals(final int own, final int other) {
@@ -94,7 +94,7 @@ public final class EqualsAndHashUtil {
      * <code>long</code> equality check.
      * @param own the first <code>long</code>
      * @param other the second <code>long</code>
-     * @return <code>true</code> if the <code>long</code>s are equal,
+     * @return {@code true} if the <code>long</code>s are equal,
      *         <code>false</code> otherwise
      */
     public static boolean equals(final long own, final long other) {
@@ -105,7 +105,7 @@ public final class EqualsAndHashUtil {
      * <code>float</code> equality check.
      * @param own the first <code>float</code>
      * @param other the second <code>float</code>
-     * @return <code>true</code> if the <code>float</code>s are equal,
+     * @return {@code true} if the <code>float</code>s are equal,
      *         <code>false</code> otherwise
      */
     public static boolean equals(final float own, final float other) {
@@ -116,7 +116,7 @@ public final class EqualsAndHashUtil {
      * <code>double</code> equality check.
      * @param own the first <code>double</code>
      * @param other the second <code>double</code>
-     * @return <code>true</code> if the <code>double</code>s are equal,
+     * @return {@code true} if the <code>double</code>s are equal,
      *         <code>false</code> otherwise
      */
     public static boolean equals(final double own, final double other) {
@@ -127,7 +127,7 @@ public final class EqualsAndHashUtil {
      * <code>Object</code> equality check.
      * @param own the first <code>Object</code>
      * @param other the second <code>Object</code>
-     * @return <code>true</code> if the <code>Object</code>s are equal,
+     * @return {@code true} if the <code>Object</code>s are equal,
      *         <code>false</code> otherwise
      */
     public static boolean equals(final Object own, final Object other) {
@@ -140,7 +140,7 @@ public final class EqualsAndHashUtil {
      *            (may be <code>null</code>)
      * @param other the second array of <code>boolean</code>s
      *              (may be <code>null</code>)
-     * @return <code>true</code> if the two <code>boolean</code> arrays are
+     * @return {@code true} if the two <code>boolean</code> arrays are
      *         equal, <code>false</code> otherwise
      */
     public static boolean equals(final boolean[] own, final boolean[] other) {
@@ -153,7 +153,7 @@ public final class EqualsAndHashUtil {
      *            (may be <code>null</code>)
      * @param other the second array of <code>char</code>s
      *              (may be <code>null</code>)
-     * @return <code>true</code> if the two <code>char</code> arrays are
+     * @return {@code true} if the two <code>char</code> arrays are
      *         equal, <code>false</code> otherwise
      */
     public static boolean equals(final char[] own, final char[] other) {
@@ -166,7 +166,7 @@ public final class EqualsAndHashUtil {
      *            (may be <code>null</code>)
      * @param other the second array of <code>byte</code>s
      *              (may be <code>null</code>)
-     * @return <code>true</code> if the two <code>byte</code> arrays are
+     * @return {@code true} if the two <code>byte</code> arrays are
      *         equal, <code>false</code> otherwise
      */
     public static boolean equals(final byte[] own, final byte[] other) {
@@ -179,7 +179,7 @@ public final class EqualsAndHashUtil {
      *            (may be <code>null</code>)
      * @param other the second array of <code>short</code>s
      *              (may be <code>null</code>)
-     * @return <code>true</code> if the two <code>short</code> arrays are
+     * @return {@code true} if the two <code>short</code> arrays are
      *         equal, <code>false</code> otherwise
      */
     public static boolean equals(final short[] own, final short[] other) {
@@ -192,7 +192,7 @@ public final class EqualsAndHashUtil {
      *            (may be <code>null</code>)
      * @param other the second array of <code>int</code>s
      *              (may be <code>null</code>)
-     * @return <code>true</code> if the two <code>int</code> arrays are
+     * @return {@code true} if the two <code>int</code> arrays are
      *         equal, <code>false</code> otherwise
      */
     public static boolean equals(final int[] own, final int[] other) {
@@ -205,7 +205,7 @@ public final class EqualsAndHashUtil {
      *            (may be <code>null</code>)
      * @param other the second array of <code>long</code>s
      *              (may be <code>null</code>)
-     * @return <code>true</code> if the two <code>long</code> arrays are
+     * @return {@code true} if the two <code>long</code> arrays are
      *         equal, <code>false</code> otherwise
      */
     public static boolean equals(final long[] own, final long[] other) {
@@ -219,7 +219,7 @@ public final class EqualsAndHashUtil {
      *            (may be <code>null</code>)
      * @param other the second array of <code>float</code>s
      *              (may be <code>null</code>)
-     * @return <code>true</code> if the two <code>float</code> arrays are
+     * @return {@code true} if the two <code>float</code> arrays are
      *         equal, <code>false</code> otherwise
      */
     public static boolean equals(final float[] own, final float[] other) {
@@ -232,7 +232,7 @@ public final class EqualsAndHashUtil {
      *            (may be <code>null</code>)
      * @param other the second array of <code>double</code>s
      *              (may be <code>null</code>)
-     * @return <code>true</code> if the two <code>double</code> arrays are
+     * @return {@code true} if the two <code>double</code> arrays are
      *         equal, <code>false</code> otherwise
      */
     public static boolean equals(final double[] own, final double[] other) {
@@ -240,13 +240,13 @@ public final class EqualsAndHashUtil {
     }
 
     /**
-     * <code>Object</code> array equality check.
-     * @param own the first array of <code>Object</code>s
-     *            (may be <code>null</code>)
-     * @param other the second array of <code>Object</code>s
-     *              (may be <code>null</code>)
-     * @return <code>true</code> if the two <code>Object</code> arrays are
-     *         equal, <code>false</code> otherwise
+     * {@code Object} array equality check.
+     * @param own the first array of {@code Object}s
+     *            (may be {@code null})
+     * @param other the second array of {@code Object}s
+     *              (may be {@code null})
+     * @return {@code true} if the two {@code Object} arrays are
+     *         equal, {@code false} otherwise
      */
     public static boolean equals(final Object[] own, final Object[] other) {
         return Arrays.equals(own, other);

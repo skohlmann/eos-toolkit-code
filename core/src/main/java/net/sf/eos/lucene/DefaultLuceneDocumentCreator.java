@@ -30,7 +30,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 /**
- * The implementation creates a document with four fields.
+ 
  * <table border='1' cellspacing='1' cellpadding='4'>
  *   <tr><th>Name</th><th>Value of</th><th>Store</th><th>Tokenize</th><th>Comment</th></tr>
  *   <tr><td><tt>CONTENT</tt></td><td>{@link EosDocument#getText() EosDocument.getText()}</td><td>Yes</td><td>TOKENIZED</td><td> </td></tr>

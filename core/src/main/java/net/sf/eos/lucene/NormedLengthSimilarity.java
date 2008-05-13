@@ -20,7 +20,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.search.DefaultSimilarity;
 
 /**
- * Normalize the lengh for als fields to 1.0.
+ * Normalize the length for {@link #lengthNorm(String, int)} to 1.0.
  * @author Sascha Kohlmann
  */
 public class NormedLengthSimilarity extends DefaultSimilarity {

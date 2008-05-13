@@ -23,7 +23,7 @@ import org.apache.hadoop.io.WritableComparable;
 import java.util.Map;
 
 /**
- * The key generator creates a key vor the given document. The advantage is
+ * The key generator creates a key for the given document. The advantage is
  * the support for replaceable strategies in key generation.
  * <p>Implementations must be stateless.</p>
  * @author Sascha Kohlmann

@@ -15,7 +15,6 @@
  */
 package net.sf.eos.hadoop.mapred;
 
-import net.sf.eos.hadoop.mapred.cooccurrence.DictionaryBasedEntityRecognizerMapReduceDriver;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.GnuParser;
@@ -67,11 +66,11 @@ public abstract class AbstractEosDriver extends Configured implements Tool {
     private JobConf jobConf = null;
 
     /**
-     * Implementations of <code>AbstractEosDriver</code> must call
-     * <code>super.run(String[])</code>. After the call {@link #getJobConf()}
-     * returns a value != <code>null</code>.
+     * Implementations of {@code AbstractEosDriver} must call
+     * {@code super.run(String[])}. After the call {@link #getJobConf()}
+     * returns a value != {@code null}.
      * <p>Never starts a job. This is part of the implementing driver.</p>
-     * @return allways zero.
+     * @return always zero.
      */
     @SuppressWarnings("nls")
     public int run(final String[] args) throws Exception {
@@ -133,7 +132,7 @@ public abstract class AbstractEosDriver extends Configured implements Tool {
     }
 
     /**
-     * Runes the job for the given configuration.
+     * Runs the job for the given configuration.
      * @param conf the job configuration
      * @return the job status. 0 if the job success. 1 if the job fails.
      * @throws Exception if an error occurs

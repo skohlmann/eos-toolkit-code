@@ -17,6 +17,8 @@ package net.sf.eos.search;
 
 import net.sf.eos.EosException;
 
+/** Base interface for index lookup.
+ * @author Sascha Kohlmann*/
 public interface EosLookup {
 
     /**

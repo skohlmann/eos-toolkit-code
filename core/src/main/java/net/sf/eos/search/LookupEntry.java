@@ -83,7 +83,7 @@ public class LookupEntry implements Metadata {
 
     /**
      * Sets the relevance of the entry.
-     * @param relevance the relevane of the entry
+     * @param relevance the relevance of the entry
      */
     public void setRelevance(@SuppressWarnings("hiding")
             final float relevance) {

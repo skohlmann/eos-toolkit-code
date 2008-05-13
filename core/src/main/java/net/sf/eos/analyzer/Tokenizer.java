@@ -16,14 +16,14 @@
 package net.sf.eos.analyzer;
 
 /**
- * An implementation splites text data into its {@link Token}.
+ * An implementation splits text data into its {@link Token}.
  * @author Sascha Kohlmann
  */
 public interface Tokenizer /*extends Configurable*/ {
 
     /**
-     * The next token or <code>null</code>.
-     * @return the next token or <code>null</code>
+     * The next token or {@code null}.
+     * @return the next token or {@code null}
      */
     Token next() throws TokenizerException;
 }

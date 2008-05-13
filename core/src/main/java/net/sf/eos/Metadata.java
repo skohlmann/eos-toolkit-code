@@ -27,7 +27,7 @@ public interface Metadata {
     /**
      * Returns simple metadata. The content of the metadata depends on the
      * implementation.
-     * @return implementation dependend metadata. Maybe <code>null</code>.
+     * @return implementation dependend metadata. Maybe {@code null}.
      */
     Map<String, List<String>> getMeta();
 }

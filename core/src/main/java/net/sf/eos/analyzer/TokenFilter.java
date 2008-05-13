@@ -15,12 +15,11 @@
  */
 package net.sf.eos.analyzer;
 
-import net.sf.eos.config.Configured;
 
 /**
- * Main class to support <code>Tokenizer</code> chaining, also known as
+ * Main class to support {@code Tokenizer} chaining, also known as
  * <a href='http://en.wikipedia.org/wiki/Decorator_pattern'>decorator pattern</a>.
- * An implementation holds a <em>source</em> <code>Tokenizer</code>, available
+ * An implementation holds a <em>source</em> {@code Tokenizer}, available
  * thru {@link #getSource()}. Implementations must implement
  * {@link #next()} to process a {@link Token} from the <em>source</em>.
  * It is highly recommended that the implementation supports the metadata

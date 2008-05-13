@@ -19,8 +19,9 @@ import java.io.IOException;
 import java.io.Writer;
 
 /**
- * The implementation replaces linefeed (ASCII 0x0a) and carriage return
- * (ASCII 0x0d) characters thru a space character (ASCII 0x20).
+ * The implementation replaces linefeed (ASCII {@literal 0x0a}) and carriage
+ * return (ASCII {@literal 0x0d}) characters thru a space character
+ * (ASCII {@literal 0x20}).
  * @author Sascha Kohlmann
  */
 public class NewlineReplaceWriter extends FilterWriter {

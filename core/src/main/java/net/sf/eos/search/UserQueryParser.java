@@ -26,13 +26,15 @@ import java.util.StringTokenizer;
  * <p>A search query is a quantity of phrases. A term is a literal without any
  * whitespace character. Whitespace characters are the delimiter of the terms
  * in a search query. A compound is a quantity of terms enclosed by two 
- * ASCII&nbsp;0x22 (") characters called phrase. The processor returns a list of
- * terms and phrases in order of there index position in the query. The
- * processor removes ASCII&nbsp;0x22 characters an normalizes following
- * whitespace characters to only one ASCII&nbsp;0x20 character. All whitespace
- * characters other than ASCII&nbsp;0x20 will normalized to ASCII&nbsp;0x20.
- * Newlines were removed if possible. If the character count of ASCII&nbsp;0x22
- * is odd, the last ASCII&nbsp;0x22 will be part of a term or a single term.</p>
+ * ASCII&nbsp;{@literal 0x22} (") characters called phrase. The processor}}
+ * returns a list of terms and phrases in order of there index position in
+ * the query. The processor removes ASCII&nbsp;{@literal 0x22} characters an
+ * normalizes following whitespace characters to only one
+ * ASCII&nbsp;{@literal 0x20} character. All whitespace characters other
+ * than ASCII&nbsp;{@literal 0x20} will normalized to
+ * ASCII&nbsp;{@literal 0x20}. Newlines were removed if possible. If the
+ * character count of ASCII&nbsp;{@literal 0x22} is odd, the last
+ * ASCII&nbsp;{@literal 0x22} will be part of a term or a single term.</p>
  *
  * @author Sascha Kohlmann
  */

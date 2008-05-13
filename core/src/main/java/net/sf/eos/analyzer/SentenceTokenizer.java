@@ -91,7 +91,7 @@ public class SentenceTokenizer /*extends Configured*/
 
     /**
      * Override this method to implement a different sentence tokenizer.
-     * @return a sentence or <code>null</code> if no next sentence available.
+     * @return a sentence or {@code null} if no next sentence available.
      * @throws TokenizerException if an error occurs
      */
     protected CharSequence nextSentence() throws TokenizerException {
@@ -100,7 +100,6 @@ public class SentenceTokenizer /*extends Configured*/
             return null;
         }
         final String sentence = this.text.substring(this.start, end).trim();
-//        System.out.println("sentence: " + sentence);
         this.start = end;
 
         return sentence;

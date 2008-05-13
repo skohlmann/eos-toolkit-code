@@ -16,10 +16,13 @@
 package net.sf.eos.analyzer;
 
 
+import static net.sf.eos.config.ConfigurationKey.Type.CLASSNAME;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import net.sf.eos.config.Configuration;
+import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.Configured;
 import net.sf.eos.config.FactoryMethod;
 import net.sf.eos.medline.MedlineTokenizerBuilder;
@@ -38,12 +41,16 @@ public abstract class TokenizerBuilder extends Configured {
     /** The configuration key name for the classname of the builder.
      * @see #newInstance(Configuration) */
     @SuppressWarnings("nls")
+    @ConfigurationKey(type=CLASSNAME,
+                            description="Builder supports the creation of stacked "
+                                        + "Tokenizers following the decoration "
+                                        + "pattern.")
     public final static String BUILDER_IMPL_CONFIG_NAME =
         "net.sf.eos.analyzer.TokenizerBuilder.impl";
 
     /**
      * Creates a new instance. The
-     * <code>Configuration</code> must contain a key
+     * {@code Configuration} must contain a key
      * {@link #BUILDER_IMPL_CONFIG_NAME} of a builder implementation. There 
      * is no default implementation.
      * @param config the configuration

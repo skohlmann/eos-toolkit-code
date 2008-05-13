@@ -15,6 +15,9 @@
  */
 package net.sf.eos.entity;
 
+import static net.sf.eos.config.ConfigurationKey.Type.INTEGER;
+import static net.sf.eos.config.ConfigurationKey.Type.CLASSNAME;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -25,15 +28,16 @@ import net.sf.eos.analyzer.Tokenizer;
 import net.sf.eos.analyzer.TokenizerException;
 import net.sf.eos.config.Configurable;
 import net.sf.eos.config.Configuration;
+import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.FactoryMethod;
-
+ 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 import java.util.Set;
 
 /**
- * An implementation of a <code>EntityRecognizer</code> identifies entities
+ * An implementation of a @code EntityRecognizer} identifies entities
  * in a text. An entity may represented by an ID. The ID is a bracket around
  * a collection of literal entity terms or phrases. The ID is represented by the
  * <em>value</em> of a {@link Map} entry. The entity literal is the value of
@@ -54,14 +58,30 @@ public abstract class AbstractDictionaryBasedEntityRecognizer
      * @see #newInstance(Tokenizer, Configuration)
      * @see #newInstance(Tokenizer) */
     @SuppressWarnings("nls")
+    @ConfigurationKey(type=CLASSNAME,
+                            description="Implementations of a EntityRecognizer "
+                                        + "to identify entities in a text.")
     public final static String
         ABSTRACT_DICTIONARY_BASED_ENTITY_RECOGNIZER_IMPL_CONFIG_NAME =
             "net.sf.eos.entity.AbstractDictionaryBasedEntityRecognizer.impl";
-   
+
+    /** Default maximum token count. */
+    @SuppressWarnings("nls")
+    private final static String DEFAULT_MAX_TOKEN = "5";
+
+    /** Key for the maximum token count. */
+    @SuppressWarnings("nls")
+    @ConfigurationKey(type=INTEGER,
+                            defaultValue=DEFAULT_MAX_TOKEN,
+                            description="The maximum token count for indentifying.")
+    public final static String
+        MAX_TOKEN_CONFIG_NAME =
+          "net.sf.eos.entity.AbstractDictionaryBasedEntityRecognizer.maxToken";
+
     private Configuration config;
 
     private TextBuilder textBuilder;
-    private int maxToken = DEFAULT_MAX_TOKEN;
+    private int maxToken = Integer.parseInt(DEFAULT_MAX_TOKEN);
     private Map<CharSequence, Set<CharSequence>> entities = null;
 
     public AbstractDictionaryBasedEntityRecognizer(
@@ -118,14 +138,18 @@ public abstract class AbstractDictionaryBasedEntityRecognizer
     /*
      * @see net.sf.eos.entity.DictionaryBasedEntityRecognizer#configure(net.sf.eos.config.Configuration)
      */
-    public final void configure(
-            @SuppressWarnings("hiding") final Configuration config) {
+    public void configure(
+            @SuppressWarnings("hiding") final Configuration config)
+                throws EosException {
         this.config = new Configuration(config);
+        final String lMaxToken =
+            config.get(MAX_TOKEN_CONFIG_NAME, DEFAULT_MAX_TOKEN);
+        this.maxToken = Integer.parseInt(lMaxToken);
     }
 
     /**
      * Returns the configuration.
-     * @return the configuration holder or <code>null</code>
+     * @return the configuration holder or {@code null}
      */
     protected final Configuration getConfiguration() {
         return this.config;
@@ -148,7 +172,7 @@ public abstract class AbstractDictionaryBasedEntityRecognizer
 
     /**
      * Creates a new instance of a of the recognizer. If the
-     * <code>Configuration</code> contains a key
+     * {@code Configuration} contains a key
      * {@link #ABSTRACT_DICTIONARY_BASED_ENTITY_RECOGNIZER_IMPL_CONFIG_NAME}
      * a new instance of the classname in the value will instantiate. The 
      * {@link SimpleLongestMatchDictionaryBasedEntityRecognizer} will
