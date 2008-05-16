@@ -18,7 +18,7 @@ package net.sf.eos.document;
 
 import static net.sf.eos.config.ConfigurationKey.Type.CLASSNAME;
 import net.sf.eos.EosException;
-import net.sf.eos.analyzer.TokenizerBuilder;
+import net.sf.eos.analyzer.TokenizerProvider;
 import net.sf.eos.analyzer.TokenizerException;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.ConfigurationKey;

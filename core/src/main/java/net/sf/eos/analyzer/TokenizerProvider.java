@@ -34,54 +34,54 @@ import net.sf.eos.medline.MedlineTokenizerBuilder;
  * @author Sascha Kohlmann
  * @see ResettableTokenFilter
  */
-public abstract class TokenizerBuilder extends Configured
+public abstract class TokenizerProvider extends Configured
         implements Provider<ResettableTokenizer> {
 
     /** For logging. */
     private static final Log LOG =
-        LogFactory.getLog(TokenizerBuilder.class.getName());
+        LogFactory.getLog(TokenizerProvider.class.getName());
 
-    /** The configuration key name for the classname of the builder.
+    /** The configuration key name for the classname of the provider.
      * @see #newInstance(Configuration) */
     @SuppressWarnings("nls")
     @ConfigurationKey(type=CLASSNAME,
-                            description="Builder supports the creation of stacked "
+                            description="Provider supports the creation of stacked "
                                         + "Tokenizers following the decoration "
                                         + "pattern.")
-    public final static String BUILDER_IMPL_CONFIG_NAME =
-        "net.sf.eos.analyzer.TokenizerBuilder.impl";
+    public final static String TOKENIZER_PROVIDER_IMPL_CONFIG_NAME =
+        "net.sf.eos.analyzer.TokenizerProvider.impl";
 
     /**
      * Creates a new instance. The
      * {@code Configuration} must contain a key
-     * {@link #BUILDER_IMPL_CONFIG_NAME} of a builder implementation. There 
+     * {@link #TOKENIZER_PROVIDER_IMPL_CONFIG_NAME} of a provider implementation. There 
      * is no default implementation.
      * @param config the configuration
      * @return a new instance
      * @throws TokenizerException if it is not possible to instantiate an instance
      */
     @SuppressWarnings("nls")
-    @FactoryMethod(key=BUILDER_IMPL_CONFIG_NAME,
+    @FactoryMethod(key=TOKENIZER_PROVIDER_IMPL_CONFIG_NAME,
                    implementation=MedlineTokenizerBuilder.class)
-    public final static TokenizerBuilder newInstance(final Configuration config)
+    public final static TokenizerProvider newInstance(final Configuration config)
             throws TokenizerException {
 
         final Thread t = Thread.currentThread();
         ClassLoader classLoader = t.getContextClassLoader();
         if (classLoader == null) {
-            classLoader = TokenizerBuilder.class.getClassLoader();
+            classLoader = TokenizerProvider.class.getClassLoader();
         }
 
-        final String clazzName = config.get(BUILDER_IMPL_CONFIG_NAME,
+        final String clazzName = config.get(TOKENIZER_PROVIDER_IMPL_CONFIG_NAME,
                                       MedlineTokenizerBuilder.class.getName());
 
         try {
-            final Class<? extends TokenizerBuilder> clazz = 
-                (Class<? extends TokenizerBuilder>) 
+            final Class<? extends TokenizerProvider> clazz = 
+                (Class<? extends TokenizerProvider>) 
                     Class.forName(clazzName, true, classLoader);
             try {
 
-                final TokenizerBuilder builder = clazz.newInstance();
+                final TokenizerProvider builder = clazz.newInstance();
                 builder.configure(config);
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("TokenizerBuilder instance: "

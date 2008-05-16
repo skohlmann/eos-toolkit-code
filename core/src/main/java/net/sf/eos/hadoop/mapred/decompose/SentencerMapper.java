@@ -20,7 +20,7 @@ import net.sf.eos.EosException;
 import net.sf.eos.analyzer.ResettableTokenizer;
 import net.sf.eos.analyzer.SentenceTokenizer;
 import net.sf.eos.analyzer.TextBuilder;
-import net.sf.eos.analyzer.TokenizerBuilder;
+import net.sf.eos.analyzer.TokenizerProvider;
 import net.sf.eos.analyzer.TextBuilder.SpaceBuilder;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.HadoopConfigurationAdapter;
@@ -59,7 +59,7 @@ import java.util.Map.Entry;
             implementation=SpaceBuilder.class
         ),
         @Service(
-            factory=TokenizerBuilder.class
+            factory=TokenizerProvider.class
         ),
         @Service(
             factory=Sentencer.class
@@ -84,8 +84,8 @@ public class SentencerMapper extends EosDocumentSupportMapReduceBase
 
         try {
             final EosDocument doc = textToEosDocument(eosDoc);
-            final TokenizerBuilder tokenBuilder =
-                TokenizerBuilder.newInstance(config);
+            final TokenizerProvider tokenBuilder =
+                TokenizerProvider.newInstance(config);
             if (LOG.isDebugEnabled()) {
                 LOG.debug("TokenizerBuilder instanceof "
                           + tokenBuilder.getClass());

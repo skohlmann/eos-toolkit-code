@@ -64,7 +64,7 @@ public abstract class SearcherProvider extends Configured
         final Thread t = Thread.currentThread();
         ClassLoader classLoader = t.getContextClassLoader();
         if (classLoader == null) {
-            classLoader = AnalyzerFactory.class.getClassLoader();
+            classLoader = SearcherProvider.class.getClassLoader();
         }
 
         final String clazzName =

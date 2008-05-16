@@ -33,10 +33,10 @@
  *  {@link net.sf.eos.lucene.LuceneDocumentCreator}. The 
  *  {@link net.sf.eos.lucene.LuceneDocumentCreator#newInstance(net.sf.eos.config.Configuration)}
  *  factory method creates a new instance.</p>
- * <h1>AnalyzerFactory</h1>
+ * <h1>AnalyzerProvider</h1>
  * <p>Its also possible to replace the Lucene analyzer. User the
- *  {@link net.sf.eos.lucene.AnalyzerFactory} with the
- *  {@link net.sf.eos.lucene.AnalyzerFactory#newInstance(net.sf.eos.config.Configuration)}
+ *  {@link net.sf.eos.lucene.AnalyzerProvider} with the
+ *  {@link net.sf.eos.lucene.AnalyzerProvider#newInstance(net.sf.eos.config.Configuration)}
  *  factory method to create a new instance.</p>
  *
  * @since 0.1.0

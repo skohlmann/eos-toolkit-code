@@ -34,7 +34,7 @@ import java.lang.annotation.Target;
  *   <li>are of type {@link String}
  * </ul>
  * <p>should be annotated. Note, that the compiler couldn't check this
- * conventions. Other tools like {@link apt} implementation should do the
+ * conventions. Other tools like {@code apt} implementation should do the
  * checking job.</p>
  *
  * @author Sascha Kohlmann

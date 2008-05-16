@@ -74,7 +74,7 @@ public abstract class LuceneDocumentCreator extends Configured {
         final Thread t = Thread.currentThread();
         ClassLoader classLoader = t.getContextClassLoader();
         if (classLoader == null) {
-            classLoader = AnalyzerFactory.class.getClassLoader();
+            classLoader = LuceneDocumentCreator.class.getClassLoader();
         }
 
         final String clazzName = config.get(DOCUMENT_CREATOR_IMPL_CONFIG_NAME,

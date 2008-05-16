@@ -8,7 +8,7 @@
  *  {@link net.sf.eos.analyzer.Token}.</p>
  * <p>The {@link net.sf.eos.analyzer.TokenFilter} implements
  *  the <a href='http://en.wikipedia.org/wiki/Decorator_pattern' title='Wikipedia'>decorator pattern</a>.
- *  With the {@link net.sf.eos.analyzer.TokenizerBuilder} it is possible to
+ *  With the {@link net.sf.eos.analyzer.TokenizerProvider} it is possible to
  *  implement classes that returns a complete chain.</p>
  * <p>Classes that implements the {@link net.sf.eos.analyzer.ResettableTokenizer}
  *  should be reused by there clients.</p>

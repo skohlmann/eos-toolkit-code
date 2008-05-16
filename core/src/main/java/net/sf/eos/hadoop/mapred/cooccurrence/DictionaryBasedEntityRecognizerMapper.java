@@ -17,7 +17,7 @@ package net.sf.eos.hadoop.mapred.cooccurrence;
 
 import net.sf.eos.EosException;
 import net.sf.eos.analyzer.ResettableTokenizer;
-import net.sf.eos.analyzer.TokenizerBuilder;
+import net.sf.eos.analyzer.TokenizerProvider;
 import net.sf.eos.analyzer.TokenizerException;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.HadoopConfigurationAdapter;
@@ -54,7 +54,7 @@ import java.util.Map.Entry;
 @Services(
     services={
         @Service(
-            factory=TokenizerBuilder.class,
+            factory=TokenizerProvider.class,
             description="Tokenizer for coocurence analyzing."
         ),
         @Service(
@@ -184,8 +184,8 @@ public class DictionaryBasedEntityRecognizerMapper
 
         try {
             final Configuration lconf = new HadoopConfigurationAdapter(this.conf);
-            final TokenizerBuilder tokenBuilder =
-                TokenizerBuilder.newInstance(lconf);
+            final TokenizerProvider tokenBuilder =
+                TokenizerProvider.newInstance(lconf);
             final ResettableTokenizer tokenizer = tokenBuilder.get();
 
             return tokenizer;

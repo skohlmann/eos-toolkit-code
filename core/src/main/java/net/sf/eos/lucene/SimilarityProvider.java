@@ -30,19 +30,19 @@ import org.apache.lucene.search.Similarity;
  * To support different strategies of Similarity in a Lucene index this
  * factory decoupled the creation of the Similarity from hard coded classnames.
  * Set the classname of a factory different from
- * <i>{@linkplain NormedLengthSimilarityFactory default}</i> implementation.
- * {@link #SIMILARITY_FACTORY_IMPL_CONFIG_NAME} contains the name of the
+ * <i>{@linkplain NormedLengthSimilarityProvider default}</i> implementation.
+ * {@link #SIMILARITY_PROVIDER_IMPL_CONFIG_NAME} contains the name of the
  * configuration key.
  *
  * <p>Implementations must have a default constructor and must implement
  * {@link #get()}.</p>
  * @author Sascha Kohlmann
  */
-public abstract class SimilarityFactory implements Provider<Similarity> {
+public abstract class SimilarityProvider implements Provider<Similarity> {
 
     /** For logging. */
     private static final Log LOG =
-        LogFactory.getLog(SimilarityFactory.class.getName());
+        LogFactory.getLog(SimilarityProvider.class.getName());
 
     /** The configuration key name for the classname of the factory.
      * @see #newInstance(Configuration) */
@@ -50,45 +50,45 @@ public abstract class SimilarityFactory implements Provider<Similarity> {
     @ConfigurationKey(type=CLASSNAME,
                             description="Configuration key of the Lucene similarity "
                                         + " factory.")
-    public final static String SIMILARITY_FACTORY_IMPL_CONFIG_NAME = 
-        "net.sf.eos.lucene.SimilarityFactory.impl";
+    public final static String SIMILARITY_PROVIDER_IMPL_CONFIG_NAME = 
+        "net.sf.eos.lucene.SimilarityProvider.impl";
 
     /**
-     * Creates a new instance of a of the factory. If the
+     * Creates a new instance of a of the provider. If the
      * {@code Configuration} contains a key
-     * {@link #SIMILARITY_FACTORY_IMPL_CONFIG_NAME} a new instance of the
+     * {@link #SIMILARITY_PROVIDER_IMPL_CONFIG_NAME} a new instance of the
      * classname in the value will instantiate. The 
-     * {@link NormedLengthSimilarityFactory} will instantiate if there is no
+     * {@link NormedLengthSimilarityProvider} will instantiate if there is no
      * value setted.
      * @param config the configuration
      * @return a new instance
      * @throws EosException if it is not possible to instantiate an instance
      */
-    @FactoryMethod(key=SIMILARITY_FACTORY_IMPL_CONFIG_NAME,
-                   implementation=NormedLengthSimilarityFactory.class)
-    public final static SimilarityFactory 
+    @FactoryMethod(key=SIMILARITY_PROVIDER_IMPL_CONFIG_NAME,
+                   implementation=NormedLengthSimilarityProvider.class)
+    public final static SimilarityProvider 
             newInstance(final Configuration config) throws EosException {
 
         final Thread t = Thread.currentThread();
         ClassLoader classLoader = t.getContextClassLoader();
         if (classLoader == null) {
-            classLoader = SimilarityFactory.class.getClassLoader();
+            classLoader = SimilarityProvider.class.getClassLoader();
         }
 
         final String clazzName =
-            config.get(SIMILARITY_FACTORY_IMPL_CONFIG_NAME,
-                       NormedLengthSimilarityFactory.class.getName());
+            config.get(SIMILARITY_PROVIDER_IMPL_CONFIG_NAME,
+                       NormedLengthSimilarityProvider.class.getName());
 
         try {
-            final Class<? extends SimilarityFactory> clazz =
-                (Class<? extends SimilarityFactory>) Class
+            final Class<? extends SimilarityProvider> clazz =
+                (Class<? extends SimilarityProvider>) Class
                     .forName(clazzName, true, classLoader);
             try {
 
-                final SimilarityFactory factory =
-                    (SimilarityFactory) clazz.newInstance();
+                final SimilarityProvider factory =
+                    (SimilarityProvider) clazz.newInstance();
                 if (LOG.isDebugEnabled()) {
-                    LOG.debug("SimilarityFactory instance: "
+                    LOG.debug("SimilarityProvider instance: "
                               + factory.getClass().getName());
                 }
                 return factory;

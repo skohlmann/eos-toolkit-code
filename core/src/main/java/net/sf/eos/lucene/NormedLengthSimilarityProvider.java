@@ -21,7 +21,7 @@ import org.apache.lucene.search.Similarity;
  * Support for {@link NormedLengthSimilarity}.
  * @author Sascha Kohlmann
  */
-public class NormedLengthSimilarityFactory extends SimilarityFactory {
+public class NormedLengthSimilarityProvider extends SimilarityProvider {
 
     /**
      * @return a {@link NormedLengthSimilarity} instance.
