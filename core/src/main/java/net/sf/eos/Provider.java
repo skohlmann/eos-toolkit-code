@@ -29,5 +29,5 @@ public interface Provider<T> {
      * Returns an instance of the expected type. The returned type may or
      * may not be a new instance, depending on the implementation.
      */
-    public T get();
+    public T get()
 }
