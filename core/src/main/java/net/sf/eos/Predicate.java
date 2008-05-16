@@ -26,7 +26,7 @@ package net.sf.eos;
  * {@code if (myPredicate.apply(myObject)) ... } to throw a
  * {@link NullPointerException}.<p>
  *
- * <p>strong>Note:</strong> experimental</p>
+ * <p><strong>Note:</strong> experimental - inspired by <em>guice</em></p>
  *
  * @author Sascha Kohlmann
  * @since 0.1.0

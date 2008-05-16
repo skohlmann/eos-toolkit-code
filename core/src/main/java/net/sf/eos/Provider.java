@@ -18,6 +18,8 @@ package net.sf.eos;
 /**
  * Instances supply objects of a single type.
  *
+ * <p><strong>Note:</strong> experimental - inspired by <em>guice</em></p>
+ *
  * @author Sascha Kohlmann
  * @since 0.1.0
  */

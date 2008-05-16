@@ -26,7 +26,7 @@ import java.lang.annotation.Target;
  * {@code null} is an acceptable value for that parameter. Cause of undefined
  * semantic it must not be used for parameters of primitive types.
  *
- * <p>strong>Note:</strong> experimental</p>
+ * <p><strong>Note:</strong> experimental - inspired by <em>guice</em></p>
  *
  * @author Sascha Kohlmann
  * @since 0.1.0

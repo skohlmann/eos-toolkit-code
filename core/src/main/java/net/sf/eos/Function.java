@@ -24,13 +24,13 @@ package net.sf.eos;
  *
  * <p>The transformation on the source object does not necessarily result in
  * an object of a different type. For example, a
- * {@code FarenheitToCelciusFunction} may implement
- * {@literal Function<Float,Float>}.</p>
+ * {@code MeterToFeetFunction} may implement
+ * {@literal Function<Integer, Integer>}.</p>
  *
  * <p>Implementations which may cause side effects upon evaluation are strongly
  * encouraged to state this fact clearly in their API documentation.</p>
  *
- * <p>strong>Note:</strong> experimental</p>
+ * <p><strong>Note:</strong> experimental</p>
  *
  * @author Sascha Kohlmann
  * @since 0.1.0
