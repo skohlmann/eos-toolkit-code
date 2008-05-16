@@ -34,8 +34,7 @@ import java.util.Set;
 public class MedlineTokenizerBuilder extends TokenizerBuilder {
 
     @Override
-    public ResettableTokenizer get()
-            throws TokenizerException {
+    public ResettableTokenizer get() {
 
         final ResettableTokenizer whitespace = new WhitespaceTokenizer();
         final Set<CharSequence> stopWords =

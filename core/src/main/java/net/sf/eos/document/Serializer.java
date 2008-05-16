@@ -62,7 +62,7 @@ public abstract class Serializer extends Configured {
         final Thread t = Thread.currentThread();
         ClassLoader classLoader = t.getContextClassLoader();
         if (classLoader == null) {
-            classLoader = TokenizerBuilder.class.getClassLoader();
+            classLoader = XmlSerializer.class.getClassLoader();
         }
 
         final String clazzName = config.get(SERIALIZER_IMPL_CONFIG_NAME,

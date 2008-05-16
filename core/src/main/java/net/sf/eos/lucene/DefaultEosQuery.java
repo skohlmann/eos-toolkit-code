@@ -153,7 +153,7 @@ public class DefaultEosQuery extends Configured implements CommonDocument, EosQu
             new QueryParser(CommonDocument.FieldName.CONTENT.name(), analyzer);
 
         final SearcherProvider provider = SearcherProvider.newInstance(conf);
-        final Searcher searcher = provider.newSearcher(conf);
+        final Searcher searcher = provider.get(conf);
 
         try {
             final Query query = parser.parse(queryString);

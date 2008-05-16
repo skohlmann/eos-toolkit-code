@@ -22,12 +22,15 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.store.Directory;
 
 import net.sf.eos.EosException;
+import net.sf.eos.config.ConfigurableProvider;
 import net.sf.eos.config.Configuration;
+import net.sf.eos.config.ConfigurationException;
 import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.Configured;
 import net.sf.eos.config.FactoryMethod;
 
-public abstract class DirectoryProvider extends Configured {
+public abstract class DirectoryProvider extends Configured
+        implements ConfigurableProvider<Directory> {
 
     /** For logging. */
     private static final Log LOG =
@@ -95,19 +98,18 @@ public abstract class DirectoryProvider extends Configured {
     /**
      * Creates a new directory for the configuration at creation time.
      * @return a new Lucene {@code Directory} instance.
-     * @throws EosException if an error occurs.
+     * @throws ConfigurationException may thrown if misconfigured
      */
-    public Directory newDirectory() throws EosException {
+    public Directory get() {
         final Configuration conf = this.getConfiguration();
-        return newDirectory(conf);
+        return get(conf);
     }
 
     /**
      * Use the given configuration to create a new {@code Directory} instance.
      * @param conf the configuration to use for {@code Directory} creating
      * @return a new Lucence {@code Directory}
-     * @throws EosException if an error occurs.
+     * @throws ConfigurationException may thrown if misconfigured
      */
-    public abstract Directory newDirectory(final Configuration conf)
-            throws EosException;
+    public abstract Directory get(final Configuration conf);
 }

@@ -243,14 +243,18 @@ public class DictionaryBasedEntityIdKeyGenerator extends Configured
      */
     protected ResettableTokenizer getTokenizer() throws TokenizerException {
 
-        final Configuration conf = getConfiguration();
+        try {
+            final Configuration conf = getConfiguration();
 
-        final TokenizerBuilder tokenBuilder =
-            TokenizerBuilder.newInstance(conf);
-        final ResettableTokenizer tokenizer =
-            tokenBuilder.get();
+            final TokenizerBuilder tokenBuilder =
+                TokenizerBuilder.newInstance(conf);
+            final ResettableTokenizer tokenizer =
+                tokenBuilder.get();
 
-        return tokenizer;
+            return tokenizer;
+        } catch (final Exception e) {
+            throw new TokenizerException(e);
+        }
     }
 
     public Trie<CharSequence, Set<CharSequence>> getTrie() {

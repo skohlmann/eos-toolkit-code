@@ -11,7 +11,7 @@
  * GNU Affero General Public License for more details.
  *
  * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package net.sf.eos;
 
@@ -26,9 +26,13 @@ import net.sf.eos.config.ConfigurableProvider;
 
 /**
  * Annotates a method as unsupported. Useful for example
- * {@link ConfigurableProvider} instances which dosn't support the {@link Provider#get()}
- * method.
- * <p><strong>Note:</strong> experimental - inspired by <em>guice</em></p>
+ * {@link ConfigurableProvider} instances which doesn't support the
+ * {@link Provider#get()} method.
+ *
+ * <p>Such an annotated method should throw a
+ * {@link UnsupportedOperationException}.</p>
+ *
+ * <p><strong>Note:</strong> experimental</p>
  *
  * @since 0.1.0
  * @author Sascha Kohlmann

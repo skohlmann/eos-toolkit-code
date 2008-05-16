@@ -182,13 +182,16 @@ public class DictionaryBasedEntityRecognizerMapper
 
         assert this.conf != null;
 
-        final Configuration lconf = new HadoopConfigurationAdapter(this.conf);
-        final TokenizerBuilder tokenBuilder =
-            TokenizerBuilder.newInstance(lconf);
-        final ResettableTokenizer tokenizer =
-            tokenBuilder.get();
+        try {
+            final Configuration lconf = new HadoopConfigurationAdapter(this.conf);
+            final TokenizerBuilder tokenBuilder =
+                TokenizerBuilder.newInstance(lconf);
+            final ResettableTokenizer tokenizer = tokenBuilder.get();
 
-        return tokenizer;
+            return tokenizer;
+        } catch (final Exception e) {
+            throw new TokenizerException(e);
+        }
     }
 
     /**

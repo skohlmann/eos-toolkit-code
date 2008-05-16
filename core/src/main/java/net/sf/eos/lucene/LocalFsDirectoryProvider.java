@@ -15,8 +15,8 @@
  */
 package net.sf.eos.lucene;
 
-import net.sf.eos.EosException;
 import net.sf.eos.config.Configuration;
+import net.sf.eos.config.ConfigurationException;
 
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
@@ -29,12 +29,12 @@ public class LocalFsDirectoryProvider extends DirectoryProvider {
         "net.sf.eos.lucene.LocalFsDirectoryProvider.path";
 
     @Override
-    public Directory newDirectory(final Configuration conf) throws EosException {
+    public Directory get(final Configuration conf) {
         final String path = conf.get(LOCAL_PATH_CONFIG_NAME);
         try {
             return FSDirectory.getDirectory(path);
         } catch (final IOException e) {
-            throw new EosException(e);
+            throw new ConfigurationException(e);
         }
     }
 }

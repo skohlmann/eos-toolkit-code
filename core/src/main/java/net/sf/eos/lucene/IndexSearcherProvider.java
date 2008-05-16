@@ -17,6 +17,7 @@ package net.sf.eos.lucene;
 
 import net.sf.eos.EosException;
 import net.sf.eos.config.Configuration;
+import net.sf.eos.config.ConfigurationException;
 import net.sf.eos.config.Service;
 
 import org.apache.lucene.index.CorruptIndexException;
@@ -36,18 +37,20 @@ import java.io.IOException;
 public class IndexSearcherProvider extends SearcherProvider {
 
     @Override
-    public Searcher newSearcher(final Configuration conf)
-            throws EosException {
-        final DirectoryProvider provider = DirectoryProvider.newInstance(conf);
-        final Directory directory = provider.newDirectory(conf);
+    public Searcher get(final Configuration conf) {
         try {
+            final DirectoryProvider provider = DirectoryProvider.newInstance(conf);
+            final Directory directory = provider.get(conf);
             return new IndexSearcher(directory);
         } catch (final CorruptIndexException e) {
             final String message = e.getMessage();
-            throw new EosException(message, e);
+            throw new ConfigurationException(message, e);
         } catch (final IOException e) {
             final String message = e.getMessage();
-            throw new EosException(message, e);
+            throw new ConfigurationException(message, e);
+        } catch (final EosException e) {
+            final String message = e.getMessage();
+            throw new ConfigurationException(message, e);
         }
     }
 }

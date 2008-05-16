@@ -19,17 +19,18 @@ import static net.sf.eos.config.ConfigurationKey.Type.CLASSNAME;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.search.Searchable;
 import org.apache.lucene.search.Searcher;
-import org.apache.lucene.store.Directory;
 
 import net.sf.eos.EosException;
+import net.sf.eos.Provider;
 import net.sf.eos.config.Configuration;
+import net.sf.eos.config.ConfigurationException;
 import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.Configured;
 import net.sf.eos.config.FactoryMethod;
 
-public abstract class SearcherProvider extends Configured {
+public abstract class SearcherProvider extends Configured
+        implements Provider<Searcher> {
 
     /** For logging. */
     private static final Log LOG =
@@ -96,19 +97,18 @@ public abstract class SearcherProvider extends Configured {
     /**
      * Creates a new searchable for the configuration at creation time.
      * @return a new Lucene {@code Searchable} instance.
-     * @throws EosException if an error occurs.
+     * @throws ConfigurationException may thrown if misconfigured
      */
-    public Searcher newSearcher() throws EosException {
+    public Searcher get() {
         final Configuration conf = this.getConfiguration();
-        return newSearcher(conf);
+        return get(conf);
     }
 
     /**
      * Use the given configuration to create a new {@code Searchable} instance.
      * @param conf the configuration to use for {@code Searchable} creating
      * @return a new Lucence {@code Searchable}
-     * @throws EosException if an error occurs.
+     * @throws ConfigurationException may thrown if misconfigured
      */
-    public abstract Searcher newSearcher(final Configuration conf)
-            throws EosException;
+    public abstract Searcher get(final Configuration conf);
 }
