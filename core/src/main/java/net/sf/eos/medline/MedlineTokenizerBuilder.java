@@ -34,7 +34,7 @@ import java.util.Set;
 public class MedlineTokenizerBuilder extends TokenizerBuilder {
 
     @Override
-    public ResettableTokenizer newResettableTokenizer()
+    public ResettableTokenizer get()
             throws TokenizerException {
 
         final ResettableTokenizer whitespace = new WhitespaceTokenizer();

@@ -186,7 +186,7 @@ public class DictionaryBasedEntityRecognizerMapper
         final TokenizerBuilder tokenBuilder =
             TokenizerBuilder.newInstance(lconf);
         final ResettableTokenizer tokenizer =
-            tokenBuilder.newResettableTokenizer();
+            tokenBuilder.get();
 
         return tokenizer;
     }

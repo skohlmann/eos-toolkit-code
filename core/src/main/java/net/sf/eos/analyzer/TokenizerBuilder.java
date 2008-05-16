@@ -21,6 +21,7 @@ import static net.sf.eos.config.ConfigurationKey.Type.CLASSNAME;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import net.sf.eos.Provider;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.Configured;
@@ -32,7 +33,8 @@ import net.sf.eos.medline.MedlineTokenizerBuilder;
  * @author Sascha Kohlmann
  * @see ResettableTokenFilter
  */
-public abstract class TokenizerBuilder extends Configured {
+public abstract class TokenizerBuilder extends Configured
+        implements Provider<ResettableTokenizer> {
 
     /** For logging. */
     private static final Log LOG =
@@ -101,6 +103,6 @@ public abstract class TokenizerBuilder extends Configured {
      * @return a new instance
      * @throws TokenizerException if an error occurs
      */
-    public abstract ResettableTokenizer newResettableTokenizer()
+    public abstract ResettableTokenizer get()
         throws TokenizerException;
 }

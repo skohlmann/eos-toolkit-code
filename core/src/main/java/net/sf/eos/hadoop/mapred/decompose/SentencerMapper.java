@@ -101,7 +101,7 @@ public class SentencerMapper extends EosDocumentSupportMapReduceBase
             }
 
             final ResettableTokenizer tokenizer =
-                tokenBuilder.newResettableTokenizer();
+                tokenBuilder.get();
             final SentenceTokenizer sentenceTokenizer =
                 new SentenceTokenizer();
 

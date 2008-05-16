@@ -248,7 +248,7 @@ public class DictionaryBasedEntityIdKeyGenerator extends Configured
         final TokenizerBuilder tokenBuilder =
             TokenizerBuilder.newInstance(conf);
         final ResettableTokenizer tokenizer =
-            tokenBuilder.newResettableTokenizer();
+            tokenBuilder.get();
 
         return tokenizer;
     }

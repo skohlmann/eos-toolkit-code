@@ -51,7 +51,7 @@ public class DefaultSentencerTest {
 
         final SentenceTokenizer sentenceTokenizer = new SentenceTokenizer();
         final ResettableTokenizer tokenizer =
-            new MedlineTokenizerBuilder().newResettableTokenizer();
+            new MedlineTokenizerBuilder().get();
 
         final Sentencer sentencer = new DefaultSentencer();
         final Map<String, EosDocument> sentenced =
@@ -89,7 +89,7 @@ public class DefaultSentencerTest {
 
         final SentenceTokenizer sentenceTokenizer = new SentenceTokenizer();
         final ResettableTokenizer tokenizer =
-            new MedlineTokenizerBuilder().newResettableTokenizer();
+            new MedlineTokenizerBuilder().get();
 
         final Sentencer sentencer = new DefaultSentencer();
         final Map<String, EosDocument> sentenced1 =
