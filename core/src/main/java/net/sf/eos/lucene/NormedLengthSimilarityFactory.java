@@ -27,7 +27,7 @@ public class NormedLengthSimilarityFactory extends SimilarityFactory {
      * @return a {@link NormedLengthSimilarity} instance.
      */
     @Override
-    public Similarity newSimilarity() {
+    public Similarity get() {
         return new NormedLengthSimilarity();
     }
 }

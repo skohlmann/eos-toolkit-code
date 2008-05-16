@@ -130,7 +130,7 @@ public class LuceneOutputFormat<K extends WritableComparable,
         try {
             AnalyzerFactory analyzerFactory =
                 AnalyzerFactory.newInstance(config);
-            final Analyzer analyzer = analyzerFactory.newAnalyzer();
+            final Analyzer analyzer = analyzerFactory.get();
 
             final IndexWriter writer =  // build locally first
                 new IndexWriter(
@@ -155,7 +155,7 @@ public class LuceneOutputFormat<K extends WritableComparable,
 
             final SimilarityFactory similarityFactory =
                 SimilarityFactory.newInstance(config);
-            final Similarity similarity = similarityFactory.newSimilarity();
+            final Similarity similarity = similarityFactory.get();
 
             writer.setSimilarity(similarity);
 

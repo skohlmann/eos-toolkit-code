@@ -147,7 +147,7 @@ public class DefaultEosQuery extends Configured implements CommonDocument, EosQu
 
         final AnalyzerFactory analyzerFactory =
             AnalyzerFactory.newInstance(conf);
-        final Analyzer analyzer = analyzerFactory.newAnalyzer();
+        final Analyzer analyzer = analyzerFactory.get();
         final String queryString = createLuceneQuery();
         final QueryParser parser =
             new QueryParser(CommonDocument.FieldName.CONTENT.name(), analyzer);

@@ -28,7 +28,7 @@ public class WhitespaceAnalyzerFactory extends AnalyzerFactory {
      * @return a Lucene {@link org.apache.lucene.analysis.WhitespaceAnalyzer}
      */
     @Override
-    public Analyzer newAnalyzer() {
+    public Analyzer get() {
         return new WhitespaceAnalyzer();
     }
 }

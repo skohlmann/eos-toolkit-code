@@ -107,7 +107,7 @@ public class SimpleIndexTest extends HadoopTestCase {
         final Configuration lconf = new HadoopConfigurationAdapter(jobConf);
 
         final AnalyzerFactory factory = AnalyzerFactory.newInstance(lconf);
-        final Analyzer analyzer = factory.newAnalyzer();
+        final Analyzer analyzer = factory.get();
         final QueryParser parser =
             new QueryParser(
                     DefaultLuceneDocumentCreator.FieldName.CONTENT.name(),

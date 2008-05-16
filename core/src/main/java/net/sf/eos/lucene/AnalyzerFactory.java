@@ -17,6 +17,7 @@ package net.sf.eos.lucene;
 
 import static net.sf.eos.config.ConfigurationKey.Type.CLASSNAME;
 import net.sf.eos.EosException;
+import net.sf.eos.Provider;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.FactoryMethod;
@@ -35,10 +36,10 @@ import org.apache.lucene.analysis.Analyzer;
  * configuration key.
  *
  * <p>Implementations must have a default constructor and must implement
- * {@link #newAnalyzer()}.</p>
+ * {@link #get()}.</p>
  * @author Sascha Kohlmann
  */
-public abstract class AnalyzerFactory {
+public abstract class AnalyzerFactory implements Provider<Analyzer> {
 
     /** For logging. */
     private static final Log LOG =
@@ -105,5 +106,5 @@ public abstract class AnalyzerFactory {
      * Returns a new {@code Analyzer} instance.
      * @return a new {@code Analyzer} instance
      */
-    public abstract Analyzer newAnalyzer();
+    public abstract Analyzer get();
 }

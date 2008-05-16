@@ -17,6 +17,7 @@ package net.sf.eos.lucene;
 
 import static net.sf.eos.config.ConfigurationKey.Type.CLASSNAME;
 import net.sf.eos.EosException;
+import net.sf.eos.Provider;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.FactoryMethod;
@@ -34,10 +35,10 @@ import org.apache.lucene.search.Similarity;
  * configuration key.
  *
  * <p>Implementations must have a default constructor and must implement
- * {@link #newSimilarity()}.</p>
+ * {@link #get()}.</p>
  * @author Sascha Kohlmann
  */
-public abstract class SimilarityFactory {
+public abstract class SimilarityFactory implements Provider<Similarity> {
 
     /** For logging. */
     private static final Log LOG =
@@ -106,5 +107,5 @@ public abstract class SimilarityFactory {
      * Returns a new {@code Similarity} instance.
      * @return a new {@code Similarity} instance
      */
-    public abstract Similarity newSimilarity();
+    public abstract Similarity get();
 }
