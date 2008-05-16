@@ -15,24 +15,29 @@
  */
 package net.sf.eos;
 
+import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
+import static java.lang.annotation.ElementType.CONSTRUCTOR;
+import static java.lang.annotation.ElementType.PACKAGE;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
 import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+
 /**
- * The presence of this annotation on a method parameter indicates that
- * {@code null} is an acceptable value for that parameter. Cause of undefined
- * semantic it must not be used for parameters of primitive types.
+ * Use annotated types, methods or annotation types with care.
+ * <p><strong>Note:</strong> experimental</p>
  *
- * <p><strong>Note:</strong> experimental - inspired by <em>guice</em></p>
- *
- * @author Sascha Kohlmann
  * @since 0.1.0
+ * @author Sascha Kohlmann
  */
 @Experimental
+@Inherited
 @Documented
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.PARAMETER)
-public @interface Nullable { }
+@Retention(value=RUNTIME)
+@Target(value={METHOD, ANNOTATION_TYPE, CONSTRUCTOR, PACKAGE, TYPE})
+public @interface Experimental { }

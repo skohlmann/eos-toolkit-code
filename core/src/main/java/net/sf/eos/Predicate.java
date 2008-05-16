@@ -32,6 +32,7 @@ package net.sf.eos;
  * @since 0.1.0
  * @param <T> the value type
  */
+@Experimental
 public interface Predicate<T> {
 
    /**

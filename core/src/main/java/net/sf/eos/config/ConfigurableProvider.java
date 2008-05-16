@@ -1,5 +1,6 @@
 package net.sf.eos.config;
 
+import net.sf.eos.Experimental;
 import net.sf.eos.Provider;
 
 /**
@@ -11,6 +12,7 @@ import net.sf.eos.Provider;
  * @since 0.1.0
  * @param <T> the provided type
  */
+@Experimental
 public interface ConfigurableProvider<T> extends Provider<T> {
 
     /**

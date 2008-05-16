@@ -24,6 +24,7 @@ package net.sf.eos;
  * @since 0.1.0
  * @param <T> the provided type
  */
+@Experimental
 public interface Provider<T> {
 
     /**

@@ -15,24 +15,26 @@
  */
 package net.sf.eos;
 
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
 import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import net.sf.eos.config.ConfigurableProvider;
+
 /**
- * The presence of this annotation on a method parameter indicates that
- * {@code null} is an acceptable value for that parameter. Cause of undefined
- * semantic it must not be used for parameters of primitive types.
- *
+ * Annotates a method as unsupported. Useful for example
+ * {@link ConfigurableProvider} instances which dosn't support the {@link Provider#get()}
+ * method.
  * <p><strong>Note:</strong> experimental - inspired by <em>guice</em></p>
  *
- * @author Sascha Kohlmann
  * @since 0.1.0
+ * @author Sascha Kohlmann
  */
 @Experimental
 @Documented
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.PARAMETER)
-public @interface Nullable { }
+@Retention(value=RUNTIME)
+@Target(value=METHOD)
+public @interface Unsupported { }
