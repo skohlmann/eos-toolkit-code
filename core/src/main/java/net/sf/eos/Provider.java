@@ -22,12 +22,15 @@ package net.sf.eos;
  *
  * @author Sascha Kohlmann
  * @since 0.1.0
+ * @param <T> the provided type
  */
 public interface Provider<T> {
 
     /**
      * Returns an instance of the expected type. The returned type may or
      * may not be a new instance, depending on the implementation.
+     * @param <T> the provided type
+     * @return an instance of the expected type
      */
-    public T get()
+    public T get();
 }
