@@ -16,8 +16,8 @@
 package net.sf.eos.util;
 
 /**
- * Provides static methods to simpler condition handling. This needs less
- * coding for the developer.
+ * Provides static methods to simpler condition handling. This implies less
+ * code.
  * <p><strong>Example</strong></p>
  * <pre>
  *     if (reference == null) {
