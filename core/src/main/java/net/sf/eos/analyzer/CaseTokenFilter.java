@@ -17,6 +17,8 @@ package net.sf.eos.analyzer;
 
 import java.util.Locale;
 
+import net.sf.eos.Nullable;
+
 /**
  * Transforms the input token to a upper or lower cased format for a given
  * {@link Locale}. The default is to change in lower case format. If the
@@ -52,7 +54,8 @@ public class CaseTokenFilter extends TokenFilter {
      * @param source the source tokenizer
      * @param locale the {@code Locale} to use for lowercase handling.
      */
-    public CaseTokenFilter(final Tokenizer source, final Locale locale) {
+    public CaseTokenFilter(final Tokenizer source,
+                           @Nullable final Locale locale) {
         this(source, locale, false);
     }
 
@@ -63,7 +66,7 @@ public class CaseTokenFilter extends TokenFilter {
      *              {@code false}.
      */
     public CaseTokenFilter(final Tokenizer source,
-                           final Locale locale,
+                           @Nullable final Locale locale,
                            final boolean upper) {
         super(source);
         this.locale = locale;

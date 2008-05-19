@@ -18,6 +18,8 @@ package net.sf.eos.config;
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
+import net.sf.eos.Experimental;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
@@ -28,6 +30,7 @@ import java.lang.annotation.Target;
  * releases.</p>
  * @author Sascha Kohlmann
  */
+@Experimental
 @Retention(value=RUNTIME)
 @Target(value=TYPE)
 public @interface Services {

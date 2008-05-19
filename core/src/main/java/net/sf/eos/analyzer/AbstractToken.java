@@ -20,6 +20,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static net.sf.eos.util.Conditions.checkArgumentNotNull;
+
 /**
  * Simple implementation for reuse.
  * @author Sascha Kohlmann
@@ -70,14 +72,8 @@ public abstract class AbstractToken implements Token {
     public AbstractToken(final CharSequence tokenSequence,
                          final String type,
                          final Map<String, List<String>> metadata) {
-        if (type == null) {
-            throw new IllegalArgumentException("type is null");
-        }
-        if (tokenSequence == null) {
-            throw new IllegalArgumentException("tokenText is null");
-        }
-        this.text = tokenSequence;
-        this.type = type;
+        this.text = checkArgumentNotNull(tokenSequence, "tokenSequence is null");
+        this.type = checkArgumentNotNull(type, "type is null");
         this.metadata.putAll(metadata);
     }
 

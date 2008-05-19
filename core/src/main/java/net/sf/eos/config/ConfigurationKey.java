@@ -22,6 +22,8 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+import net.sf.eos.Experimental;
+
 
 /**
  * Indicates that a field name is a key of the {@link Configuration} data.
@@ -42,6 +44,7 @@ import java.lang.annotation.Target;
 @Documented
 @Retention(value=RUNTIME)
 @Target(value=FIELD)
+@Experimental
 public @interface ConfigurationKey {
 
     /** The possible type of the configuration parameter.

@@ -18,6 +18,8 @@ package net.sf.eos.analyzer;
 import java.text.BreakIterator;
 import java.util.Locale;
 
+import static net.sf.eos.util.Conditions.checkArgumentNotNull;
+
 /**
  * Tokenized a text into sentences.
  * <p>Based on {@link BreakIterator#getLineInstance(Locale)}.</p>
@@ -54,12 +56,9 @@ public class SentenceTokenizer /*extends Configured*/
     public SentenceTokenizer(
             @SuppressWarnings("hiding") final CharSequence text,
             @SuppressWarnings("hiding") final Locale locale) {
-        if (text == null) {
-            throw new IllegalArgumentException("text is null");
-        }
-        if (locale == null) {
-            throw new IllegalArgumentException("locale is null");
-        }
+        checkArgumentNotNull(text, "text is null");
+        checkArgumentNotNull(locale, "locale is null");
+
         this.itr = BreakIterator.getSentenceInstance(locale);
         final String toTokenize = text.toString();
         this.itr.setText(toTokenize);

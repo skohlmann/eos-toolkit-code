@@ -62,7 +62,7 @@ public abstract class TextBuilder extends Configured {
      */
     public static final class SpaceBuilder extends TextBuilder {
         @SuppressWarnings("nls")
-        public final static String SPACE = " ";
+        public final static String SPACE = new String(new char[] {0x20});
         @Override
         public CharSequence buildText(final List<Token> tokens) {
             final StringBuilder sb = new StringBuilder();

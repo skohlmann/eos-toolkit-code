@@ -18,6 +18,8 @@ package net.sf.eos.analyzer;
 import java.util.HashSet;
 import java.util.Set;
 
+import net.sf.eos.Nullable;
+
 /**
  * Filter for stop words out of the {@linkplain Token token} stream.
  * @author Sascha Kohlmann
@@ -32,7 +34,8 @@ public class StopTokenFilter extends TokenFilter {
      * @param stopWords a collection of stop words
      */
     public StopTokenFilter(final Tokenizer source,
-                @SuppressWarnings("hiding") final Set<CharSequence> stopWords) {
+                           @SuppressWarnings("hiding")
+                           @Nullable final Set<CharSequence> stopWords) {
         super(source);
         this.stopWords.addAll(stopWords);
     }

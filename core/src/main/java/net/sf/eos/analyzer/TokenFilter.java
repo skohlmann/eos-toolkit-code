@@ -15,6 +15,7 @@
  */
 package net.sf.eos.analyzer;
 
+import static net.sf.eos.util.Conditions.checkArgumentNotNull;
 
 /**
  * Main class to support {@code Tokenizer} chaining, also known as
@@ -34,28 +35,25 @@ public abstract class TokenFilter /*extends Configured*/
 
     /**
      * Creates a new instance.
-     * @param source the source <code>Tokenizer</code>.
+     * @param source the source {@code Tokenizer}.
      * @see #getSource()
      */
     @SuppressWarnings("nls")
     public TokenFilter(@SuppressWarnings("hiding") final Tokenizer source) {
-        if (source == null) {
-            throw new IllegalArgumentException("source is null");
-        }
-        this.source = source;
+        this.source = checkArgumentNotNull(source, "source is null");
     }
 
     /**
      * Implementations should use {@link #getSource()} to fetch the source
-     * <code>Tokenizer</code> an handle the resulting <code>Token</code>.
-     * @return the next token or <code>null</code>
+     * {@code Tokenizer} an handle the resulting {@code Token}.
+     * @return the next token or {@code null}
      * @throws TokenizerException if an error occurs
      */
     public abstract Token next() throws TokenizerException;
 
     /**
-     * Returns the source <code>Tokenizer</code>.
-     * @return the source <code>Tokenizer</code>
+     * Returns the source {@code Tokenizer}.
+     * @return the source {@code Tokenizer}
      */
     protected Tokenizer getSource() {
         assert this.source != null;

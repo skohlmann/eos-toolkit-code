@@ -13,21 +13,17 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.sf.eos;
+package net.sf.eos.search;
 
-import java.util.List;
-import java.util.Map;
+import net.sf.eos.Metadata;
 
 /**
- * Support for metadata.
+ * Holder for the search query.
  * @author Sascha Kohlmann
  */
-public interface Metadata {
+public class SearchHolder {
+          
+    private Metadata meta;
+    private String userQuery;
 
-    /**
-     * Returns simple metadata. The content of the metadata depends on the
-     * implementation.
-     * @return implementation dependend metadata. Maybe {@code null}.
-     */
-    Map<String, List<String>> getMeta();
 }

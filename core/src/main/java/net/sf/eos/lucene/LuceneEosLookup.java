@@ -47,53 +47,53 @@ public abstract class LuceneEosLookup extends Configured implements EosLookup {
     public final static String LUCENE_EOS_LOOKUP_IMPL_CONFIG_NAME = 
         "net.sf.eos.lucene.LuceneEosLookup.impl";
 
-    /**
-     * Creates a new instance of a of the lookup. If the
-     * {@code Configuration} contains a key
-     * {@link #LUCENE_EOS_LOOKUP_IMPL_CONFIG_NAME} a new instance of the
-     * classname in the value will instantiate. The 
-     * {@link DefaultLuceneEosLookup} will instantiate if there is no
-     * value setted.
-     * @param config the configuration
-     * @return a new instance
-     * @throws EosException if it is not possible to instantiate an instance
-     */
-    @FactoryMethod(key=LUCENE_EOS_LOOKUP_IMPL_CONFIG_NAME,
-                   implementation=DefaultLuceneEosLookup.class)
-    public final static LuceneEosLookup
-            newInstance(final Configuration config) throws EosException {
-
-        final Thread t = Thread.currentThread();
-        ClassLoader classLoader = t.getContextClassLoader();
-        if (classLoader == null) {
-            classLoader = LuceneEosLookup.class.getClassLoader();
-        }
-
-        final String clazzName =
-            config.get(LUCENE_EOS_LOOKUP_IMPL_CONFIG_NAME,
-                       DefaultLuceneEosLookup.class.getName());
-
-        try {
-            final Class<? extends LuceneEosLookup> clazz =
-                (Class<? extends LuceneEosLookup>) Class
-                    .forName(clazzName, true, classLoader);
-            try {
-
-                final LuceneEosLookup lookup = clazz.newInstance();
-                lookup.configure(config);
-                if (LOG.isDebugEnabled()) {
-                    LOG.debug("LuceneEosLookup instance: "
-                              + lookup.getClass().getName());
-                }
-                return lookup;
-
-            } catch (final InstantiationException e) {
-                throw new EosException(e);
-            } catch (final IllegalAccessException e) {
-                throw new EosException(e);
-            }
-        } catch (final ClassNotFoundException e) {
-            throw new EosException(e);
-        }
-    }
+//    /**
+//     * Creates a new instance of a of the lookup. If the
+//     * {@code Configuration} contains a key
+//     * {@link #LUCENE_EOS_LOOKUP_IMPL_CONFIG_NAME} a new instance of the
+//     * classname in the value will instantiate. The 
+//     * {@link DefaultLuceneEosLookup} will instantiate if there is no
+//     * value setted.
+//     * @param config the configuration
+//     * @return a new instance
+//     * @throws EosException if it is not possible to instantiate an instance
+//     */
+//    @FactoryMethod(key=LUCENE_EOS_LOOKUP_IMPL_CONFIG_NAME,
+//                   implementation=DefaultLuceneEosLookup.class)
+//    public final static LuceneEosLookup
+//            newInstance(final Configuration config) throws EosException {
+//
+//        final Thread t = Thread.currentThread();
+//        ClassLoader classLoader = t.getContextClassLoader();
+//        if (classLoader == null) {
+//            classLoader = LuceneEosLookup.class.getClassLoader();
+//        }
+//
+//        final String clazzName =
+//            config.get(LUCENE_EOS_LOOKUP_IMPL_CONFIG_NAME,
+//                       DefaultLuceneEosLookup.class.getName());
+//
+//        try {
+//            final Class<? extends LuceneEosLookup> clazz =
+//                (Class<? extends LuceneEosLookup>) Class
+//                    .forName(clazzName, true, classLoader);
+//            try {
+//
+//                final LuceneEosLookup lookup = clazz.newInstance();
+//                lookup.configure(config);
+//                if (LOG.isDebugEnabled()) {
+//                    LOG.debug("LuceneEosLookup instance: "
+//                              + lookup.getClass().getName());
+//                }
+//                return lookup;
+//
+//            } catch (final InstantiationException e) {
+//                throw new EosException(e);
+//            } catch (final IllegalAccessException e) {
+//                throw new EosException(e);
+//            }
+//        } catch (final ClassNotFoundException e) {
+//            throw new EosException(e);
+//        }
+//    }
 }

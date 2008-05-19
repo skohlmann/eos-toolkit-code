@@ -139,8 +139,7 @@ public abstract class AbstractDictionaryBasedEntityRecognizer
      * @see net.sf.eos.entity.DictionaryBasedEntityRecognizer#configure(net.sf.eos.config.Configuration)
      */
     public void configure(
-            @SuppressWarnings("hiding") final Configuration config)
-                throws EosException {
+            @SuppressWarnings("hiding") final Configuration config) {
         this.config = new Configuration(config);
         final String lMaxToken =
             config.get(MAX_TOKEN_CONFIG_NAME, DEFAULT_MAX_TOKEN);

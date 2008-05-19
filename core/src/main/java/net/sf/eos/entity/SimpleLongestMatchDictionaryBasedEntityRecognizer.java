@@ -24,6 +24,9 @@ import net.sf.eos.analyzer.Token;
 import net.sf.eos.analyzer.Tokenizer;
 import net.sf.eos.analyzer.TokenizerException;
 
+import static net.sf.eos.util.Conditions.checkArgument;
+import static net.sf.eos.util.Conditions.checkState;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -81,9 +84,7 @@ public class SimpleLongestMatchDictionaryBasedEntityRecognizer
         final Tokenizer source = getSource();
         assert source != null;
         final Map<CharSequence, Set<CharSequence>> entityMap = getEntityMap();
-        if (entityMap == null) {
-            throw new IllegalStateException("entitymap is null");
-        }
+        checkState(entityMap != null, "entitymap is null");
         {
             Token t = null;
             while (this.longestMatchQueue.size() != max
@@ -206,9 +207,7 @@ public class SimpleLongestMatchDictionaryBasedEntityRecognizer
         private int maxSize = 0;
 
         public FixedSizeQueue(final int size) {
-            if (size < 0) {
-                throw new IllegalArgumentException("size < 0");
-            }
+            checkArgument(size >= 0, "size < 0");
             this.maxSize = size;
         }
 

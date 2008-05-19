@@ -19,6 +19,8 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+import net.sf.eos.Experimental;
+
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
@@ -32,6 +34,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 @Retention(value=RUNTIME)
 @Target(value=METHOD)
+@Experimental
 public @interface FactoryMethod {
 
     /** Default none implementation. */

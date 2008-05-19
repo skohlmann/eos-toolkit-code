@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import net.sf.eos.Function;
+
 /**
  * Simple splitter for user search queries. User search queries must be very
  * simple to understand (for the most users, not for power user).
@@ -38,7 +40,7 @@ import java.util.StringTokenizer;
  *
  * @author Sascha Kohlmann
  */
-public class UserQueryParser {
+public class UserQueryParser implements Function<String, List<String> > {
 
     /**
      * Splits the user query in different terms and phrases.
@@ -47,7 +49,7 @@ public class UserQueryParser {
      * @return Array with different search information
      */
     @SuppressWarnings("nls")
-    public final List<String> parseUserQuery(final String query) {
+    final List<String> parseUserQuery(final String query) {
 
         if (query == null) {
             return new ArrayList<String>(0);
@@ -117,5 +119,15 @@ public class UserQueryParser {
             retval.add(part);
         }
         return retval;
+    }
+
+    /**
+     * Splits the user query in different terms and phrases.
+     *
+     * @param query the users search query
+     * @return Array with different search information
+     */
+    public List<String> apply(final String query) {
+        return parseUserQuery(query);
     }
 }

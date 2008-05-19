@@ -21,6 +21,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+import net.sf.eos.Experimental;
+
 /**
  * Indicates the internal use of a service in an instance. Use {@link Services}
  * if the implementation supports more than one {@code Service}.
@@ -30,6 +32,7 @@ import java.lang.annotation.Target;
  * @author Sascha Kohlmann
  * @see Services
  */
+@Experimental
 @Retention(value=RUNTIME)
 @Target(value=TYPE)
 public @interface Service {

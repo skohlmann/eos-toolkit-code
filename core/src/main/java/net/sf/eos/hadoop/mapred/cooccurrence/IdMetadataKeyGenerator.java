@@ -15,7 +15,6 @@
  */
 package net.sf.eos.hadoop.mapred.cooccurrence;
 
-import static net.sf.eos.config.ConfigurationKey.Type.CLASSNAME;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

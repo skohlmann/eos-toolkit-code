@@ -21,7 +21,7 @@ import net.sf.eos.Provider;
 /**
  * Instances supply objects of a single type which are {@code configurable}.
  *
- * <p><strong>Note:</strong> experimental - inspired by <em>guice</em></p>
+ * <p><strong>Note:</strong> experimental</p>
  *
  * @author Sascha Kohlmann
  * @since 0.1.0
@@ -29,14 +29,4 @@ import net.sf.eos.Provider;
  * @see net.sf.eos.Unsupported
  */
 @Experimental
-public interface ConfigurableProvider<T> extends Provider<T> {
-
-    /**
-     * Returns an instance of the expected type. The returned type may or
-     * may not be a new instance, depending on the implementation.
-     * @param config the {@code configuration}
-     * @return an instance of the expected type
-     */
-    public T get(final Configuration config);
-
-}
+public interface ConfigurableProvider<T> extends Provider<T>, Configurable { }

@@ -15,6 +15,8 @@
  */
 package net.sf.eos.analyzer;
 
+import static net.sf.eos.util.Conditions.checkArgumentNotNull;
+
 /**
  * <p>A token filter that supports handling with resettable tokenizer. Use case
  * is a tokenizer chain where the last tokenizer in the chain is a resettable
@@ -45,14 +47,11 @@ public final class ResettableTokenFilter extends TokenFilter
     public ResettableTokenFilter(final Tokenizer source,
             @SuppressWarnings("hiding") final ResettableTokenizer resettable) {
         super(source);
-        if (resettable == null) {
-            throw new IllegalStateException("resettable is null");
-        }
-        this.resettable = resettable;
+        this.resettable = checkArgumentNotNull(resettable);
     }
 
     /**
-     * Usefull if the tokenizer are the same.
+     * Useful if the tokenizer are the same.
      * @param resettableSource the source tokenizer
      */
     public ResettableTokenFilter(final ResettableTokenizer resettableSource) {

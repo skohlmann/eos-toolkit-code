@@ -15,6 +15,7 @@
  */
 package net.sf.eos.hadoop.mapred;
 
+import static net.sf.eos.util.Conditions.checkState;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.GnuParser;
@@ -110,11 +111,7 @@ public abstract class AbstractEosDriver extends Configured implements Tool {
      */
     @SuppressWarnings("nls")
     protected final JobConf getJobConf() {
-        if (this.jobConf == null) {
-            throw new IllegalStateException(
-                    "Called before run(String[]) thru super."
-            );
-        }
+        checkState(this.jobConf != null, "Called before run(String[]) thru super.");
 
         return this.jobConf;
     }
