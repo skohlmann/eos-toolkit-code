@@ -34,8 +34,8 @@ import static net.sf.eos.util.Conditions.checkArgumentNotNull;
 public class Compositions {
 
     /**
-     * Returns the composition of two functions. For {@code f: F&#8594;I} and
-     * {@code g: I&#8594;T}, composition is defined as the function {@code h}
+     * Returns the composition of two functions. For {@code f: F→I} and
+     * {@code g: I→T}, composition is defined as the function {@code h}
      * such that {@code h(x) == g(f(x))} for each {@code x}.
      *
      * <p>The usage interface is designed as a {@code from} function which
