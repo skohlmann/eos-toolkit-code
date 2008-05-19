@@ -118,9 +118,9 @@ public final class EosDocument implements Metadata {
             return false;
         }
         final EosDocument doc = (EosDocument) other;
-        return EqualsAndHashUtil.equals(this.text, doc.text)
-                && EqualsAndHashUtil.equals(this.title, doc.title)
-                && EqualsAndHashUtil.equals(this.meta, doc.meta);
+        return EqualsAndHashUtil.isEqual(this.text, doc.text)
+                && EqualsAndHashUtil.isEqual(this.title, doc.title)
+                && EqualsAndHashUtil.isEqual(this.meta, doc.meta);
     }
 
     /**

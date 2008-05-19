@@ -21,13 +21,12 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
-
-import net.sf.eos.config.ConfigurableProvider;
+import java.util.Iterator;
 
 /**
  * Annotates a method as unsupported. Useful for example
- * {@link ConfigurableProvider} instances which doesn't support the
- * {@link Provider#get()} method.
+ * {@link Iterator} instances which doesn't support the
+ * {@link Iterator#remove()} method.
  *
  * <p>Such an annotated method should throw a
  * {@link UnsupportedOperationException}.</p>
