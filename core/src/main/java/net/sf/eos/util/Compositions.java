@@ -25,7 +25,7 @@ import static net.sf.eos.util.Conditions.checkArgumentNotNull;
  * Defines some useful compositions for handling with {@link Function Functions},
  * {@link Predicate Predicates} and {@link Provider Providers}.
  *
- * <p>Each {@code compositions} follows the rule of a {@code from} or <em>source</em>
+ * <p>Each {@code composition} follows the rule of a {@code from} or <em>source</em>
  * entity, propagating its result value to a {@code to} or <em>target</em> entity.</p>
  *
  * @author Sascha Kohlmann
