@@ -15,8 +15,8 @@
  */
 package net.sf.eos.search;
 
-import net.sf.eos.config.ConfigurableProvider;
+import net.sf.eos.config.ConfigurableSupplier;
 
-public interface EosLookupProvider extends ConfigurableProvider<EosLookup> {
+public interface EosLookupProvider extends ConfigurableSupplier<EosLookup> {
 
 }

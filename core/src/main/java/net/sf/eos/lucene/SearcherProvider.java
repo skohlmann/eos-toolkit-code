@@ -22,7 +22,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.search.Searcher;
 
 import net.sf.eos.EosException;
-import net.sf.eos.Provider;
+import net.sf.eos.Supplier;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.ConfigurationException;
 import net.sf.eos.config.ConfigurationKey;
@@ -30,7 +30,7 @@ import net.sf.eos.config.Configured;
 import net.sf.eos.config.FactoryMethod;
 
 public abstract class SearcherProvider extends Configured
-        implements Provider<Searcher> {
+        implements Supplier<Searcher> {
 
     /** For logging. */
     private static final Log LOG =

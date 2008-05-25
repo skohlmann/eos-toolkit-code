@@ -22,7 +22,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 // import net.sf.eos.Provider;
-import net.sf.eos.Provider;
+import net.sf.eos.Supplier;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.Configured;
@@ -35,7 +35,7 @@ import net.sf.eos.medline.MedlineTokenizerProvider;
  * @see ResettableTokenFilter
  */
 public abstract class TokenizerProvider extends Configured
-        implements Provider<ResettableTokenizer> {
+        implements Supplier<ResettableTokenizer> {
 
     /** For logging. */
     private static final Log LOG =
@@ -45,7 +45,7 @@ public abstract class TokenizerProvider extends Configured
      * @see #newInstance(Configuration) */
     @SuppressWarnings("nls")
     @ConfigurationKey(type=CLASSNAME,
-                            description="Provider supports the creation of stacked "
+                            description="Provider supports the creation of stacked \n"
                                         + "Tokenizers following the decoration "
                                         + "pattern.")
     public final static String TOKENIZER_PROVIDER_IMPL_CONFIG_NAME =

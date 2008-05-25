@@ -17,7 +17,7 @@ package net.sf.eos.lucene;
 
 import static net.sf.eos.config.ConfigurationKey.Type.CLASSNAME;
 import net.sf.eos.EosException;
-import net.sf.eos.Provider;
+import net.sf.eos.Supplier;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.FactoryMethod;
@@ -39,7 +39,7 @@ import org.apache.lucene.analysis.Analyzer;
  * {@link #get()}.</p>
  * @author Sascha Kohlmann
  */
-public abstract class AnalyzerProvider implements Provider<Analyzer> {
+public abstract class AnalyzerProvider implements Supplier<Analyzer> {
 
     /** For logging. */
     private static final Log LOG =

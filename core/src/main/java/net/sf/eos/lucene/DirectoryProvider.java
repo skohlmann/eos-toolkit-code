@@ -22,7 +22,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.store.Directory;
 
 import net.sf.eos.EosException;
-import net.sf.eos.config.ConfigurableProvider;
+import net.sf.eos.config.ConfigurableSupplier;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.ConfigurationException;
 import net.sf.eos.config.ConfigurationKey;
@@ -30,7 +30,7 @@ import net.sf.eos.config.Configured;
 import net.sf.eos.config.FactoryMethod;
 
 public abstract class DirectoryProvider extends Configured
-        implements ConfigurableProvider<Directory> {
+        implements ConfigurableSupplier<Directory> {
 
     /** For logging. */
     private static final Log LOG =

@@ -15,16 +15,16 @@
  */
 package net.sf.eos.util;
 
-import net.sf.eos.Provider;
-import net.sf.eos.config.ConfigurableProvider;
+import net.sf.eos.Supplier;
+import net.sf.eos.config.ConfigurableSupplier;
 import net.sf.eos.config.Configuration;
 
 import static net.sf.eos.util.Conditions.checkArgumentNotNull;
 
-public final class ProviderFactory<T> {
+public final class SupplierFactory<T> {
 
     /**
-     * Creates a new instance of the {@link Provider} class. The
+     * Creates a new instance of the {@link Supplier} class. The
      * {@code provider} must support a default Constructor.
      * @param <T> the type of the {@code provider}
      * @param clazz the class instance of the {@code provider}
@@ -32,11 +32,11 @@ public final class ProviderFactory<T> {
      * @throw IllegalArgumentException if it is not possible to create
      *                                 a new {@code provider}
      */
-    public static final <T> Provider<T>
-                newProvider(final Class<? extends Provider<T>> clazz) {
+    public static final <T> Supplier<T>
+                newSupplier(final Class<? extends Supplier<T>> clazz) {
         checkArgumentNotNull(clazz, "clazz is null");
         try {
-            final Provider<T> p = clazz.newInstance();
+            final Supplier<T> p = clazz.newInstance();
             return p;
         } catch (final InstantiationException e) {
             throw new IllegalArgumentException(e);
@@ -46,7 +46,7 @@ public final class ProviderFactory<T> {
     }
 
     /**
-     * Creates a new instance of the {@link ConfigurableProvider} class.
+     * Creates a new instance of the {@link ConfigurableSupplier} class.
      * The {@code provider} must support a default Constructor.
      * @param <T> the type of the {@code provider}
      * @param clazz the class instance of the {@code provider}
@@ -54,18 +54,18 @@ public final class ProviderFactory<T> {
      * @throw IllegalArgumentException if it is not possible to create
      *                                 a new {@code provider}
      */
-    public static final <T> ConfigurableProvider<T>
-            newProvider(final Class<? extends ConfigurableProvider<T>> clazz,
+    public static final <T> ConfigurableSupplier<T>
+            newSupplier(final Class<? extends ConfigurableSupplier<T>> clazz,
                         final Configuration config) {
         checkArgumentNotNull(config, "configuration is null");
-        final ConfigurableProvider<T> cp =
-             (ConfigurableProvider<T>) newProvider(clazz);
+        final ConfigurableSupplier<T> cp =
+             (ConfigurableSupplier<T>) newSupplier(clazz);
         cp.configure(config);
         return cp;
     }
 
     /**
-     * Creates a new instance of the {@link Provider} class. The
+     * Creates a new instance of the {@link Supplier} class. The
      * {@code provider} must support a default Constructor.
      * @param <T> the type of the {@code provider}
      * @param configName the name of the key that value in {@code config}
@@ -75,17 +75,17 @@ public final class ProviderFactory<T> {
      * @throw IllegalArgumentException if it is impossible to create
      *                                 a new {@code provider}
      */
-    public static final <T> Provider<T> newProvider(
+    public static final <T> Supplier<T> newSupplier(
                  final String configName,
                  final Configuration config) {
         checkArgumentNotNull(configName, "config name is null");
         checkArgumentNotNull(config, "configuration is null");
         final String clazzName = config.get(configName);
-        return newProvider(configName, config, clazzName);
+        return newSupplier(configName, config, clazzName);
     }
 
     /**
-     * Creates a new instance of the {@link Provider} class. The
+     * Creates a new instance of the {@link Supplier} class. The
      * {@code provider} must support a default Constructor.
      * @param <T> the type of the {@code provider}
      * @param configName the name of the key that value in {@code config}
@@ -96,7 +96,7 @@ public final class ProviderFactory<T> {
      * @throw IllegalArgumentException if it is impossible to create
      *                                 a new {@code provider}
      */
-    public static final <T> Provider<T> newProvider(
+    public static final <T> Supplier<T> newSupplier(
                 final String configName,
                 final Configuration config,
                 final String defaultClazzName) {
@@ -104,13 +104,13 @@ public final class ProviderFactory<T> {
         checkArgumentNotNull(config, "configuration is null");
         final String clazzName = config.get(configName, defaultClazzName);
         try {
-            final Class<Provider<T>> clazz =
-                (Class<Provider<T>>) Class.forName(clazzName);
+            final Class<Supplier<T>> clazz =
+                (Class<Supplier<T>>) Class.forName(clazzName);
 
-            final Provider<T> p = (Provider<T>) newProvider(clazz);
-            if (p instanceof ConfigurableProvider) {
-                final ConfigurableProvider<T> cp =
-                    (ConfigurableProvider<T>) p;
+            final Supplier<T> p = (Supplier<T>) newSupplier(clazz);
+            if (p instanceof ConfigurableSupplier) {
+                final ConfigurableSupplier<T> cp =
+                    (ConfigurableSupplier<T>) p;
                 cp.configure(config);
             }
             return p;

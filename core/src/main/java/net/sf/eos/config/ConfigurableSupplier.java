@@ -13,24 +13,20 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.sf.eos;
+package net.sf.eos.config;
+
+import net.sf.eos.Experimental;
+import net.sf.eos.Supplier;
 
 /**
- * Instances supply objects of a single type.
+ * Instances supply objects of a single type which are {@code configurable}.
  *
- * <p><strong>Note:</strong> experimental - inspired by <em>guice</em></p>
+ * <p><strong>Note:</strong> experimental</p>
  *
  * @author Sascha Kohlmann
  * @since 0.1.0
  * @param <T> the provided type
+ * @see net.sf.eos.Unsupported
  */
 @Experimental
-public interface Provider<T> {
-
-    /**
-     * Returns an instance of the expected type. The returned type may or
-     * may not be a new instance, depending on the implementation.
-     * @return an instance of the expected type
-     */
-    public T get();
-}
+public interface ConfigurableSupplier<T> extends Supplier<T>, Configurable { }

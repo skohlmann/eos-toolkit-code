@@ -22,6 +22,5 @@
 	<classpathentry kind="var" path="M2_REPO/xmlenc/xmlenc/0.52/xmlenc-0.52.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/apache/hadoop/hadoop-test/0.16.2/hadoop-test-0.16.2.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/apache/lucene/lucene-core/2.3.1/lucene-core-2.3.1.jar"/>
-	<classpathentry kind="lib" path="/home/sk/app/java/jdk1.5.0_09/lib/tools.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

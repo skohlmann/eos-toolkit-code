@@ -18,44 +18,44 @@ package net.sf.eos.util;
 import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 
-import net.sf.eos.Provider;
-import net.sf.eos.config.ConfigurableProvider;
+import net.sf.eos.Supplier;
+import net.sf.eos.config.ConfigurableSupplier;
 import net.sf.eos.config.Configuration;
 
 
-public class ProviderFactoryTest {
+public class SupplierFactoryTest {
 
     @Test
     public void creatInstanceWithClass() {
-        final Provider<String> p =
-            ProviderFactory.newProvider(StringProvider.class);
+        final Supplier<String> p =
+            SupplierFactory.newSupplier(StringSupplier.class);
 
-        assertTrue(p instanceof StringProvider);
+        assertTrue(p instanceof StringSupplier);
     }
 
     @Test(expected=IllegalArgumentException.class)
     public void creatInstanceWithClassAsNull() {
-        ProviderFactory.newProvider(null);
+        SupplierFactory.newSupplier(null);
     }
 
     @Test
     public void creatInstanceWithConfigurableProvider() {
-        final Provider<String> p =
-            ProviderFactory.newProvider(ConfigurableStringProvider.class,
+        final Supplier<String> p =
+            SupplierFactory.newSupplier(ConfigurableStringSupplier.class,
                                         new Configuration());
 
-        assertTrue(p instanceof ConfigurableProvider);
+        assertTrue(p instanceof ConfigurableSupplier);
     }
 
     @Test(expected=IllegalArgumentException.class)
-    public void creatInstanceWithConfigurableProviderWithNullClass() {
-        ProviderFactory.newProvider((Class) null,
+    public void creatInstanceWithConfigurableSupplierWithNullClass() {
+        SupplierFactory.newSupplier((Class) null,
                                     new Configuration());
     }
 
     @Test(expected=IllegalArgumentException.class)
-    public void creatInstanceWithConfigurableProviderWithNullConfiguration() {
-        ProviderFactory.newProvider(ConfigurableStringProvider.class,
+    public void creatInstanceWithConfigurableSupplierWithNullConfiguration() {
+        SupplierFactory.newSupplier(ConfigurableStringSupplier.class,
                                     null);
     }
 
@@ -63,45 +63,45 @@ public class ProviderFactoryTest {
     public void creatInstanceWithClassWithConfigurationAndName() {
         final String key = "key";
         final Configuration config = new Configuration();
-        config.set(key, StringProvider.class.getName());
-        final Provider<String> p =
-            ProviderFactory.newProvider(key, config);
+        config.set(key, StringSupplier.class.getName());
+        final Supplier<String> p =
+            SupplierFactory.newSupplier(key, config);
 
-        assertTrue(p instanceof StringProvider);
+        assertTrue(p instanceof StringSupplier);
     }
 
     @Test
     public void creatInstanceWithClassWithConfigurationAndDefaultName() {
         final String key = "key";
         final Configuration config = new Configuration();
-        final Provider<String> p =
-            ProviderFactory.newProvider(key,
+        final Supplier<String> p =
+            SupplierFactory.newSupplier(key,
                                         config,
-                                        StringProvider.class.getName());
+                                        StringSupplier.class.getName());
 
-        assertTrue(p instanceof StringProvider);
+        assertTrue(p instanceof StringSupplier);
     }
 
     @Test
     public void creatInstanceWithClassWithConfigurationAndNoDefaultName() {
         final String key = "key";
         final Configuration config = new Configuration();
-        config.set(key, ConfigurableStringProvider.class.getName());
-        final Provider<String> p =
-            ProviderFactory.newProvider(key,
+        config.set(key, ConfigurableStringSupplier.class.getName());
+        final Supplier<String> p =
+            SupplierFactory.newSupplier(key,
                                         config,
-                                        StringProvider.class.getName());
+                                        StringSupplier.class.getName());
 
-        assertTrue(p instanceof ConfigurableStringProvider);
+        assertTrue(p instanceof ConfigurableStringSupplier);
     }
 
-    final static class StringProvider implements Provider<String> {
+    final static class StringSupplier implements Supplier<String> {
         public String get() {
             return "";
         }
     }
 
-    final static class ConfigurableStringProvider implements ConfigurableProvider<String> {
+    final static class ConfigurableStringSupplier implements ConfigurableSupplier<String> {
         public String get() {
             return "";
         }

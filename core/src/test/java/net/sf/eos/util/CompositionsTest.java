@@ -16,9 +16,12 @@
 package net.sf.eos.util;
 
 import net.sf.eos.Function;
+import net.sf.eos.Predicate;
+import net.sf.eos.Supplier;
 
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class CompositionsTest {
 
@@ -56,5 +59,89 @@ public class CompositionsTest {
             });
         final String result = f.apply("from");
         assertEquals("from-to", result);
+    }
+
+
+    @SuppressWarnings("unchecked")
+    @Test(expected=IllegalArgumentException.class)
+    public void supplierCompositionWithNullProvider() {
+        Compositions.compose(new Supplier() {
+            public Object get() {
+                return null;
+            }
+        }, (Function) null);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Test(expected=IllegalArgumentException.class)
+    public void supplierCompositionWithNullFunction() {
+        Compositions.compose((Supplier) null,
+            new Function() {
+                public Object apply(final Object from) {
+                    return null;
+                }
+            }
+        );
+    }
+
+    @SuppressWarnings("nls")
+    @Test
+    public void validSupplierComposition() {
+        final Supplier<String> p =
+            Compositions.compose(
+                new Supplier<Integer>() {
+                    public Integer get() {
+                        return 1;
+                    }
+                },
+                new Function<Integer, String>() {
+                    public String apply(final Integer i) {
+                        return i.toString();
+                    }
+                }
+            );
+        assertEquals("1", p.get());
+    }
+
+    @SuppressWarnings("unchecked")
+    @Test(expected=IllegalArgumentException.class)
+    public void predicateCompositionWithNullFunction() {
+        Compositions.compose(new Function() {
+                public Object apply(Object from) {
+                    return null;
+                }
+            }, (Predicate) null);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Test(expected=IllegalArgumentException.class)
+    public void preciateCompositionWithNulPredicate() {
+        Compositions.compose((Function) null,
+            new Predicate() {
+                public boolean evaluate(Object t) {
+                    return false;
+                }
+            }
+        );
+    }
+
+    @SuppressWarnings("nls")
+    @Test
+    public void validPredicateComposition() {
+        final Predicate<String> p =
+            Compositions.compose(
+                new Function<String, Integer>() {
+                    public Integer apply(final String from) {
+                        return Integer.valueOf(from);
+                    }
+                },
+                new Predicate<Integer>() {
+                    @SuppressWarnings("boxing")
+                    public boolean evaluate(final Integer t) {
+                        return t == 2;
+                    }
+                }
+            );
+        assertTrue(p.evaluate("2"));
     }
 }
