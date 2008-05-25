@@ -20,7 +20,7 @@ import net.sf.eos.analyzer.ResettableTokenizer;
 import net.sf.eos.analyzer.SentenceTokenizer;
 import net.sf.eos.analyzer.TextBuilder;
 import net.sf.eos.document.EosDocument;
-import net.sf.eos.medline.MedlineTokenizerProvider;
+import net.sf.eos.medline.MedlineTokenizerSupplier;
 import net.sf.eos.sentence.DefaultSentencer;
 import net.sf.eos.sentence.Sentencer;
 
@@ -51,7 +51,7 @@ public class DefaultSentencerTest {
 
         final SentenceTokenizer sentenceTokenizer = new SentenceTokenizer();
         final ResettableTokenizer tokenizer =
-            new MedlineTokenizerProvider().get();
+            new MedlineTokenizerSupplier().get();
 
         final Sentencer sentencer = new DefaultSentencer();
         final Map<String, EosDocument> sentenced =
@@ -89,7 +89,7 @@ public class DefaultSentencerTest {
 
         final SentenceTokenizer sentenceTokenizer = new SentenceTokenizer();
         final ResettableTokenizer tokenizer =
-            new MedlineTokenizerProvider().get();
+            new MedlineTokenizerSupplier().get();
 
         final Sentencer sentencer = new DefaultSentencer();
         final Map<String, EosDocument> sentenced1 =

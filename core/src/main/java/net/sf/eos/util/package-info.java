@@ -19,5 +19,6 @@
  * Utilities which make no sence otherwhere.
  *
  * @since 0.1.0
+ * @author Sascha Kohlmann
  */
 package net.sf.eos.util;

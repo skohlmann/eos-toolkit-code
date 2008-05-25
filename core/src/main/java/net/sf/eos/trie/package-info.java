@@ -49,5 +49,6 @@
  * @see net.sf.eos.hadoop
  * @see net.sf.eos.entity
  * @see net.sf.eos.hadoop.mapred.cooccurrence
+ * @author Sascha Kohlmann
  */
 package net.sf.eos.trie;

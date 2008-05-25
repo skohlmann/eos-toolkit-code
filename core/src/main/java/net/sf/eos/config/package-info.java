@@ -25,5 +25,6 @@
  * configuration system.</p>
  *
  * @since 0.1.0
+ * @author Sascha Kohlmann
  */
 package net.sf.eos.config;

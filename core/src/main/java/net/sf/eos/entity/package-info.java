@@ -25,5 +25,6 @@
  *  which supports a longest match named entity recognition.</p>
  *
  * @since 0.1.0
+ * @author Sascha Kohlmann
  */
 package net.sf.eos.entity;

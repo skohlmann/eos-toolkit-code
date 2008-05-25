@@ -24,5 +24,6 @@
  *
  * @since 0.1.0
  * @see net.sf.eos.analyzer
+ * @author Sascha Kohlmann
  */
 package net.sf.eos.medline;

@@ -22,5 +22,6 @@
  * information in some core &#949;&#959;s data structures.</p>
  *
  * @since 0.1.0
+ * @author Sascha Kohlmann
  */
 package net.sf.eos;

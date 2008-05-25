@@ -16,10 +16,11 @@
 
 
 /**
- * <p>Contains adapter and support for reuse of 
- * <a href='http://lucene.apache.org/' title='Homepage'>Lucene</a> Tokenizer.</p>
+ * Contains I/O support. The {@code writer} example
+ * {@link net.sf.eos.io.NewlineReplaceWriter} filters out all newline characters
+ * from a datastream an replace it with ASCII 0x20.
  *
  * @since 0.1.0
  * @author Sascha Kohlmann
  */
-package net.sf.eos.analyzer.lucene;
+package net.sf.eos.io;

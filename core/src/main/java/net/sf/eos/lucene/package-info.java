@@ -40,5 +40,6 @@
  *  factory method to create a new instance.</p>
  *
  * @since 0.1.0
+ * @author Sascha Kohlmann
  */
 package net.sf.eos.lucene;

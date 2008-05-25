@@ -26,5 +26,6 @@
  *  configuration is set.</p>
  *
  * @since 0.1.0
+ * @author Sascha Kohlmann
  */
 package net.sf.eos.sentence;

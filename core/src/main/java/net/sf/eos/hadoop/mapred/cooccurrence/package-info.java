@@ -21,5 +21,6 @@
  *
  * @since 0.1.0
  * @see net.sf.eos.entity
+ * @author Sascha Kohlmann
  */
 package net.sf.eos.hadoop.mapred.cooccurrence;

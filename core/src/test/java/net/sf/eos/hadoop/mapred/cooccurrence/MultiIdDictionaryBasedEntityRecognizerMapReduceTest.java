@@ -28,7 +28,7 @@ import net.sf.eos.hadoop.TestDistributedCacheStrategy;
 import net.sf.eos.hadoop.mapred.Index;
 import net.sf.eos.hadoop.mapred.cooccurrence.DictionaryBasedEntityRecognizerMapper;
 import net.sf.eos.hadoop.mapred.cooccurrence.DictionaryBasedEntityRecognizerReducer;
-import net.sf.eos.medline.MedlineTokenizerProvider;
+import net.sf.eos.medline.MedlineTokenizerSupplier;
 import net.sf.eos.trie.AbstractTrieLoader;
 import net.sf.eos.trie.XmlTrieLoader;
 
@@ -105,7 +105,7 @@ public class MultiIdDictionaryBasedEntityRecognizerMapReduceTest
         jobConf.set(Serializer.SERIALIZER_IMPL_CONFIG_NAME,
                     XmlSerializer.class.getName());
         jobConf.set(TokenizerSupplier.TOKENIZER_PROVIDER_IMPL_CONFIG_NAME,
-                    MedlineTokenizerProvider.class.getName());
+                    MedlineTokenizerSupplier.class.getName());
         jobConf.set(AbstractTrieLoader.TRIE_LOADER_IMPL_CONFIG_NAME,
                     XmlTrieLoader.class.getName());
         jobConf.set(AbstractDictionaryBasedEntityRecognizer

@@ -22,5 +22,6 @@
  * {@link java.lang.CharSequence} and {@link java.lang.String} parts.</p>
  *
  * @since 0.1.0
+ * @author Sascha Kohlmann
  */
 package net.sf.eos.document;

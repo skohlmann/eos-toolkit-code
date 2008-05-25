@@ -20,5 +20,6 @@
  *
  * @since 0.1.0
  * @see net.sf.eos.sentence
+ * @author Sascha Kohlmann
  */
 package net.sf.eos.hadoop.mapred.decompose;

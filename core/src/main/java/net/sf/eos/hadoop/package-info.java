@@ -23,5 +23,6 @@
  * to use Hadoops distributeded cache environment in different use cases.</p>
  *
  * @since 0.1.0
+ * @author Sascha Kohlmann
  */
 package net.sf.eos.hadoop;

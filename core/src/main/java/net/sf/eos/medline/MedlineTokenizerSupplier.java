@@ -30,7 +30,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class MedlineTokenizerProvider extends TokenizerSupplier {
+public class MedlineTokenizerSupplier extends TokenizerSupplier {
 
     @Override
     public ResettableTokenizer get() {

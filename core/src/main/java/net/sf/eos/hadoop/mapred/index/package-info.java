@@ -33,6 +33,7 @@
  * license.</p>
  *
  * @since 0.1.0
+ * @author Sascha Kohlmann
  * @see net.sf.eos.lucene
  */
 package net.sf.eos.hadoop.mapred.index;

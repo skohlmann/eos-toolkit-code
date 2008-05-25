@@ -37,7 +37,7 @@ import net.sf.eos.entity.SimpleLongestMatchDictionaryBasedEntityRecognizer;
 import net.sf.eos.hadoop.DistributedCacheStrategy;
 import net.sf.eos.hadoop.TestDistributedCacheStrategy;
 import net.sf.eos.hadoop.mapred.cooccurrence.DictionaryBasedEntityRecognizerMapper;
-import net.sf.eos.medline.MedlineTokenizerProvider;
+import net.sf.eos.medline.MedlineTokenizerSupplier;
 import net.sf.eos.trie.AbstractTrieLoader;
 import net.sf.eos.trie.Trie;
 import net.sf.eos.trie.XmlTrieLoader;
@@ -189,7 +189,7 @@ public class SimpleDictionaryBasedEntityRecognizerMapperTest {
         conf.set(Serializer.SERIALIZER_IMPL_CONFIG_NAME,
                  XmlSerializer.class.getName());
         conf.set(TokenizerSupplier.TOKENIZER_PROVIDER_IMPL_CONFIG_NAME,
-                 MedlineTokenizerProvider.class.getName());
+                 MedlineTokenizerSupplier.class.getName());
         conf.set(AbstractTrieLoader.TRIE_LOADER_IMPL_CONFIG_NAME,
                  XmlTrieLoader.class.getName());
         conf.set(AbstractDictionaryBasedEntityRecognizer

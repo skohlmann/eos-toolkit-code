@@ -27,7 +27,7 @@ import net.sf.eos.config.Configuration;
 import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.Configured;
 import net.sf.eos.config.FactoryMethod;
-import net.sf.eos.medline.MedlineTokenizerProvider;
+import net.sf.eos.medline.MedlineTokenizerSupplier;
 
 /**
  * Support class for {@link ResettableTokenizer}.
@@ -62,7 +62,7 @@ public abstract class TokenizerSupplier extends Configured
      */
     @SuppressWarnings("nls")
     @FactoryMethod(key=TOKENIZER_PROVIDER_IMPL_CONFIG_NAME,
-                   implementation=MedlineTokenizerProvider.class)
+                   implementation=MedlineTokenizerSupplier.class)
     public final static TokenizerSupplier newInstance(final Configuration config)
             throws TokenizerException {
 
@@ -73,7 +73,7 @@ public abstract class TokenizerSupplier extends Configured
         }
 
         final String clazzName = config.get(TOKENIZER_PROVIDER_IMPL_CONFIG_NAME,
-                                            MedlineTokenizerProvider.class.getName());
+                                            MedlineTokenizerSupplier.class.getName());
 
         try {
             final Class<? extends TokenizerSupplier> clazz = 

@@ -14,5 +14,6 @@
  *  should be reused by there clients.</p>
  *
  * @since 0.1.0
+ * @author Sascha Kohlmann
  */
 package net.sf.eos.analyzer;

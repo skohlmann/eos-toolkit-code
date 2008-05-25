@@ -24,5 +24,6 @@
  * in the map-task of a mapreduce job.</p>
  *
  * @since 0.1.0
+ * @author Sascha Kohlmann
  */
 package net.sf.eos.hadoop.mapred;

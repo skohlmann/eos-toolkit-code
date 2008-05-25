@@ -26,5 +26,6 @@
  *                            queries.
  *
  * @since 0.1.0
+ * @author Sascha Kohlmann
  */
 package net.sf.eos.search;
