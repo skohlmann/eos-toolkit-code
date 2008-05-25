@@ -21,7 +21,7 @@ import net.sf.eos.EosException;
 import net.sf.eos.analyzer.ResettableTokenizer;
 import net.sf.eos.analyzer.TextBuilder;
 import net.sf.eos.analyzer.Token;
-import net.sf.eos.analyzer.TokenizerProvider;
+import net.sf.eos.analyzer.TokenizerSupplier;
 import net.sf.eos.analyzer.TokenizerException;
 import net.sf.eos.analyzer.TextBuilder.SpaceBuilder;
 import net.sf.eos.config.Configuration;
@@ -50,7 +50,7 @@ import java.util.Map.Entry;
 @Services(
     services={
         @Service(
-            factory=TokenizerProvider.class,
+            factory=TokenizerSupplier.class,
             description="Tokenizer for coocurence analyzing."
         ),
         @Service(
@@ -246,8 +246,8 @@ public class DictionaryBasedEntityIdKeyGenerator extends Configured
         try {
             final Configuration conf = getConfiguration();
 
-            final TokenizerProvider tokenBuilder =
-                TokenizerProvider.newInstance(conf);
+            final TokenizerSupplier tokenBuilder =
+                TokenizerSupplier.newInstance(conf);
             final ResettableTokenizer tokenizer =
                 tokenBuilder.get();
 

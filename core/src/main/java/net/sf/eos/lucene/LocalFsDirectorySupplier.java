@@ -23,10 +23,10 @@ import org.apache.lucene.store.FSDirectory;
 
 import java.io.IOException;
 
-public class LocalFsDirectoryProvider extends DirectoryProvider {
+public class LocalFsDirectorySupplier extends DirectorySupplier {
 
     public static final String LOCAL_PATH_CONFIG_NAME =
-        "net.sf.eos.lucene.LocalFsDirectoryProvider.path";
+        "net.sf.eos.lucene.LocalFsDirectorySupplier.path";
 
     @Override
     public Directory get(final Configuration conf) {

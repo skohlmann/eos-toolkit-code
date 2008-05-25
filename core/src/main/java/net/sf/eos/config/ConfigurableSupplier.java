@@ -21,8 +21,6 @@ import net.sf.eos.Supplier;
 /**
  * Instances supply objects of a single type which are {@code configurable}.
  *
- * <p><strong>Note:</strong> experimental</p>
- *
  * @author Sascha Kohlmann
  * @since 0.1.0
  * @param <T> the provided type

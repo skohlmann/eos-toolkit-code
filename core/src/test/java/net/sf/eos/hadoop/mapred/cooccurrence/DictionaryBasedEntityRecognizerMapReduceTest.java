@@ -15,7 +15,7 @@
  */
 package net.sf.eos.hadoop.mapred.cooccurrence;
 
-import net.sf.eos.analyzer.TokenizerProvider;
+import net.sf.eos.analyzer.TokenizerSupplier;
 import net.sf.eos.document.Serializer;
 import net.sf.eos.document.XmlSerializer;
 import net.sf.eos.entity.AbstractDictionaryBasedEntityRecognizer;
@@ -56,7 +56,7 @@ public class DictionaryBasedEntityRecognizerMapReduceTest
         final Thread t = Thread.currentThread();
         ClassLoader classLoader = t.getContextClassLoader();
         if (classLoader == null) {
-            classLoader = TokenizerProvider.class.getClassLoader();
+            classLoader = TokenizerSupplier.class.getClassLoader();
         }
         final URL resource = classLoader.getResource(INPUT_EOSDOCS);
 
@@ -97,7 +97,7 @@ public class DictionaryBasedEntityRecognizerMapReduceTest
 
         jobConf.set(Serializer.SERIALIZER_IMPL_CONFIG_NAME,
                     XmlSerializer.class.getName());
-        jobConf.set(TokenizerProvider.TOKENIZER_PROVIDER_IMPL_CONFIG_NAME,
+        jobConf.set(TokenizerSupplier.TOKENIZER_PROVIDER_IMPL_CONFIG_NAME,
                     MedlineTokenizerProvider.class.getName());
         jobConf.set(AbstractTrieLoader.TRIE_LOADER_IMPL_CONFIG_NAME,
                     XmlTrieLoader.class.getName());

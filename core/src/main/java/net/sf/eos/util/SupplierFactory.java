@@ -25,12 +25,12 @@ public final class SupplierFactory<T> {
 
     /**
      * Creates a new instance of the {@link Supplier} class. The
-     * {@code provider} must support a default Constructor.
-     * @param <T> the type of the {@code provider}
-     * @param clazz the class instance of the {@code provider}
-     * @return the {@code provider}
+     * {@code supplier} must support a default Constructor.
+     * @param <T> the type of the {@code supplier}
+     * @param clazz the class instance of the {@code supplier}
+     * @return the {@code supplier}
      * @throw IllegalArgumentException if it is not possible to create
-     *                                 a new {@code provider}
+     *                                 a new {@code supplier}
      */
     public static final <T> Supplier<T>
                 newSupplier(final Class<? extends Supplier<T>> clazz) {
@@ -47,12 +47,12 @@ public final class SupplierFactory<T> {
 
     /**
      * Creates a new instance of the {@link ConfigurableSupplier} class.
-     * The {@code provider} must support a default Constructor.
-     * @param <T> the type of the {@code provider}
-     * @param clazz the class instance of the {@code provider}
-     * @return the {@code provider}
+     * The {@code supplier} must support a default Constructor.
+     * @param <T> the type of the {@code supplier}
+     * @param clazz the class instance of the {@code supplier}
+     * @return the {@code supplier}
      * @throw IllegalArgumentException if it is not possible to create
-     *                                 a new {@code provider}
+     *                                 a new {@code supplier}
      */
     public static final <T> ConfigurableSupplier<T>
             newSupplier(final Class<? extends ConfigurableSupplier<T>> clazz,
@@ -66,14 +66,14 @@ public final class SupplierFactory<T> {
 
     /**
      * Creates a new instance of the {@link Supplier} class. The
-     * {@code provider} must support a default Constructor.
-     * @param <T> the type of the {@code provider}
+     * {@code supplier} must support a default Constructor.
+     * @param <T> the type of the {@code supplier}
      * @param configName the name of the key that value in {@code config}
-     *                   is the name of a provider class
+     *                   is the name of a supplier class
      * @param config the configuration containing the class name
-     * @return the {@code provider}
+     * @return the {@code supplier}
      * @throw IllegalArgumentException if it is impossible to create
-     *                                 a new {@code provider}
+     *                                 a new {@code supplier}
      */
     public static final <T> Supplier<T> newSupplier(
                  final String configName,
@@ -86,15 +86,15 @@ public final class SupplierFactory<T> {
 
     /**
      * Creates a new instance of the {@link Supplier} class. The
-     * {@code provider} must support a default Constructor.
-     * @param <T> the type of the {@code provider}
+     * {@code supplier} must support a default Constructor.
+     * @param <T> the type of the {@code supplier}
      * @param configName the name of the key that value in {@code config}
-     *                   is the name of a provider class
+     *                   is the name of a supplier class
      * @param config the configuration containing the class name
-     * @param defaultClazzName the default provider class name
-     * @return the {@code provider}
+     * @param defaultClazzName the default supplier class name
+     * @return the {@code supplier}
      * @throw IllegalArgumentException if it is impossible to create
-     *                                 a new {@code provider}
+     *                                 a new {@code supplier}
      */
     public static final <T> Supplier<T> newSupplier(
                 final String configName,

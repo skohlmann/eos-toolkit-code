@@ -23,8 +23,8 @@ import net.sf.eos.config.Configuration;
 import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.HadoopConfigurationAdapter;
 import net.sf.eos.config.Service;
-import net.sf.eos.lucene.AnalyzerProvider;
-import net.sf.eos.lucene.SimilarityProvider;
+import net.sf.eos.lucene.AnalyzerSupplier;
+import net.sf.eos.lucene.SimilaritySupplier;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -52,7 +52,7 @@ import java.util.Random;
  * @author Sascha Kohlmann
  */
 @Service(
-    factory=AnalyzerProvider.class
+    factory=AnalyzerSupplier.class
 )
 public class LuceneOutputFormat<K extends WritableComparable,
                                 V extends ObjectWritable>
@@ -102,8 +102,8 @@ public class LuceneOutputFormat<K extends WritableComparable,
 
     /**
      * To configure see <code><em>XXX</em>_CONFIG_NAME</code> keys. Uses
-     * internally the instances of {@link AnalyzerProvider} and
-     * {@link SimilarityProvider}.
+     * internally the instances of {@link AnalyzerSupplier} and
+     * {@link SimilaritySupplier}.
      */
     @SuppressWarnings("cast")
     @Override
@@ -128,8 +128,8 @@ public class LuceneOutputFormat<K extends WritableComparable,
         HadoopConfigurationAdapter.addHadoopConfigToEosConfig(job, config);
 
         try {
-            AnalyzerProvider analyzerProvider =
-            	AnalyzerProvider.newInstance(config);
+            AnalyzerSupplier analyzerProvider =
+            	AnalyzerSupplier.newInstance(config);
             final Analyzer analyzer = analyzerProvider.get();
 
             final IndexWriter writer =  // build locally first
@@ -153,8 +153,8 @@ public class LuceneOutputFormat<K extends WritableComparable,
                 job.getInt(MAX_FIELD_LENGTH_CONFIG_NAME, 100000);
             writer.setMaxFieldLength(maxFieldLength);
 
-            final SimilarityProvider similarityFactory =
-                SimilarityProvider.newInstance(config);
+            final SimilaritySupplier similarityFactory =
+                SimilaritySupplier.newInstance(config);
             final Similarity similarity = similarityFactory.get();
 
             writer.setSimilarity(similarity);

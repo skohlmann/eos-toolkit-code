@@ -25,7 +25,7 @@ import net.sf.eos.EosException;
 import net.sf.eos.analyzer.ResettableTokenizer;
 import net.sf.eos.analyzer.Token;
 import net.sf.eos.analyzer.Tokenizer;
-import net.sf.eos.analyzer.TokenizerProvider;
+import net.sf.eos.analyzer.TokenizerSupplier;
 import net.sf.eos.analyzer.TokenizerException;
 import net.sf.eos.document.EosDocument;
 import net.sf.eos.document.Serializer;
@@ -188,7 +188,7 @@ public class SimpleDictionaryBasedEntityRecognizerMapperTest {
         final JobConf conf = new JobConf();
         conf.set(Serializer.SERIALIZER_IMPL_CONFIG_NAME,
                  XmlSerializer.class.getName());
-        conf.set(TokenizerProvider.TOKENIZER_PROVIDER_IMPL_CONFIG_NAME,
+        conf.set(TokenizerSupplier.TOKENIZER_PROVIDER_IMPL_CONFIG_NAME,
                  MedlineTokenizerProvider.class.getName());
         conf.set(AbstractTrieLoader.TRIE_LOADER_IMPL_CONFIG_NAME,
                  XmlTrieLoader.class.getName());

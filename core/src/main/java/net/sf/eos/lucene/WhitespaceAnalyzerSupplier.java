@@ -22,7 +22,7 @@ import org.apache.lucene.analysis.WhitespaceAnalyzer;
  * Supprt for Lucene {@link org.apache.lucene.analysis.WhitespaceAnalyzer}.
  * @author Sascha Kohlmann
  */
-public class WhitespaceAnalyzerProvider extends AnalyzerProvider {
+public class WhitespaceAnalyzerSupplier extends AnalyzerSupplier {
 
     /**
      * @return a Lucene {@link org.apache.lucene.analysis.WhitespaceAnalyzer}

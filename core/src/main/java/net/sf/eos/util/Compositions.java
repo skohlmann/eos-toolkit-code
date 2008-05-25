@@ -23,7 +23,7 @@ import static net.sf.eos.util.Conditions.checkArgumentNotNull;
 
 /**
  * Defines some useful compositions for handling with {@link Function Functions},
- * {@link Predicate Predicates} and {@link Supplier Providers}.
+ * {@link Predicate Predicates} and {@link Supplier Suppliers}.
  *
  * <p>Each {@code composition} follows the rule of a {@code from} or <em>source</em>
  * entity, propagating its result value to a {@code to} or <em>target</em> entity.</p>
@@ -124,7 +124,7 @@ public class Compositions {
     }
     
     /**
-     * Returns a composition of a <em>from</em> {@code Provider} and an applied
+     * Returns a composition of a <em>from</em> {@code Supplier} and an applied
      * <em>to</em> {@code Function}. The {@code function} retrieves the value from
      * the {@code supplier}.
      *

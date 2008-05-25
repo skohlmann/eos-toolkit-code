@@ -29,12 +29,12 @@ import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.Configured;
 import net.sf.eos.config.FactoryMethod;
 
-public abstract class DirectoryProvider extends Configured
+public abstract class DirectorySupplier extends Configured
         implements ConfigurableSupplier<Directory> {
 
     /** For logging. */
     private static final Log LOG =
-        LogFactory.getLog(DirectoryProvider.class.getName());
+        LogFactory.getLog(DirectorySupplier.class.getName());
 
     /** The configuration key name for the classname of the factory.
      * @see #newInstance(Configuration) */
@@ -42,45 +42,45 @@ public abstract class DirectoryProvider extends Configured
     @ConfigurationKey(type=CLASSNAME,
                             description="Configuration key of the Lucene directory "
                                         + " provider factory.")
-    public final static String DIRECTORY_PROVIDER_IMPL_CONFIG_NAME = 
-        "net.sf.eos.lucene.DirectoryProvider.impl";
+    public final static String DIRECTORY_SUPPLIER_IMPL_CONFIG_NAME = 
+        "net.sf.eos.lucene.DirectorySupplier.impl";
 
     /**
      * Creates a new instance of a of the factory. If the
      * {@code Configuration} contains a key
-     * {@link #DIRECTORY_PROVIDER_IMPL_CONFIG_NAME} a new instance of the
+     * {@link #DIRECTORY_SUPPLIER_IMPL_CONFIG_NAME} a new instance of the
      * classname in the value will instantiate. The 
-     * {@link LocalFsDirectoryProvider} will instantiate if there is no
+     * {@link LocalFsDirectorySupplier} will instantiate if there is no
      * value setted.
      * @param config the configuration
      * @return a new instance
      * @throws EosException if it is not possible to instantiate an instance
-     * @see LocalFsDirectoryProvider
+     * @see LocalFsDirectorySupplier
      */
-    @FactoryMethod(key=DIRECTORY_PROVIDER_IMPL_CONFIG_NAME,
-                   implementation=LocalFsDirectoryProvider.class)
-    public final static DirectoryProvider newInstance(final Configuration config)
+    @FactoryMethod(key=DIRECTORY_SUPPLIER_IMPL_CONFIG_NAME,
+                   implementation=LocalFsDirectorySupplier.class)
+    public final static DirectorySupplier newInstance(final Configuration config)
             throws EosException {
 
         final Thread t = Thread.currentThread();
         ClassLoader classLoader = t.getContextClassLoader();
         if (classLoader == null) {
-            classLoader = SearcherProvider.class.getClassLoader();
+            classLoader = SearcherSupplier.class.getClassLoader();
         }
 
         final String clazzName =
-            config.get(DIRECTORY_PROVIDER_IMPL_CONFIG_NAME,
-                    LocalFsDirectoryProvider.class.getName());
+            config.get(DIRECTORY_SUPPLIER_IMPL_CONFIG_NAME,
+                    LocalFsDirectorySupplier.class.getName());
 
         try {
-            final Class<? extends DirectoryProvider> clazz =
-                (Class<? extends DirectoryProvider>) Class
+            final Class<? extends DirectorySupplier> clazz =
+                (Class<? extends DirectorySupplier>) Class
                     .forName(clazzName, true, classLoader);
             try {
 
-                final DirectoryProvider factory = clazz.newInstance();
+                final DirectorySupplier factory = clazz.newInstance();
                 if (LOG.isDebugEnabled()) {
-                    LOG.debug("DirectoryProvider instance: "
+                    LOG.debug("DirectorySupplier instance: "
                               + factory.getClass().getName());
                 }
                 return factory;

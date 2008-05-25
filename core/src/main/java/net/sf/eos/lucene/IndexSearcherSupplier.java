@@ -28,18 +28,18 @@ import org.apache.lucene.store.Directory;
 import java.io.IOException;
 
 /**
- * Based on {@link DirectoryProvider}.
+ * Based on {@link DirectorySupplier}.
  * @author Sascha Kohlmann
  */
 @Service(
-    factory=DirectoryProvider.class
+    factory=DirectorySupplier.class
 )
-public class IndexSearcherProvider extends SearcherProvider {
+public class IndexSearcherSupplier extends SearcherSupplier {
 
     @Override
     public Searcher get(final Configuration conf) {
         try {
-            final DirectoryProvider provider = DirectoryProvider.newInstance(conf);
+            final DirectorySupplier provider = DirectorySupplier.newInstance(conf);
             final Directory directory = provider.get(conf);
             return new IndexSearcher(directory);
         } catch (final CorruptIndexException e) {

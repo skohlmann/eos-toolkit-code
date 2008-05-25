@@ -37,7 +37,7 @@ import net.sf.eos.search.EosQuery;
 import net.sf.eos.search.LookupEntry;
 
 /**
- * Use internally {@link AnalyzerProvider}, {@link SearcherProvider} and
+ * Use internally {@link AnalyzerSupplier}, {@link SearcherSupplier} and
  * {@link CommonNameResolver} if configured.
  * @author Sascha Kohlmann
  */
@@ -145,14 +145,14 @@ public class DefaultEosQuery extends Configured implements CommonDocument, EosQu
 
         final Configuration conf = getConfiguration();
 
-        final AnalyzerProvider analyzerProvider =
-            AnalyzerProvider.newInstance(conf);
+        final AnalyzerSupplier analyzerProvider =
+            AnalyzerSupplier.newInstance(conf);
         final Analyzer analyzer = analyzerProvider.get();
         final String queryString = createLuceneQuery();
         final QueryParser parser =
             new QueryParser(CommonDocument.FieldName.CONTENT.name(), analyzer);
 
-        final SearcherProvider provider = SearcherProvider.newInstance(conf);
+        final SearcherSupplier provider = SearcherSupplier.newInstance(conf);
         final Searcher searcher = provider.get(conf);
 
         try {

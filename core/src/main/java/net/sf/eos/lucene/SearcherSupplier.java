@@ -29,57 +29,57 @@ import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.Configured;
 import net.sf.eos.config.FactoryMethod;
 
-public abstract class SearcherProvider extends Configured
+public abstract class SearcherSupplier extends Configured
         implements Supplier<Searcher> {
 
     /** For logging. */
     private static final Log LOG =
-        LogFactory.getLog(SearcherProvider.class.getName());
+        LogFactory.getLog(SearcherSupplier.class.getName());
 
     /** The configuration key name for the classname of the factory.
      * @see #newInstance(Configuration) */
     @SuppressWarnings("nls")
     @ConfigurationKey(type=CLASSNAME,
-                            description="Configuration key of the search provider.")
-    public final static String SEARCHER_PROVIDER_IMPL_CONFIG_NAME = 
-        "net.sf.eos.lucene.SearcherProvider.impl";
+                            description="Configuration key of the search supplier.")
+    public final static String SEARCHER_SUPPLIER_IMPL_CONFIG_NAME = 
+        "net.sf.eos.lucene.SearcherSupplier.impl";
 
     /**
      * Creates a new instance of a of the factory. If the
      * {@code Configuration} contains a key
-     * {@link #SEARCHER_PROVIDER_IMPL_CONFIG_NAME} a new instance of the
+     * {@link #SEARCHER_SUPPLIER_IMPL_CONFIG_NAME} a new instance of the
      * classname in the value will instantiate. The 
-     * {@link IndexSearcherProvider} will instantiate if there is no
+     * {@link IndexSearcherSupplier} will instantiate if there is no
      * value setted.
      * @param config the configuration
      * @return a new instance
      * @throws EosException if it is not possible to instantiate an instance
-     * @see IndexSearcherProvider
+     * @see IndexSearcherSupplier
      */
-    @FactoryMethod(key=SEARCHER_PROVIDER_IMPL_CONFIG_NAME,
-                   implementation=IndexSearcherProvider.class)
-    public final static SearcherProvider newInstance(final Configuration config)
+    @FactoryMethod(key=SEARCHER_SUPPLIER_IMPL_CONFIG_NAME,
+                   implementation=IndexSearcherSupplier.class)
+    public final static SearcherSupplier newInstance(final Configuration config)
             throws EosException {
 
         final Thread t = Thread.currentThread();
         ClassLoader classLoader = t.getContextClassLoader();
         if (classLoader == null) {
-            classLoader = SearcherProvider.class.getClassLoader();
+            classLoader = SearcherSupplier.class.getClassLoader();
         }
 
         final String clazzName =
-            config.get(SEARCHER_PROVIDER_IMPL_CONFIG_NAME,
-                       IndexSearcherProvider.class.getName());
+            config.get(SEARCHER_SUPPLIER_IMPL_CONFIG_NAME,
+                       IndexSearcherSupplier.class.getName());
 
         try {
-            final Class<? extends SearcherProvider> clazz =
-                (Class<? extends SearcherProvider>) Class
+            final Class<? extends SearcherSupplier> clazz =
+                (Class<? extends SearcherSupplier>) Class
                     .forName(clazzName, true, classLoader);
             try {
 
-                final SearcherProvider factory = clazz.newInstance();
+                final SearcherSupplier factory = clazz.newInstance();
                 if (LOG.isDebugEnabled()) {
-                    LOG.debug("SearcherProvider instance: "
+                    LOG.debug("SearcherSupplier instance: "
                               + factory.getClass().getName());
                 }
                 return factory;

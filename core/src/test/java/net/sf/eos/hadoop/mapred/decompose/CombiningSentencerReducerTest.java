@@ -16,7 +16,7 @@
 package net.sf.eos.hadoop.mapred.decompose;
 
 
-import net.sf.eos.analyzer.TokenizerProvider;
+import net.sf.eos.analyzer.TokenizerSupplier;
 import net.sf.eos.hadoop.mapred.Index;
 import net.sf.eos.hadoop.mapred.decompose.SentencerMapper;
 import net.sf.eos.hadoop.mapred.decompose.SentencerReducer;
@@ -45,7 +45,7 @@ public class CombiningSentencerReducerTest extends HadoopTestCase {
        final Thread t = Thread.currentThread();
        ClassLoader classLoader = t.getContextClassLoader();
        if (classLoader == null) {
-           classLoader = TokenizerProvider.class.getClassLoader();
+           classLoader = TokenizerSupplier.class.getClassLoader();
        }
        final URL resource = classLoader.getResource(INPUT_EOSDOCS);
 

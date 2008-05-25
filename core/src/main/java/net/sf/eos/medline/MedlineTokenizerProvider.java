@@ -21,7 +21,7 @@ import net.sf.eos.analyzer.ResettableTokenizer;
 import net.sf.eos.analyzer.StopTokenFilter;
 import net.sf.eos.analyzer.SurroundingTokenFilter;
 import net.sf.eos.analyzer.Tokenizer;
-import net.sf.eos.analyzer.TokenizerProvider;
+import net.sf.eos.analyzer.TokenizerSupplier;
 import net.sf.eos.analyzer.WhitespaceTokenizer;
 
 import static net.sf.eos.medline.MedlineAbstractStructureWords.STRUCTURE_WORDS_UPPER;
@@ -30,7 +30,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class MedlineTokenizerProvider extends TokenizerProvider {
+public class MedlineTokenizerProvider extends TokenizerSupplier {
 
     @Override
     public ResettableTokenizer get() {

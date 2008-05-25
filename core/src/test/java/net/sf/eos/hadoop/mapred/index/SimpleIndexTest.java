@@ -15,10 +15,10 @@
  */
 package net.sf.eos.hadoop.mapred.index;
 
-import net.sf.eos.analyzer.TokenizerProvider;
+import net.sf.eos.analyzer.TokenizerSupplier;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.HadoopConfigurationAdapter;
-import net.sf.eos.lucene.AnalyzerProvider;
+import net.sf.eos.lucene.AnalyzerSupplier;
 import net.sf.eos.lucene.DefaultLuceneDocumentCreator;
 
 import org.apache.hadoop.fs.FileSystem;
@@ -54,7 +54,7 @@ public class SimpleIndexTest extends HadoopTestCase {
         final Thread t = Thread.currentThread();
         ClassLoader classLoader = t.getContextClassLoader();
         if (classLoader == null) {
-            classLoader = TokenizerProvider.class.getClassLoader();
+            classLoader = TokenizerSupplier.class.getClassLoader();
         }
         final URL resource = classLoader.getResource(INPUT_EOSDOCS);
 
@@ -106,7 +106,7 @@ public class SimpleIndexTest extends HadoopTestCase {
 
         final Configuration lconf = new HadoopConfigurationAdapter(jobConf);
 
-        final AnalyzerProvider provider = AnalyzerProvider.newInstance(lconf);
+        final AnalyzerSupplier provider = AnalyzerSupplier.newInstance(lconf);
         final Analyzer analyzer = provider.get();
         final QueryParser parser =
             new QueryParser(

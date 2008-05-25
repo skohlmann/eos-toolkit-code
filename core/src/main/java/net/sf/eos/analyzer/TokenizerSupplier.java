@@ -34,12 +34,12 @@ import net.sf.eos.medline.MedlineTokenizerProvider;
  * @author Sascha Kohlmann
  * @see ResettableTokenFilter
  */
-public abstract class TokenizerProvider extends Configured
+public abstract class TokenizerSupplier extends Configured
         implements Supplier<ResettableTokenizer> {
 
     /** For logging. */
     private static final Log LOG =
-        LogFactory.getLog(TokenizerProvider.class.getName());
+        LogFactory.getLog(TokenizerSupplier.class.getName());
 
     /** The configuration key name for the classname of the provider.
      * @see #newInstance(Configuration) */
@@ -63,25 +63,25 @@ public abstract class TokenizerProvider extends Configured
     @SuppressWarnings("nls")
     @FactoryMethod(key=TOKENIZER_PROVIDER_IMPL_CONFIG_NAME,
                    implementation=MedlineTokenizerProvider.class)
-    public final static TokenizerProvider newInstance(final Configuration config)
+    public final static TokenizerSupplier newInstance(final Configuration config)
             throws TokenizerException {
 
         final Thread t = Thread.currentThread();
         ClassLoader classLoader = t.getContextClassLoader();
         if (classLoader == null) {
-            classLoader = TokenizerProvider.class.getClassLoader();
+            classLoader = TokenizerSupplier.class.getClassLoader();
         }
 
         final String clazzName = config.get(TOKENIZER_PROVIDER_IMPL_CONFIG_NAME,
                                             MedlineTokenizerProvider.class.getName());
 
         try {
-            final Class<? extends TokenizerProvider> clazz = 
-                (Class<? extends TokenizerProvider>) 
+            final Class<? extends TokenizerSupplier> clazz = 
+                (Class<? extends TokenizerSupplier>) 
                     Class.forName(clazzName, true, classLoader);
             try {
 
-                final TokenizerProvider builder = clazz.newInstance();
+                final TokenizerSupplier builder = clazz.newInstance();
                 builder.configure(config);
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("TokenizerProvider instance: "

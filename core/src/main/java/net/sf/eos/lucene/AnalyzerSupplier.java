@@ -31,7 +31,7 @@ import org.apache.lucene.analysis.Analyzer;
  * To support different strategies of Lucene analyzers this
  * factory decoupled the creation of the analyzer from hard coded classnames.
  * Set the classname of a factory different from
- * <i>{@linkplain WhitespaceAnalyzerProvider default}</i> implementation.
+ * <i>{@linkplain WhitespaceAnalyzerSupplier default}</i> implementation.
  * {@link #ANALYZER_PROVIDER_IMPL_CONFIG_NAME} contains the name of the
  * configuration key.
  *
@@ -39,11 +39,11 @@ import org.apache.lucene.analysis.Analyzer;
  * {@link #get()}.</p>
  * @author Sascha Kohlmann
  */
-public abstract class AnalyzerProvider implements Supplier<Analyzer> {
+public abstract class AnalyzerSupplier implements Supplier<Analyzer> {
 
     /** For logging. */
     private static final Log LOG =
-        LogFactory.getLog(AnalyzerProvider.class.getName());
+        LogFactory.getLog(AnalyzerSupplier.class.getName());
 
     /** The configuration key name for the classname of the factory.
      * @see #newInstance(Configuration) */
@@ -59,33 +59,33 @@ public abstract class AnalyzerProvider implements Supplier<Analyzer> {
      * {@code Configuration} contains a key
      * {@link #ANALYZER_PROVIDER_IMPL_CONFIG_NAME} a new instance of the
      * classname in the value will instantiate. The 
-     * {@link WhitespaceAnalyzerProvider} will instantiate if there is no
+     * {@link WhitespaceAnalyzerSupplier} will instantiate if there is no
      * value setted.
      * @param config the configuration
      * @return a new instance
      * @throws EosException if it is not possible to instantiate an instance
      */
     @FactoryMethod(key=ANALYZER_PROVIDER_IMPL_CONFIG_NAME)
-    public final static AnalyzerProvider newInstance(final Configuration config)
+    public final static AnalyzerSupplier newInstance(final Configuration config)
             throws EosException {
 
         final Thread t = Thread.currentThread();
         ClassLoader classLoader = t.getContextClassLoader();
         if (classLoader == null) {
-            classLoader = AnalyzerProvider.class.getClassLoader();
+            classLoader = AnalyzerSupplier.class.getClassLoader();
         }
 
         final String clazzName =
             config.get(ANALYZER_PROVIDER_IMPL_CONFIG_NAME,
-                       WhitespaceAnalyzerProvider.class.getName());
+                       WhitespaceAnalyzerSupplier.class.getName());
 
         try {
-            final Class<? extends AnalyzerProvider> clazz =
-                (Class<? extends AnalyzerProvider>) Class
+            final Class<? extends AnalyzerSupplier> clazz =
+                (Class<? extends AnalyzerSupplier>) Class
                     .forName(clazzName, true, classLoader);
             try {
 
-                final AnalyzerProvider factory = clazz.newInstance();
+                final AnalyzerSupplier factory = clazz.newInstance();
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("AnalyzerProvider instance: "
                               + factory.getClass().getName());
