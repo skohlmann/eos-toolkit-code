@@ -55,18 +55,18 @@ public class ConfigurationKeyIntrospectorFunction
         /** The class to introspect. */
         final Class<?> clazz;
         /** The value of the field. */
-        final String configKeyName;
+        final String configKeyValue;
 
         /**
          * Creates a new instance.
          * @param clazz the {@code class} to introspect
-         * @param configKeyName the value of the configuration key field
+         * @param configKeyValue the value of the configuration key field
          */
         public ConfigurationKeySupport(
                 @SuppressWarnings("hiding") @Nullable final Class<?> clazz,
-                @SuppressWarnings("hiding") @Nullable final String configKeyName) {
+                @SuppressWarnings("hiding") @Nullable final String configKeyValue) {
             this.clazz = clazz;
-            this.configKeyName = configKeyName;
+            this.configKeyValue = configKeyValue;
         }
 
         /**
@@ -81,10 +81,11 @@ public class ConfigurationKeyIntrospectorFunction
          * Returns the value of the configuration key field.
          * @return the value of the configuration key field. May be {@code null}
          */
-        public String getConfigKeyName() {
-            return this.configKeyName;
+        public String getConfigKeyValue() {
+            return this.configKeyValue;
         }
 
+        /** {@inheritDoc} */
         @SuppressWarnings("nls")
         @Override
         public String toString() {
@@ -92,7 +93,7 @@ public class ConfigurationKeyIntrospectorFunction
             sb.append("ConfigurationKeySupport[configKeyHolderClass=");
             sb.append(this.getConfigKeyHolderClass());
             sb.append("|configKeyValue=");
-            sb.append(this.getConfigKeyName());
+            sb.append(this.getConfigKeyValue());
             sb.append("]");
 
             return sb.toString();
@@ -111,7 +112,7 @@ public class ConfigurationKeyIntrospectorFunction
     public ConfigurationKey apply(@Nullable ConfigurationKeySupport from) {
         if (from == null
                 || from.getConfigKeyHolderClass() == null
-                || from.getConfigKeyName() == null) {
+                || from.getConfigKeyValue() == null) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("from value or values of from are null: " + from);
             }
@@ -133,7 +134,7 @@ public class ConfigurationKeyIntrospectorFunction
                         && Modifier.isPublic(modifiers)) {
                     try {
                         final Object o = field.get(null);
-                        if (from.getConfigKeyName().equals(o)) {
+                        if (from.getConfigKeyValue().equals(o)) {
                             retval = fieldKey;
                             // Found, nothing elese todo.
                             break;

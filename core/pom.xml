@@ -83,6 +83,7 @@
           <excludes>
             <exclude>**/DocumentCreator.java</exclude>
             <exclude>**/PartFileFilter.java</exclude>
+            <exclude>**/DummyWithPrivateConfigurationKey.java</exclude>
           </excludes>
         </configuration>
       </plugin>
