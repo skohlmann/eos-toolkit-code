@@ -23,7 +23,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 import net.sf.eos.Experimental;
-
+import net.sf.eos.Predicate;
 
 /**
  * Indicates that a field name is a key of the {@link Configuration} data.
@@ -46,6 +46,20 @@ import net.sf.eos.Experimental;
 @Target(value=FIELD)
 @Experimental
 public @interface ConfigurationKey {
+
+    /**
+     * The {@code predicate} always returns {@code true}.
+     * @author Sascha Kohlmann
+     */
+    public static final class AlwaysTruePredicate implements Predicate<String> {
+        /**
+         * @param value will be ignored.
+         * @return always {@code true}
+         */
+        public boolean evaluate(final String value) {
+            return true;
+        }
+    }
 
     /** The possible type of the configuration parameter.
      * @author Sascha Kohlmann
@@ -80,4 +94,10 @@ public @interface ConfigurationKey {
 
     /** The type of the configuration parameter. */
     Type type() default Type.STRING;
+
+
+    /** A {@code predicate} to valid the configuration value. {@code default}
+     * returns always {@code true}. */
+    Class<? extends net.sf.eos.Predicate<String>> validator()
+                            default AlwaysTruePredicate.class;
 }
