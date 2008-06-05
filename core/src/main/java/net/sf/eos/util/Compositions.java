@@ -172,6 +172,65 @@ public class Compositions {
         }
     }
 
+    /**
+     * Composes a rule. A rule contains a {@code predicate} as decision maker either to call the
+     * {@code trueFunction} or the {@code falseFunction}. The returning function calls the 
+     * {@code trueFunction} if {@code predicate} returns {@code true}. Otherwise the
+     * {@code falseFunction} will call.
+     * @param <F> the input type of the {@code predicate} and the {@code functions}
+     * @param <T> the output type of the applyied {@code functions}
+     * @param decider the decision maker
+     * @param trueFunction apply if the decision maker returns {@code true}
+     * @param falseFunction apply if the decision maker returns {@code false}
+     * @return a ruling function
+     * @since 0.8.1
+     */
+    public final static <F, T> Function<F, T> composeRule(
+            final Predicate<? super F> decider,
+            final Function<? super F, ? extends T> trueFunction,
+            final Function<? super F, ? extends T> falseFunction) {
+        return new RuledFunctionComposition<F, T>(decider, trueFunction, falseFunction);
+    }
+
+    /** @see #compose(Predicate, Function, Function) */
+    private static class RuledFunctionComposition<F, T> implements Function<F, T> {
+        /** The <em>trueFunction</em> will aplly if {@link #decider} returns {@code true}. */
+        private final Function<? super F, ? extends T> trueFunction;
+
+        /** The <em>falseFunction</em> will aplly if {@link #decider} returns {@code false}. */
+        private final Function<? super F, ? extends T> falseFunction;
+
+        /** Descider either call <em>trueFunction</em> or <em>falseFunction</em>. */
+        private final Predicate<? super F> decider;
+
+        /**
+         * Constructs the composition of the given {@link Predicate} and {@link Function Functions}.
+         *
+         * @param decisionMaker the predicate which decision is the source for using the
+         *                      <em>trueFunction</em> or the <em>falseFunction</em>
+         * @param trueFunction the {@link Function} will call if {@code decisionMaker}
+         *                     returns {@code true}
+         * @param falseFunction the {@link Function} will call if {@code decisionMaker}
+         *                      returns {@code false}
+         */
+        @SuppressWarnings("nls")
+        public RuledFunctionComposition(
+                @SuppressWarnings("hiding") final Predicate<? super F> decisionMaker,
+                @SuppressWarnings("hiding") final Function<? super F, ? extends T> trueFunction,
+                @SuppressWarnings("hiding") final Function<? super F, ? extends T> falseFunction) {
+            this.decider = checkArgumentNotNull(decisionMaker, "decisionMaker is null");
+            this.trueFunction = checkArgumentNotNull(trueFunction, "trueFunction is null");
+            this.falseFunction = checkArgumentNotNull(falseFunction, "falseFunction is null");
+        }
+
+        /** {@inheritDoc} */
+        public T apply(final F source) {
+            if (this.decider.evaluate(source)) { 
+                return this.trueFunction.apply(source);
+            }
+            return this.falseFunction.apply(source);
+        }
+    }
 
     /** Never used. */
     private Compositions() { }

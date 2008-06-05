@@ -15,11 +15,17 @@
  */
 package net.sf.eos.util;
 
+
 import net.sf.eos.Function;
 import net.sf.eos.Predicate;
 import net.sf.eos.Supplier;
 
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -144,4 +150,100 @@ public class CompositionsTest {
             );
         assertTrue(p.evaluate("2"));
     }
+
+    @Test(expected=IllegalArgumentException.class)
+    public void composeRuleWithNullPredicate() {
+        final Function<Object, Object> dummy = new Function<Object, Object>() {
+            public Object apply(final Object from) {
+                return from;
+            }
+        };
+        Compositions.composeRule(null, dummy, dummy);
+    }
+
+    @Test(expected=IllegalArgumentException.class)
+    public void composeRuleWithNullTrueFunction() {
+        final Function<Object, Object> fDummy = new Function<Object, Object>() {
+            public Object apply(final Object from) {
+                return from;
+            }
+        };
+        Compositions.composeRule(truePredicate, null, fDummy);
+    }
+
+    @Test(expected=IllegalArgumentException.class)
+    public void composeRuleWithNullFalseFunction() {
+        final Function<Object, Object> fDummy = new Function<Object, Object>() {
+            public Object apply(final Object from) {
+                return from;
+            }
+        };
+        Compositions.composeRule(truePredicate, fDummy, null);
+    }
+
+    @SuppressWarnings("nls")
+    @Test
+    public void composeRuleWithTruePredicate() {
+        final List<String> trueValue = new ArrayList<String>();
+        final List<String> falseValue = new ArrayList<String>();
+        final Function<String, Collection<String>> fTrue =
+            new Function<String, Collection<String>>() {
+                public Collection<String> apply(final String from) {
+                    trueValue.add(from);
+                    return trueValue;
+                }
+        };
+        final Function<String, Collection<String>> fFalse =
+            new Function<String, Collection<String>>() {
+                public Collection<String> apply(final String from) {
+                    falseValue.add(from);
+                    return falseValue;
+                }
+        };
+        final Function <String, Collection<String>> retval =
+            Compositions.composeRule(truePredicate, fTrue, fFalse);
+        retval.apply("");
+        assertEquals(1, trueValue.size());
+        assertEquals(0, falseValue.size());
+    }
+
+    @SuppressWarnings("nls")
+    @Test
+    public void composeRuleWithFalsePredicate() {
+        final List<String> trueValue = new ArrayList<String>();
+        final List<String> falseValue = new ArrayList<String>();
+        final Function<String, Collection<String>> fTrue =
+            new Function<String, Collection<String>>() {
+                public Collection<String> apply(final String from) {
+                    trueValue.add(from);
+                    return trueValue;
+                }
+        };
+        final Function<String, Collection<String>> fFalse =
+            new Function<String, Collection<String>>() {
+                public Collection<String> apply(final String from) {
+                    falseValue.add(from);
+                    return falseValue;
+                }
+        };
+        final Function <String, Collection<String>> retval =
+            Compositions.composeRule(falsePredicate, fTrue, fFalse);
+        retval.apply("");
+        assertEquals(0, trueValue.size());
+        assertEquals(1, falseValue.size());
+    }
+
+    public final static Predicate<String> truePredicate =
+        new Predicate<String>() {
+            public boolean evaluate(final String s) {
+                return true;
+            };
+        };
+
+    public final static Predicate<String> falsePredicate =
+        new Predicate<String>() {
+            public boolean evaluate(final String s) {
+                return false;
+            };
+        };
 }

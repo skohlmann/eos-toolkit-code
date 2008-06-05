@@ -23,4 +23,3 @@
 package net.sf.eos.util.functions;
 
 import net.sf.eos.Experimental;
-
