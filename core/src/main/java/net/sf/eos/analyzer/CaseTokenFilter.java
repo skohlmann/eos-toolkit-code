@@ -95,13 +95,22 @@ public class CaseTokenFilter extends TokenFilter {
             }
         } else {
             if (this.upper) {
-                cased = ("" + tokenText).toUpperCase();
+                cased = ("" + tokenText).toUpperCase(Locale.getDefault());
             } else {
-                cased = ("" + tokenText).toLowerCase();
+                cased = ("" + tokenText).toLowerCase(Locale.getDefault());
             }
         }
 
         assert cased != null;
-        return new AbstractToken(cased) {;};
+        return new CasedToken(cased);
+    }
+
+    /** Token represents a cased token. */
+    private final static class CasedToken extends AbstractToken {
+        /** Creates a new token.
+         * @param value the cased value */
+        public CasedToken(final CharSequence value) {
+            super(value);
+        }
     }
 }

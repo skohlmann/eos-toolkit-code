@@ -194,14 +194,14 @@ public class Compositions {
 
     /** @see #compose(Predicate, Function, Function) */
     private static class RuledFunctionComposition<F, T> implements Function<F, T> {
-        /** The <em>trueFunction</em> will aplly if {@link #decider} returns {@code true}. */
+        /** The <em>trueFunction</em> will aplly if {@link #decisionMaker} returns {@code true}. */
         private final Function<? super F, ? extends T> trueFunction;
 
-        /** The <em>falseFunction</em> will aplly if {@link #decider} returns {@code false}. */
+        /** The <em>falseFunction</em> will aplly if {@link #decisionMaker} returns {@code false}. */
         private final Function<? super F, ? extends T> falseFunction;
 
         /** Descider either call <em>trueFunction</em> or <em>falseFunction</em>. */
-        private final Predicate<? super F> decider;
+        private final Predicate<? super F> decisionMaker;
 
         /**
          * Constructs the composition of the given {@link Predicate} and {@link Function Functions}.
@@ -218,14 +218,14 @@ public class Compositions {
                 @SuppressWarnings("hiding") final Predicate<? super F> decisionMaker,
                 @SuppressWarnings("hiding") final Function<? super F, ? extends T> trueFunction,
                 @SuppressWarnings("hiding") final Function<? super F, ? extends T> falseFunction) {
-            this.decider = checkArgumentNotNull(decisionMaker, "decisionMaker is null");
+            this.decisionMaker = checkArgumentNotNull(decisionMaker, "decisionMaker is null");
             this.trueFunction = checkArgumentNotNull(trueFunction, "trueFunction is null");
             this.falseFunction = checkArgumentNotNull(falseFunction, "falseFunction is null");
         }
 
         /** {@inheritDoc} */
         public T apply(final F source) {
-            if (this.decider.evaluate(source)) { 
+            if (this.decisionMaker.evaluate(source)) { 
                 return this.trueFunction.apply(source);
             }
             return this.falseFunction.apply(source);

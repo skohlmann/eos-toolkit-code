@@ -84,7 +84,7 @@ public class DictionaryBasedEntityIdKeyGenerator extends Configured
         final DictionaryBasedEntityRecognizer dber =
             getDictionaryBasedEntityRecognizerForText(text);
 
-        List<Token> tokens = tokens = identifiyToken(dber);
+        List<Token> tokens = identifiyToken(dber);
 
         final Map<String, List<Token>> mapToTokenList =
             new HashMap<String, List<Token>>();
@@ -120,12 +120,11 @@ public class DictionaryBasedEntityIdKeyGenerator extends Configured
         // Create new document for each entity ID. Remove entity ID from
         // document and replace character sequence of the entity common- or
         // other name by the entity ID.
-        for (final Entry<String, List<Token>> entry : mapToTokenList.entrySet())
-        {
+        for (final Entry<String, List<Token>> entry : mapToTokenList.entrySet()) {
             final String key = entry.getKey();
-            if (! mapToDocument.containsKey(key)) {
-                final TextBuilder builder =
-                    TextBuilder.newInstance(lconf);
+            final Text keyAsText = new Text(key);
+            if (! mapToDocument.containsKey(keyAsText)) {
+                final TextBuilder builder = TextBuilder.newInstance(lconf);
 
                 final List<CharSequence> l = new ArrayList<CharSequence>();
                 final List<Token> value = entry.getValue();
@@ -138,8 +137,7 @@ public class DictionaryBasedEntityIdKeyGenerator extends Configured
                         final Map<String, List<String>> meta = token.getMeta();
                         final List<String> ids = meta.get(ENTITY_ID_KEY);
 
-                        final List<CharSequence> idList =
-                            new ArrayList<CharSequence>();
+                        final List<CharSequence> idList = new ArrayList<CharSequence>();
                         for (final String id :ids) {
                             if (! key.equals(id)) {
                                 idList.add(id);
@@ -180,9 +178,9 @@ public class DictionaryBasedEntityIdKeyGenerator extends Configured
                     generator.createKeysForDocument(newDoc);
                 for (final Entry<Text, EosDocument> toStoreEntry
                         : toStore.entrySet()) {
-                    final Text keyAsText = toStoreEntry.getKey();
+                    final Text keyAsLocalText = toStoreEntry.getKey();
                     final EosDocument toStoreDoc = toStoreEntry.getValue();
-                    mapToDocument.put(keyAsText, toStoreDoc);
+                    mapToDocument.put(keyAsLocalText, toStoreDoc);
                 }
             }
         }
@@ -230,7 +228,7 @@ public class DictionaryBasedEntityIdKeyGenerator extends Configured
             regconizer.setTextBuilder(textBuilder);
 
             return regconizer;
-        } catch (final Exception e) {
+        } catch (final EosException e) {
             throw new RuntimeException(e);
         }
     }

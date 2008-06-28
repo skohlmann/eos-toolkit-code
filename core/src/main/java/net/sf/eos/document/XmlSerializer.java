@@ -164,7 +164,7 @@ public class XmlSerializer extends Serializer {
      * {@link XmlSerializer#serialize(EosDocument, Writer)}.
      * @author Sascha Kohlmann
      */
-    protected final class XmlEosDocumentHandler extends DefaultHandler2 {
+    protected final static class XmlEosDocumentHandler extends DefaultHandler2 {
 
         private StringBuilder sb = null;
 

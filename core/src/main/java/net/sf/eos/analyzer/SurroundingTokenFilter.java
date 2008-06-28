@@ -34,9 +34,9 @@ package net.sf.eos.analyzer;
  */
 public class SurroundingTokenFilter extends TokenFilter {
 
-    public static final char[] OPEN_CHARS =
+    static final char[] OPEN_CHARS =
         new char[] {'"', '\'', '\u00ab', '\u201c', '\u2018', '(', '[', '<', '{'};
-    public static final char[] CLOSE_CHARS =
+    static final char[] CLOSE_CHARS =
         new char[] {'"', '\'', '\u00bb', '\u201d', '\u2019', ')', ']', '>', '}'};
 
     private static final String EMPTY = "";
@@ -57,7 +57,7 @@ public class SurroundingTokenFilter extends TokenFilter {
         }
         final CharSequence tokenText = t.getTokenText();
         final CharSequence seq = this.correctSurroundingChars(tokenText);
-        return new AbstractToken(seq) {};
+        return new SurroundingToken(seq);
     }
 
     /**
@@ -126,5 +126,14 @@ public class SurroundingTokenFilter extends TokenFilter {
         }
         
         return count;
+    }
+
+    /** Token represents a surrounding freed token. */
+    private final static class SurroundingToken extends AbstractToken {
+        /** Creates a new token.
+         * @param value the freed value */
+        public SurroundingToken(final CharSequence value) {
+            super(value);
+        }
     }
 }

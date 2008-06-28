@@ -105,7 +105,7 @@ public class SimpleLongestMatchDictionaryBasedEntityRecognizer
 
             if (match != null) {
                 final Token token =
-                    new AbstractToken(match.key, ENTITY_TYPE) {};
+                    new SimpleLongestMatch(match.key, ENTITY_TYPE);
                 final Map<String, List<String>> meta = token.getMeta();
                 final List<String> ids = new ArrayList<String>();
                 for (final CharSequence cs : match.value) {
@@ -201,9 +201,11 @@ public class SimpleLongestMatchDictionaryBasedEntityRecognizer
     /**
      * Only for internal use!
      * @author Sascha Kohlmann
+     * @param <E> the type of the queue
      */
     final static class FixedSizeQueue<E> extends LinkedList<E> {
 
+        private static final long serialVersionUID = -2462616526335905273L;
         private int maxSize = 0;
 
         public FixedSizeQueue(final int size) {
@@ -237,6 +239,16 @@ public class SimpleLongestMatchDictionaryBasedEntityRecognizer
             sb.append("]");
 
             return sb.toString();
+        }
+    }
+
+    /** Token represents a longest match. */
+    private final static class SimpleLongestMatch extends AbstractToken {
+        /** Creates a new token.
+         * @param value the longest match value
+         * @param type the type */
+        public SimpleLongestMatch(final CharSequence value, final String type) {
+            super(value, type);
         }
     }
 }

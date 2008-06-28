@@ -25,6 +25,8 @@ import org.apache.lucene.search.DefaultSimilarity;
  */
 public class NormedLengthSimilarity extends DefaultSimilarity {
 
+    private static final long serialVersionUID = 1070479651291502989L;
+
     /** For logging. */
     private static final Log LOG =
         LogFactory.getLog(NormedLengthSimilarity.class.getName());

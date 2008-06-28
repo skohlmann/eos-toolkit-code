@@ -73,7 +73,7 @@ public class SentenceTokenizer /*extends Configured*/
     public Token next() throws TokenizerException {
         final CharSequence sentence = nextSentence();
         if (sentence != null) {
-            return new AbstractToken(sentence, SENTENCE_TYPE) {};
+            return new SentenceToken(sentence, SENTENCE_TYPE);
         }
         return null;
     }
@@ -102,5 +102,14 @@ public class SentenceTokenizer /*extends Configured*/
         this.start = end;
 
         return sentence;
+    }
+
+    /** Token represents sentence as token. */
+    private final static class SentenceToken extends AbstractToken {
+        /** Creates a new token representing a sentence.
+         * @param value a sentence */
+        public SentenceToken(final CharSequence value, final String type) {
+            super(value, type);
+        }
     }
 }

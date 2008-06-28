@@ -22,7 +22,7 @@ package net.sf.eos.medline;
  * abstract texts.
  * @author Sascha Kohlmann
  */
-public class MedlineAbstractStructureWords {
+public final class MedlineAbstractStructureWords {
 
     /** List of medline structure words. */
     @SuppressWarnings("nls")
