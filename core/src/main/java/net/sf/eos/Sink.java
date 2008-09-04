@@ -16,21 +16,18 @@
 package net.sf.eos;
 
 /**
- * Instances supply objects of a single type.
- *
- * <p><strong>Note:</strong> experimental - inspired by <em>guice</em></p>
+ * Instances sinks objects of a single type.
  *
  * @author Sascha Kohlmann
  * @since 0.1.0
- * @param <T> the provided type to supply
- */
-@Experimental
-public interface Supplier<T> {
+ * @param <T> the value type to sink
+ */@Experimental
+public interface Sink<T> {
 
-    /**
-     * Returns an instance of the expected type. The returned type may or
-     * may not be a new instance, depending on the implementation.
-     * @return an instance of the expected type
-     */
-    public T get();
+     /**
+      * Sinks an instance of the expected type. The sinked type may store in a data storage system,
+      * depending on the implementation.
+      * @param t the type to sink
+      */
+    void put(final T t);
 }
