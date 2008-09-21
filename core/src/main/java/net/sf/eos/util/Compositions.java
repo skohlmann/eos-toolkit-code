@@ -30,13 +30,12 @@ import static net.sf.eos.util.Conditions.checkArgumentNotNull;
  *
  * @author Sascha Kohlmann
  */
-@Experimental
 public class Compositions {
 
     /**
-     * Returns the composition of two functions. For {@code f: F→I} and
-     * {@code g: I→T}, composition is defined as the function {@code h}
-     * such that {@code h(x) == g(f(x))} for each {@code x}.
+     * Returns the composition of two functions. For <tt>f:&nbsp;F&rarr;I</tt> and
+     * <tt>g:&nbsp;I&rarr;T</tt>, composition is defined as the function {@code h}
+     * such that <tt>h(x)&nbsp;==&nbsp;g(f(x))</tt for each {@code x}.
      *
      * <p>The usage interface is designed as a {@code from} function which
      * propagates its result to the {@code to} function.</p>

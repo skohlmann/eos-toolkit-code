@@ -37,7 +37,6 @@ package net.sf.eos;
  * @param <F> the <em>from</em> type to handle in the function
  * @param <T> the <em>to</em> type results from {@link #apply}
  */
-@Experimental
 public interface Function<F, T> {
 
     /**

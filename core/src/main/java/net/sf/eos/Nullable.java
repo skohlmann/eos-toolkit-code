@@ -31,7 +31,6 @@ import java.lang.annotation.Target;
  * @author Sascha Kohlmann
  * @since 0.1.0
  */
-@Experimental
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.PARAMETER)

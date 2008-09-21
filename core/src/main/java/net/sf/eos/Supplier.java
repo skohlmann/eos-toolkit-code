@@ -24,7 +24,6 @@ package net.sf.eos;
  * @since 0.1.0
  * @param <T> the provided type to supply
  */
-@Experimental
 public interface Supplier<T> {
 
     /**

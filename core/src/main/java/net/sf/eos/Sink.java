@@ -21,9 +21,8 @@ package net.sf.eos;
  * @author Sascha Kohlmann
  * @since 0.1.0
  * @param <T> the value type to sink
- */@Experimental
+ */
 public interface Sink<T> {
-
      /**
       * Sinks an instance of the expected type. The sinked type may store in a data storage system,
       * depending on the implementation.
