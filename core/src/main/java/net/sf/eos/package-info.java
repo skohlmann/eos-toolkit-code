@@ -16,7 +16,7 @@
 
 
 /**
- * <p>Core ackage contains only some simple basic structures.
+ * <p>Core package contains only some simple basic structures.
  * {@link net.sf.eos.EosException} is the base exception for all &#949;&#959;s
  * processes. {@link net.sf.eos.Metadata} describes the access to the metadata
  * information in some core &#949;&#959;s data structures.</p>

@@ -21,7 +21,7 @@ import java.util.Locale;
 import static net.sf.eos.util.Conditions.checkArgumentNotNull;
 
 /**
- * Tokenized a text into sentences.
+ * Tokenizes a text into sentences.
  * <p>Based on {@link BreakIterator#getLineInstance(Locale)}.</p>
  * @author Sascha Kohlmann
  */

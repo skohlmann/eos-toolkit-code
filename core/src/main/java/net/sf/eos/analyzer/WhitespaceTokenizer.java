@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.io.Reader;
 
 /**
- * Tokenized a sequence of chars at whitespaces. Wrapper around Lucenes
+ * Tokenized a sequence of chars at whitespace. Wrapper around Lucenes
  * {@code WhitespaceTokenizer}.
  * @author Sascha Kohlmann
  */

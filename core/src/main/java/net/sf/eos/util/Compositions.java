@@ -178,7 +178,7 @@ public class Compositions {
      * {@code trueFunction} if {@code predicate} returns {@code true}. Otherwise the
      * {@code falseFunction} will call.
      * @param <F> the input type of the {@code predicate} and the {@code functions}
-     * @param <T> the output type of the applyied {@code functions}
+     * @param <T> the output type of the applied {@code functions}
      * @param decider the decision maker
      * @param trueFunction apply if the decision maker returns {@code true}
      * @param falseFunction apply if the decision maker returns {@code false}
@@ -194,13 +194,13 @@ public class Compositions {
 
     /** @see #compose(Predicate, Function, Function) */
     private static class RuledFunctionComposition<F, T> implements Function<F, T> {
-        /** The <em>trueFunction</em> will aplly if {@link #decisionMaker} returns {@code true}. */
+        /** The <em>trueFunction</em> will apply if {@link #decisionMaker} returns {@code true}. */
         private final Function<? super F, ? extends T> trueFunction;
 
-        /** The <em>falseFunction</em> will aplly if {@link #decisionMaker} returns {@code false}. */
+        /** The <em>falseFunction</em> will apply if {@link #decisionMaker} returns {@code false}. */
         private final Function<? super F, ? extends T> falseFunction;
 
-        /** Descider either call <em>trueFunction</em> or <em>falseFunction</em>. */
+        /** Decider either call <em>trueFunction</em> or <em>falseFunction</em>. */
         private final Predicate<? super F> decisionMaker;
 
         /**

@@ -54,7 +54,7 @@ public abstract class AbstractToken implements Token {
     }
 
     /**
-     * Copy constuctor.
+     * Copy constructor.
      * @param t the token to copy.
      */
     public AbstractToken(final Token t) {

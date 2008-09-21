@@ -7,7 +7,7 @@
   <parent>
     <groupId>net.sf.eos-toolkit</groupId>
     <artifactId>net.sf.eos-toolkit.base</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.2.0-SNAPSHOT</version>
   </parent>
 
   <groupId>net.sf.eos-toolkit</groupId>
@@ -39,3 +39,4 @@
     <url>https://sourceforge.net/tracker/?group_id=222423</url>
   </issueManagement>
 </project>
+

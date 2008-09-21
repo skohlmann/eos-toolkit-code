@@ -34,7 +34,7 @@
       </roles>
       <timezone>+2</timezone>
       <properties>
-        <picUrl>http://www.speexx.de/blog/images/2007/05/u-bahn%20cabrio%20tunnelfahrt%20-%20sascha%20-%2020070518.th.jpg</picUrl>
+        <picUrl>http://www.speexx.de/blog/images/2007/05/u-bahn cabrio tunnelfahrt - sascha - 20070518.th.jpg</picUrl>
       </properties>
     </developer>
   </developers>
@@ -250,3 +250,4 @@
   </properties>
 
 </project>
+

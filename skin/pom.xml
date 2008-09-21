@@ -23,7 +23,7 @@
   <groupId>net.sf.eos-toolkit</groupId>
   <artifactId>net.sf.eos-toolkit.skin</artifactId>
   <packaging>jar</packaging>
-  <version>0.3.0-SNAPSHOT</version>
+  <version>0.2.0-SNAPSHOT</version>
   <name>net.sf.eos-toolkit.skin</name>
   <url>http://eos-toolkit.sourceforge.net/</url>
   <description>eos-toolkit Site Skin</description>
@@ -50,3 +50,4 @@
   </build>
 
 </project>
+

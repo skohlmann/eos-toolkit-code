@@ -32,5 +32,5 @@ public interface Supplier<T> {
      * may not be a new instance, depending on the implementation.
      * @return an instance of the expected type
      */
-    public T get();
+    T get();
 }
