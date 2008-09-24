@@ -15,7 +15,6 @@
  */
 package net.sf.eos.util;
 
-import net.sf.eos.Experimental;
 import net.sf.eos.Function;
 import net.sf.eos.Predicate;
 import net.sf.eos.Supplier;
@@ -224,7 +223,7 @@ public class Compositions {
 
         /** {@inheritDoc} */
         public T apply(final F source) {
-            if (this.decisionMaker.evaluate(source)) { 
+            if (this.decisionMaker.evaluate(source)) {
                 return this.trueFunction.apply(source);
             }
             return this.falseFunction.apply(source);

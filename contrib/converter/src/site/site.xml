@@ -41,7 +41,7 @@
 
   <body>
     <breadcrumbs>
-      <item name='&#949;&#959;s-tooklkit' href='../../index.html'/>
+      <item name='&#949;&#959;s-toolkit' href='../../index.html'/>
       <item name='${project.name}' href='./index.html'/>
     </breadcrumbs>
 
