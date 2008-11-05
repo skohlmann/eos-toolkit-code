@@ -24,7 +24,6 @@ import net.sf.eos.Nullable;
  * and {@link Object#hashCode()} method implementation.
  * @author Sascha Kohlmann
  * @since 0.1.0
- * @version 1.0.0
  */
 public final class EqualsAndHashUtil {
 
@@ -355,14 +354,8 @@ public final class EqualsAndHashUtil {
      * @param arr the array of {@code Object}s to compute the hash code for
      * @return a hash code
      */
-    public static int hash(@Nullable final Object[] arr) {
-        int hashCode = 0;
-        if (arr != null) {
-            for (int i = arr.length; i >= 0; i--) {
-                hashCode += EqualsAndHashUtil.hash(arr[i]);
-            }
-        }
-        return hashCode;
+    public static int hash(@Nullable final Object[] objarr) {
+        return Arrays.hashCode(objarr);
     }
 
     /**
@@ -372,14 +365,8 @@ public final class EqualsAndHashUtil {
      * @param arr the array of {@code boolean}s to compute the hash code
      * @return a hash code
      */
-    public static int hash(@Nullable final boolean[] arr) {
-        int hashCode = 0;
-        if (arr != null) {
-            for (int i = arr.length; i >= 0; i--) {
-                hashCode += EqualsAndHashUtil.hash(arr[i]);
-            }
-        }
-        return hashCode;
+    public static int hash(@Nullable final boolean[] boolarr) {
+        return Arrays.hashCode(boolarr);
     }
 
     /**
@@ -389,14 +376,8 @@ public final class EqualsAndHashUtil {
      * @param arr the array of {@code byte}s to compute the hash code for
      * @return a hash code
      */
-    public static int hash(@Nullable final byte[] arr) {
-        int hashCode = 0;
-        if (arr != null) {
-            for (int i = arr.length; i >= 0; i--) {
-                hashCode += EqualsAndHashUtil.hash(arr[i]);
-            }
-        }
-        return hashCode;
+    public static int hash(@Nullable final byte[] barr) {
+        return Arrays.hashCode(barr);
     }
 
     /**
@@ -406,14 +387,8 @@ public final class EqualsAndHashUtil {
      * @param arr the array of {@code char}s to compute the hash code for
      * @return a hash code
      */
-    public static int hash(@Nullable final char[] arr) {
-        int hashCode = 0;
-        if (arr != null) {
-            for (int i = arr.length; i >= 0; i--) {
-                hashCode += EqualsAndHashUtil.hash(arr[i]);
-            }
-        }
-        return hashCode;
+    public static int hash(@Nullable final char[] carr) {
+        return Arrays.hashCode(carr);
     }
 
     /**
@@ -423,14 +398,8 @@ public final class EqualsAndHashUtil {
      * @param arr the array of {@code short}s to compute the hash code for
      * @return a hash code
      */
-    public static int hash(@Nullable final short[] arr) {
-        int hashCode = 0;
-        if (arr != null) {
-            for (int i = arr.length; i >= 0; i--) {
-                hashCode += EqualsAndHashUtil.hash(arr[i]);
-            }
-        }
-        return hashCode;
+    public static int hash(@Nullable final short[] sarr) {
+        return Arrays.hashCode(sarr);
     }
 
     /**
@@ -440,14 +409,8 @@ public final class EqualsAndHashUtil {
      * @param arr the array of {@code int}s to compute the hash code for
      * @return a hash code
      */
-    public static int hash(@Nullable final int[] arr) {
-        int hashCode = 0;
-        if (arr != null) {
-            for (int i = arr.length; i >= 0; i--) {
-                hashCode += EqualsAndHashUtil.hash(arr[i]);
-            }
-        }
-        return hashCode;
+    public static int hash(@Nullable final int[] iarr) {
+        return Arrays.hashCode(iarr);
     }
 
     /**
@@ -457,14 +420,8 @@ public final class EqualsAndHashUtil {
      * @param arr the array of {@code long}s to compute the hash code for
      * @return a hash code
      */
-    public static int hash(@Nullable final long[] arr) {
-        int hashCode = 0;
-        if (arr != null) {
-            for (int i = arr.length; i >= 0; i--) {
-                hashCode += EqualsAndHashUtil.hash(arr[i]);
-            }
-        }
-        return hashCode;
+    public static int hash(@Nullable final long[] larr) {
+        return Arrays.hashCode(larr);
     }
 
     /**
@@ -474,14 +431,8 @@ public final class EqualsAndHashUtil {
      * @param arr the array of {@code float}s to compute the hash code for
      * @return a hash code
      */
-    public static int hash(@Nullable final float[] arr) {
-        int hashCode = 0;
-        if (arr != null) {
-            for (int i = arr.length; i >= 0; i--) {
-                hashCode += EqualsAndHashUtil.hash(arr[i]);
-            }
-        }
-        return hashCode;
+    public static int hash(@Nullable final float[] farr) {
+        return Arrays.hashCode(farr);
     }
 
     /**
@@ -491,13 +442,7 @@ public final class EqualsAndHashUtil {
      * @param arr the array of {@code double}s to compute the hash code for
      * @return a hash code
      */
-    public static int hash(@Nullable final double[] arr) {
-        int hashCode = 0;
-        if (arr != null) {
-            for (int i = arr.length; i >= 0; i--) {
-                hashCode += EqualsAndHashUtil.hash(arr[i]);
-            }
-        }
-        return hashCode;
+    public static int hash(@Nullable final double[] darr) {
+        return Arrays.hashCode(darr);
     }
 }

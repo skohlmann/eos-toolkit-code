@@ -93,7 +93,7 @@ public final class LuceneTokenizerWrapper extends TokenFilter {
         return new LuceneTokenWrapper(retval);
     }
 
-    final void nextLuceneToken() throws TokenizerException {
+    void nextLuceneToken() throws TokenizerException {
         final Tokenizer tokenizer = getSource();
         if (tokenizer.getClass() == NullTokenizer.class) {
             try {

@@ -24,7 +24,6 @@ import net.sf.eos.config.Configuration;
 import net.sf.eos.config.ConfigurationKey;
 import static net.sf.eos.config.ConfigurationKey.Type.CLASSNAME;
 import net.sf.eos.config.Configured;
-import net.sf.eos.config.FactoryMethod;
 
 import java.util.Arrays;
 import java.util.List;
@@ -100,8 +99,6 @@ public abstract class TextBuilder extends Configured {
      * @throws EosException if it is not possible to instantiate an instance
      */
     @SuppressWarnings("nls")
-    @FactoryMethod(key=TEXT_BUILDER_IMPL_CONFIG_NAME,
-                   implementation=SpaceBuilder.class)
     public final static TextBuilder newInstance(final Configuration config)
             throws EosException {
 

@@ -18,10 +18,8 @@ package net.sf.eos.hadoop.mapred;
 import net.sf.eos.EosException;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.HadoopConfigurationAdapter;
-import net.sf.eos.config.Service;
 import net.sf.eos.document.EosDocument;
 import net.sf.eos.document.Serializer;
-import net.sf.eos.document.XmlSerializer;
 
 import org.apache.commons.io.input.CharSequenceReader;
 import org.apache.commons.logging.Log;
@@ -39,12 +37,6 @@ import java.io.Writer;
  * Support for handling Map/Reduce jobs with {@link EosDocument}.
  * @author Sascha Kohlmann
  */
-@Service(
-    factory=Serializer.class,
-    implementation=XmlSerializer.class,
-    description="Implementations support the serialization and deserialization "
-                + "of EosDocuments."
-)
 public abstract class EosDocumentSupportMapReduceBase extends MapReduceBase {
 
     /** For logging. */
@@ -123,8 +115,8 @@ public abstract class EosDocumentSupportMapReduceBase extends MapReduceBase {
         this.conf = conf;
     }
 
-    @Override
-    public void close() throws IOException {
-        super.close();
-    }
+//    @Override
+//    public void close() throws IOException {
+//        super.close();
+//    }
 }

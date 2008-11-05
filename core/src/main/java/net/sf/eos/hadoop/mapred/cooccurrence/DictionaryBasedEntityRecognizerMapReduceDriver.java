@@ -18,7 +18,7 @@ package net.sf.eos.hadoop.mapred.cooccurrence;
 import net.sf.eos.hadoop.DistributedCacheStrategy;
 import net.sf.eos.hadoop.FullyDistributedCacheStrategy;
 import net.sf.eos.hadoop.mapred.AbstractEosDriver;
-import net.sf.eos.trie.TrieLoader;
+//import net.sf.eos.trie.TrieLoader;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.GnuParser;
@@ -32,7 +32,7 @@ import org.apache.hadoop.filecache.DistributedCache;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.JobConf;
-import org.apache.hadoop.util.GenericOptionsParser;
+//import org.apache.hadoop.util.GenericOptionsParser;
 import org.apache.hadoop.util.ToolRunner;
 
 

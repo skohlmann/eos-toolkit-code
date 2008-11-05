@@ -27,7 +27,6 @@ import net.sf.eos.config.Configuration;
 import net.sf.eos.config.ConfigurationException;
 import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.Configured;
-import net.sf.eos.config.FactoryMethod;
 
 public abstract class SearcherSupplier extends Configured
         implements Supplier<Searcher> {
@@ -56,8 +55,6 @@ public abstract class SearcherSupplier extends Configured
      * @throws EosException if it is not possible to instantiate an instance
      * @see IndexSearcherSupplier
      */
-    @FactoryMethod(key=SEARCHER_SUPPLIER_IMPL_CONFIG_NAME,
-                   implementation=IndexSearcherSupplier.class)
     public final static SearcherSupplier newInstance(final Configuration config)
             throws EosException {
 

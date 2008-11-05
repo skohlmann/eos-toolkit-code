@@ -24,6 +24,10 @@
  * change between Hadoops configuration system an this &#949;&#959;s
  * configuration system.</p>
  *
+ * <p>With the {@link net.sf.eos.config.Inject} annotation it is possible to
+ * create simple injectable systems. Use {@link net.sf.eos.config.InjectionSupport}
+ * to make injections.</p>
+ *
  * @since 0.1.0
  * @author Sascha Kohlmann
  */

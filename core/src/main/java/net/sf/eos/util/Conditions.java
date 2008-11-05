@@ -119,4 +119,85 @@ public final class Conditions {
             throw new IllegalStateException("" + errorMessage);
         }
     }
+
+    /**
+     * Checks that any of the values of the {@link Iterable} are <em>not</em>
+     * {@code null}. Throws an {@code NullPointerException} for the first
+     * found {@code null} reference.
+     *
+     * @param <T> the generic type of the reference parameter.
+     * @param iterable any {@code Iterable} object
+     * @return an {@code iterable} with no {@code null} reference
+     * @throws NullPointerException if {@code iterable} self is {@code null} 
+     *                              or contains at least one {@code null}
+     *                              reference
+     */
+    public static <T extends Iterable<?>> T checkContainsNoNull(T iterable) {
+        checkNotNull(iterable);
+        for (final Object ref : iterable) {
+            checkNotNull(ref);
+        }
+        return iterable;
+    }
+
+    /**
+     * Checks that any of the values of the {@link Iterable} are <em>not</em>
+     * {@code null}. Throws an {@code NullPointerException} for the first
+     * found {@code null} reference.
+     *
+     * @param <T> the generic type of the reference parameter.
+     * @param iterable any {@code Iterable} object
+     * @param errorMessage the error message to be included into the
+     *                     exception message.
+     * @return and {@code iterable} with no {@code null} reference
+     * @throws NullPointerException if {@code iterable} self is {@code null} 
+     *                              or contains at least one {@code null}
+     *                              reference
+     */
+    @SuppressWarnings("nls")
+    public static <T extends Iterable<?>> T checkContainsNoNull(final T iterable,
+                                                                final Object errorMessage) {
+        checkNotNull(iterable, errorMessage);
+        for (Object element : iterable) {
+            checkNotNull(element, errorMessage);
+        }
+        return iterable;
+    }
+
+    /**
+     * Checks that the given reference is {@code null} and throws an
+     * {@code NullPointerException} if so.
+     *
+     * @param <T> the generic type of the reference parameter.
+     * @param ref an object reference
+     * @return the non-{@code null} reference
+     * @throws NullPointerException if {@code ref} is {@code null}
+     */
+    public static <T> T checkNotNull(final T ref) {
+        if (ref == null) {
+            throw new NullPointerException();
+        }
+        return ref;
+    }
+
+    /**
+     * Checks that the given reference is {@code null} and throws an
+     * {@code NullPointerException} if so.
+     *
+     * @param <T> the generic type of the reference parameter.
+     * @param ref an object reference
+     * @param errorMessage the error message to be included into the exception
+     *                     message.
+     * @return the non-{@code null} reference
+     * @throws NullPointerException if {@code ref} is {@code null}
+     */
+    @SuppressWarnings("nls")
+    public static <T> T checkNotNull(final T ref,
+                                     final Object errorMessage) {
+        if (ref == null) {
+            throw new NullPointerException("" + errorMessage);
+        }
+        return ref;
+    }
+
 }

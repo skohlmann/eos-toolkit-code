@@ -22,7 +22,6 @@ import net.sf.eos.analyzer.TokenizerException;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.Configured;
-import net.sf.eos.config.FactoryMethod;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -53,8 +52,6 @@ public abstract class Serializer extends Configured {
     public final static String SERIALIZER_IMPL_CONFIG_NAME =
         "net.sf.eos.document.Serializer.impl";
 
-    @FactoryMethod(key=SERIALIZER_IMPL_CONFIG_NAME,
-                   implementation=XmlSerializer.class)
     public final static Serializer newInstance(final Configuration config)
             throws EosException {
 

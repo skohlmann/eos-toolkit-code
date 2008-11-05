@@ -22,7 +22,6 @@ import net.sf.eos.EosException;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.HadoopConfigurationAdapter;
-import net.sf.eos.config.Service;
 import net.sf.eos.lucene.AnalyzerSupplier;
 import net.sf.eos.lucene.SimilaritySupplier;
 
@@ -51,9 +50,6 @@ import java.util.Random;
  * @author Nutch Team
  * @author Sascha Kohlmann
  */
-@Service(
-    factory=AnalyzerSupplier.class
-)
 public class LuceneOutputFormat<K extends WritableComparable,
                                 V extends ObjectWritable>
         extends OutputFormatBase<K, V> {

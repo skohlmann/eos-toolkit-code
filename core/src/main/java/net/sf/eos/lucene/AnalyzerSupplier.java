@@ -20,7 +20,6 @@ import net.sf.eos.EosException;
 import net.sf.eos.Supplier;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.ConfigurationKey;
-import net.sf.eos.config.FactoryMethod;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -65,7 +64,6 @@ public abstract class AnalyzerSupplier implements Supplier<Analyzer> {
      * @return a new instance
      * @throws EosException if it is not possible to instantiate an instance
      */
-    @FactoryMethod(key=ANALYZER_PROVIDER_IMPL_CONFIG_NAME)
     public final static AnalyzerSupplier newInstance(final Configuration config)
             throws EosException {
 

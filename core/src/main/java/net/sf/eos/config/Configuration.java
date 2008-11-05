@@ -38,9 +38,7 @@ public class Configuration implements Iterable<Entry<String, String>> {
     private final Map<String, String> config = new HashMap<String, String>();
 
     /** Creates a new instance. */
-    public Configuration() {
-        ;
-    }
+    public Configuration() { }
 
     /** 
      * Copy constructor.

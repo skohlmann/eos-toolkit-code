@@ -23,15 +23,11 @@ import net.sf.eos.analyzer.TextBuilder;
 import net.sf.eos.analyzer.Token;
 import net.sf.eos.analyzer.TokenizerSupplier;
 import net.sf.eos.analyzer.TokenizerException;
-import net.sf.eos.analyzer.TextBuilder.SpaceBuilder;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.Configured;
-import net.sf.eos.config.Service;
-import net.sf.eos.config.Services;
 import net.sf.eos.document.EosDocument;
 import net.sf.eos.entity.AbstractDictionaryBasedEntityRecognizer;
 import net.sf.eos.entity.DictionaryBasedEntityRecognizer;
-import net.sf.eos.entity.SimpleLongestMatchDictionaryBasedEntityRecognizer;
 import net.sf.eos.hadoop.mapred.AbstractKeyGenerator;
 import net.sf.eos.hadoop.mapred.KeyGenerator;
 import net.sf.eos.trie.Trie;
@@ -47,27 +43,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
-@Services(
-    services={
-        @Service(
-            factory=TokenizerSupplier.class,
-            description="Tokenizer for coocurence analyzing."
-        ),
-        @Service(
-            factory=AbstractKeyGenerator.class,
-            implementation=IdMetadataKeyGenerator.class,
-            description="Create ID for map task."
-        ),
-        @Service(
-            factory=AbstractDictionaryBasedEntityRecognizer.class,
-            implementation=SimpleLongestMatchDictionaryBasedEntityRecognizer.class
-        ),
-        @Service(
-            factory=TextBuilder.class,
-            implementation=SpaceBuilder.class
-        )
-    }
-)
 public class DictionaryBasedEntityIdKeyGenerator extends Configured
 /*        implements KeyGenerator<Text> */ {
 

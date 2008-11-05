@@ -20,7 +20,6 @@ import net.sf.eos.EosException;
 import net.sf.eos.Supplier;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.ConfigurationKey;
-import net.sf.eos.config.FactoryMethod;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -64,8 +63,6 @@ public abstract class SimilaritySupplier implements Supplier<Similarity> {
      * @return a new instance
      * @throws EosException if it is not possible to instantiate an instance
      */
-    @FactoryMethod(key=SIMILARITY_SUPPLIER_IMPL_CONFIG_NAME,
-                   implementation=NormedLengthSimilaritySupplier.class)
     public final static SimilaritySupplier 
             newInstance(final Configuration config) throws EosException {
 

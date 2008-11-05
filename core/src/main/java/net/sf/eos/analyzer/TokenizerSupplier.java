@@ -26,7 +26,6 @@ import net.sf.eos.Supplier;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.Configured;
-import net.sf.eos.config.FactoryMethod;
 import net.sf.eos.medline.MedlineTokenizerSupplier;
 
 /**
@@ -61,8 +60,6 @@ public abstract class TokenizerSupplier extends Configured
      * @throws TokenizerException if it is not possible to instantiate an instance
      */
     @SuppressWarnings("nls")
-    @FactoryMethod(key=TOKENIZER_PROVIDER_IMPL_CONFIG_NAME,
-                   implementation=MedlineTokenizerSupplier.class)
     public final static TokenizerSupplier newInstance(final Configuration config)
             throws TokenizerException {
 

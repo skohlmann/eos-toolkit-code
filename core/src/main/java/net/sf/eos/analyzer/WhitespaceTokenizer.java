@@ -111,15 +111,6 @@ public final class WhitespaceTokenizer extends TokenFilter
         }
     }
 
-    /**
-     * Return value may be {@code null}.
-     * @return may be {@code null}
-     */
-    @Override
-    protected Tokenizer getSource() {
-        return super.getSource();
-    }
-
     private final static class NullTokenizer extends Configured
                                              implements Tokenizer {
         public Token next() throws TokenizerException {

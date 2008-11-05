@@ -30,8 +30,6 @@ package net.sf.eos;
  * <p>Implementations which may cause side effects upon evaluation are strongly
  * encouraged to state this fact clearly in their API documentation.</p>
  *
- * <p><strong>Note:</strong> experimental - inspired by <em>guice</em></p>
- *
  * @author Sascha Kohlmann
  * @since 0.1.0
  * @param <F> the <em>from</em> type to handle in the function

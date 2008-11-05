@@ -26,7 +26,6 @@ import net.sf.eos.EosException;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.Configured;
-import net.sf.eos.config.FactoryMethod;
 
 /**
  * The common name resolver maps an ID of an entity to the common name of
@@ -57,7 +56,6 @@ public abstract class CommonNameResolver extends Configured {
      * @return a new instance
      * @throws EosException if it is not possible to instantiate an instance
      */
-    @FactoryMethod(key=COMMON_NAME_RESOLVER_IMPL_CONFIG_NAME)
     public final static CommonNameResolver newInstance(final Configuration config)
                 throws EosException {
 

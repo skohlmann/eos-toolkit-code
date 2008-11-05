@@ -138,9 +138,4 @@ public class SentencerReducer extends EosDocumentSupportMapReduceBase
         super.configure(conf);
         this.conf = conf;
     }
-
-    @Override
-    public void close() throws IOException {
-        super.close();
-    }
 }

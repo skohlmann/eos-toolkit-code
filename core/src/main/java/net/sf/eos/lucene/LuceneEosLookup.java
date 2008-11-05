@@ -24,7 +24,6 @@ import net.sf.eos.EosException;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.Configured;
-import net.sf.eos.config.FactoryMethod;
 import net.sf.eos.search.EosLookup;
 
 /**

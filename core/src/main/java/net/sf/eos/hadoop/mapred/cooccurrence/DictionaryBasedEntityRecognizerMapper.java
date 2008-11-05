@@ -21,8 +21,6 @@ import net.sf.eos.analyzer.TokenizerSupplier;
 import net.sf.eos.analyzer.TokenizerException;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.HadoopConfigurationAdapter;
-import net.sf.eos.config.Service;
-import net.sf.eos.config.Services;
 import net.sf.eos.document.EosDocument;
 import net.sf.eos.hadoop.DistributedCacheStrategy;
 import net.sf.eos.hadoop.FullyDistributedCacheStrategy;
@@ -51,18 +49,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
-@Services(
-    services={
-        @Service(
-            factory=TokenizerSupplier.class,
-            description="Tokenizer for coocurence analyzing."
-        ),
-        @Service(
-            factory=AbstractTrieLoader.class,
-            description="Trie contains the look up data for cooccurance analyzis."
-        )
-    }
-)
 public class DictionaryBasedEntityRecognizerMapper
         extends EosDocumentSupportMapReduceBase
         implements Mapper<LongWritable, Text, Text, Text> {

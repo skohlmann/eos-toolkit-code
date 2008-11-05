@@ -20,7 +20,6 @@ import static net.sf.eos.config.ConfigurationKey.Type.CLASSNAME;
 import net.sf.eos.analyzer.TokenizerException;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.ConfigurationKey;
-import net.sf.eos.config.FactoryMethod;
 
 import java.io.InputStream;
 
@@ -38,16 +37,12 @@ public abstract class AbstractTrieLoader<K, V> implements TrieLoader<K, V> {
      * @return a loader
      * @throws TokenizerException
      */
-    @FactoryMethod(key=TRIE_LOADER_IMPL_CONFIG_NAME,
-                   implementation=XmlTrieLoader.class)
     public final static TrieLoader newInstance() throws TokenizerException
     {
         final Configuration config = new Configuration();
         return newInstance(config);
     }
 
-    @FactoryMethod(key=TRIE_LOADER_IMPL_CONFIG_NAME,
-                   implementation=XmlTrieLoader.class)
     public final static TrieLoader newInstance(final Configuration config)
             throws TokenizerException {
 

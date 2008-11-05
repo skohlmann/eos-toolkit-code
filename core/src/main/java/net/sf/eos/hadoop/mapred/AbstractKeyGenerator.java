@@ -20,7 +20,6 @@ import net.sf.eos.EosException;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.Configured;
-import net.sf.eos.config.FactoryMethod;
 import net.sf.eos.sentence.Sentencer;
 
 import org.apache.commons.logging.Log;
@@ -53,7 +52,6 @@ public abstract class AbstractKeyGenerator<K extends WritableComparable>
      * @return a new instance
      * @throws EosException if an error occurs
      */
-    @FactoryMethod(key=ABSTRACT_KEY_GENERATOR_IMPL_CONFIG_NAME)
     public final static AbstractKeyGenerator<? extends WritableComparable> 
             newInstance(final Configuration conf) throws EosException {
 

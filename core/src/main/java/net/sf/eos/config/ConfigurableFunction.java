@@ -15,26 +15,16 @@
  */
 package net.sf.eos.config;
 
-import static java.lang.annotation.ElementType.TYPE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-
 import net.sf.eos.Experimental;
-
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+import net.sf.eos.Function;
 
 /**
- * Exports the usage of internal {@link Service Services}. Internal services
- * may create thru a method, annotated with {@link FactoryMethod}.
- * <p>The value of the {@code Services} annotation should be volatile between
- * releases.</p>
+ * A {@code function} which is {@code #configure(Configuration) configurable}.
+ *
  * @author Sascha Kohlmann
+ * @since 0.2.0
+ * @param <F> the <em>from</em> type to handle in the function
+ * @param <T> the <em>to</em> type results from {@link #apply}
  */
 @Experimental
-@Retention(value=RUNTIME)
-@Target(value=TYPE)
-public @interface Services {
-
-    /** The list of internal used services. */
-    Service[] services();
-}
+public interface ConfigurableFunction<F, T> extends Function<F, T>, Configurable { }

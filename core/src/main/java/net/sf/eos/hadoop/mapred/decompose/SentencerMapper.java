@@ -24,8 +24,6 @@ import net.sf.eos.analyzer.TokenizerSupplier;
 import net.sf.eos.analyzer.TextBuilder.SpaceBuilder;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.HadoopConfigurationAdapter;
-import net.sf.eos.config.Service;
-import net.sf.eos.config.Services;
 import net.sf.eos.document.EosDocument;
 import net.sf.eos.hadoop.mapred.AbstractKeyGenerator;
 import static net.sf.eos.hadoop.mapred.AbstractKeyGenerator.ABSTRACT_KEY_GENERATOR_IMPL_CONFIG_NAME;
@@ -47,25 +45,6 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Map.Entry;
 
-@Services(
-    services={
-        @Service(
-            factory=AbstractKeyGenerator.class,
-            implementation=TextMetaKeyGenerator.class,
-            description="Tokenizer for coocurence analyzing."
-        ),
-        @Service(
-            factory=TextBuilder.class,
-            implementation=SpaceBuilder.class
-        ),
-        @Service(
-            factory=TokenizerSupplier.class
-        ),
-        @Service(
-            factory=Sentencer.class
-        )
-    }
-)
 public class SentencerMapper extends EosDocumentSupportMapReduceBase
         implements Mapper<LongWritable, Text, Text, Text> {
 

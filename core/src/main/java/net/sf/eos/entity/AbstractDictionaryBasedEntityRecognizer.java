@@ -29,7 +29,6 @@ import net.sf.eos.analyzer.TokenizerException;
 import net.sf.eos.config.Configurable;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.ConfigurationKey;
-import net.sf.eos.config.FactoryMethod;
  
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -161,8 +160,6 @@ public abstract class AbstractDictionaryBasedEntityRecognizer
      * @return a new instance
      * @throws EosException if it is not possible to instantiate an instance
      */
-    @FactoryMethod(key=ABSTRACT_DICTIONARY_BASED_ENTITY_RECOGNIZER_IMPL_CONFIG_NAME,
-                   implementation=SimpleLongestMatchDictionaryBasedEntityRecognizer.class)
     public final static DictionaryBasedEntityRecognizer 
             newInstance(final Tokenizer source) throws EosException {
         final Configuration config = new Configuration();
@@ -181,8 +178,6 @@ public abstract class AbstractDictionaryBasedEntityRecognizer
      * @return a new instance
      * @throws EosException if it is not possible to instantiate an instance
      */
-    @FactoryMethod(key=ABSTRACT_DICTIONARY_BASED_ENTITY_RECOGNIZER_IMPL_CONFIG_NAME,
-                   implementation=SimpleLongestMatchDictionaryBasedEntityRecognizer.class)
     public final static DictionaryBasedEntityRecognizer 
             newInstance(final Tokenizer source, final Configuration config)
                 throws EosException {

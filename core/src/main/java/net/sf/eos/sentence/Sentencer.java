@@ -28,7 +28,6 @@ import net.sf.eos.analyzer.TokenizerException;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.Configured;
-import net.sf.eos.config.FactoryMethod;
 import net.sf.eos.document.EosDocument;
 
 import java.security.MessageDigest;
@@ -80,10 +79,7 @@ public abstract class Sentencer extends Configured {
      * @throws EosException if it is not possible to instantiate an instance
      */
     @SuppressWarnings("nls")
-    @FactoryMethod(key=SENTENCER_IMPL_CONFIG_NAME,
-                   implementation=DefaultSentencer.class)
-    public final static Sentencer newInstance(final Configuration config)
-            throws EosException {
+    public final static Sentencer newInstance(final Configuration config) throws EosException {
 
         final Thread t = Thread.currentThread();
         ClassLoader classLoader = t.getContextClassLoader();

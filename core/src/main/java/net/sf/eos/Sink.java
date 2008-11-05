@@ -24,8 +24,8 @@ package net.sf.eos;
  */
 public interface Sink<T> {
      /**
-      * Sinks an instance of the expected type. The sinked type may store in a data storage system,
-      * depending on the implementation.
+      * Sinks an instance of the expected type. The sinked type may store in a data
+      * storage system, depending on the implementation.
       * @param t the type to sink
       */
     void put(final T t);

@@ -49,7 +49,7 @@ public class SimpleLongestMatchDictionaryBasedEntityRecognizer
     static final Log LOG =
         LogFactory.getLog(SimpleLongestMatchDictionaryBasedEntityRecognizer.class.getName());
 
-    private Map<CharSequence, Set<CharSequence>> entities;
+//    private Map<CharSequence, Set<CharSequence>> entities;
     private Queue<Token> retvalBuffer = new LinkedList<Token>();
     private FixedSizeQueue<Token> longestMatchQueue = null;
 
@@ -219,10 +219,8 @@ public class SimpleLongestMatchDictionaryBasedEntityRecognizer
         }
 
         public E offerFix(final E e) {
-            if (super.offer(e)) {
-                if (size() > maxSize) {
-                    return poll();
-                }
+            if (super.offer(e) && size() > maxSize) {
+                return poll();
             }
             return null;
         }

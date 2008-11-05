@@ -19,7 +19,8 @@ import net.sf.eos.Experimental;
 import net.sf.eos.Supplier;
 
 /**
- * Instances supply objects of a single type which are {@code configurable}.
+ * Instances supply objects of a single type which is
+ * {@code #configure(Configuration) configurable}.
  *
  * @author Sascha Kohlmann
  * @since 0.1.0

@@ -15,7 +15,6 @@
  */
 package net.sf.eos.hadoop.mapred.cooccurrence;
 
-import static net.sf.eos.config.ConfigurationKey.Type.CLASSNAME;
 import net.sf.eos.EosException;
 import net.sf.eos.analyzer.TextBuilder;
 import net.sf.eos.config.Configuration;
@@ -190,11 +189,6 @@ public class DictionaryBasedEntityRecognizerReducer
     public void configure(final JobConf conf) {
         super.configure(conf);
         this.conf = conf;
-    }
-
-    @Override
-    public void close() throws IOException {
-        super.close();
     }
 
     final void combineDocuments(final EosDocument from, final EosDocument to)

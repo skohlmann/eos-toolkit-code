@@ -27,7 +27,6 @@ import net.sf.eos.config.Configuration;
 import net.sf.eos.config.ConfigurationException;
 import net.sf.eos.config.ConfigurationKey;
 import net.sf.eos.config.Configured;
-import net.sf.eos.config.FactoryMethod;
 
 public abstract class DirectorySupplier extends Configured
         implements ConfigurableSupplier<Directory> {
@@ -57,8 +56,6 @@ public abstract class DirectorySupplier extends Configured
      * @throws EosException if it is not possible to instantiate an instance
      * @see LocalFsDirectorySupplier
      */
-    @FactoryMethod(key=DIRECTORY_SUPPLIER_IMPL_CONFIG_NAME,
-                   implementation=LocalFsDirectorySupplier.class)
     public final static DirectorySupplier newInstance(final Configuration config)
             throws EosException {
 

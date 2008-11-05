@@ -15,42 +15,24 @@
  */
 package net.sf.eos.config;
 
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 import net.sf.eos.Experimental;
 
-import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-
-
 /**
- * Identifies a method in a class as a factory method. A factory method has
- * always a {@linkplain Configuration configuration key} in which the name
- * of the implementing class is stored.
+ * Marks an injection resource as a singleton. The annotation is useful for
+ * {@link InjectionSupport} not to create always a new instance of the resource to inject.
+ * <p><strong>NOTE: Highly experimental. Use carefully in production code. </strong></p>  
  * @author Sascha Kohlmann
+ * @since 0.2.0
  */
 @Documented
-@Retention(value=RUNTIME)
-@Target(value=METHOD)
+@Retention(value = RUNTIME)
+@Target(value = TYPE)
 @Experimental
-public @interface FactoryMethod {
-
-    /** Default none implementation. */
-    static class None {
-        private None() {
-            ;
-        }
-    }
-
-    /** Contains the name of the configuration key.
-     * @return the configuration key. */
-    String key();
-
-    /**
-     * The class of the default implementation if available.
-     * @return the name of the default implementation.
-     */
-    Class<?> implementation() default None.class;
-}
+@interface Singleton { }

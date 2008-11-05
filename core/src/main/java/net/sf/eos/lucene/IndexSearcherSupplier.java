@@ -18,7 +18,6 @@ package net.sf.eos.lucene;
 import net.sf.eos.EosException;
 import net.sf.eos.config.Configuration;
 import net.sf.eos.config.ConfigurationException;
-import net.sf.eos.config.Service;
 
 import org.apache.lucene.index.CorruptIndexException;
 import org.apache.lucene.search.IndexSearcher;
@@ -31,9 +30,6 @@ import java.io.IOException;
  * Based on {@link DirectorySupplier}.
  * @author Sascha Kohlmann
  */
-@Service(
-    factory=DirectorySupplier.class
-)
 public class IndexSearcherSupplier extends SearcherSupplier {
 
     @Override

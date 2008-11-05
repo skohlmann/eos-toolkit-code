@@ -28,6 +28,9 @@ import java.util.Map;
  * Represents a simple &#949;&#959;s document. An instance of this document
  * never contains any linefeed (ASCII <tt>0xa</tt>) or carriage return
  * (ASCII <tt>0xd</tt>) characters.
+ * <p style='color:red'><strong>Note:</strong> Needs support for annotations
+ * like in speexx ocean annotator framework for batched distributed entity
+ * recognition. {@link net.sf.eos.analyzer.Token see Token}.</p>
  * @author Sascha Kohlmann
  */
 public final class EosDocument implements Metadata {

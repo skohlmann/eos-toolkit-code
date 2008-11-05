@@ -19,6 +19,9 @@ import net.sf.eos.Metadata;
 
 /**
  * A Token represents a part of a tokenized text.
+ * <p style='color:red'><strong>Note:</strong> Needs support for the start position (include) and
+ * the length of the original token. Useful for support of batched entity recognition
+ * in distributed environments. {@link net.sf.eos.document.EosDocument see EosDocument}.</p>
  * @see Tokenizer
  * @author Sascha Kohlmann
  */

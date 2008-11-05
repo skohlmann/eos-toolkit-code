@@ -15,8 +15,14 @@
  */
 package net.sf.eos.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
+
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
 public class ConditionsTest {
@@ -82,5 +88,80 @@ public class ConditionsTest {
         } catch (final IllegalStateException e) {
              assertEquals("expr", e.getMessage());
         }
+    }
+
+    @Test
+    public void notNullWithValue() {
+        assertEquals("t", Conditions.checkNotNull("t"));
+    }
+
+    @Test(expected=NullPointerException.class)
+    public void notNullWithNull() {
+        Conditions.checkNotNull(null);
+    }
+
+    @Test
+    public void notNullWithValueAndMessage() {
+        assertEquals("te", Conditions.checkNotNull("te", "me"));
+    }
+
+    @Test
+    public void notNullWithNullAndMessage() {
+        try {
+            Conditions.checkNotNull(null, "blub");
+            fail("Oops... Missing NullPointerException");
+        } catch (final NullPointerException e) {
+            assertEquals("blub", e.getMessage());
+        }
+    }
+
+    @Test(expected=NullPointerException.class)
+    public void iterableWithNullParameterValue() {
+        Conditions.checkContainsNoNull(null);
+    }
+
+    @Test(expected=NullPointerException.class)
+    public void iterableWithNullValueInIterable() {
+        final List<Integer> iterable = new ArrayList<Integer>();
+        iterable.add(1);
+        iterable.add(null);
+        Conditions.checkContainsNoNull(iterable);
+    }
+
+    @Test
+    public void iterableWithNotNullValueInIterable() {
+        final List<Integer> iterable = new ArrayList<Integer>();
+        iterable.add(1);
+        assertSame(iterable, Conditions.checkContainsNoNull(iterable));
+    }
+
+    @Test
+    public void iterableWithNullParameterValueAndMessage() {
+        try {
+            Conditions.checkContainsNoNull(null, "blub");
+            fail("Oops... Missing NullPointerException");
+        } catch (final NullPointerException e) {
+            assertEquals("blub", e.getMessage());
+        }
+    }
+
+    @Test
+    public void iterableWithNullValueInIterableAndMessage() {
+        final List<Integer> iterable = new ArrayList<Integer>();
+        iterable.add(1);
+        iterable.add(null);
+        try {
+            Conditions.checkContainsNoNull(iterable, "bla");
+            fail("Oops... Missing NullPointerException");
+        } catch (final NullPointerException e) {
+            assertEquals("bla", e.getMessage());
+        }
+    }
+
+    @Test
+    public void iterableWithNotNullValueInIterableAndMessage() {
+        final List<Integer> iterable = new ArrayList<Integer>();
+        iterable.add(1);
+        assertSame(iterable, Conditions.checkContainsNoNull(iterable, ""));
     }
 }
